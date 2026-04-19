@@ -1,43 +1,17 @@
-# PROJECT.md
+# Project Requirements Workspace
 
-_Shared project context. All agents read and update this file._
+## Active Projects
 
-## Project
-
-- **Name:** TBD
-- **Status:** Discovery / Pre-development
-- **Owner:** Keith Goff
-- **Started:** April 2026
-- **Requirements Repo:** https://github.com/kthgff/project-requirements
-- **Local Repo:** ~/Documents/project-requirements
-
-## Vision
-
-_(To be defined. PM agent: fill this in as the concept solidifies.)_
-
-## Current Sprint / Focus
-
-- [ ] Define product concept and core user problem
-- [ ] Identify tech stack and architecture approach
-- [ ] Set up development environment
-
-## Roadmap
-
-| Phase | Description | Status |
-|---|---|---|
-| 1 | Discovery & concept definition | In Progress |
-| 2 | Architecture & stack decisions | Pending |
-| 3 | MVP build | Pending |
-| 4 | QA & testing | Pending |
-| 5 | Launch | Pending |
-
-## Key Decisions
-
-_(Log major decisions here with rationale as they are made.)_
-
-## Open Questions
-
-_(PM: track unresolved product questions here.)_
-
----
-_Updated by agents as the project evolves._
+### JobTrackr
+- Location: `projects/jobtrackr/`
+- Status: Draft documentation started
+- Current docs:
+  - `projects/jobtrackr/prd.md`
+  - `projects/jobtrackr/requirements.md`
+  - `projects/jobtrackr/stories.md`
+- Next decisions needed:
+  - Model saved as a state vs flag
+  - Model archived as a status vs attribute
+  - Define duplicate handling behavior
+  - Decide whether manual job entry is included in MVP
+  - Decide whether update emails attach to a job timeline
