@@ -8,6 +8,8 @@ _Shared project context. All agents read and update this file._
 - **Status:** Discovery / Pre-development
 - **Owner:** Keith Goff
 - **Started:** April 2026
+- **Requirements Repo:** https://github.com/kthgff/project-requirements
+- **Local Repo:** ~/Documents/project-requirements
 
 ## Vision
 
