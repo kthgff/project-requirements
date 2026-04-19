@@ -52,6 +52,7 @@ JobTrakr has moved from vague concept into defined MVP discovery. Core product d
 - Data model v1 created
 - Gmail ingestion spec v1 created
 - Fit analysis spec v1 created
+- Auth and login spec v1 created
 
 ## What Is In Progress
 
@@ -97,6 +98,7 @@ New implementation-ready artifacts created:
 - deduplication rules are defined conceptually but not yet translated into implementation guidance
 - table UI behavior is not yet specified in detail
 - engineering sequence and milestones are not yet defined
+- Google auth access policy is not yet finalized, single approved account vs broader sign-in
 
 ## Next Recommended Steps
 

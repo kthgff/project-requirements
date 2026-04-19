@@ -27,6 +27,8 @@ The MVP should automatically turn job alert emails into structured tracked jobs 
 - Identify jobs referenced in those emails
 - Look up fuller details for each job
 - Save structured job records to a database
+- Support authenticated access with Gmail federated login
+- Include a login page for user sign-in
 - Allow Keith to upload a resume for fit evaluation
 - Use AI to compare each job against the uploaded resume
 - Flag jobs that look like good fits
@@ -43,16 +45,25 @@ The MVP should automatically turn job alert emails into structured tracked jobs 
 
 ## 8. Proposed User Flow
 
-1. Keith uploads his resume
-2. System scans Gmail inbox for job alert emails
-3. System detects job opportunities from relevant emails, including LinkedIn and Indeed alerts
-4. System looks up fuller job details
-5. System creates or updates a job record in the database
-6. AI compares the job against Keith's uploaded resume
-7. System flags good-fit roles
-8. Keith reviews jobs in a table UI and updates status as needed
+1. Keith opens the product login page
+2. Keith signs in with Gmail federated login
+3. System creates or resumes the authenticated session
+4. Keith uploads his resume
+5. System scans Gmail inbox for job alert emails
+6. System detects job opportunities from relevant emails, including LinkedIn and Indeed alerts
+7. System looks up fuller job details
+8. System creates or updates a job record in the database
+9. AI compares the job against Keith's uploaded resume
+10. System flags good-fit roles
+11. Keith reviews jobs in a table UI and updates status as needed
 
 ## 9. Core Entities
+
+### User
+- authenticated account
+- Google identity
+- email address
+- created date
 
 ### Resume
 - uploaded file
@@ -117,19 +128,25 @@ The system shall detect referenced jobs and gather fuller job details before per
 ### FR4. Job persistence
 The system shall create or update job records in the database.
 
-### FR5. Resume upload
+### FR5. Authentication
+The system shall support user authentication via Gmail federated login.
+
+### FR6. Login page
+The system shall provide a login page where the user can start Gmail federated sign-in.
+
+### FR7. Resume upload
 The system shall allow Keith to upload a resume file to be used for fit evaluation.
 
-### FR6. AI fit analysis
+### FR8. AI fit analysis
 The system shall compare tracked jobs against the uploaded resume and produce a fit result.
 
-### FR7. Fit flagging
+### FR9. Fit flagging
 The system shall clearly flag jobs identified as likely good fits.
 
-### FR8. Table review UI
+### FR10. Table review UI
 The system shall present tracked jobs in a table interface.
 
-### FR9. Status tracking
+### FR11. Status tracking
 The system shall support manual job status updates using the initial status model.
 
 ## 13. Open Questions

@@ -1,3 +1,16 @@
+# JobTrakr MVP Stories v1
+
+## Epic 0: Authentication
+
+### Story 0
+As Keith, I want to log into JobTrakr using my Gmail account so that I can securely access my job tracking workspace.
+
+**Acceptance criteria**
+- The product includes a login page
+- The login page offers Gmail federated sign-in
+- After successful sign-in, I am authenticated into the app
+- Unauthenticated users cannot access the main app experience
+
 # JobTrackr MVP Stories v1
 
 ## Epic 1: Resume setup
