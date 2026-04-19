@@ -13,9 +13,196 @@ This document identifies requirement gaps, ambiguities, and untestable areas acr
 Current specs are sufficient for product direction, but not yet sufficient for low-risk implementation. The biggest issues are conflicting data semantics, underdefined edge-case behavior, and several places where APIs are drafted before product decisions are finalized.
 
 Recommendation:
-- Resolve all P0 items before engineering starts.
+- The P0 product decisions are now answered in `specs/jobtrackr-pm-decision-memo-2026-04-19.md`.
+- Engineering should treat the PM memo plus `projects/jobtrackr/api-contract.md` as the canonical current direction.
+- Remaining risk is now spec drift: the ingestion spec and QA expectations must be updated so implementation is not driven by stale language.
 - Resolve P1 items before UI and API contracts are declared stable.
 - P2 items can follow shortly after implementation starts if needed, but earlier is better.
+
+---
+
+# API Contract vs Ingestion Spec Mismatch Review
+
+This section flags the current contract mismatches that would make QA expectations unstable if engineering follows `projects/jobtrackr/api-contract.md` while reviewers or implementers still rely on `specs/jobtrackr-gmail-ingestion-spec-v1.md`.
+
+## M1. Source-of-truth drift on P0 decisions
+### Current state
+- `projects/jobtrackr/api-contract.md` says it incorporates `specs/jobtrackr-pm-decision-memo-2026-04-19.md`.
+- `specs/jobtrackr-gmail-ingestion-spec-v1.md` still presents several of those same behaviors as open questions or PM recommendations.
+
+### QA risk
+A tester can derive different expected behavior depending on which document they read first.
+
+### Action needed
+Update the ingestion spec so these are stated as final MVP requirements, not unresolved recommendations:
+- Gmail scope
+- initial sync window
+- incremental sync cadence
+- uncertain-email handling
+- parsed-job creation threshold
+- duplicate-match rules
+- candidate/source-email retention policy
+
+## M2. Parsed-job creation threshold is final in the contract, ambiguous in the ingestion spec
+### Contract
+`projects/jobtrackr/api-contract.md` defines a hard parsed-job creation threshold in Validation Rules.
+
+### Ingestion spec
+`specs/jobtrackr-gmail-ingestion-spec-v1.md` still says partial jobs are allowed when there is a valid URL or enough identifying data, but does not define the threshold in the main extraction section.
+
+### QA risk
+Unstable expectation for whether low-data emails should create jobs or remain source-email-only.
+
+### Exact tests destabilized
+- URL-only parsed job creation
+- title+company creation without URL
+- below-threshold source-email-only handling
+- multi-job digest extraction with mixed-confidence items
+
+## M3. Candidate retention policy conflicts
+### Contract / PM memo
+- Persist `source_email` for `job_alert`, `uncertain`, and pipeline failures.
+- Do not persist clearly irrelevant mail by default.
+
+### Ingestion spec
+- says to store `source_email` for every email processed as candidate input
+- later says irrelevant email storage is optional
+- later gives a PM recommendation to store relevant and uncertain candidates, not the whole inbox
+
+### QA risk
+Run counts and debug-message expectations will vary depending on which retention rule engineering implements.
+
+### Exact tests destabilized
+- source-email persistence counts after sync
+- visibility of irrelevant messages in debug views
+- replay and failure-trace expectations for candidate classes
+
+## M4. Uncertain-email behavior is still too loose in the ingestion spec
+### Contract / PM memo direction
+- uncertain emails are persisted
+- PM memo recommends debug visibility for uncertain emails in MVP
+- practical extraction behavior needs to be deterministic for QA
+
+### Ingestion spec
+- says `uncertain` should either skip or queue for lower-confidence extraction, depending on engineering simplicity
+- also includes an open question on whether uncertain emails should be retained for manual review later
+
+### QA risk
+QA cannot know whether an uncertain email with a link should create a source-email-only record, a parsed job, or no persisted record.
+
+### Exact tests destabilized
+- uncertain email with job link
+- uncertain email without job link
+- debug review visibility for uncertain messages
+
+## M5. Incremental sync cadence differs between final decision and ingestion recommendation
+### Contract / PM memo
+- incremental sync cadence defaults to every 10 minutes
+
+### Ingestion spec
+- says PM recommendation is every 5 to 15 minutes unless push is easy and reliable
+
+### QA risk
+Scheduled-sync expectations and operational acceptance tests will drift.
+
+### Exact tests destabilized
+- background ingestion cadence checks
+- duplicate protection under overlapping incremental windows
+- stale-state timing expectations in Gmail account and sync UI
+
+## M6. Gmail scope is finalized in the contract but still open in the ingestion spec
+### Contract / PM memo
+- final MVP scope includes `openid`, `email`, `profile`, and `https://www.googleapis.com/auth/gmail.readonly`
+
+### Ingestion spec
+- still says to request the minimum practical read scopes and leaves exact scope as an open question
+
+### QA risk
+OAuth consent expectations and denied-scope failure behavior are not stable if reviewers treat scope as unsettled.
+
+### Exact tests destabilized
+- consent screen validation
+- denied-permission handling
+- granted-scope inspection via account endpoint
+
+## M7. Source message to job linkage is more precise in the contract than in older mental models
+### Contract / PM memo
+- a single source email may link to many jobs
+- debug endpoints expose `linkedJobIds` / `linkedJobs`
+- job detail exposes `sourceMessages`
+
+### Ingestion spec
+- says one email may contain one or more jobs, but does not define an explicit observable linkage model for QA
+
+### QA risk
+Traceability is conceptually supported but not testable without consistent response-level expectations.
+
+### Exact tests destabilized
+- one-message-to-many-jobs digest validation
+- duplicate attachment vs new-job creation traceability
+- source-message audit trail checks from job detail and debug endpoints
+
+## M8. POST /jobs mismatch has been resolved in practice but should stay explicit in QA docs
+### Contract
+- manual job creation endpoint is no longer present
+
+### Ingestion-adjacent docs
+- prior review documents still call out `POST /jobs` as a mismatch risk and manual entry as unresolved
+
+### QA risk
+Legacy QA notes may continue to test or expect a manual create path that is now out of MVP scope.
+
+### Exact tests destabilized
+- manual job creation coverage
+- validation expectations for manually created rows vs parsed rows
+
+## M9. Archived handling is canonical in the contract, but older docs still describe the conflict
+### Contract / PM memo
+- archive is represented by `archivedAt`
+- `archived` is not a workflow status
+
+### Ingestion / QA-adjacent docs
+- older sections still frame this as unresolved or conflicting
+
+### QA risk
+Archive tests may still be written against an outdated status-based model.
+
+### Exact tests destabilized
+- archived list semantics
+- status filter semantics
+- archive/unarchive endpoint persistence behavior
+
+## M10. Saved handling is canonical in the contract, but older docs still describe it as unresolved
+### Contract / PM memo
+- `saved` is a boolean flag and top-level saved view is `saved=true` plus non-archived
+
+### QA-adjacent docs
+- older sections still describe saved as potentially a state, flag, or virtual view
+
+### QA risk
+Saved-view and saved-filter expectations remain unstable unless the QA docs are updated to the canonical model.
+
+### Exact tests destabilized
+- saved filter correctness
+- saved view dataset membership
+- interactions between saved and archived
+
+## M11. Sync run statuses are finalized in the contract, not yet anchored in the ingestion spec
+### Contract / PM memo
+- canonical statuses: `queued`, `running`, `completed`, `partial`, `failed`, `canceled`
+
+### Ingestion spec
+- expects graceful failure and replay support but does not define the run-status vocabulary
+
+### QA risk
+Operational UI and API assertions for sync visibility are not fully grounded in a shared source.
+
+### Exact tests destabilized
+- sync run status transitions
+- partial-failure reporting
+- failure-summary visibility in run detail
+
+---
 
 ---
 

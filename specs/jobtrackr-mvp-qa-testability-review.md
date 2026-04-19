@@ -33,8 +33,142 @@ Main blockers to reliable implementation and QA sign-off:
 6. API contract includes manual creation and saved/archive query shapes that are not aligned with unresolved product decisions.
 
 Recommendation:
-- Do not begin implementation without resolving the clarifications listed in `jobtrackr-spec-clarifications-needed.md`.
+- Use `specs/jobtrackr-pm-decision-memo-2026-04-19.md` as the current source of truth for the former P0 blockers.
+- Do not begin implementation until those decisions are reflected consistently in the ingestion spec, API contract, and development handoff.
 - Treat the checklist below as the minimum QA gate for MVP.
+
+---
+
+# 0. P0 Blocker Checklist Mapped to Blocked Test Cases
+
+This checklist converts the former open P0 items into explicit QA blockers. Even though the PM memo now resolves them at the product level, implementation and QA remain blocked anywhere the decision has not yet propagated into the working specs and build.
+
+## 0.1 Canonical status, saved, and archived semantics
+
+Decision source:
+- `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+
+Required canonical behavior:
+- `status` is workflow state only
+- `saved` is a boolean flag
+- archive state is controlled by `archivedAt`
+- `archived` is not a workflow status
+- views map as follows:
+  - inbox = non-archived + `status=new`
+  - all jobs = non-archived
+  - saved = non-archived + `saved=true`
+  - archived = `archivedAt IS NOT NULL`
+
+Blocked test cases if not implemented consistently:
+- Verify status-update coverage for each allowed workflow status only
+- Verify archived jobs do not appear in inbox or all-jobs views
+- Verify saved view returns only `saved=true` and non-archived jobs
+- Verify archived view is driven by `archivedAt`, not `status`
+- Verify status filters do not accept or return `archived`
+- Verify `PATCH /jobs/:id`, `POST /jobs/:id/archive`, and list filters stay consistent after refresh
+
+Blocking reason:
+- QA cannot define stable expected datasets for inbox, all jobs, saved, archived, or status-filter behavior if archive is both a status and an attribute in different docs.
+
+Checklist:
+- [ ] Ingestion-adjacent specs no longer describe `archived` as a status
+- [ ] Stories and acceptance coverage align to the three-part model
+- [ ] API list/filter examples use the canonical view semantics
+- [ ] QA regression cases for saved/archive/status no longer conflict across documents
+
+## 0.2 Minimum parsed-job creation threshold
+
+Decision source:
+- `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+
+Required canonical behavior:
+Create a parsed job only when at least one is true:
+- external job ID exists
+- normalized job URL exists
+- title and company both exist
+- title, location, and source platform exist with medium-or-higher confidence
+
+Otherwise:
+- persist source email only
+- expose extraction outcome for debug review
+
+Blocked test cases if not implemented consistently:
+- Verify link-only alerts create a job when URL is valid
+- Verify title+company alerts create a job without URL
+- Verify low-data emails below threshold do not create junk job rows
+- Verify relevant-but-unparseable emails stay visible as source-email-only records
+- Verify null title/null company rows are created only when threshold is still satisfied
+- Verify multi-job digests can create zero, one, or many jobs based on per-item threshold evaluation
+
+Blocking reason:
+- QA cannot distinguish valid partial records from parser junk without a deterministic creation threshold.
+
+Checklist:
+- [ ] Ingestion spec uses the same parsed-job threshold as the PM memo and API contract
+- [ ] Debug behavior for below-threshold emails is explicitly testable
+- [ ] Acceptance checklist names source-email-only outcomes as pass conditions
+
+## 0.3 Deduplication and ambiguous-match behavior
+
+Decision source:
+- `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+
+Required canonical behavior:
+- exact external job ID match = duplicate
+- exact normalized job URL match = duplicate
+- exact normalized company+title+location match = duplicate fallback
+- near matches that are not exact do not auto-merge in MVP
+- duplicate updates may attach source linkage, update `lastSeenAt`, fill nulls, and replace lower-confidence extracted fields only
+
+Blocked test cases if not implemented consistently:
+- Verify tracked jobs are deduped when tracking params differ but normalized URL matches
+- Verify same title/company with different normalized locations does not merge
+- Verify same title/location with different companies does not merge
+- Verify repeated alert updates do not overwrite notes, tags, saved state, archive state, or manual status
+- Verify ambiguous near-duplicates create separate jobs rather than silent merges
+- Verify one-message-to-many-jobs traceability survives duplicate attachment behavior
+
+Blocking reason:
+- QA cannot produce deterministic pass/fail expectations for duplicate prevention, data refresh, or user-trust behavior without exact merge rules.
+
+Checklist:
+- [ ] URL normalization and exact-match fallback rules are documented in the implementation-facing spec
+- [ ] Duplicate update rules explicitly protect user-edited fields
+- [ ] Ambiguous-match behavior is testable via stored metadata or observable outcome
+
+## 0.4 Search and filter semantics
+
+Decision source:
+- `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+
+Required canonical behavior:
+- keyword search is case-insensitive substring match
+- search scope is only `title`, `company`, and `descriptionSnippet`
+- filter families combine with AND logic
+- repeated values within a filter family combine with OR logic
+- date boundaries are inclusive
+- date filtering uses the user-facing timezone against UTC-stored timestamps
+- location filtering is case-insensitive exact match on normalized location
+- default sort is `dateReceived:desc`
+
+Blocked test cases if not implemented consistently:
+- Verify query matches title/company/snippet but not notes or tags
+- Verify search with null title/company fields does not crash or mis-rank results
+- Verify `status=applied&status=interviewing` returns OR-within-status results
+- Verify search + status + tag + date filters return intersection results across families
+- Verify `dateFrom` and `dateTo` include same-day boundary records in the user-facing timezone
+- Verify location normalization collapses casing differences but not semantically different strings
+- Verify clearing search restores the correct base dataset for inbox, all jobs, saved, and archived
+
+Blocking reason:
+- QA cannot lock result-set expectations without one canonical definition for query scope, combination logic, and date/location semantics.
+
+Checklist:
+- [ ] Search scope is consistent across requirements, QA review, and API examples
+- [ ] Date and location filter semantics are explicit enough for fixture-based tests
+- [ ] Base dataset semantics for inbox, all jobs, saved, and archived remain consistent after filters clear
+
+---
 
 ---
 
