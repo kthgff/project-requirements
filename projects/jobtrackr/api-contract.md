@@ -1,14 +1,16 @@
 # JobTrackr API Contract Draft
 
 ## Purpose
-This document defines the initial API contract for the JobTrackr MVP.
+This document defines the MVP API contract for JobTrackr.
 
-The API is designed for a React frontend backed by a Go service. It supports:
+The API supports:
 - authentication and session flow
 - Gmail connection and sync visibility
-- job management
+- parsed job management
 - notes, tags, search, and filters
 - operational visibility for ingestion
+
+This contract incorporates the PM decisions in `specs/jobtrackr-pm-decision-memo-2026-04-19.md`.
 
 ## API Principles
 - REST-style JSON endpoints
@@ -27,12 +29,15 @@ The API is designed for a React frontend backed by a Go service. It supports:
 - backend creates a secure session cookie
 - frontend sends browser requests with credentials enabled
 - Gmail tokens are stored server-side only
+- OAuth requests the following scopes for MVP:
+  - `openid`
+  - `email`
+  - `profile`
+  - `https://www.googleapis.com/auth/gmail.readonly`
 
 ## Standard Response Conventions
 
 ### Success Envelope
-Success responses may return either a direct resource or an envelope. For MVP consistency, use a simple envelope:
-
 ```json
 {
   "data": {}
@@ -71,6 +76,7 @@ Behavior:
 - validates state
 - exchanges code for tokens
 - creates or updates user/session
+- creates or updates Gmail account when Gmail scope is granted
 - redirects to the frontend app
 
 Response:
@@ -116,13 +122,29 @@ Response:
 {
   "data": {
     "connected": true,
+    "needsReconnect": false,
+    "state": "connected",
     "email": "user@gmail.com",
     "lastSyncedAt": "2026-04-19T21:00:00Z",
     "tokenExpiresAt": "2026-04-19T22:00:00Z",
-    "needsReconnect": false
+    "lastErrorCode": null,
+    "lastErrorMessage": null,
+    "grantedScopes": [
+      "openid",
+      "email",
+      "profile",
+      "https://www.googleapis.com/auth/gmail.readonly"
+    ]
   }
 }
 ```
+
+Allowed `state` values:
+- `connected`
+- `disconnected`
+- `expired`
+- `revoked`
+- `denied`
 
 ### POST /gmail/connect/start
 Starts Gmail authorization flow if separated from app auth.
@@ -150,19 +172,28 @@ Response:
 
 ## Sync Endpoints
 
+Canonical run statuses:
+- `queued`
+- `running`
+- `completed`
+- `partial`
+- `failed`
+- `canceled`
+
 ### POST /sync/run
 Triggers an on-demand sync for the authenticated user.
 
 Notes:
-- may be rate-limited
-- may be restricted in production UI if only background schedules should run
+- rate-limited per user
+- exposed in MVP UI as a manual refresh action
+- returns quickly rather than blocking until full completion
 
 Response:
 ```json
 {
   "data": {
     "runId": "uuid",
-    "status": "running"
+    "status": "queued"
   }
 }
 ```
@@ -186,7 +217,8 @@ Response:
       "messagesMatched": 8,
       "jobsCreated": 5,
       "jobsAttached": 2,
-      "errorsCount": 1
+      "errorsCount": 1,
+      "errorSummary": null
     }
   ]
 }
@@ -224,25 +256,42 @@ Response:
 
 ## Jobs Endpoints
 
+### Canonical job model
+- `status` is workflow state only
+- `saved` is a boolean flag
+- `archivedAt` controls archive state
+
+Supported status values:
+- `new`
+- `interested`
+- `applied`
+- `interviewing`
+- `offer`
+- `rejected`
+
 ### GET /jobs
-Returns a filtered list of jobs.
+Returns a filtered list of non-archived or archived jobs.
 
 Query params:
-- `q` keyword search
-- `status` one or many values
-- `location`
+- `q` keyword search, case-insensitive substring over `title`, `company`, and `descriptionSnippet`
+- `status` one or many repeated params, OR semantics within the status filter
+- `location` case-insensitive exact match after normalization
 - `saved` boolean
 - `archived` boolean
-- `tag` one or many tag names or IDs
-- `dateFrom`
-- `dateTo`
+- `tag` one or many repeated params, OR semantics within the tag filter
+- `dateFrom` inclusive date lower bound in user-facing timezone
+- `dateTo` inclusive date upper bound in user-facing timezone
 - `page`
 - `pageSize`
 - `sort` default `dateReceived:desc`
 
+Filter composition rules:
+- different filter families combine with AND logic
+- repeated values within the same filter family combine with OR logic
+
 Example:
 ```text
-/jobs?q=designer&status=applied&saved=true&page=1&pageSize=20
+/jobs?q=designer&status=applied&status=interviewing&saved=true&page=1&pageSize=20
 ```
 
 Response:
@@ -259,43 +308,15 @@ Response:
         "saved": true,
         "dateReceived": "2026-04-18T13:00:00Z",
         "archivedAt": null,
+        "fitFlag": null,
+        "fitScore": null,
+        "fitSummary": null,
         "tags": ["priority", "remote"]
       }
     ],
     "page": 1,
     "pageSize": 20,
     "total": 1
-  }
-}
-```
-
-### POST /jobs
-Creates a manual job entry.
-
-Request:
-```json
-{
-  "title": "Backend Engineer",
-  "company": "Example Inc",
-  "location": "Chicago, IL",
-  "descriptionSnippet": "Go backend role",
-  "applicationLink": "https://example.com/jobs/123",
-  "recruiterName": "Jane Doe",
-  "recruiterEmail": "jane@example.com",
-  "salaryText": "$150k-$180k",
-  "status": "new",
-  "saved": false,
-  "notes": "Found via networking",
-  "dateReceived": "2026-04-19T20:00:00Z",
-  "tags": ["networking"]
-}
-```
-
-Response:
-```json
-{
-  "data": {
-    "id": "uuid"
   }
 }
 ```
@@ -318,9 +339,12 @@ Response:
     "salaryText": "$150k-$180k",
     "status": "new",
     "saved": false,
-    "notes": "Found via networking",
+    "notes": "Interesting infra scope",
     "dateReceived": "2026-04-19T20:00:00Z",
     "archivedAt": null,
+    "fitFlag": null,
+    "fitScore": null,
+    "fitSummary": null,
     "tags": [
       {
         "id": "uuid",
@@ -330,8 +354,8 @@ Response:
     "activities": [
       {
         "id": "uuid",
-        "type": "manual_entry_created",
-        "body": "Job created manually",
+        "type": "source_email_attached",
+        "body": "New source email linked to job",
         "createdAt": "2026-04-19T20:01:00Z"
       }
     ],
@@ -349,7 +373,7 @@ Response:
 ```
 
 ### PATCH /jobs/:id
-Updates one or more editable fields on a job.
+Updates one or more editable fields on a parsed job.
 
 Request:
 ```json
@@ -390,13 +414,14 @@ Response:
 ```json
 {
   "data": {
-    "success": true
+    "success": true,
+    "archivedAt": null
   }
 }
 ```
 
 ## Notes Endpoints
-For MVP simplicity, notes may live directly on the job record. These endpoints remain optional if PATCH /jobs/:id is sufficient.
+For MVP simplicity, notes may live directly on the job record. These endpoints remain optional if `PATCH /jobs/:id` is sufficient.
 
 ### PUT /jobs/:id/notes
 Replaces the job notes field.
@@ -526,6 +551,7 @@ These may be hidden from normal UI but are useful during MVP.
 Returns ingested Gmail messages for debug review.
 
 Query params:
+- `classification`
 - `parseStatus`
 - `jobLinked`
 - `limit`
@@ -539,13 +565,19 @@ Response:
       "gmailMessageId": "18f0...",
       "subject": "New opportunity",
       "fromEmail": "recruiter@example.com",
-      "detectionResult": true,
+      "classification": "job_alert",
       "parseStatus": "partial",
-      "processedAt": "2026-04-19T20:01:00Z"
+      "processedAt": "2026-04-19T20:01:00Z",
+      "linkedJobIds": ["uuid1", "uuid2"]
     }
   ]
 }
 ```
+
+Allowed `classification` values:
+- `job_alert`
+- `not_job_alert`
+- `uncertain`
 
 ### GET /messages/:id
 Returns one ingested message and parsing metadata.
@@ -561,10 +593,16 @@ Response:
     "fromName": "Jane Doe",
     "fromEmail": "recruiter@example.com",
     "snippet": "I wanted to reach out...",
-    "detectionResult": true,
+    "classification": "job_alert",
     "parseStatus": "partial",
     "parseError": null,
-    "jobId": "uuid"
+    "linkedJobs": [
+      {
+        "id": "uuid",
+        "title": "Backend Engineer",
+        "company": "Example Inc"
+      }
+    ]
   }
 }
 ```
@@ -594,15 +632,34 @@ Response:
 
 ## Validation Rules
 
-### Job Create and Update
-- `status` must be one of supported enum values
-- `title` and `company` may be nullable for parsed jobs, but manual creation should require at least one of them
-- `dateReceived` may be omitted for manual entry and default to current time
-- `tags` must be deduplicated case-insensitively
+### Parsed Job Creation Threshold
+A parsed job may be created only when at least one of the following is true:
+- external job ID exists
+- normalized job URL exists
+- title and company both exist
+- title, location, and source platform exist with medium-or-higher extraction confidence
+
+Otherwise, persist source email only.
+
+### Job Update Rules
+- `status` must be one of the supported workflow enum values
+- `saved` is a boolean flag
+- archive state is represented only by `archivedAt`
+- notes are plain text for MVP
+- tags are deduplicated case-insensitively
+
+### Deduplication Rules
+Treat a candidate as a duplicate when one of the following is true:
+1. exact external job ID match
+2. exact normalized job URL match
+3. exact normalized `company + title + location` match
+
+If the match is not exact after normalization, do not auto-merge in MVP.
 
 ### Sync Triggers
-- on-demand sync should be rate-limited per user
-- sync should return accepted/running rather than block until full completion if job duration becomes noticeable
+- on-demand sync is rate-limited per user
+- initial historical window defaults to 30 days
+- incremental sync cadence defaults to every 10 minutes
 
 ## Error Codes
 Recommended initial error codes:
@@ -612,6 +669,7 @@ Recommended initial error codes:
 - `validation_failed`
 - `gmail_not_connected`
 - `gmail_reconnect_required`
+- `gmail_access_denied`
 - `sync_already_running`
 - `job_not_found`
 - `tag_not_found`
@@ -640,6 +698,7 @@ Recommended outputs:
 
 ## Future API Extensions
 Not needed for MVP, but likely later:
+- manual job creation
 - richer activity endpoints
 - duplicate review endpoints
 - parser feedback endpoints
