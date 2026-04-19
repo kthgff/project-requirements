@@ -10,6 +10,9 @@
   - `projects/jobtrackr/requirements.md`
   - `projects/jobtrackr/stories.md`
   - `projects/jobtrackr/development-plan.md`
+  - `projects/jobtrackr/technical-architecture.md`
+  - `projects/jobtrackr/database-schema.md`
+  - `projects/jobtrackr/api-contract.md`
 - Stack direction:
   - Frontend: Next.js, React, TypeScript
   - Backend: Go with Gin
@@ -23,7 +26,7 @@
   - Use soft duplicate detection, not aggressive auto-merge
   - Attach update emails to a timeline only when match confidence is high
 - Next deliverables:
-  - Technical architecture spec
-  - Database schema spec
-  - API contract draft
   - Repository scaffolding plan
+  - Initial migration plan
+  - Initial endpoint implementation order
+  - Local development setup guide
