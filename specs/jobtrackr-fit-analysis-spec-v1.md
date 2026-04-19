@@ -1,8 +1,8 @@
-# JobTrakr Fit Analysis Spec v1
+# JobTrackr Fit Analysis Spec v1
 
 ## Purpose
 
-Define how JobTrakr evaluates job fit using Keith's uploaded resume, determines whether a role should be flagged, and stores output suitable for backend processing and table-based UI review.
+Define how JobTrackr evaluates job fit using Keith's uploaded resume, determines whether a role should be flagged, and stores output suitable for backend processing and table-based UI review.
 
 ## Goal
 

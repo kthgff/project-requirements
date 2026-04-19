@@ -1,8 +1,8 @@
-# JobTrakr PRD v1
+# JobTrackr PRD v1
 
 ## 1. Product Summary
 
-JobTrakr is a job-search workflow tool for Keith Goff. It scans Gmail for job alert emails, identifies job opportunities, enriches them with fuller details, stores them in a database, compares them against Keith's uploaded resume, and flags strong-fit roles in a table-based UI.
+JobTrackr is a job-search workflow tool for Keith Goff. It scans Gmail for job alert emails, identifies job opportunities, enriches them with fuller details, stores them in a database, compares them against Keith's uploaded resume, and flags strong-fit roles in a table-based UI.
 
 ## 2. Problem
 

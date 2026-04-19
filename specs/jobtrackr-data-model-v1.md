@@ -1,8 +1,8 @@
-# JobTrakr Data Model v1
+# JobTrackr Data Model v1
 
 ## Purpose
 
-Define the initial data model for JobTrakr MVP so engineering can implement ingestion, fit analysis, and table-based review.
+Define the initial data model for JobTrackr MVP so engineering can implement ingestion, fit analysis, and table-based review.
 
 ## Design Principles
 

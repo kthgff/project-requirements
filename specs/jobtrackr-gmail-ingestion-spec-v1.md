@@ -1,8 +1,8 @@
-# JobTrakr Gmail Ingestion Spec v1
+# JobTrackr Gmail Ingestion Spec v1
 
 ## Purpose
 
-Define how JobTrakr scans Gmail for job alert emails, identifies relevant opportunities, extracts job references, enriches job details, and stores normalized records for MVP.
+Define how JobTrackr scans Gmail for job alert emails, identifies relevant opportunities, extracts job references, enriches job details, and stores normalized records for MVP.
 
 ## Goal
 

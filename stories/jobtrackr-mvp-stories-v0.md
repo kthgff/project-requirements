@@ -1,4 +1,4 @@
-# JobTrakr MVP Stories v0
+# JobTrackr MVP Stories v0
 
 ## Epic: Inbox scanning and job ingestion
 

@@ -1,4 +1,4 @@
-# JobTrakr MVP Stories v1
+# JobTrackr MVP Stories v1
 
 ## Epic 1: Resume setup
 
