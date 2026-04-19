@@ -58,17 +58,23 @@ JobTrakr has moved from vague concept into defined MVP discovery. Core product d
 ### MVP specification completion
 Still needed to complete the core PM handoff package:
 - table UI spec
-- engineering handoff summary
 - backlog breakdown by implementation phase
 - open decision cleanup
+
+### Engineering handoff package
+New implementation-ready artifacts created:
+- backend and frontend scaffolding plan
+- Gmail auth and ingestion implementation package
+- repository structure and service boundary guidance
+- smallest vertical slice definition for OAuth plus raw Gmail ingestion
 
 ## What Is Not Started
 
 ### Engineering handoff
-- API and worker contract recommendations
-- implementation sequencing guidance
-- dependency map
-- milestone-based delivery plan
+- API and worker contract recommendations, complete
+- implementation sequencing guidance, complete
+- dependency map, in progress
+- milestone-based delivery plan, in progress
 
 ### Build phase
 - repo and architecture decisions
@@ -95,9 +101,9 @@ Still needed to complete the core PM handoff package:
 ## Next Recommended Steps
 
 1. Create the table UI spec
-2. Create the engineering handoff summary
-3. Break MVP into implementation milestones
-4. Hand off to Engineering
+2. Break MVP into implementation milestones
+3. Finalize dependency map and engineering handoff summary
+4. Start the smallest Gmail auth plus raw ingestion vertical slice
 
 ## Key Files
 
@@ -106,6 +112,8 @@ Still needed to complete the core PM handoff package:
 - `specs/jobtrakr-data-model-v1.md`
 - `specs/jobtrakr-gmail-ingestion-spec-v1.md`
 - `specs/jobtrakr-fit-analysis-spec-v1.md`
+- `projects/jobtrackr/scaffolding-plan.md`
+- `projects/jobtrackr/gmail-auth-ingestion-implementation-package.md`
 
 ## Project Plan to Completion
 
@@ -128,9 +136,9 @@ Still needed to complete the core PM handoff package:
 - [ ] Resolve remaining open product questions
 
 ### Phase 3. Engineering handoff
-- [ ] Create engineering handoff summary
+- [x] Create engineering handoff summary
 - [ ] Break work into implementation milestones
-- [ ] Define recommended build order
+- [x] Define recommended build order
 - [ ] Identify dependencies and blockers
 - [ ] Hand off final PM package to Engineering
 
