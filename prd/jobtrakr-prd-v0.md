@@ -2,15 +2,15 @@
 
 ## Product Summary
 
-JobTrakr is a job-search workflow tool for Keith Goff. It ingests job opportunities from Gmail, tracks them in one place, helps evaluate fit with AI, and assists with applications when a role is worth pursuing.
+JobTrakr is a job-search workflow tool for Keith Goff. It scans Gmail inbox job alert emails, identifies jobs, looks up fuller job details, saves them to a database, and helps Keith quickly see which roles are worth attention by comparing each job against his resume.
 
 ## Problem
 
-Job searching takes too long because opportunities arrive across email and require repeated manual work to review, compare, track, and apply.
+Job searching takes too long because relevant opportunities arrive by email and require too much manual effort to identify, research, track, and evaluate.
 
 ## Goal
 
-Reduce the time and effort required to move from inbound job email to a clear decision: ignore, track, review, or apply.
+Reduce the time from job alert email to a clear decision about whether the opportunity is worth attention.
 
 ## Primary User
 
@@ -18,46 +18,78 @@ Reduce the time and effort required to move from inbound job email to a clear de
 
 ## Core Jobs To Be Done
 
-- When job emails arrive, I want them automatically tracked so I do not miss opportunities.
-- When I review tracked jobs, I want to quickly understand whether a role is a good fit.
-- When a role looks promising, I want help preparing or completing the application.
+- When job alert emails arrive, I want the system to automatically find and track the jobs so I do not miss them.
+- When a job is tracked, I want the system to gather useful details so I do not have to research every role from scratch.
+- When I review jobs, I want AI to compare them to my resume and flag likely fits so I can focus faster.
 
 ## MVP Scope
 
 ### In scope
-- Connect to Gmail or ingest job-related emails from Gmail
-- Identify and track job opportunities from email
-- Show tracked jobs in a UI
-- Provide AI-assisted fit evaluation
-- Support an application workflow for promising jobs
+- Scan Gmail inbox for job alert emails
+- Detect job opportunities in those emails
+- Look up each job to gather fuller details
+- Save job details to a database
+- Show tracked jobs in a table UI
+- Compare jobs against Keith's resume
+- Flag jobs that appear to be a good fit
 
-### Not yet defined
-- Whether v1 submits applications automatically
-- Whether v1 drafts resumes or cover letters
-- Whether v1 supports multiple users
-- Whether v1 tracks interview pipeline after application
+### Out of scope for v0
+- Automatic job application submission
+- Multi-user support
+- Advanced workflow automation beyond tracking, lookup, and fit flagging
 
-## User Flow
+## Proposed Workflow
 
-1. Job email arrives in Gmail
-2. JobTrakr detects and parses the opportunity
-3. JobTrakr creates or updates a tracked job record
-4. Keith views tracked jobs in the UI
-5. AI evaluates likely fit
-6. Keith reviews recommendation
-7. Keith chooses to ignore, save, or apply
-8. Product supports the apply step at the chosen MVP depth
+1. System scans Gmail inbox for job alert emails
+2. System identifies jobs referenced in the email
+3. System looks up each job to gather fuller details
+4. System creates or updates a job record in the database
+5. System compares the role against Keith's resume
+6. System flags the job if it appears to be a good fit
+7. Keith reviews jobs in a table UI
+
+## Core Data Needed Per Job
+
+Initial assumption:
+- company
+- title
+- location
+- remote/hybrid/on-site
+- compensation if available
+- source email
+- source link
+- job description or summary
+- fit flag
+- fit rationale
+- status
+- date found
+
+## UI Direction
+
+Primary first view:
+- table of tracked jobs
+
+Likely useful columns:
+- company
+- title
+- location
+- source
+- date found
+- fit flag
+- status
 
 ## Key Open Questions
 
-- What counts as a job email?
-- What data should be extracted from each email?
-- What fit criteria matter most?
-- What level of automation is acceptable for applying?
-- What statuses should jobs move through?
+- How do we define a "job alert email" for filtering and detection?
+- Which external sources should be used to look up fuller job details?
+- What exact file or profile source should be used as the resume input?
+- What statuses should jobs support?
+- How should fit be represented, boolean flag only, score plus flag, or rationale plus flag?
+- What level of deduplication is required when multiple emails mention the same role?
 
 ## Success Criteria
 
-- Keith can see inbound job opportunities in one place
-- Keith can quickly distinguish stronger fits from weaker ones
-- Keith spends materially less time handling job applications
+- Inbox job alert emails are converted into structured job records
+- Keith can review tracked jobs in a simple table
+- Good-fit roles are clearly flagged using resume-based evaluation
+- Keith spends materially less time triaging job opportunities

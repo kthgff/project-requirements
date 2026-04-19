@@ -1,40 +1,42 @@
 # JobTrakr MVP Stories v0
 
-## Epic: Job ingestion and tracking
+## Epic: Inbox scanning and job ingestion
 
 ### Story 1
-As Keith, I want job-related emails from Gmail to appear as tracked jobs so that I do not have to manually copy them into a tracker.
+As Keith, I want the system to scan my Gmail inbox for job alert emails so that job opportunities can be detected automatically.
 
 **Acceptance criteria**
-- System can read selected Gmail job emails
-- System creates a tracked job record from an email
-- Duplicate emails for the same role do not create obvious duplicate jobs
-- Tracked jobs are visible in the UI
+- System can access the target Gmail inbox
+- System identifies emails that match the job alert definition
+- Non-job emails are ignored
 
 ### Story 2
-As Keith, I want to view all tracked jobs in one interface so that I can see what needs attention.
+As Keith, I want detected jobs to be looked up and saved to the database so that each opportunity has useful structured detail.
 
 **Acceptance criteria**
-- UI shows a list of tracked jobs
-- Each job shows core summary information
-- I can open a job to view more detail
+- System extracts or identifies a job from a relevant email
+- System gathers additional job details from available sources
+- System creates or updates a job record in the database
+- Duplicate mentions of the same job do not create obvious duplicate records
 
 ## Epic: Fit evaluation
 
 ### Story 3
-As Keith, I want AI to assess whether a job looks like a good fit so that I can focus on the most promising roles.
+As Keith, I want each tracked job compared against my resume so that likely fits are flagged for review.
 
 **Acceptance criteria**
-- System generates a fit recommendation for a tracked job
-- Recommendation includes a short rationale
-- Recommendation is visible in the UI
+- System uses Keith's resume as fit context
+- System generates a fit result for tracked jobs
+- Good-fit jobs are clearly flagged
+- Fit output includes at least a short rationale
 
-## Epic: Apply workflow
+## Epic: Job review UI
 
 ### Story 4
-As Keith, I want help with promising jobs so that I can move faster on applications.
+As Keith, I want to review tracked jobs in a table so that I can scan opportunities quickly.
 
 **Acceptance criteria**
-- For a promising job, the system provides a clear next step toward applying
-- The product indicates whether the job is ready to apply, needs review, or should be skipped
-- Exact automation depth for apply flow remains to be defined
+- UI presents tracked jobs in a table
+- Table includes core columns for job summary and fit status
+- Jobs can be sorted or filtered by fit/status at minimum
+- Selecting a job reveals fuller detail
