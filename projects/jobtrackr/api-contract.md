@@ -304,10 +304,12 @@ Response:
         "title": "Senior Product Designer",
         "company": "Acme",
         "location": "Remote",
+        "source": "linkedin",
         "status": "applied",
         "saved": true,
         "dateReceived": "2026-04-18T13:00:00Z",
         "archivedAt": null,
+        "fitState": "pending",
         "fitFlag": null,
         "fitScore": null,
         "fitSummary": null,
@@ -321,6 +323,12 @@ Response:
 }
 ```
 
+List payload notes:
+- `fitScore` is the user-facing match rating when present
+- `fitFlag` stays as the quick triage boolean
+- `fitState` supports `pending`, `scored`, or `unavailable` so the UI can distinguish missing analysis from a low score
+- `source` is included in the list payload because it is a required dashboard column
+
 ### GET /jobs/:id
 Returns a single job detail.
 
@@ -332,6 +340,7 @@ Response:
     "title": "Backend Engineer",
     "company": "Example Inc",
     "location": "Chicago, IL",
+    "source": "linkedin",
     "descriptionSnippet": "Go backend role",
     "applicationLink": "https://example.com/jobs/123",
     "recruiterName": "Jane Doe",
@@ -342,6 +351,7 @@ Response:
     "notes": "Interesting infra scope",
     "dateReceived": "2026-04-19T20:00:00Z",
     "archivedAt": null,
+    "fitState": "scored",
     "fitFlag": null,
     "fitScore": null,
     "fitSummary": null,
@@ -526,6 +536,8 @@ Response:
 ### GET /filters
 Returns filter options and counts used by the dashboard.
 
+The initial dashboard should support fit-state filtering and match-rating sorting without requiring a separate ratings endpoint.
+
 Response:
 ```json
 {
@@ -534,11 +546,26 @@ Response:
       { "value": "new", "count": 8 },
       { "value": "applied", "count": 12 }
     ],
+    "fitStates": [
+      { "value": "flagged", "count": 6 },
+      { "value": "unflagged", "count": 18 },
+      { "value": "pending", "count": 4 }
+    ],
     "locations": [
       { "value": "Remote", "count": 14 }
     ],
     "tags": [
       { "id": "uuid", "name": "priority", "count": 3 }
+    ],
+    "sorts": [
+      "dateReceived:desc",
+      "dateReceived:asc",
+      "company:asc",
+      "company:desc",
+      "status:asc",
+      "status:desc",
+      "fitScore:desc",
+      "fitScore:asc"
     ]
   }
 }

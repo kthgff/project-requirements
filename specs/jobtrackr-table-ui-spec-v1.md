@@ -42,11 +42,13 @@ It should:
 ## Column Requirements
 
 ### Fit
-- show a strong visual indicator for flagged jobs
-- support three states:
-  - flagged
-  - not flagged
-  - unavailable/pending
+- show both a numeric `match rating` from 0 to 100 and a simple flagged/not-flagged state
+- support three fit availability states:
+  - flagged or not flagged with a computed rating
+  - analyzed but below flag threshold
+  - unavailable or pending because resume or job data is incomplete
+- numeric rating should be sortable
+- flagged state should remain visually obvious for fast triage
 
 ### Company
 - display normalized company name
@@ -84,6 +86,7 @@ At minimum support sorting by:
 - Date Found
 - Company
 - Status
+- Match rating
 
 Default sort:
 - Date Found descending
@@ -94,6 +97,7 @@ At minimum support:
 - status filter
 - fit filter
 - source filter
+- optional match-rating sort without needing a separate filter in MVP
 
 ### Pagination or virtualization
 PM recommendation:
@@ -126,6 +130,7 @@ The table should make these things easy to notice first:
 
 ### Recommended treatment
 - flagged jobs use a badge or colored icon
+- match rating appears as a compact score, such as `84/100`, near the fit state
 - title text should be visually stronger than metadata
 - muted styling for lower-priority metadata like source/date
 
@@ -146,6 +151,7 @@ Show:
 ### Missing fit data
 Show:
 - neutral placeholder such as `Pending` or `No resume`
+- no misleading numeric score when analysis has not run yet
 
 ### Long text
 - truncate in cells
@@ -168,7 +174,7 @@ Show:
 The dashboard shall present jobs in a structured table.
 
 ### FR2. Fit visibility
-The table shall visually distinguish flagged jobs.
+The table shall visually distinguish flagged jobs and display a numeric match rating when analysis exists.
 
 ### FR3. Row detail access
 The user shall be able to open fuller job detail from the table.

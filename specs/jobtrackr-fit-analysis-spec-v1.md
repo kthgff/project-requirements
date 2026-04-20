@@ -66,6 +66,7 @@ Each analyzed job should produce:
 ### MVP UI requirements
 In table view, show at minimum:
 - fit flag
+- fit score as the user-facing `match rating`
 
 In job detail view, show at minimum:
 - fit summary
@@ -123,7 +124,7 @@ Examples:
 
 ## Scoring Model, MVP Recommendation
 
-Use a 0 to 100 score internally, even if the first UI mostly emphasizes the flag.
+Use a 0 to 100 score internally and expose it in the first dashboard UI as the user-facing `match rating`.
 
 ### Suggested interpretation
 - `80-100`: strong fit
@@ -268,7 +269,8 @@ The system shall support fit evaluation using partial job data when complete det
 ### Table view
 Show:
 - fit flag as a clear yes/no visual state
-- optional score later if desired
+- fit score as a visible `match rating` from 0 to 100
+- pending or unavailable state when analysis has not run yet
 
 ### Job detail view
 Show:
@@ -305,6 +307,5 @@ The analysis should avoid overclaiming.
 ## Open Questions
 
 - Should the user be able to override fit flags manually?
-- Should fit score appear in the first UI or remain internal initially?
 - Should location and remote preference be hard filters or only scoring inputs?
 - Should the system support separate thresholds for flagging and sorting?
