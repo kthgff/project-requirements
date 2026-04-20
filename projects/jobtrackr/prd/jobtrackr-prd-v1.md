@@ -93,6 +93,7 @@ The MVP should automatically turn job alert emails into structured tracked jobs 
 - flagged
 - reviewing
 - skipped
+- not a match
 - applied
 - interview
 - rejected
@@ -150,6 +151,9 @@ The system shall present tracked jobs in a table interface.
 
 ### FR11. Status tracking
 The system shall support manual job status updates using the initial status model.
+
+### FR12. Auto-close low-fit jobs
+The system shall automatically set jobs with a match score below 60 to "not a match" status.
 
 ## 13. Open Questions
 
