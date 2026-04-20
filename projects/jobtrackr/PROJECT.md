@@ -75,6 +75,7 @@ New implementation-ready artifacts created:
 - Gmail auth and ingestion implementation package
 - repository structure and service boundary guidance
 - smallest vertical slice definition for OAuth plus raw Gmail ingestion
+- single-file Phase 3 engineering handoff package with canonical source links, gate status, and lane pickup guidance
 
 ## What Is Not Started
 
@@ -121,6 +122,7 @@ New implementation-ready artifacts created:
 - `specs/jobtrakr-fit-analysis-spec-v1.md`
 - `projects/jobtrackr/scaffolding-plan.md`
 - `projects/jobtrackr/gmail-auth-ingestion-implementation-package.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
 ## Project Plan to Completion
 
