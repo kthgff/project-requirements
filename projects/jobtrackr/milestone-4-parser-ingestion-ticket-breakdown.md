@@ -10,7 +10,7 @@ Translate the current Gmail ingestion baseline and parser follow-through into im
 ## Delivery Notes
 - These tickets assume Gmail scope remains readonly.
 - Deduplication remains keyed on job URL.
-- Auto-close below fit score 60 stays downstream of ingestion and fit analysis, not inside the parser.
+- Canonical low-fit handling below fit score 60 stays downstream of ingestion and fit analysis as a fit-signal concern, not inside the parser and not as a workflow-state mutation.
 - Parser output should match the required job fields already captured in `DEVELOPMENT_PLAN.md` decisions.
 
 ## Proposed Tickets
@@ -151,5 +151,6 @@ Translate the current Gmail ingestion baseline and parser follow-through into im
 
 ## Coordination Watchouts
 - Do not let parser output invent fields that drift from the locked dashboard payload.
-- Keep fit scoring and auto-close out of the ingestion parser layer.
+- Keep fit scoring and canonical low-fit handling out of the ingestion parser layer, and do not treat fit signals as workflow-state changes.
 - Preserve user-authored workflow fields during dedupe updates.
+- Treat any flagged or low-fit indicators as fit-signal metadata only, never as new workflow statuses.
