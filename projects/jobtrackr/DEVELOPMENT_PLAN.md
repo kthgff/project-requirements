@@ -1,7 +1,22 @@
 # DEVELOPMENT_PLAN.md
 
 ## Project Overview
-Build and ship the current AI-powered app initiative quickly with clean, maintainable implementation, using this plan to coordinate work across engineering agents and avoid overlap.
+Build and ship JobTrakr quickly with clean, maintainable implementation. This plan is now execution-first: use locked PM decisions as the product source of truth, minimize new requirements work, and prioritize coding the smallest end-to-end slices.
+
+
+## Execution Rule
+
+From this point forward, engineering should prefer coding against locked PM semantics over opening new requirement questions unless blocked.
+
+Use these as locked product truths:
+- Google login is required
+- dashboard is the main jobs page
+- jobs page is a searchable database-backed table
+- each job has a match percentage
+- flagged is a quick triage signal
+- TypeScript is the project language direction
+
+If a requirement appears ambiguous, check the canonical PM specs first and escalate only if still blocked.
 
 ## Team
 | Agent | Role | Channel |
@@ -94,6 +109,11 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 ### Milestone 1: Auth Foundation
 **Goal:** Ship user login and protected app access.
 
+**Locked product semantics for this milestone:**
+- Google federated login
+- protected dashboard access
+- single jobs workspace entry via authenticated session
+
 **Steps:**
 1. Set up monorepo structure: `apps/web`, `apps/api`, `packages/types`, `infra/`
 2. Initialize Go API with Gin framework
@@ -120,6 +140,12 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 ### Milestone 2: Dashboard Shell and Table Foundation
 **Goal:** Ship the visible frontend shell for the app.
 
+**Locked product semantics for this milestone:**
+- dashboard is the main jobs page
+- jobs page is a searchable table
+- required columns include fit flag, match %, company, title, location, source, date found, and status
+- use mock data first only to unblock UI implementation, then replace with DB-backed data
+
 **Steps:**
 1. Design dashboard layout (header, filters row, jobs table, pagination)
 2. Implement dashboard page in Next.js
@@ -145,13 +171,18 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 ### Milestone 3: Data Model and Real Job List
 **Goal:** Replace mock table data with real persisted jobs.
 
+**Locked product semantics for this milestone:**
+- jobs page reads from the database
+- searchable table remains the primary review UI
+- payload must include match percentage when available
+
 **Steps:**
 1. Define database schema (users, jobs, tags, notes, gmail_tokens, sync_state)
 2. Create PostgreSQL migration scripts
 3. Set up local PostgreSQL with Docker Compose
 4. Implement sqlc for type-safe database queries
 5. Create job repository with CRUD operations
-6. Implement jobs list query with filters
+6. Implement jobs list query with search, filters, sorting, and pagination
 7. Implement single-job detail query
 8. Add API endpoints: `GET /api/v1/jobs`, `GET /api/v1/jobs/:id`
 9. Connect frontend dashboard to real API endpoints
@@ -218,7 +249,7 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 
 **Steps:**
 1. Design fit scoring algorithm (compare job vs resume skills/experience)
-2. Implement fit scoring service (score 1-100)
+2. Implement fit scoring service (score 0-100)
 3. Add fit analysis trigger on job creation
 4. Store nullable fit score, low-fit indicator metadata, and rationale in the job record
 5. Implement canonical low-fit handling for jobs below 60 without writing a non-canonical workflow status
