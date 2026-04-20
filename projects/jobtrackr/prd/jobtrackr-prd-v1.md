@@ -155,6 +155,9 @@ The system shall support manual job status updates using the initial status mode
 ### FR12. Auto-close low-fit jobs
 The system shall automatically set jobs with a match score below 60 to "not a match" status.
 
+### FR13. Job details page
+The system shall provide a dedicated page to view full job details including description, skills, tags, notes, and source link.
+
 ## 13. Open Questions
 
 - ~~What fields are mandatory for a useful job record?~~ **Answered: id, title, company, description, salary range, location, match, skills, tags**
