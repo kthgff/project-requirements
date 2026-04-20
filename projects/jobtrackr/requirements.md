@@ -54,7 +54,12 @@ Optional fields:
 - Recruiter email
 
 Behavior requirements:
-- A job record must still be created when some fields are missing
+- A parsed job record may be created only when at least one of the following is true:
+  - external job ID exists
+  - normalized job URL exists
+  - title and company both exist
+  - title, location, and source platform exist with medium-or-higher extraction confidence
+- If the parsed-job threshold is not met, the system must persist the source email only for debug and traceability
 - Parsed fields must be editable in the UI
 - Source email references must be retained for traceability
 
@@ -75,27 +80,40 @@ Displayed fields in list view:
 - Date received
 
 ### 6. Status Tracking
-Supported statuses:
+Canonical job-state model:
+- `status` is workflow state only
+- `saved` is a boolean shortlist flag
+- `archived_at` is a separate archive attribute
+
+Supported workflow statuses:
 - New
 - Interested
 - Applied
 - Interviewing
 - Offer
 - Rejected
-- Archived
+
+Derived view semantics:
+- Inbox: non-archived jobs with status `new`
+- All jobs: all non-archived jobs
+- Saved: non-archived jobs where `saved = true`
+- Archived: jobs where `archived_at` is set
 
 Requirements:
 - User must be able to update status manually
+- User must be able to save and unsave jobs independently of status
+- User must be able to archive and unarchive jobs independently of status
 - Status changes must persist immediately
-- Jobs must be filterable by status
+- Jobs must be filterable by workflow status
 
 ### 7. Search and Filtering
 The user must be able to:
-- Search by keyword across title, company, and description
-- Filter by status
-- Filter by date received
-- Filter by location
-- Combine filters in one view
+- Search by case-insensitive substring across title, company, and description
+- Filter by workflow status
+- Filter by date received using inclusive date boundaries in the user-facing timezone
+- Filter by location using case-insensitive exact matching on normalized values
+- Filter by saved state and archived state
+- Combine filters in one view with AND logic across filter types and OR logic within repeated values of the same filter
 
 ### 8. Notes and Tags
 - User must be able to add and edit notes on a job
@@ -145,9 +163,13 @@ Not required for MVP:
 - Gmail permission scope may create onboarding friction
 - Job update emails may be hard to associate with existing records
 
-## Decisions Needed
-- Whether saved is a distinct state or a saved flag
-- Whether archived is a status or a separate attribute
-- Whether duplicate handling is automatic or review-based
-- Whether manual job entry is needed in MVP
+## Locked MVP Decisions
+- `saved` is a boolean flag, not a workflow state
+- archive is a separate attribute represented by `archived_at`, not a workflow status
+- duplicate handling is automatic only for exact-match rules defined in the PM decision memo; ambiguous matches do not auto-merge in MVP
+- manual job entry is out of MVP scope
+- recruiter outreach is in MVP scope only when the email clearly references a specific open role
+
+## Decisions Still Open
 - Whether update emails should appear in a job activity timeline
+- What enrichment source should be authoritative when email data conflicts with the linked job page

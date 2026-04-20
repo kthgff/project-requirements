@@ -46,16 +46,22 @@ Out of scope for MVP:
 
 ### Authentication
 - Use OAuth with Gmail API
-- Request the minimum practical read scopes for inbox scanning
+- Request exactly these MVP scopes:
+  - `openid`
+  - `email`
+  - `profile`
+  - `https://www.googleapis.com/auth/gmail.readonly`
 - Store tokens securely
 
 ### Initial sync
 - On first connection, scan a bounded historical window
-- PM recommendation for MVP default: last 30 days
+- MVP default: last 30 days
+- This window is not user-configurable in MVP
 
 ### Incremental sync
 - After initial sync, ingest newly received emails on a recurring basis
-- PM recommendation for MVP default: poll every 5 to 15 minutes, unless push is easy and reliable
+- MVP default: poll every 10 minutes
+- Support a user-triggered on-demand sync in MVP UI via the authenticated sync endpoint
 
 ---
 
@@ -103,16 +109,13 @@ Each candidate email should be classified as:
 ### MVP behavior
 - `job_alert`: proceed to extraction
 - `not_job_alert`: mark email as non-job and stop
-- `uncertain`: either skip or queue for lower-confidence extraction, depending on engineering simplicity
-
-PM recommendation:
-- In MVP, treat `uncertain` as extract-if-link-present, otherwise skip
+- `uncertain`: persist for debug visibility, attempt extraction only when a usable job link or equivalent strong identifier is present, otherwise stop after source-email persistence
 
 ---
 
 ## Source Email Storage
 
-For every email processed as candidate input, store a `source_email` record with:
+For every candidate email that is `job_alert`, `uncertain`, or fails after entering the pipeline, store a `source_email` record with:
 - Gmail message id
 - thread id
 - from name
@@ -160,7 +163,11 @@ Support both:
 - multi-job digest emails
 
 If extraction confidence is low:
-- store partial job record only if there is a valid job URL or enough identifying data
+- store a parsed job record only when at least one of the following is true:
+  - external job ID exists
+  - normalized job URL exists
+  - title and company both exist
+  - title, location, and source platform exist with medium-or-higher extraction confidence
 - otherwise keep only the source email record
 
 ---
@@ -208,14 +215,19 @@ The system should avoid creating obvious duplicates when multiple alerts referen
 If duplicate found:
 - update existing job record
 - update `last_seen_at`
-- optionally refresh changed fields if the new source is richer
+- attach the new source email linkage
+- fill null fields
+- replace lower-confidence extracted fields with higher-confidence values
+- do not overwrite user-edited notes, tags, `saved`, archive state, or manual status changes
 - do not create a new active job row
 
 If no duplicate found:
 - create a new job record
 
 If match confidence is ambiguous:
-- prefer creating a new record with a possible duplicate marker rather than incorrectly merging distinct jobs
+- do not auto-merge in MVP
+- create a new record
+- optional internal duplicate-review metadata is allowed if cheap, but no user-facing review flow is required in MVP
 
 ---
 
@@ -232,10 +244,10 @@ If match confidence is ambiguous:
 - mark extraction outcome for debugging
 
 ### On irrelevant email
-- optional: store `source_email` with `is_job_alert = false` if useful for future tuning
+- do not persist `source_email` by default in MVP
 
-PM recommendation:
-- store relevant and uncertain candidates, not the whole inbox
+MVP retention rule:
+- store `source_email` for `job_alert`, `uncertain`, and pipeline-failed candidates only
 
 ---
 
@@ -330,10 +342,6 @@ The system shall trigger fit analysis after job creation or meaningful job updat
 
 ---
 
-## Open Questions
+## Remaining Open Questions
 
-- What exact Gmail scope should engineering request for MVP?
-- Should initial sync be 30 days, 60 days, or user-configurable?
-- Should recruiter outreach be treated as first-class job alerts in MVP?
 - What enrichment source is authoritative when email data conflicts with linked page data?
-- Should uncertain emails be retained for manual review later?
