@@ -579,6 +579,11 @@ Allowed `classification` values:
 - `not_job_alert`
 - `uncertain`
 
+Classification handling for MVP:
+- `job_alert`: proceed through extraction and dedupe
+- `uncertain`: attempt extraction only when a usable job link or equivalent strong identifier is present, otherwise persist for debug review without creating a job
+- `not_job_alert`: do not create a job and do not persist the message unless it had already entered the pipeline and failed later
+
 ### GET /messages/:id
 Returns one ingested message and parsing metadata.
 
@@ -640,6 +645,14 @@ A parsed job may be created only when at least one of the following is true:
 - title, location, and source platform exist with medium-or-higher extraction confidence
 
 Otherwise, persist source email only.
+
+### Source Email Persistence Rules
+Persist a `source_email` or `gmail_messages` record for:
+- `job_alert`
+- `uncertain`
+- any candidate that entered the pipeline and failed during later stages
+
+Do not persist clearly irrelevant mail by default in MVP.
 
 ### Job Update Rules
 - `status` must be one of the supported workflow enum values

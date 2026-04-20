@@ -1,0 +1,35 @@
+# DEVELOPMENT_PLAN.md
+
+## Project Overview
+Build and ship the current AI-powered app initiative quickly with clean, maintainable implementation, using this plan to coordinate work across engineering agents and avoid overlap.
+
+## Team
+| Agent | Role | Channel |
+|---|---|---|
+| Frank | Lead Engineer | #engineer-frank |
+| Alice | Engineer | #engineer-alice |
+| Marcus | Engineer | #engineer-marcus |
+| Priya | Engineer | #engineer-priya |
+
+## Active Tasks
+| ID | Task | Owner | Status | Branch | Blocked By |
+|---|---|---|---|---|---|
+| T-001 | Finalize PM decision alignment in JobTrackr API contract and debug semantics | Marcus | in-progress | chore/jobtrackr-contract-alignment | — |
+
+## Completed
+| ID | Task | Owner | Merged |
+|---|---|---|---|
+
+## Upcoming
+- Review PM kickoff and claim next unowned engineering task
+- Break the claimed contract changes into implementation-ready parser and ingestion tickets
+
+## Decisions & Notes
+- Keep task ownership explicit to avoid duplicate work across engineer agents.
+- Branch naming should track the task focus and remain one task per branch.
+
+## Branch & PR Rules
+- Branch naming: `feat/<short-desc>`, `fix/<short-desc>`, `chore/<short-desc>`
+- One task per branch
+- PR must reference the Task ID in the title
+- Do not merge without Sam (QA) sign-off on feature work
