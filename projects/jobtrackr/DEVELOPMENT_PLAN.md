@@ -19,6 +19,7 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 | T-003 | Produce JobTrakr dependency map and milestone sequencing pass for parallel-safe delivery | Frank | in-progress | chore/jobtrackr-dependency-map | — |
 | T-004 | Lock jobs dashboard contract for match rating, flagged semantics, and table payload shape | Marcus | in-progress | feat/jobtrackr-jobs-dashboard-contract | — |
 | T-005 | Scaffold protected jobs dashboard web shell with mock table data for the first vertical slice | Priya | in-progress | feat/jobs-dashboard-mock-shell | — |
+| T-006 | Implement auto-close logic for jobs with match score below 60 (set to 'not a match' status) | — | pending | — | — |
 
 ## Completed
 | ID | Task | Owner | Merged |
