@@ -29,7 +29,13 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - T-023: Add canonical list-to-detail contract examples so the jobs workspace and detail UI stay aligned with the locked section order and edit model
 - T-024: Add canonical workspace session-state examples for deterministic row-selection continuity across filters, sorting, and dashboard return flows
 - T-025: Publish a canonical Gate A reconciliation matrix so engineering can resolve workflow/archive, fit nullability, and source-email linkage drift from one file
+- T-026: Add persisted Gmail search results and first-pass server-side filtering endpoints for the inbox job search slice
+- T-027: Canonicalize the list-to-detail example docs so API, frontend, and QA reference one authoritative detail continuity example set
 - T-028: Add a canonical workspace continuity QA matrix for filter, sort, dashboard return, and responsive selection behavior
+- T-029: Deliver the first authenticated persisted-jobs vertical slice by wiring session-backed Gmail search results into the jobs UI
+- T-030: Harden the job details editing UI with contract-aligned save/cancel notes flow, in-context tag edits, and shared section structure across drawer and page views
+- T-031: Implement deterministic row-selection continuity in the mock jobs workspace across filter changes, pagination, and dashboard return flows
+- T-032: Rewrite stale Gate A docs so legacy workflow statuses and auto-close behavior no longer conflict with the canonical PM memo, API contract, and reconciliation matrix
 
 ---
 
@@ -1000,6 +1006,42 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Older story docs are marked non-canonical for workflow-state implementation.
 - Source-email linkage guidance matches the join-table expectation used elsewhere in Gate A docs.
 
+## T-026 Persisted Gmail Search and Filtering Test Cases
+
+### TC-1950 Persisted jobs endpoint returns stored results without rescanning Gmail
+**Steps**
+1. Trigger one Gmail sync that creates persisted job records.
+2. Call the jobs list endpoint twice without starting another sync.
+3. Compare response behavior and persistence expectations.
+
+**Expected**
+- The jobs endpoint reads from persisted data.
+- Repeated list calls do not require a new Gmail scan.
+- Response semantics stay deterministic between calls when no new sync runs.
+
+### TC-1951 Server-side filters honor canonical list semantics
+**Steps**
+1. Seed jobs that vary by status, company, and text content.
+2. Call the jobs list endpoint with individual and combined query params.
+3. Compare returned rows to the API contract filter rules.
+
+**Expected**
+- Supported filters narrow server results correctly.
+- Combined filters use AND-across-filter-family behavior.
+- Search scope stays limited to canonical searchable fields.
+
+## T-027 Canonical List-to-Detail Example Test Cases
+
+### TC-1960 Only one authoritative list-detail example file remains implementation-facing
+**Steps**
+1. Review `jobtrackr-list-detail-contract-examples-2026-04-20.md` and any older list-detail example docs.
+2. Inspect cross-links from the API contract, detail contract, workspace contract, and handoff package.
+
+**Expected**
+- `jobtrackr-list-detail-contract-examples-2026-04-20.md` is the canonical example set.
+- Older example files are either compatibility shims or explicitly marked non-canonical.
+- New implementation-facing docs point only to the canonical file.
+
 ## T-028 Workspace Continuity QA Matrix Test Cases
 
 ### TC-1940 Continuity matrix covers preserve, clear, restore, and no-fallback rules
@@ -1021,6 +1063,90 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Engineers can reach the QA matrix from the two canonical workspace docs.
 - Reviewers do not need to infer which continuity file is implementation-facing versus QA-facing.
 
+## T-029 Authenticated Persisted-Jobs Vertical Slice Test Cases
+
+### TC-1970 Authenticated user can reach persisted jobs without mock-only fallback
+**Steps**
+1. Sign in through the auth flow.
+2. Confirm Gmail connection is available.
+3. Open the jobs UI after persisted jobs exist.
+
+**Expected**
+- The jobs UI loads through the authenticated session.
+- Results come from persisted backend data rather than mock-only fixtures.
+- Loading and empty states reflect real API responses cleanly.
+
+### TC-1971 Session loss blocks persisted job retrieval cleanly
+**Steps**
+1. Load persisted jobs in an authenticated session.
+2. Expire or clear the session.
+3. Retry the jobs request and revisit the jobs UI.
+
+**Expected**
+- Persisted job retrieval is denied after session loss.
+- The UI returns to a signed-out or re-auth-required state.
+- No stale protected job data remains visible.
+
+## T-030 Job Details Editing UI Hardening Test Cases
+
+### TC-1980 Notes require explicit save or cancel in both drawer and page views
+**Steps**
+1. Open a job detail in drawer form.
+2. Edit notes, then cancel.
+3. Repeat in full-page detail and save.
+
+**Expected**
+- Notes never autosave.
+- Cancel discards only unsaved changes.
+- Save persists the edited notes in both detail patterns.
+
+### TC-1981 Tag editing stays in-context and matches canonical section structure
+**Steps**
+1. Open detail in drawer and full-page patterns.
+2. Add and remove tags in each view.
+3. Compare section order and edit affordances.
+
+**Expected**
+- Tag edits happen in-context without a separate management screen.
+- Drawer and page views keep the same section order.
+- Editing affordances match the canonical detail contract.
+
+## T-031 Deterministic Row-Selection Continuity Implementation Test Cases
+
+### TC-1990 Pagination never replaces a hidden selection with a fallback row
+**Steps**
+1. Select a job in a paginated result set.
+2. Change to another page where that job is not visible.
+3. Return to the original page or otherwise make the job visible again.
+
+**Expected**
+- Selection clears when the job is no longer visible.
+- No first-row or nearest-row fallback is auto-selected.
+- The exact prior job restores only when it is visible again.
+
+### TC-1991 Dashboard return preserves continuity state across responsive layouts
+**Steps**
+1. Select a job on desktop or tablet.
+2. Leave to dashboard, then re-enter jobs on a different breakpoint.
+3. Inspect selection and helper-state behavior.
+
+**Expected**
+- Filters and sort restore before selection logic runs.
+- Selection restores only when the same job is visible.
+- Breakpoint changes do not mutate continuity state by themselves.
+
+## T-032 Stale Gate A Doc Cleanup Test Cases
+
+### TC-2000 Legacy workflow statuses are removed or explicitly superseded in stale docs
+**Steps**
+1. Review older Gate A-related docs, especially stale auto-close and MVP story references.
+2. Check for `flagged`, `reviewing`, `skipped`, `interview`, and `not a match` presented as canonical workflow statuses.
+
+**Expected**
+- Legacy workflow statuses are removed from implementation-facing docs or clearly marked superseded.
+- Cleaned docs point back to the PM memo, API contract, and reconciliation matrix.
+- Engineering cannot reasonably mistake stale semantics for current source of truth.
+
 ## Current QA coverage gaps
 1. No tasks are marked `done` or moved to QA in `DEVELOPMENT_PLAN.md`, so this hour remains acceptance-coverage and blocker surfacing work rather than runnable execution validation.
 2. T-006 is still blocked by status-model drift in `jobtrackr-auto-close-logic-spec-v1.md`, which still references pre-decision statuses like `flagged`, `reviewing`, `skipped`, `interview`, and `not a match` instead of the canonical workflow model.
@@ -1032,3 +1158,6 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 8. Gmail connection-state edge cases like `expired`, `revoked`, and `denied` now have acceptance coverage, but QA still needs runnable fixtures or test accounts before T-018 and T-022 can be signed off.
 9. T-010 and T-014 ticket work now describe Gate A and Gate B, but QA still needs engineering to treat those gates as hard blockers before live-data integration starts.
 10. T-023, T-024, and T-025 now have stronger canonical docs, but those examples and reconciliation rules still need explicit cross-links from the API contract, workspace contract, and handoff package so implementation teams do not fork behavior.
+11. T-026 and T-029 still lack runnable persisted-jobs fixtures or endpoint examples in QA-owned docs, so execution coverage is blocked at contract level until engineering exposes deterministic sample responses.
+12. T-030 and T-031 now have acceptance coverage, but QA still needs a real branch build to verify drawer/page parity, session-state transitions, and no-fallback selection behavior in the UI.
+13. T-032 is still an active blocker area because older docs continue to advertise legacy workflow states that conflict with the canonical PM memo and current Gate A reconciliation work.
