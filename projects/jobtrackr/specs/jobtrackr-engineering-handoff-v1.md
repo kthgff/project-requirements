@@ -12,7 +12,7 @@ JobTrakr is a single-user job search assistant that:
 - extracts and enriches job records
 - stores normalized job data
 - compares each job to the uploaded resume
-- flags likely good-fit roles
+- surfaces match rating and low-fit indicators as fit signals, not workflow-state changes
 - presents all jobs in a dashboard table UI
 
 ## Locked Product Decisions
@@ -24,7 +24,7 @@ JobTrakr is a single-user job search assistant that:
 - relevant alert sources include LinkedIn, Indeed, and other relevant job alert emails
 - resume source: uploaded file
 - main UI: dashboard with jobs table
-- good-fit action: flag it, do not auto-apply in MVP
+- good-fit behavior: surface fit signals in the UI, do not auto-apply in MVP
 - initial workflow statuses:
   - `new`
   - `interested`
@@ -79,7 +79,7 @@ Goal:
 
 ### Slice 6. Fit analysis
 Goal:
-- system compares jobs against resume and flags good fits
+- system compares jobs against resume and surfaces match rating plus low-fit indicators without mutating workflow state
 
 ### Slice 7. Detail and workflow controls
 Goal:

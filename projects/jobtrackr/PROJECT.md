@@ -10,7 +10,7 @@
 
 ## Current Position
 
-JobTrakr has moved from vague concept into defined MVP discovery. Core product direction is now clear, the foundational PM specs are being assembled, and TypeScript has been chosen as the project language direction.
+JobTrakr has moved from vague concept into defined MVP discovery. Core product direction is now clear, the canonical PM contracts are locked for engineering pickup, and TypeScript is the implementation language direction.
 
 ## Current Phase
 
@@ -38,7 +38,7 @@ JobTrakr has moved from vague concept into defined MVP discovery. Core product d
 - Main jobs page should be a **searchable jobs table backed by database data**
 - Each job should include a **match percentage** showing alignment with Keith's resume and known profile
 - Project language direction defined as **TypeScript**
-- Good-fit action defined as **flag it**, not auto-apply
+- Good-fit handling defined as a **fit signal surfaced in the UI**, not auto-apply and not a workflow-state change
 - Canonical workflow statuses defined:
   - `new`
   - `interested`
@@ -67,9 +67,9 @@ JobTrakr has moved from vague concept into defined MVP discovery. Core product d
 
 ### PM cleanup
 Still needed:
-- open decision cleanup where older specs, handoff notes, and development-plan semantics differ
+- final drift cleanup where older specs and handoff notes still differ from the canonical workflow, archive, and fit-signal contracts
 - tracker alignment so task status reflects actual implementation progress
-- legacy handoff references cleanup so canonical workflow and fit language stays consistent across entrypoint docs
+- remaining entrypoint-doc cleanup so engineers can move between PROJECT, milestone docs, and handoff docs without inheriting stale assumptions
 
 ### Engineering kickoff
 In progress:
@@ -103,9 +103,9 @@ In progress:
 
 ## Next Recommended Steps
 
-1. Reconcile status and fit semantics between PM specs and development plan
+1. Finish reconciling PROJECT, milestone, and handoff references against the canonical workflow and fit-signal contract
 2. Lock the first shared schema and API interfaces for the raw-ingestion vertical slice
-3. Confirm TypeScript framework choices with Engineering
+3. Keep the engineering handoff entrypoints current as implementation pickup accelerates
 4. Move the first build slice into active coding with verifiable completion states
 
 ## Key Files

@@ -5,7 +5,7 @@ Translate the current Gmail ingestion baseline and parser follow-through into im
 
 ## Depends On
 - T-001, PM decision alignment in JobTrackr API contract and debug semantics
-- T-004, jobs dashboard contract for match rating, flagged semantics, and table payload shape
+- T-004, jobs dashboard contract for match rating, fit-signal semantics, and table payload shape
 
 ## Delivery Notes
 - These tickets assume Gmail scope remains readonly.

@@ -94,13 +94,14 @@ Priority order:
 3. T-011 after auth and Gmail connection state are stable
 
 ### Marcus
-Focus on shared contracts that unblock backend and detail UI alignment.
+Focus on shared contracts and reconciliation docs that keep implementation entrypoints aligned.
 
 Priority order:
 1. T-015 detail-view contract as the shared source for section order and editing behavior
 2. T-019 detail UI alignment against that contract
 3. T-023 list-to-detail contract examples so selection, payloads, and edit flows stay concrete
-4. Keep T-001 and T-004 aligned so list/detail payload semantics do not drift
+4. T-045 reconciliation of PROJECT, milestone, and handoff references so engineers do not inherit stale workflow or fit wording while moving between entrypoint docs
+5. Keep T-001 and T-004 aligned so list/detail payload semantics do not drift
 
 ### Priya
 Focus on workspace behavior in the mock-data frontend slice.
@@ -137,7 +138,7 @@ Gmail connection state contract, readonly OAuth wiring, source-email ingestion, 
 
 - Frank: finish Gate A reconciliation and keep engineering package current
 - Alice: auth callback, session flow, Gmail readonly connect path
-- Marcus: detail contract examples, selection continuity examples, and detail editing alignment
+- Marcus: detail contract examples, detail editing alignment, and entrypoint-doc reconciliation so milestone and handoff wording stay canonical
 - Priya: row-selection continuity, active-filter context, empty-result recovery
 
 ## Open Risks To Watch
@@ -146,6 +147,7 @@ Gmail connection state contract, readonly OAuth wiring, source-email ingestion, 
 - Gmail connection state can drift if reconnect and error handling fields are not shared consistently
 - Job detail UI and API can drift if detail examples diverge from the locked contract
 - Hourly kickoff becomes noisy if this package stops reflecting the actual latest canonical files
+- Engineers can still pick up stale workflow or fit-language assumptions if PROJECT, milestone docs, and handoff docs drift apart
 
 ## Definition of a Ready Engineering Handoff
 
@@ -158,4 +160,4 @@ The handoff is ready when:
 
 ## Maintenance Note
 
-Update this file whenever canonical source files change, new gate blockers appear, or pickup guidance changes meaningfully.
+Update this file whenever canonical source files change, new gate blockers appear, pickup guidance changes meaningfully, or entrypoint-doc reconciliation changes what engineers should read first.
