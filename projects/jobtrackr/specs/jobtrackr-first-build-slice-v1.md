@@ -64,7 +64,7 @@ This gives the team a real working product surface fast and creates the base for
 1. Login page implemented
 2. Protected dashboard page implemented
 3. Dashboard renders table with required columns:
-   - fit, showing both match rating and flagged state
+   - fit, showing both match rating and a fit indicator state
    - company
    - title
    - location
@@ -103,9 +103,9 @@ This gives the team a real working product surface fast and creates the base for
 
 ### Mock data guidance
 Use a temporary static dataset with 5 to 10 representative rows covering:
-- flagged and unflagged jobs
+- stronger-fit and lower-fit examples
 - visible match ratings from 0 to 100 plus at least one pending fit state
-- different statuses
+- different canonical workflow statuses
 - different sources such as LinkedIn and Indeed
 - at least one remote role
 

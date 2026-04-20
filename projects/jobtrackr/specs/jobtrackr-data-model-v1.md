@@ -238,13 +238,15 @@ Recommended behavior:
 
 #### `job.status`
 - `new`
-- `flagged`
-- `reviewing`
-- `skipped`
+- `interested`
 - `applied`
-- `interview`
-- `rejected`
+- `interviewing`
 - `offer`
+- `rejected`
+
+Canonical note:
+- fit signals such as `fit_flag`, low-fit indicators, shortlist cues, or review priority must stay separate from workflow status
+- do not persist legacy statuses such as `flagged`, `reviewing`, `skipped`, or `interview`
 
 #### `job.location_type`
 - `remote`
