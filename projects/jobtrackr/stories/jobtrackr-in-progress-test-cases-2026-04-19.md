@@ -16,6 +16,10 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - T-010: Break the approved dependency sequencing into implementation-ready engineering tickets for Milestones 1 to 4
 - T-011: Improve the responsive jobs list UX with mobile cards, clearer active filter context, and compact results navigation
 - T-012: Add editable notes and tag management interactions to the job details page using the agreed detail-view contract
+- T-013: Add visible active-filter context and empty-result recovery controls to the mock jobs workspace
+- T-014: Break the finalized parser and ingestion contract changes into implementation-ready tickets after the jobs dashboard payload is locked
+- T-015: Define the job detail view contract for field grouping, edit interactions, and API expectations across T-008 and T-012
+- T-016: Define the mock jobs workspace UX contract for active-filter visibility, empty-result recovery, and dashboard-to-jobs navigation
 
 ---
 
@@ -564,11 +568,139 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 
 ---
 
+## T-013 Filter Context and Empty-Result Recovery Test Cases
+
+### TC-1201 Active filters stay visible after apply
+**Steps**
+1. Apply search, status, and location filters in the jobs workspace.
+2. Inspect the results area at desktop, tablet, and mobile widths.
+
+**Expected**
+- An `Active filters` summary appears above results.
+- Each applied filter is visible as its own removable chip or badge.
+- Total visible-result count updates with the applied filter state.
+
+### TC-1202 Empty-result state explains recovery paths
+**Steps**
+1. Apply filters that produce zero matching jobs.
+2. Inspect the empty-result messaging and available actions.
+
+**Expected**
+- The table body is replaced by an explicit empty-result panel, not a blank region.
+- Primary recovery action is `Clear all filters`.
+- Secondary recovery action is `Back to dashboard`.
+- If search text is active, the empty-state copy references it.
+
+### TC-1203 Filter reset and dashboard return do not confuse workspace state
+**Steps**
+1. From a filtered empty state, click `Clear all filters`.
+2. Reapply filters, then click `Back to dashboard`.
+3. Re-enter the jobs workspace.
+
+**Expected**
+- Clear-all returns the user to the default jobs workspace state.
+- Back-to-dashboard is available without relying on browser back.
+- Re-entering the jobs workspace preserves filters when the contract says that session context should survive.
+
+---
+
+## T-014 Parser and Ingestion Ticket Breakdown QA Checks
+
+### TC-1301 Milestone 4 parser follow-through tickets are blocked on contract lock
+**Steps**
+1. Review the parser and ingestion ticket breakdown work for T-014.
+2. Trace each ticket dependency back to T-001 and T-004.
+
+**Expected**
+- Parser and ingestion follow-through work does not bypass unresolved contract work.
+- Dependencies explicitly mention dashboard payload and ingestion-contract prerequisites.
+- Engineering can tell what must be frozen before implementation starts.
+
+### TC-1302 Parser follow-through tickets expose QA-verifiable exit checks
+**Steps**
+1. Inspect each T-014 ticket for acceptance language.
+2. Check whether ingestion logging, source-email persistence, extraction thresholds, and dedupe outcomes are testable.
+
+**Expected**
+- Ticket acceptance criteria are measurable.
+- QA can verify source-email retention, dedupe-by-URL, and created-job outcomes without guessing.
+- Hidden parser assumptions are called out instead of implied.
+
+---
+
+## T-015 Detail View Contract Test Cases
+
+### TC-1401 Detail section order is locked and reusable
+**Steps**
+1. Review `jobtrackr-detail-view-contract-2026-04-20.md`.
+2. Compare the defined section order with T-008 and T-012 expectations.
+
+**Expected**
+- Section order is explicitly documented as header summary, fit and workflow, job content, notes, tags, then source and activity context.
+- T-008 and T-012 can build against one shared order instead of divergent layouts.
+
+### TC-1402 Editable versus view-only fields are unambiguous
+**Steps**
+1. Review field-level interaction rules in the detail contract.
+2. Verify whether status, notes, and tags are the only editable MVP fields.
+
+**Expected**
+- Editable fields are limited to `status`, `notes`, and `tags`.
+- Fit fields, recruiter metadata, and source/activity context remain view-only.
+- Notes use explicit `Save` and `Cancel`, not autosave.
+
+### TC-1403 Detail payload example supports real implementation handoff
+**Steps**
+1. Inspect the example `GET /jobs/:id` payload in the detail contract.
+2. Compare it with existing T-008 and T-012 test assumptions.
+
+**Expected**
+- Payload includes the fields needed for header, fit, notes, tags, and source/activity rendering.
+- API write paths for notes and tags are documented clearly enough for frontend and QA alignment.
+- Any missing field that blocks implementation is treated as a contract gap.
+
+---
+
+## T-016 Workspace UX Contract Test Cases
+
+### TC-1501 Filter summary contract is explicit across breakpoints
+**Steps**
+1. Review `jobtrackr-workspace-ux-contract-2026-04-20.md`.
+2. Inspect placement and behavior rules for desktop, tablet, and mobile.
+
+**Expected**
+- The active-filter summary placement is specified for each breakpoint.
+- Summary is hidden only when no filters are active.
+- Removing a chip updates results and summary count immediately.
+
+### TC-1502 Empty-result recovery actions are standardized
+**Steps**
+1. Review the filtered-empty and no-jobs-yet states.
+2. Compare required actions and copy guidance.
+
+**Expected**
+- Filtered-empty state and no-jobs-yet state are distinct.
+- `Clear all filters` and `Back to dashboard` are required recovery actions for filtered-empty states.
+- Empty-result messaging is testable and not left to ad hoc frontend copy.
+
+### TC-1503 Selection and navigation rules preserve user context
+**Steps**
+1. Review the row-selected and dashboard-to-jobs navigation sections.
+2. Check whether selection persistence and return paths are defined clearly enough for QA.
+
+**Expected**
+- Selected-row treatment must survive non-destructive changes when the row remains visible.
+- Dashboard-to-jobs and back navigation are explicit and testable.
+- Mobile return behavior preserves filter context, and selected-row preservation is at least preferred where cleanly possible.
+
+---
+
 ## Current QA coverage gaps
 1. No tasks are marked `done` or moved to QA in `DEVELOPMENT_PLAN.md`, so this hour remains acceptance-coverage and blocker surfacing work rather than runnable execution validation.
-2. T-006 is blocked by status-model drift: `jobtrackr-auto-close-logic-spec-v1.md` still uses `flagged`, `reviewing`, `skipped`, `interview`, and `not a match`, while `jobtrackr-api-contract.md` defines the canonical workflow enum as `new`, `interested`, `applied`, `interviewing`, `offer`, and `rejected`.
+2. T-006 is blocked by status-model drift: `jobtrackr-auto-close-logic-spec-v1.md` still uses `flagged`, `reviewing`, `skipped`, `interview`, and `not a match`, while older contract language elsewhere still references `new`, `interested`, `applied`, `interviewing`, `offer`, and `rejected`. QA cannot sign off until one canonical workflow model is restored across specs.
 3. `DEVELOPMENT_PLAN.md` still says T-002 is a Go web app, while Milestone 1 and Milestone 2 execution docs describe a Next.js plus TypeScript frontend and shared web shell, so QA cannot lock environment-specific execution steps until implementation direction is reconciled.
 4. Jimmy's cron note points QA at `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, but the live plan is actually `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
-5. Real API payload examples for the jobs table and job details page are still needed before fixture-based UI checks can graduate into integration tests for T-007, T-008, T-011, and T-012.
-6. Gmail connection-state edge cases like `expired`, `revoked`, and `denied` still need explicit runnable acceptance coverage before QA can sign off on auth-plus-ingestion-plus-persistence behavior.
-7. T-010 now has a ticket artifact (`jobtrackr-milestones-1-to-4-engineering-tickets-2026-04-20.md`), but QA still needs engineering to treat Gate A and Gate B as hard blockers before live-data integration starts.
+5. Real API payload examples for the jobs table are still needed before fixture-based UI checks can graduate into integration tests for T-007, T-011, T-013, and T-016.
+6. The new detail-view contract now gives QA a usable payload target for T-008, T-012, and T-015, but engineering still needs to cross-link it from the main API contract so implementation does not drift.
+7. Gmail connection-state edge cases like `expired`, `revoked`, and `denied` still need explicit runnable acceptance coverage before QA can sign off on auth-plus-ingestion-plus-persistence behavior.
+8. T-010 and T-014 ticket work now describe Gate A and Gate B, but QA still needs engineering to treat those gates as hard blockers before live-data integration starts.
