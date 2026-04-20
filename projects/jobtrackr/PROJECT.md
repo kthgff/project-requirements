@@ -3,7 +3,7 @@
 ## Project
 
 - **Name:** JobTrakr
-- **Status:** Discovery complete, MVP specification in progress
+- **Status:** Discovery complete, MVP specification and engineering handoff largely complete
 - **Owner:** Keith Goff
 - **PM:** OC
 - **Started:** April 2026
@@ -14,13 +14,13 @@ JobTrakr has moved from vague concept into defined MVP discovery. Core product d
 
 ## Current Phase
 
-**Phase 2: MVP specification**
+**Phase 3: Engineering handoff and kickoff**
 
 ## Overall Progress
 
 - Phase 1: Discovery and product definition, **complete**
-- Phase 2: MVP requirements and specs, **in progress**
-- Phase 3: Engineering handoff package, **not started**
+- Phase 2: MVP requirements and specs, **mostly complete**
+- Phase 3: Engineering handoff package, **in progress**
 - Phase 4: Build and implementation, **not started**
 - Phase 5: QA and launch readiness, **not started**
 - Phase 6: Launch and post-launch iteration, **not started**
@@ -60,38 +60,30 @@ JobTrakr has moved from vague concept into defined MVP discovery. Core product d
 - Table UI spec v1 created
 - Engineering handoff v1 created
 - Implementation milestones v1 created
+- First build slice v1 created
 
 ## What Is In Progress
 
-### MVP specification completion
-Still needed to complete the core PM handoff package:
-- table UI spec
-- backlog breakdown by implementation phase
-- open decision cleanup
+### PM cleanup
+Still needed:
+- open decision cleanup where specs and development-plan semantics differ
+- tracker alignment so task status reflects actual implementation progress
 
-### Engineering handoff package
-New implementation-ready artifacts created:
-- backend and frontend scaffolding plan
-- Gmail auth and ingestion implementation package
-- repository structure and service boundary guidance
-- smallest vertical slice definition for OAuth plus raw Gmail ingestion
-- single-file Phase 3 engineering handoff package with canonical source links, gate status, and lane pickup guidance
+### Engineering kickoff
+In progress:
+- engineering development plan actively populated with implementation tasks
+- dependency map and milestone sequencing being finalized
+- frontend and auth kickoff slices prepared for development
 
 ## What Is Not Started
 
-### Engineering handoff
-- API and worker contract recommendations, complete
-- implementation sequencing guidance, complete
-- dependency map, in progress
-- milestone-based delivery plan, in progress
-
-### Build phase
-- repo and architecture decisions
+### Build phase not yet verified complete
 - Gmail integration implementation
 - ingestion pipeline implementation
 - resume upload implementation
 - fit analysis implementation
 - job table UI implementation
+- status updates and filters implementation
 
 ### QA and launch
 - test plan
@@ -104,14 +96,15 @@ New implementation-ready artifacts created:
 
 - ~~job detail enrichment source is not yet fully specified~~ **Answered: scrape from job detail page linked in email**
 - dependency map across implementation milestones still needs to be finalized
+- status semantics differ between PM tracker and development plan and need reconciliation
 - ~~Google auth access policy is not yet finalized, single approved account vs broader sign-in~~ **Answered: allow anyone with Google account**
 
 ## Next Recommended Steps
 
-1. Lock the first shared schema and API interfaces for the raw-ingestion vertical slice
-2. Confirm TypeScript framework choices with Engineering
-3. Decide Google auth access policy for MVP
-4. Start the smallest Gmail auth plus protected-dashboard vertical slice
+1. Reconcile status and fit semantics between PM specs and development plan
+2. Lock the first shared schema and API interfaces for the raw-ingestion vertical slice
+3. Confirm TypeScript framework choices with Engineering
+4. Move the first build slice into active coding with verifiable completion states
 
 ## Key Files
 
