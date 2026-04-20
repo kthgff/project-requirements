@@ -60,6 +60,8 @@ This contract does not lock final API payloads beyond the frontend states needed
 - Selected row remains visually distinct in the table.
 - Selection treatment must survive sort changes and non-destructive filter edits when the selected row still exists in the visible set.
 - Opening detail should not fully disorient the user from the current table context.
+- If a filter or search change removes the selected row from the visible result set, clear the active selection immediately and show helper copy explaining that the previously selected job no longer matches the current results.
+- If the selected row becomes visible again after filters are relaxed within the same workspace session, restore the last selected row automatically on desktop and tablet, and restore it on mobile when returning from detail or filter controls.
 
 ## Filter Summary Contract
 
@@ -107,10 +109,12 @@ This contract does not lock final API payloads beyond the frontend states needed
 ### From jobs workspace back to dashboard
 - user can return via explicit `Back to dashboard` action in the page chrome or empty state
 - returning to dashboard should not silently discard workspace state unless the user used `Clear all filters`
+- returning to dashboard should preserve the last workspace snapshot in session state: active filters, sort, visible count, and last selected job id if that job still exists in the underlying result set
 
 ### Re-entering jobs workspace
-- if user returns within the same session, preserving prior filters and selected row is preferred for desktop/tablet
-- on mobile, preserving filters is required, preserving selected row is preferred if the UI pattern allows it cleanly
+- if user returns within the same session, preserving prior filters and selected row is required for desktop/tablet when the selected row still matches the current result set
+- on mobile, preserving filters is required, preserving selected row is required when returning from detail within the same session and preferred when returning from dashboard navigation if the selected job still exists cleanly in the list pattern
+- if the last selected job no longer matches current filters on re-entry, keep filters intact, clear the selection, and show a small inline message near the results summary rather than restoring stale detail state
 
 ## Responsive Interaction Expectations
 
@@ -129,6 +133,23 @@ This contract does not lock final API payloads beyond the frontend states needed
 - active-filter summary must remain visible above the results list after returning from filter controls
 - empty-result actions must be full-width or otherwise thumb-friendly
 - returning from job detail should land the user near the previously selected result
+
+## Row-Selection Continuity Rules
+
+### Preserve selection
+- Sorting changes must preserve the selected job by id, even if its row position changes.
+- Non-destructive filter edits must preserve the selected job by id when that job remains in the visible result set.
+- Returning from detail to the list must scroll the user near the selected row or card.
+
+### Clear selection
+- Search or filter changes that remove the selected job from the visible result set must clear the active selection immediately.
+- Clearing selection because a row disappeared must not reset active filters or sort.
+- The workspace should show helper copy such as `Your previously selected job is hidden by the current filters.` with an optional secondary action to clear filters.
+
+### Restore selection
+- If the user relaxes filters and the most recently selected job becomes visible again during the same session, restore that selection automatically.
+- Automatic restoration should only target the most recent selected job id, not an arbitrary nearby row.
+- Using `Clear all filters` may restore the last selected row if it still exists in the full mock dataset; otherwise load the default unselected state.
 
 ## Visual and Content Guidance
 
@@ -167,4 +188,3 @@ This contract does not lock final API payloads beyond the frontend states needed
 
 1. Should mobile use a card list for all job rows, or only below a specific width threshold?
 2. Should `Back to dashboard` preserve the last active summary card on the dashboard, or simply return to the top of the page?
-3. Should row selection persist after a filter change hides the selected record, or should the selection clear immediately with a toast or helper message?

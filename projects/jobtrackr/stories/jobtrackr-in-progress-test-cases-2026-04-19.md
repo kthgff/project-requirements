@@ -693,7 +693,29 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 **Expected**
 - Selected-row treatment must survive non-destructive changes when the row remains visible.
 - Dashboard-to-jobs and back navigation are explicit and testable.
-- Mobile return behavior preserves filter context, and selected-row preservation is at least preferred where cleanly possible.
+- Mobile return behavior preserves filter context, and selected-row preservation is defined for in-session return flows.
+
+### TC-1504 Selection clears with guidance when filters hide the active row
+**Steps**
+1. Start from a workspace state with one selected job row.
+2. Apply a search or filter that removes that job from the visible results.
+3. Inspect the resulting list or empty-result state.
+
+**Expected**
+- Active selection is cleared immediately.
+- Active filters and sort remain intact.
+- Inline helper copy explains that the previously selected job is hidden by current filters.
+
+### TC-1505 Selection restores when the same row becomes visible again in-session
+**Steps**
+1. Select a job row in the workspace.
+2. Apply a filter that hides it, then relax or clear that filter during the same session.
+3. Return to the list and inspect the row state.
+
+**Expected**
+- The most recently selected visible job is restored by id, not by row index.
+- The list returns near the restored row or card.
+- Restoration behavior is defined for desktop, tablet, and mobile return flows.
 
 ---
 
