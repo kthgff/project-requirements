@@ -23,6 +23,7 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 | T-007 | Implement view all jobs page with full job details and filtering | Alice | in-progress | feat/jobtrackr-view-all-jobs-page | — | Page created, details displayed, filtering works, search works, pagination works, tested | Page shows all jobs, filters by status/fit/date work, search returns results, pagination navigates pages | — |
 | T-008 | Implement job details page to view full job information (description, skills, tags, notes, source link) | Marcus | in-progress | feat/jobtrackr-job-details-page | — | Details page created, all fields displayed, source link works, notes editable, tags manageable | Page shows all required fields, source link opens in new tab, notes save to DB, tags add/remove works | — |
 | T-009 | Polish jobs table interaction states and shared dashboard UX for the mock-data frontend slice | Priya | in-progress | feat/jobtrackr-dashboard-table-polish | — | Dashboard and jobs views share richer table states, selected row treatment is clear, and empty/loading shells are present | Mock-data frontend supports obvious row selection, empty-state rendering, loading placeholders, and smoother dashboard-to-jobs navigation | Claimed from unassigned frontend polish work after Jimmy's latest sequencing pass |
+| T-010 | Break the approved dependency sequencing into implementation-ready engineering tickets for Milestones 1 to 4 | Frank | in-progress | chore/jobtrackr-milestone-ticket-breakdown | T-001, T-004 | Milestones 1 to 4 have implementation-ready tickets with dependencies, owners, and exit criteria documented | Each ticket traces to a milestone step, notes contract dependencies, and gives engineering enough detail to implement without PM follow-up | Claimed from unassigned engineering handoff follow-through after Jimmy's latest sequencing pass |
 
 ## Completed
 | ID | Task | Owner | Merged |
@@ -30,7 +31,6 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 
 ## Upcoming
 - Add persistence and filtering improvements to the Gmail job search web app after initial scaffold
-- Convert the dependency map into team-ready implementation tickets once sequencing is approved
 - Break the finalized parser and ingestion contract changes into implementation-ready tickets after the jobs dashboard payload is locked
 
 ## Decisions & Notes
