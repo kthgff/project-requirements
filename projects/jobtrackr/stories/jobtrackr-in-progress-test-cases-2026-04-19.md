@@ -20,6 +20,8 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - T-014: Break the finalized parser and ingestion contract changes into implementation-ready tickets after the jobs dashboard payload is locked
 - T-015: Define the job detail view contract for field grouping, edit interactions, and API expectations across T-008 and T-012
 - T-016: Define the mock jobs workspace UX contract for active-filter visibility, empty-result recovery, and dashboard-to-jobs navigation
+- T-017: Close Gate A documentation by reconciling schema, workflow/archive semantics, fit nullability, and source-email linkage across canonical specs
+- T-018: Implement the Google auth callback, session flow, and Gmail readonly connection path for the first end-to-end vertical slice
 
 ---
 
@@ -695,12 +697,104 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 
 ---
 
+## T-017 Gate A Closeout Test Cases
+
+### TC-1601 Workflow, saved, and archive semantics are consistent across canonical specs
+**Steps**
+1. Compare `jobtrackr-pm-decision-memo-2026-04-19.md`, `jobtrackr-api-contract.md`, `jobtrackr-database-schema.md`, and the Milestones 1 to 4 engineering tickets.
+2. Check whether workflow enum values, `saved`, and `archivedAt` semantics agree.
+3. Check whether any spec still treats archive as a workflow state.
+
+**Expected**
+- Canonical workflow enum is `new`, `interested`, `applied`, `interviewing`, `offer`, `rejected` in all Gate A docs.
+- `saved` remains a separate boolean flag.
+- `archivedAt` remains the only archive-state field.
+- No Gate A document reintroduces `archived` as a status value.
+
+### TC-1602 Fit nullability stays explicit before analysis exists
+**Steps**
+1. Review the PM memo, API contract, schema spec, and milestone tickets.
+2. Compare how pre-analysis jobs represent fit data.
+
+**Expected**
+- Gate A docs consistently allow `fitFlag = null`, `fitScore = null`, and `fitSummary = null` before analysis runs.
+- No Gate A document requires synthetic default fit values.
+- Frontend-facing docs distinguish pending or unavailable fit from low-score fit.
+
+### TC-1603 One-source-email-to-many-jobs linkage is preserved end to end
+**Steps**
+1. Review linkage modeling in schema, API/debug docs, and milestone tickets.
+2. Check whether any doc still implies a single `job_id` on the source-email record as the only linkage path.
+
+**Expected**
+- Canonical linkage model supports one source email to many jobs.
+- Schema, debug endpoints, and milestone tickets all describe durable traceability for that relationship.
+- If a legacy single-job pointer still appears, the doc either removes it or clearly marks it transitional and non-canonical.
+
+## T-018 Google Auth and Gmail Connection Slice Test Cases
+
+### TC-1701 Google auth start returns a usable OAuth URL
+**Steps**
+1. Call `POST /api/v1/auth/google/start` from an unauthenticated state.
+2. Inspect the response payload.
+
+**Expected**
+- Response returns a non-empty `authUrl`.
+- Requested scopes include `openid`, `email`, `profile`, and `gmail.readonly` only.
+- Response shape matches the API contract.
+
+### TC-1702 OAuth callback creates session and redirects into the app
+**Steps**
+1. Start Google auth.
+2. Complete the callback with a valid code and state.
+3. Inspect resulting redirect and session state.
+
+**Expected**
+- Callback validates state and completes without exposing raw tokens to the browser.
+- Session cookie is created.
+- User lands in the authenticated app experience.
+- `GET /api/v1/auth/session` returns the signed-in user and Gmail connection indicator.
+
+### TC-1703 Protected routes deny unauthenticated access after auth work lands
+**Steps**
+1. Request a protected route without a valid session.
+2. Request the same route with a valid session.
+
+**Expected**
+- Unauthenticated access is redirected or rejected consistently.
+- Authenticated access succeeds.
+- Protected shell behavior matches the Milestone 1 exit checks.
+
+### TC-1704 Gmail account endpoint exposes readonly connection state cleanly
+**Steps**
+1. Complete auth with Gmail readonly granted.
+2. Call `GET /api/v1/gmail/account`.
+3. Repeat with disconnected, expired, revoked, and denied fixtures or test states.
+
+**Expected**
+- Response exposes `connected`, `needsReconnect`, `state`, `lastSyncedAt`, `lastErrorCode`, and `lastErrorMessage`.
+- Allowed states match the PM memo and API contract.
+- `needsReconnect` is true where reconnect is required.
+- No broader Gmail scope appears in the persisted account state.
+
+### TC-1705 Logout fully clears session state without disconnecting imported Gmail history
+**Steps**
+1. Sign in and confirm session exists.
+2. Call `POST /api/v1/auth/logout`.
+3. Recheck protected routes and Gmail account behavior after signing back in.
+
+**Expected**
+- Logout clears the active session.
+- Protected routes are no longer accessible until re-authentication.
+- Historical Gmail connection or imported state is not silently deleted by logout alone.
+
 ## Current QA coverage gaps
 1. No tasks are marked `done` or moved to QA in `DEVELOPMENT_PLAN.md`, so this hour remains acceptance-coverage and blocker surfacing work rather than runnable execution validation.
-2. T-006 is blocked by status-model drift: `jobtrackr-auto-close-logic-spec-v1.md` still uses `flagged`, `reviewing`, `skipped`, `interview`, and `not a match`, while older contract language elsewhere still references `new`, `interested`, `applied`, `interviewing`, `offer`, and `rejected`. QA cannot sign off until one canonical workflow model is restored across specs.
-3. `DEVELOPMENT_PLAN.md` still says T-002 is a Go web app, while Milestone 1 and Milestone 2 execution docs describe a Next.js plus TypeScript frontend and shared web shell, so QA cannot lock environment-specific execution steps until implementation direction is reconciled.
+2. T-006 is still blocked by status-model drift in `jobtrackr-auto-close-logic-spec-v1.md`, which still references pre-decision statuses like `flagged`, `reviewing`, `skipped`, `interview`, and `not a match` instead of the canonical workflow model.
+3. T-002 still describes a Go web app in the plan, while the PM memo and implementation package point to a TypeScript frontend plus Go API split, so QA cannot lock environment-specific execution steps until those docs are reconciled.
 4. Jimmy's cron note points QA at `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, but the live plan is actually `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
-5. Real API payload examples for the jobs table are still needed before fixture-based UI checks can graduate into integration tests for T-007, T-011, T-013, and T-016.
-6. The new detail-view contract now gives QA a usable payload target for T-008, T-012, and T-015, but engineering still needs to cross-link it from the main API contract so implementation does not drift.
-7. Gmail connection-state edge cases like `expired`, `revoked`, and `denied` still need explicit runnable acceptance coverage before QA can sign off on auth-plus-ingestion-plus-persistence behavior.
-8. T-010 and T-014 ticket work now describe Gate A and Gate B, but QA still needs engineering to treat those gates as hard blockers before live-data integration starts.
+5. Gate A is not fully closed yet because the schema spec still includes a direct `job_id` pattern in the raw-ingestion implementation package while the canonical schema uses the `job_source_emails` join model for one-email-to-many-jobs traceability.
+6. Real API payload examples for the jobs table are still needed before fixture-based UI checks can graduate into integration tests for T-007, T-011, T-013, and T-016.
+7. The detail-view contract now gives QA a usable payload target for T-008, T-012, and T-015, but engineering still needs to keep it cross-linked from the main API contract and tickets so implementation does not drift.
+8. Gmail connection-state edge cases like `expired`, `revoked`, and `denied` now have acceptance coverage, but QA still needs runnable fixtures or test accounts before T-018 can be signed off.
+9. T-010 and T-014 ticket work now describe Gate A and Gate B, but QA still needs engineering to treat those gates as hard blockers before live-data integration starts.
