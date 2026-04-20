@@ -28,6 +28,7 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - T-022: Wire the authenticated frontend shell to the new auth session and Gmail connection endpoints for the first vertical slice
 - T-023: Add canonical list-to-detail contract examples so the jobs workspace and detail UI stay aligned with the locked section order and edit model
 - T-024: Add canonical workspace session-state examples for deterministic row-selection continuity across filters, sorting, and dashboard return flows
+- T-025: Publish a canonical Gate A reconciliation matrix so engineering can resolve workflow/archive, fit nullability, and source-email linkage drift from one file
 
 ---
 
@@ -966,14 +967,46 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Required fields for notes, tags, status, fit, and source metadata are present.
 - Any missing example that blocks implementation is treated as a contract gap.
 
+## T-025 Gate A Reconciliation Matrix Test Cases
+
+### TC-1930 Matrix preserves canonical precedence order
+**Steps**
+1. Review `jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`.
+2. Compare its precedence list to the current handoff package and live development plan.
+
+**Expected**
+- The matrix points engineers first to `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
+- PM memo, API contract, schema, milestone tickets, and handoff package all appear in a stable precedence order.
+- Engineering can resolve a doc conflict without falling back to stale story files.
+
+### TC-1931 Each Gate A rule names stale references and required engineering behavior
+**Steps**
+1. Review each Gate A row in the matrix.
+2. Check whether workflow, archive, fit-nullability, dashboard payload, and source-email linkage all list stale references plus an explicit engineering action.
+
+**Expected**
+- Every Gate A rule identifies at least one risky stale source where drift is still likely.
+- Every Gate A rule tells engineering what to implement or avoid.
+- The matrix is actionable enough to use as a review checklist, not just a summary.
+
+### TC-1932 Immediate drift callouts align with current QA blockers
+**Steps**
+1. Compare the matrix drift callouts with the current in-progress QA blockers.
+2. Check auto-close semantics, old story docs, and source-email linkage guidance.
+
+**Expected**
+- The matrix explicitly flags the stale auto-close status model.
+- Older story docs are marked non-canonical for workflow-state implementation.
+- Source-email linkage guidance matches the join-table expectation used elsewhere in Gate A docs.
+
 ## Current QA coverage gaps
 1. No tasks are marked `done` or moved to QA in `DEVELOPMENT_PLAN.md`, so this hour remains acceptance-coverage and blocker surfacing work rather than runnable execution validation.
 2. T-006 is still blocked by status-model drift in `jobtrackr-auto-close-logic-spec-v1.md`, which still references pre-decision statuses like `flagged`, `reviewing`, `skipped`, `interview`, and `not a match` instead of the canonical workflow model.
 3. T-002 still describes a Go web app in the live plan, while Milestone 1 and the handoff package describe a Next.js frontend plus Go API split, so QA cannot lock environment-specific execution steps until those docs are reconciled.
 4. Jimmy's cron note points QA at `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, but the live plan is actually `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
-5. Gate A is still not fully closed, because older schema and ingestion references can still imply stale linkage or workflow assumptions even though the handoff package now warns engineers not to implement from them.
-6. Real runnable API fixtures are still needed before list and workspace checks for T-007, T-011, T-013, T-016, T-020, and T-024 can graduate from contract validation into executable integration tests.
-7. The Phase 3 handoff artifact now exists, but it references `jobtrackr-list-detail-examples-2026-04-20.md` while the current canonical file on disk is `jobtrackr-list-detail-contract-examples-2026-04-20.md`; QA considers that a source-of-truth drift risk until reconciled.
+5. Gate A is still not fully closed, because the new reconciliation matrix now exists but older schema, story, and auto-close references still expose stale workflow or linkage assumptions.
+6. Real runnable API fixtures are still needed before list and workspace checks for T-007, T-011, T-013, T-016, T-020, T-024, and T-025 can graduate from contract validation into executable integration tests.
+7. The Phase 3 handoff package and canonical examples are closer now, but the repo still contains both `jobtrackr-list-detail-examples-2026-04-20.md` and `jobtrackr-list-detail-contract-examples-2026-04-20.md`; QA considers the duplicate naming a source-of-truth drift risk until one is clearly superseded.
 8. Gmail connection-state edge cases like `expired`, `revoked`, and `denied` now have acceptance coverage, but QA still needs runnable fixtures or test accounts before T-018 and T-022 can be signed off.
 9. T-010 and T-014 ticket work now describe Gate A and Gate B, but QA still needs engineering to treat those gates as hard blockers before live-data integration starts.
-10. T-023 and T-024 now have canonical example docs, which reduces interpretation drift, but those examples still need explicit cross-links from the API contract, workspace contract, and handoff package so implementation teams do not fork behavior.
+10. T-023, T-024, and T-025 now have stronger canonical docs, but those examples and reconciliation rules still need explicit cross-links from the API contract, workspace contract, and handoff package so implementation teams do not fork behavior.
