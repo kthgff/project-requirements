@@ -31,6 +31,7 @@ The MVP should automatically turn job alert emails into structured tracked jobs 
 - Include a login page for user sign-in
 - Allow Keith to upload a resume for fit evaluation
 - Use AI to compare each job against the uploaded resume
+- Calculate a match percentage for each job
 - Flag jobs that look like good fits
 - Show tracked jobs in a table UI
 - Support manual status management for tracked jobs
@@ -82,6 +83,7 @@ The MVP should automatically turn job alert emails into structured tracked jobs 
 - job description or summary
 - date found
 - fit flag
+- match percentage
 - fit rationale
 - status
 

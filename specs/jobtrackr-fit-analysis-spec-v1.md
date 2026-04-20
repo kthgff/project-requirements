@@ -58,6 +58,7 @@ The system should use the uploaded resume to derive fit context, such as:
 Each analyzed job should produce:
 - `fit_flag` boolean
 - `fit_score` integer from 0 to 100
+- `match_percentage` integer from 0 to 100
 - `summary` short human-readable explanation
 - `strengths` list of positive fit factors
 - `gaps` list of missing or weaker-fit factors
@@ -238,19 +239,22 @@ The system shall compare each tracked job against resume evidence.
 ### FR3. Score output
 The system shall produce a numeric fit score from 0 to 100.
 
-### FR4. Flag output
+### FR4. Match percentage output
+The system shall expose a match percentage from 0 to 100 for each analyzed job.
+
+### FR5. Flag output
 The system shall produce a boolean fit flag derived from the fit result.
 
-### FR5. Human-readable rationale
+### FR6. Human-readable rationale
 The system shall produce a concise human-readable fit summary.
 
-### FR6. Strength and gap capture
+### FR7. Strength and gap capture
 The system shall store structured or semi-structured strengths and gaps.
 
-### FR7. Reanalysis
+### FR8. Reanalysis
 The system shall support rerunning fit analysis when a new resume is uploaded or job details materially change.
 
-### FR8. Partial-data analysis
+### FR9. Partial-data analysis
 The system shall support fit evaluation using partial job data when complete detail is unavailable.
 
 ---

@@ -25,12 +25,13 @@ It should:
 
 ### Required columns
 1. `Fit`
-2. `Company`
-3. `Title`
-4. `Location`
-5. `Source`
-6. `Date Found`
-7. `Status`
+2. `Match %`
+3. `Company`
+4. `Title`
+5. `Location`
+6. `Source`
+7. `Date Found`
+8. `Status`
 
 ### Optional future columns
 - Salary
@@ -83,6 +84,7 @@ PM recommendation:
 
 ### Sorting behavior
 At minimum support sorting by:
+- Match %
 - Date Found
 - Company
 - Status
@@ -123,7 +125,7 @@ Reason:
 ## Visual Hierarchy
 
 The table should make these things easy to notice first:
-1. flagged jobs
+1. flagged jobs and match percentage
 2. title and company
 3. current status
 4. recency
@@ -179,19 +181,19 @@ The table shall visually distinguish flagged jobs and display a numeric match ra
 ### FR3. Row detail access
 The user shall be able to open fuller job detail from the table.
 
-### FR4. Search
+### FR5. Search
 The user shall be able to search across tracked jobs stored in the database.
 
-### FR5. Filtering
+### FR6. Filtering
 The user shall be able to filter by status, fit state, and source.
 
-### FR6. Sorting
-The user shall be able to sort by supported columns.
+### FR7. Sorting
+The user shall be able to sort by supported columns, including match percentage.
 
-### FR7. Status visibility
+### FR8. Status visibility
 The table shall show workflow status for every job.
 
-### FR8. Status editing
+### FR9. Status editing
 The product shall support updating job status from the dashboard experience.
 
 ---

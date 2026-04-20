@@ -36,6 +36,7 @@ JobTrakr has moved from vague concept into defined MVP discovery. Core product d
 - Resume source defined as **uploaded file**
 - Main initial UI defined as **table view**
 - Main jobs page should be a **searchable jobs table backed by database data**
+- Each job should include a **match percentage** showing alignment with Keith's resume and known profile
 - Project language direction defined as **TypeScript**
 - Good-fit action defined as **flag it**, not auto-apply
 - Initial statuses defined:

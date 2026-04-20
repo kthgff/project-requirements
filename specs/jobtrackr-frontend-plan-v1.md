@@ -134,6 +134,7 @@ Enable rapid review of tracked jobs with enough information to decide what deser
 
 ### Required columns for MVP
 - Fit
+- Match %
 - Company
 - Title
 - Location
@@ -148,6 +149,7 @@ Enable rapid review of tracked jobs with enough information to decide what deser
 
 ### Column behavior
 - Fit should be visually distinct, badge/icon/color state
+- Match % should display the computed alignment percentage
 - Status should be editable inline if implementation is straightforward
 - Title should open job detail
 - Date Found should support sorting
@@ -199,6 +201,7 @@ Reason:
 - source platform
 - apply/job link
 - job summary or description
+- match percentage
 - fit summary
 - strengths
 - gaps
