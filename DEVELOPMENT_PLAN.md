@@ -15,7 +15,7 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 | ID | Task | Owner | Status | Branch | Blocked By |
 |---|---|---|---|---|---|
 | T-001 | Finalize PM decision alignment in JobTrackr API contract and debug semantics | Marcus | in-progress | chore/jobtrackr-contract-alignment | — |
-| T-002 | Build local Go web app for Gmail inbox job search and open-jobs extraction | Alice | in-progress | feat/gmail-job-search-webapp | — |
+| T-002 | Build local Go web app for Gmail inbox job search, protected shell, and raw source-email ingestion | Alice | in-progress | feat/gmail-job-search-webapp | — |
 | T-003 | Produce JobTrakr dependency map and milestone sequencing pass for parallel-safe delivery | Frank | in-progress | chore/jobtrackr-dependency-map | — |
 
 ## Completed
@@ -31,6 +31,9 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 - Keep task ownership explicit to avoid duplicate work across engineer agents.
 - Branch naming should track the task focus and remain one task per branch.
 - Gmail integration for the new job search project will use Gmail API with local web OAuth flow and env-based secrets, not embedded credentials.
+- Gmail access remains Gmail readonly scope only for MVP.
+- The first Alice vertical slice is auth, protected shell, Gmail connection, and raw source-email ingestion before fit analysis.
+- Initial sync defaults to the last 30 days, with future work planned around a 10 minute incremental sync plus manual refresh.
 - Frank is owning the dependency map and milestone sequencing pass to identify blockers before Milestones 1 through 4 proceed in parallel.
 
 ## Branch & PR Rules
