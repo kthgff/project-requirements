@@ -19,7 +19,7 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 | T-003 | Produce JobTrakr dependency map and milestone sequencing pass for parallel-safe delivery | Frank | in-progress | chore/jobtrackr-dependency-map | — | Dependency map created, sequencing defined, parallel-safe validated, documented | Dependency graph complete, milestone sequence validated for parallel execution, blockers identified, documented in spec | — |
 | T-004 | Lock jobs dashboard contract for match rating, flagged semantics, and table payload shape | Marcus | in-progress | feat/jobtrackr-jobs-dashboard-contract | — | Match rating defined, flagged semantics defined, table payload locked, API documented, reviewed | Match rating algorithm defined, flag thresholds documented, table JSON schema locked, OpenAPI spec updated | — |
 | T-005 | Scaffold protected jobs dashboard web shell with mock table data for the first vertical slice | Priya | in-progress | feat/jobs-dashboard-mock-shell | — | Dashboard scaffolded, mock data displayed, auth works, responsive, loading states | Dashboard page loads with auth, table displays mock jobs, responsive on mobile/tablet, loading spinner shows | — |
-| T-006 | Implement auto-close logic for jobs with match score below 60 (set to 'not a match' status) | Frank | in-progress | feat/jobtrackr-auto-close-logic | — | Auto-close implemented, jobs below 60 set to 'not a match', tested, edge cases handled | Jobs with score < 60 auto-set to 'not a match', edge case (score = null) handled, logging added | — |
+| T-006 | Implement canonical low-fit handling for jobs with fit score below 60 without introducing non-canonical workflow statuses | Frank | in-progress | feat/jobtrackr-auto-close-logic | — | Low-fit handling is implemented against the canonical workflow model, low-score jobs remain representable without a fake status transition, tested, and edge cases are handled | Jobs with score < 60 are surfaced as low-fit according to the canonical fit contract, score = null does not force a workflow change, and logging/debug output is added | Reworded under T-033 to remove stale `not a match` workflow semantics and point implementation back to the canonical Gate A rules |
 | T-007 | Implement view all jobs page with full job details and filtering | Alice | in-progress | feat/jobtrackr-view-all-jobs-page | — | Page created, details displayed, filtering works, search works, pagination works, tested | Page shows all jobs, filters by status/fit/date work, search returns results, pagination navigates pages | — |
 | T-008 | Implement job details page to view full job information (description, skills, tags, notes, source link) | Marcus | in-progress | feat/jobtrackr-job-details-page | — | Details page created, all fields displayed, source link works, notes editable, tags manageable | Page shows all required fields, source link opens in new tab, notes save to DB, tags add/remove works | — |
 | T-009 | Polish jobs table interaction states and shared dashboard UX for the mock-data frontend slice | Priya | in-progress | feat/jobtrackr-dashboard-table-polish | — | Dashboard and jobs views share richer table states, selected row treatment is clear, and empty/loading shells are present | Mock-data frontend supports obvious row selection, empty-state rendering, loading placeholders, and smoother dashboard-to-jobs navigation | Claimed from unassigned frontend polish work after Jimmy's latest sequencing pass |
@@ -66,11 +66,11 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 - Marcus is owning the jobs dashboard contract shape so frontend and API work can converge on the same table payload, especially around match rating and flagged semantics.
 - Job enrichment: scrape full details from job detail page linked in email.
 - Deduplication: match on job URL to merge repeated alerts for the same job.
-- Mandatory job record fields: id, title, company, description, salary range, location, match (1-100), skills, tags.
-- Fit display: show match score from 1 to 100.
-- Auto-close: jobs with match score below 60 are automatically set to "not a match" status.
+- Mandatory job record fields: id, title, company, description, salary range, location, fit score (nullable until analysis), skills, tags.
+- Fit display: show a user-facing match rating when fit analysis exists, while keeping fit state separate from workflow status.
+- Low-fit handling: jobs with fit score below 60 must follow the canonical low-fit contract and must not introduce `not a match` as a workflow status.
 - Notifications: no email/push notifications; user reviews jobs in UI.
-- Status model: new, flagged, reviewing, skipped, not a match, applied, interview, rejected, offer.
+- Status model: new, interested, applied, interviewing, offer, rejected.
 
 ## Branch & PR Rules
 - Branch naming: `feat/<short-desc>`, `fix/<short-desc>`, `chore/<short-desc>`
@@ -208,28 +208,28 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 
 ---
 
-### Milestone 6: Fit Analysis and Flagged Jobs
-**Goal:** Surface likely good-fit roles in the dashboard.
+### Milestone 6: Fit Analysis and Fit Signals
+**Goal:** Surface likely good-fit roles in the dashboard without conflating fit indicators with workflow state.
 
 **Steps:**
 1. Design fit scoring algorithm (compare job vs resume skills/experience)
 2. Implement fit scoring service (score 1-100)
 3. Add fit analysis trigger on job creation
-4. Store fit score and rationale in job record
-5. Implement auto-close logic (jobs below 60 set to "not a match")
-6. Add fit flag logic (threshold for "flagged" status)
-7. Display fit score in table column
+4. Store nullable fit score, fit flag, and rationale in the job record
+5. Implement canonical low-fit handling for jobs below 60 without writing a non-canonical workflow status
+6. Add fit flag logic as a fit indicator, not a workflow status
+7. Display fit score in the table column as the user-facing match rating
 8. Add fit badge/color coding (high score vs low score)
-9. Show fit rationale in job detail drawer
+9. Show fit rationale in the job detail drawer
 10. Test fit analysis with sample jobs and resume
 11. Verify jobs receive fit results
-12. Verify dashboard clearly shows flagged jobs
-13. Verify auto-close logic works for low-fit jobs
+12. Verify the dashboard clearly shows fit indicators and pending-fit states
+13. Verify low-fit handling works for jobs below 60 score without mutating workflow state incorrectly
 
 **Exit Criteria:**
 - Jobs receive fit results
-- Dashboard clearly shows flagged jobs
-- Auto-close logic works for jobs below 60 score
+- Dashboard clearly shows fit indicators without treating them as workflow states
+- Low-fit handling works for jobs below 60 score under the canonical contract
 
 ---
 
@@ -274,9 +274,9 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 12. Prepare production deployment
 13. Configure production environment variables
 14. Set up monitoring (Sentry, health endpoints)
-15. Verify critical user flow works from login to flagged jobs in dashboard
+15. Verify critical user flow works from login to fit-scored jobs in the dashboard
 16. Resolve major known blockers
 
 **Exit Criteria:**
-- Critical user flow works from login to flagged jobs in dashboard
+- Critical user flow works from login to fit-scored jobs in the dashboard
 - Major known blockers resolved
