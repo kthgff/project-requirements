@@ -189,6 +189,8 @@ Selection examples that bridge this workspace contract to the detail-view contra
 
 Deterministic session-state transitions for preserve, clear, and restore behavior are documented in `specs/jobtrackr-workspace-session-state-examples-2026-04-20.md`.
 
+QA-ready breakpoint coverage for those transitions is documented in `specs/jobtrackr-workspace-continuity-qa-matrix-2026-04-20.md`.
+
 ## Open Questions
 
 1. Should mobile use a card list for all job rows, or only below a specific width threshold?

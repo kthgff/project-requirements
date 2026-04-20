@@ -8,6 +8,9 @@ This file extends:
 - `specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
 - `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
 
+QA-ready scenario coverage for these transitions lives in:
+- `specs/jobtrackr-workspace-continuity-qa-matrix-2026-04-20.md`
+
 ## Canonical Session-State Shape
 
 ```json
@@ -184,6 +187,9 @@ When returning from detail in the same session:
 - Layout changes do not change state semantics.
 
 ## QA Checklist
+
+Use `specs/jobtrackr-workspace-continuity-qa-matrix-2026-04-20.md` when a reviewer needs breakpoint-by-breakpoint expected outcomes instead of narrative examples.
+
 
 - Sorting keeps selection tied to job id.
 - Restrictive filters clear visible selection but retain `lastSelectedJobId`.

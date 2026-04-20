@@ -29,6 +29,7 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - T-023: Add canonical list-to-detail contract examples so the jobs workspace and detail UI stay aligned with the locked section order and edit model
 - T-024: Add canonical workspace session-state examples for deterministic row-selection continuity across filters, sorting, and dashboard return flows
 - T-025: Publish a canonical Gate A reconciliation matrix so engineering can resolve workflow/archive, fit nullability, and source-email linkage drift from one file
+- T-028: Add a canonical workspace continuity QA matrix for filter, sort, dashboard return, and responsive selection behavior
 
 ---
 
@@ -998,6 +999,27 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The matrix explicitly flags the stale auto-close status model.
 - Older story docs are marked non-canonical for workflow-state implementation.
 - Source-email linkage guidance matches the join-table expectation used elsewhere in Gate A docs.
+
+## T-028 Workspace Continuity QA Matrix Test Cases
+
+### TC-1940 Continuity matrix covers preserve, clear, restore, and no-fallback rules
+**Steps**
+1. Review `jobtrackr-workspace-continuity-qa-matrix-2026-04-20.md`.
+2. Confirm it includes sort, filter-hide, restore, dashboard return, mobile return, and no-fallback scenarios.
+
+**Expected**
+- QA has one canonical matrix for deterministic selection continuity.
+- Each scenario names expected `selectedJobId`, `lastSelectedJobId`, and helper-state outcomes.
+- Breakpoint parity is explicit instead of implied.
+
+### TC-1941 Workspace continuity references are wired from the UX and session-state docs
+**Steps**
+1. Review the workspace UX contract and workspace session-state examples.
+2. Confirm both point to the continuity QA matrix.
+
+**Expected**
+- Engineers can reach the QA matrix from the two canonical workspace docs.
+- Reviewers do not need to infer which continuity file is implementation-facing versus QA-facing.
 
 ## Current QA coverage gaps
 1. No tasks are marked `done` or moved to QA in `DEVELOPMENT_PLAN.md`, so this hour remains acceptance-coverage and blocker surfacing work rather than runnable execution validation.
