@@ -54,6 +54,8 @@ JobTrakr has moved from vague concept into defined MVP discovery. Core product d
 - Gmail ingestion spec v1 created
 - Fit analysis spec v1 created
 - Auth and login spec v1 created
+- Frontend plan v1 created
+- Table UI spec v1 created
 
 ## What Is In Progress
 
@@ -96,16 +98,15 @@ New implementation-ready artifacts created:
 ## Active Risks / Gaps
 
 - job detail enrichment source is not yet fully specified
-- table UI behavior is not yet specified in detail
 - dependency map across implementation milestones still needs to be finalized
 - Google auth access policy is not yet finalized, single approved account vs broader sign-in
 
 ## Next Recommended Steps
 
-1. Create the table UI spec
-2. Finalize dependency map and engineering handoff summary
-3. Lock the first shared schema and API interfaces for the raw-ingestion vertical slice
-4. Start the smallest Gmail auth plus raw ingestion vertical slice
+1. Finalize dependency map and engineering handoff summary
+2. Lock the first shared schema and API interfaces for the raw-ingestion vertical slice
+3. Start the smallest Gmail auth plus raw ingestion vertical slice
+4. Prepare frontend implementation breakdown for login and dashboard
 
 ## Key Files
 
@@ -134,7 +135,9 @@ New implementation-ready artifacts created:
 - [x] Define data model
 - [x] Define Gmail ingestion spec
 - [x] Define fit analysis spec
-- [ ] Define table UI spec
+- [x] Define auth and login spec
+- [x] Define frontend plan
+- [x] Define table UI spec
 - [ ] Resolve remaining open product questions
 
 ### Phase 3. Engineering handoff
