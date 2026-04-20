@@ -23,6 +23,10 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - T-017: Close Gate A documentation by reconciling schema, workflow/archive semantics, fit nullability, and source-email linkage across canonical specs
 - T-018: Implement the Google auth callback, session flow, and Gmail readonly connection path for the first end-to-end vertical slice
 - T-019: Align the job details UI with the locked detail-view contract, including section order, editing affordances, and list/detail behavior examples
+- T-020: Lock row-selection continuity rules for the mock jobs workspace across filter changes, sorting, and dashboard return flows
+- T-021: Assemble the final Phase 3 engineering handoff package with source-of-truth links, dependency gates, owner mapping, and immediate pickup guidance
+- T-022: Wire the authenticated frontend shell to the new auth session and Gmail connection endpoints for the first vertical slice
+- T-023: Add canonical list-to-detail contract examples so the jobs workspace and detail UI stay aligned with the locked section order and edit model
 
 ---
 
@@ -203,6 +207,30 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Active selection clears as soon as the selected row leaves the visible set.
 - Helper copy explains why the detail state disappeared.
 - The most recently selected job restores automatically when it becomes visible again in the same session.
+
+## T-020 Row-Selection Continuity Test Cases
+
+### TC-1910 Sorting preserves selection by job id
+**Steps**
+1. Select a job row in the workspace.
+2. Change sort order one or more times.
+3. Inspect the selected state after each sort.
+
+**Expected**
+- Selection persists by job id, not row index.
+- The selected row stays visibly selected after sort changes.
+- Returning from detail lands near the selected row.
+
+### TC-1911 Dashboard return preserves workspace snapshot without stale selection
+**Steps**
+1. Enter the jobs workspace from dashboard.
+2. Apply filters and select a job.
+3. Return to dashboard, then re-enter jobs in the same session.
+
+**Expected**
+- Active filters and sort are preserved.
+- Selection is restored only if the selected job still matches the active result set.
+- If the job no longer matches, selection stays cleared and helper copy explains why.
 
 ## T-003 Dependency and Sequencing QA Checks
 
@@ -844,6 +872,64 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Protected routes are no longer accessible until re-authentication.
 - Historical Gmail connection or imported state is not silently deleted by logout alone.
 
+## T-021 Handoff Package QA Checks
+
+### TC-1801 Final handoff package points to one canonical source-of-truth set
+**Steps**
+1. Review the Phase 3 handoff package.
+2. Check the linked plan, contract, QA, and gate documents.
+
+**Expected**
+- One handoff file links the active plan, detail/workspace contracts, milestone ticket docs, and latest QA coverage.
+- Gate A and Gate B readiness are called out explicitly.
+- A new engineer could find current source-of-truth docs without reconstructing state from multiple channels.
+
+## T-022 Frontend Auth and Gmail Connection Wiring Test Cases
+
+### TC-1810 Frontend reflects signed-out, signed-in, and reconnect states
+**Steps**
+1. Open the app signed out.
+2. Start auth from the UI and complete sign-in.
+3. Revisit the app with a disconnected or reconnect-required Gmail state.
+
+**Expected**
+- Signed-out state exposes a clear auth entry point.
+- Signed-in state shows session-aware UI without manual API calls.
+- Gmail connection state renders connected versus reconnect-needed states clearly.
+
+### TC-1811 Logout and reconnect actions are available from the authenticated shell
+**Steps**
+1. Start from an authenticated shell with Gmail account state loaded.
+2. Trigger logout.
+3. Sign back in and trigger reconnect if the Gmail state requires it.
+
+**Expected**
+- Logout clears the shell back to signed-out behavior.
+- Reconnect action is visible only when needed.
+- Session and Gmail connection controls do not drift from the backend contract.
+
+## T-023 Canonical List-to-Detail Example Test Cases
+
+### TC-1820 List and detail examples use the same section order and selection model
+**Steps**
+1. Review the list-to-detail examples doc.
+2. Compare it with the detail-view contract and workspace UX contract.
+
+**Expected**
+- Example flows preserve the same section order defined in the detail contract.
+- Selection continuity matches the workspace UX contract.
+- Notes, tags, and status interactions do not contradict the locked edit model.
+
+### TC-1821 Example payloads are concrete enough for frontend, API, and QA alignment
+**Steps**
+1. Inspect list payload, selected-row state, and detail payload examples.
+2. Check for missing fields or ambiguous transitions.
+
+**Expected**
+- Examples show how list state maps into detail state without inferred behavior.
+- Required fields for notes, tags, status, fit, and source metadata are present.
+- Any missing example that blocks implementation is treated as a contract gap.
+
 ## Current QA coverage gaps
 1. No tasks are marked `done` or moved to QA in `DEVELOPMENT_PLAN.md`, so this hour remains acceptance-coverage and blocker surfacing work rather than runnable execution validation.
 2. T-006 is still blocked by status-model drift in `jobtrackr-auto-close-logic-spec-v1.md`, which still references pre-decision statuses like `flagged`, `reviewing`, `skipped`, `interview`, and `not a match` instead of the canonical workflow model.
@@ -854,3 +940,7 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 7. The detail-view contract now gives QA a usable payload target for T-008, T-012, and T-015, but engineering still needs to keep it cross-linked from the main API contract and tickets so implementation does not drift.
 8. Gmail connection-state edge cases like `expired`, `revoked`, and `denied` now have acceptance coverage, but QA still needs runnable fixtures or test accounts before T-018 can be signed off.
 9. T-010 and T-014 ticket work now describe Gate A and Gate B, but QA still needs engineering to treat those gates as hard blockers before live-data integration starts.
+10. T-020 now has QA coverage for selection persistence, clearing, and restoration, but frontend still needs deterministic session-state handling across dashboard return and filter churn before QA can sign it off.
+11. T-021 remains blocked on producing one actual handoff artifact that consolidates source-of-truth links, gate status, and lane guidance into a single engineer-usable document.
+12. T-022 needs runnable frontend states or fixtures for signed-out, connected, expired, revoked, and denied Gmail account scenarios before UX sign-off is possible.
+13. T-023 still needs the canonical examples document itself; until that lands, list/detail alignment remains partially spec-driven and vulnerable to interpretation drift.
