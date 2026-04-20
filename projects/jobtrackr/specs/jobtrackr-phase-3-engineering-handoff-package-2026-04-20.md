@@ -23,13 +23,15 @@ Engineers should use these files in this order when there is any conflict.
    - shared API payload expectations
 4. `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
    - locked detail view structure and editing expectations
-5. `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
+5. `projects/jobtrackr/specs/jobtrackr-list-detail-examples-2026-04-20.md`
+   - canonical examples for list selection, detail continuity, and edit behavior alignment
+6. `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
    - locked workspace interaction expectations
-6. `projects/jobtrackr/specs/jobtrackr-dependency-map-and-sequencing-2026-04-19.md`
+7. `projects/jobtrackr/specs/jobtrackr-dependency-map-and-sequencing-2026-04-19.md`
    - milestone dependencies and parallel-safe sequencing
-7. `projects/jobtrackr/specs/jobtrackr-milestones-1-to-4-engineering-tickets-2026-04-20.md`
+8. `projects/jobtrackr/specs/jobtrackr-milestones-1-to-4-engineering-tickets-2026-04-20.md`
    - implementation-ready ticket map for Milestones 1 to 4
-8. `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`
+9. `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`
    - current QA expectations for in-flight slices
 
 ## Contract Gates
@@ -93,7 +95,8 @@ Focus on shared contracts that unblock backend and detail UI alignment.
 Priority order:
 1. T-015 detail-view contract as the shared source for section order and editing behavior
 2. T-019 detail UI alignment against that contract
-3. Keep T-001 and T-004 aligned so list/detail payload semantics do not drift
+3. T-023 list-to-detail contract examples so selection, payloads, and edit flows stay concrete
+4. Keep T-001 and T-004 aligned so list/detail payload semantics do not drift
 
 ### Priya
 Focus on workspace behavior in the mock-data frontend slice.
@@ -130,7 +133,7 @@ Gmail connection state contract, readonly OAuth wiring, source-email ingestion, 
 
 - Frank: finish Gate A reconciliation and keep engineering package current
 - Alice: auth callback, session flow, Gmail readonly connect path
-- Marcus: detail contract examples and detail editing alignment
+- Marcus: detail contract examples, selection continuity examples, and detail editing alignment
 - Priya: row-selection continuity, active-filter context, empty-result recovery
 
 ## Open Risks To Watch

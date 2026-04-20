@@ -328,11 +328,13 @@ List payload notes:
 - `fitFlag` stays as the quick triage boolean
 - `fitState` supports `pending`, `scored`, or `unavailable` so the UI can distinguish missing analysis from a low score
 - `source` is included in the list payload because it is a required dashboard column
+- canonical list-to-detail examples for row selection, drawer continuity, and detail handoff live in `specs/jobtrackr-list-detail-examples-2026-04-20.md`
 
 ### GET /jobs/:id
 Returns a single job detail.
 
 Interaction and section-order expectations for this payload are defined in `specs/jobtrackr-detail-view-contract-2026-04-20.md`.
+List-to-detail continuity, selected-row behavior, and edit-flow examples are defined in `specs/jobtrackr-list-detail-examples-2026-04-20.md`.
 
 Response:
 ```json

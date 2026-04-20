@@ -22,6 +22,7 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - T-016: Define the mock jobs workspace UX contract for active-filter visibility, empty-result recovery, and dashboard-to-jobs navigation
 - T-017: Close Gate A documentation by reconciling schema, workflow/archive semantics, fit nullability, and source-email linkage across canonical specs
 - T-018: Implement the Google auth callback, session flow, and Gmail readonly connection path for the first end-to-end vertical slice
+- T-019: Align the job details UI with the locked detail-view contract, including section order, editing affordances, and list/detail behavior examples
 
 ---
 
@@ -169,6 +170,39 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Extraction outcome is available for debugging.
 
 ---
+
+## T-019 Detail UI Alignment Test Cases
+
+### TC-1901 Detail uses locked section order in both drawer and route patterns
+**Steps**
+1. Review the detail-view contract and list-to-detail examples doc.
+2. Compare drawer and full-page detail states.
+
+**Expected**
+- Both patterns use the same six-section order.
+- The UI does not invent a separate edit screen for notes or tags.
+
+### TC-1902 Status edit reflects back into the selected list row
+**Steps**
+1. Start from a selected job in the jobs workspace.
+2. Change the job status in the detail surface.
+3. Re-check the selected list row state.
+
+**Expected**
+- Status updates in the detail UI.
+- The same selected job remains active.
+- The list row reflects the updated status without losing workspace context.
+
+### TC-1903 Hidden selected row clears and restores deterministically
+**Steps**
+1. Select a job from the list.
+2. Apply filters that hide that job.
+3. Relax filters so the same job becomes visible again.
+
+**Expected**
+- Active selection clears as soon as the selected row leaves the visible set.
+- Helper copy explains why the detail state disappeared.
+- The most recently selected job restores automatically when it becomes visible again in the same session.
 
 ## T-003 Dependency and Sequencing QA Checks
 
