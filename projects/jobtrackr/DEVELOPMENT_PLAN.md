@@ -12,16 +12,16 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 | Priya | SWE | #swe-priya |
 
 ## Active Tasks
-| ID | Task | Owner | Status | Branch | Blocked By |
-|---|---|---|---|---|---|
-| T-001 | Finalize PM decision alignment in JobTrackr API contract and debug semantics | Marcus | in-progress | chore/jobtrackr-contract-alignment | — |
-| T-002 | Build local Go web app for Gmail inbox job search, protected shell, and raw source-email ingestion | Alice | in-progress | feat/gmail-job-search-webapp | — |
-| T-003 | Produce JobTrakr dependency map and milestone sequencing pass for parallel-safe delivery | Frank | in-progress | chore/jobtrackr-dependency-map | — |
-| T-004 | Lock jobs dashboard contract for match rating, flagged semantics, and table payload shape | Marcus | in-progress | feat/jobtrackr-jobs-dashboard-contract | — |
-| T-005 | Scaffold protected jobs dashboard web shell with mock table data for the first vertical slice | Priya | in-progress | feat/jobs-dashboard-mock-shell | — |
-| T-006 | Implement auto-close logic for jobs with match score below 60 (set to 'not a match' status) | — | pending | — | — |
-| T-007 | Implement view all jobs page with full job details and filtering | — | pending | — | — |
-| T-008 | Implement job details page to view full job information (description, skills, tags, notes, source link) | — | pending | — | — |
+| ID | Task | Owner | Status | Branch | Blocked By | DoD |
+|---|---|---|---|---|---|---|
+| T-001 | Finalize PM decision alignment in JobTrackr API contract and debug semantics | Marcus | in-progress | chore/jobtrackr-contract-alignment | — | PM decisions documented, API contract finalized, debug semantics defined, spec approved |
+| T-002 | Build local Go web app for Gmail inbox job search, protected shell, and raw source-email ingestion | Alice | in-progress | feat/gmail-job-search-webapp | — | Local app runs, Gmail search works, protected shell implemented, raw ingestion works, tested |
+| T-003 | Produce JobTrakr dependency map and milestone sequencing pass for parallel-safe delivery | Frank | in-progress | chore/jobtrackr-dependency-map | — | Dependency map created, sequencing defined, parallel-safe validated, documented |
+| T-004 | Lock jobs dashboard contract for match rating, flagged semantics, and table payload shape | Marcus | in-progress | feat/jobtrackr-jobs-dashboard-contract | — | Match rating defined, flagged semantics defined, table payload locked, API documented, reviewed |
+| T-005 | Scaffold protected jobs dashboard web shell with mock table data for the first vertical slice | Priya | in-progress | feat/jobs-dashboard-mock-shell | — | Dashboard scaffolded, mock data displayed, auth works, responsive, loading states |
+| T-006 | Implement auto-close logic for jobs with match score below 60 (set to 'not a match' status) | — | pending | — | — | Auto-close implemented, jobs below 60 set to 'not a match', tested, edge cases handled |
+| T-007 | Implement view all jobs page with full job details and filtering | — | pending | — | — | Page created, details displayed, filtering works, search works, pagination works, tested |
+| T-008 | Implement job details page to view full job information (description, skills, tags, notes, source link) | — | pending | — | — | Details page created, all fields displayed, source link works, notes editable, tags manageable |
 
 ## Completed
 | ID | Task | Owner | Merged |
