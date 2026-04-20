@@ -153,11 +153,11 @@ The system shall support manual job status updates using the initial status mode
 
 ## 13. Open Questions
 
-- What fields are mandatory for a useful job record?
-- What enrichment sources should be used when the email itself lacks detail?
-- Should fit be shown as a boolean flag only, or as a score plus rationale?
-- What deduplication logic should merge repeated alerts for the same job?
-- Should the system notify Keith when new flagged jobs appear?
+- ~~What fields are mandatory for a useful job record?~~ **Answered: id, title, company, description, salary range, location, match, skills, tags**
+- ~~What enrichment sources should be used when the email itself lacks detail?~~ **Answered: scrape from job detail page linked in email**
+- ~~Should fit be shown as a boolean flag only, or as a score plus rationale?~~ **Answered: score from 1 to 100**
+- ~~What deduplication logic should merge repeated alerts for the same job?~~ **Answered: match on job URL**
+- ~~Should the system notify Keith when new flagged jobs appear?~~ **Answered: no, can view UI**
 
 ## 14. Success Criteria
 

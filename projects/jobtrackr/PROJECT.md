@@ -101,9 +101,9 @@ New implementation-ready artifacts created:
 
 ## Active Risks / Gaps
 
-- job detail enrichment source is not yet fully specified
+- ~~job detail enrichment source is not yet fully specified~~ **Answered: scrape from job detail page linked in email**
 - dependency map across implementation milestones still needs to be finalized
-- Google auth access policy is not yet finalized, single approved account vs broader sign-in
+- ~~Google auth access policy is not yet finalized, single approved account vs broader sign-in~~ **Answered: allow anyone with Google account**
 
 ## Next Recommended Steps
 
