@@ -132,14 +132,14 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Table includes `Fit`, `Company`, `Title`, `Location`, `Source`, `Date Found`, and `Status`.
 - Table renders mock data if live data is not yet wired.
 
-### TC-105 Fit column supports numeric score plus flagged state
+### TC-105 Fit column supports numeric score plus fit-signal state
 **Steps**
 1. Review dashboard fixtures or rendered rows.
-2. Compare rows with flagged, unflagged, and pending fit states.
+2. Compare rows with strong-fit, low-fit, and pending fit states.
 
 **Expected**
 - Fit cell can display match rating from 0 to 100.
-- Flagged state is visually distinct.
+- Fit-state treatment is visually distinct without implying workflow status.
 - Pending or unavailable fit state does not show a misleading numeric value.
 
 ### TC-106 Empty state is safe and actionable
@@ -303,10 +303,10 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 ### TC-301 Table payload supports fit tri-state
 **Steps**
 1. Review dashboard/table response contract or fixture model.
-2. Validate representation for rated-flagged, rated-not-flagged, and pending/unavailable fit cases.
+2. Validate representation for rated-strong-fit, rated-low-fit, and pending/unavailable fit cases.
 
 **Expected**
-- Contract supports numeric score and flagged state together.
+- Contract supports numeric score plus canonical fit-state signaling together.
 - Contract supports null or equivalent pending state when fit is unavailable.
 
 ### TC-302 Required table fields are present and sortable where promised
@@ -390,16 +390,16 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 
 ## T-006 Auto-Close Logic Test Cases
 
-### TC-501 Auto-close transitions eligible low-fit jobs to `not a match`
+### TC-501 Canonical low-fit handling does not invent a workflow transition
 **Steps**
-1. Create or simulate jobs in `new`, `flagged`, and `reviewing` states.
+1. Create or simulate jobs in `new` and `interested` states.
 2. Write fit results below 60.
-3. Observe resulting job status and audit trail.
+3. Observe resulting job status, fit metadata, and audit trail.
 
 **Expected**
-- Eligible triage-state jobs change to `not a match`.
-- A status-history entry is created once per actual transition.
-- Structured logging records the auto-close action.
+- Workflow status remains unchanged.
+- Low-fit treatment is represented through canonical fit metadata or helper signals, not a synthetic workflow status.
+- Structured logging records the low-fit handling path.
 
 ### TC-502 Auto-close does not trigger for score 60 or above
 **Steps**
@@ -408,8 +408,8 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 
 **Expected**
 - Status remains unchanged.
-- No auto-close history row is added.
-- Log path records skipped-above-threshold behavior.
+- No low-fit workflow mutation or synthetic status-history row is added.
+- Log path records above-threshold behavior.
 
 ### TC-503 Null fit scores do not change workflow state
 **Steps**
@@ -421,24 +421,24 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - No auto-close history row is written.
 - Skip reason is logged as null-score behavior.
 
-### TC-504 Manual or user-advanced states are protected from auto-close overwrite
+### TC-504 Manual or user-advanced states are protected from low-fit overwrite
 **Steps**
-1. Set jobs to `skipped`, `applied`, `interview`, `rejected`, and `offer`.
+1. Set jobs to `applied`, `interviewing`, `rejected`, and `offer`.
 2. Re-run analysis with a score below 60.
 
 **Expected**
 - Protected statuses remain unchanged.
-- Logs capture protected-state skip behavior.
+- Logs capture protected-state handling behavior.
 - No duplicate or destructive transition occurs.
 
-### TC-505 QA blocker: auto-close spec conflicts with PM canonical workflow model
+### TC-505 QA blocker: low-fit implementation docs conflict with the canonical workflow model
 **Steps**
-1. Compare `jobtrackr-auto-close-logic-spec-v1.md` with the PM decision memo and current API contract.
-2. Inspect whether `flagged`, `reviewing`, `skipped`, `interview`, and `not a match` are still canonical workflow statuses.
+1. Compare `jobtrackr-auto-close-logic-spec-v1.md` with the PM decision memo, reconciliation matrix, and current API contract.
+2. Inspect whether `flagged`, `reviewing`, `skipped`, `interview`, and `not a match` are still presented as canonical workflow statuses or workflow outcomes.
 
 **Expected**
 - Any mismatch is treated as a release blocker for implementation sign-off.
-- QA requires one canonical status model before implementation is approved.
+- QA requires one canonical workflow status model plus one canonical low-fit handling model before implementation is approved.
 
 ---
 
@@ -1152,7 +1152,7 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 2. T-006 is still blocked by status-model drift in `jobtrackr-auto-close-logic-spec-v1.md`, which still references pre-decision statuses like `flagged`, `reviewing`, `skipped`, `interview`, and `not a match` instead of the canonical workflow model.
 3. T-002 still describes a Go web app in the live plan, while Milestone 1 and the handoff package describe a Next.js frontend plus Go API split, so QA cannot lock environment-specific execution steps until those docs are reconciled.
 4. Jimmy's cron note points QA at `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, but the live plan is actually `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
-5. Gate A is still not fully closed, because the new reconciliation matrix now exists but older schema, story, and auto-close references still expose stale workflow or linkage assumptions.
+5. Gate A is still not fully closed, because the reconciliation matrix exists but older schema, story, PRD, and auto-close references still expose stale workflow or linkage assumptions.
 6. Real runnable API fixtures are still needed before list and workspace checks for T-007, T-011, T-013, T-016, T-020, T-024, and T-025 can graduate from contract validation into executable integration tests.
 7. The duplicate list/detail example naming issue is now partially mitigated: `jobtrackr-list-detail-examples-2026-04-20.md` is retained only as a compatibility shim, and `jobtrackr-list-detail-contract-examples-2026-04-20.md` is the canonical source. QA should verify new cross-links keep pointing only to the canonical file.
 8. Gmail connection-state edge cases like `expired`, `revoked`, and `denied` now have acceptance coverage, but QA still needs runnable fixtures or test accounts before T-018 and T-022 can be signed off.
