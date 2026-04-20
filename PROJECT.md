@@ -10,7 +10,7 @@
 
 ## Current Position
 
-JobTrakr has moved from vague concept into defined MVP discovery. Core product direction is now clear, and the foundational PM specs are being assembled.
+JobTrakr has moved from vague concept into defined MVP discovery. Core product direction is now clear, the foundational PM specs are being assembled, and TypeScript has been chosen as the project language direction.
 
 ## Current Phase
 
@@ -35,6 +35,7 @@ JobTrakr has moved from vague concept into defined MVP discovery. Core product d
 - Supported email sources clarified to include **all relevant alerts**, including **LinkedIn** and **Indeed**
 - Resume source defined as **uploaded file**
 - Main initial UI defined as **table view**
+- Project language direction defined as **TypeScript**
 - Good-fit action defined as **flag it**, not auto-apply
 - Initial statuses defined:
   - `new`
@@ -95,16 +96,15 @@ New implementation-ready artifacts created:
 ## Active Risks / Gaps
 
 - job detail enrichment source is not yet fully specified
-- deduplication rules are defined conceptually but not yet translated into implementation guidance
 - table UI behavior is not yet specified in detail
-- engineering sequence and milestones are not yet defined
+- dependency map across implementation milestones still needs to be finalized
 - Google auth access policy is not yet finalized, single approved account vs broader sign-in
 
 ## Next Recommended Steps
 
 1. Create the table UI spec
-2. Break MVP into implementation milestones
-3. Finalize dependency map and engineering handoff summary
+2. Finalize dependency map and engineering handoff summary
+3. Lock the first shared schema and API interfaces for the raw-ingestion vertical slice
 4. Start the smallest Gmail auth plus raw ingestion vertical slice
 
 ## Key Files
@@ -139,7 +139,7 @@ New implementation-ready artifacts created:
 
 ### Phase 3. Engineering handoff
 - [x] Create engineering handoff summary
-- [ ] Break work into implementation milestones
+- [x] Break work into implementation milestones
 - [x] Define recommended build order
 - [ ] Identify dependencies and blockers
 - [ ] Hand off final PM package to Engineering

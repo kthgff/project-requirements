@@ -226,3 +226,5 @@ Update the API contract to reflect:
 6. removal of `POST /jobs`
 7. one-message-to-many-jobs debug linkage
 8. fit nullability behavior on job responses where fit data appears
+
+- Implementation language direction: **TypeScript**
