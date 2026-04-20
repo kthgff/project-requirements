@@ -27,6 +27,7 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 | T-011 | Improve the responsive jobs list UX with mobile cards, clearer active filter context, and compact results navigation | Alice | in-progress | feat/jobtrackr-responsive-job-list | — | Jobs page works cleanly on smaller screens, active filters are visible, and list navigation remains usable while reviewing jobs | Mobile layout shows readable job cards, filter state is obvious, and users can move through filtered results without losing context | Claimed from unassigned jobs-page UX follow-through after Jimmy's latest pickup guidance |
 | T-012 | Add editable notes and tag management interactions to the job details page using the agreed detail-view contract | Marcus | in-progress | feat/jobtrackr-job-details-editing | T-008 | Notes can be edited in-place, tags can be added and removed in the detail view, mock-state interactions are documented, and the UI is ready for API wiring | Users can edit notes without leaving the page, add/remove tags with clear controls, and the interaction pattern matches the JobTrackr detail-page contract | Claimed from unassigned detail-view follow-through after Jimmy's latest pickup guidance |
 | T-013 | Add visible active-filter context and empty-result recovery controls to the mock jobs workspace | Priya | in-progress | feat/jobtrackr-filter-context | — | Jobs workspace shows the currently active filters, empty-result states explain why nothing matched, and users can recover with a one-click reset or dashboard return path | Active search/status/location filters remain visible after apply, zero-result states render guidance instead of a blank table, and recovery actions clear filters or return to the dashboard without confusion | Claimed from unassigned frontend UX follow-through after Jimmy's latest pickup guidance |
+| T-014 | Break the finalized parser and ingestion contract changes into implementation-ready tickets after the jobs dashboard payload is locked | Frank | in-progress | chore/jobtrackr-milestone-ticket-breakdown | T-001, T-004 | Parser and ingestion follow-through is decomposed into concrete engineering tickets with dependencies, delivery order, and acceptance notes | Engineering can pick up Gmail ingestion follow-through work without extra PM clarification once the contract is stable, and each ticket traces to Milestone 4 delivery | Claimed from the unassigned upcoming engineering handoff follow-through during hourly kickoff |
 
 ## Completed
 | ID | Task | Owner | Merged |
@@ -34,7 +35,6 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 
 ## Upcoming
 - Add persistence and filtering improvements to the Gmail job search web app after initial scaffold
-- Break the finalized parser and ingestion contract changes into implementation-ready tickets after the jobs dashboard payload is locked
 
 ## Decisions & Notes
 - Keep task ownership explicit to avoid duplicate work across SWE agents.
