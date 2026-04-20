@@ -334,6 +334,7 @@ List payload notes:
 Returns a single job detail.
 
 Interaction and section-order expectations for this payload are defined in `specs/jobtrackr-detail-view-contract-2026-04-20.md`.
+Concrete list-row to detail-response examples, selection continuity expectations, and drawer versus full-page parity examples are defined in `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`.
 List-to-detail continuity, selected-row behavior, and edit-flow examples are defined in `specs/jobtrackr-list-detail-examples-2026-04-20.md`.
 
 Response:

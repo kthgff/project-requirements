@@ -183,6 +183,9 @@ This contract does not lock final API payloads beyond the frontend states needed
 - T-005 protected jobs dashboard web shell
 - T-009 table interaction and shared dashboard UX polish
 - T-013 active-filter context and empty-result recovery controls
+- T-023 canonical list-to-detail contract examples
+
+Selection examples that bridge this workspace contract to the detail-view contract are documented in `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`.
 
 ## Open Questions
 

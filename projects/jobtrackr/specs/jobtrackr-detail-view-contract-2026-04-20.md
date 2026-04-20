@@ -214,6 +214,7 @@ Frontend work for T-008 and T-012 can proceed assuming `GET /jobs/:id` returns a
 
 ## Recommended Follow-through
 
-1. Add a short cross-reference from `specs/jobtrackr-api-contract.md` to this contract.
+1. Keep the API contract cross-reference aligned with this contract.
 2. Use this section order in mock fixtures and frontend component naming.
 3. Treat any future detail-view interaction change as a contract update, not a one-off UI tweak.
+4. Use `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md` as the canonical example set for drawer versus full-page parity, selection continuity, and list-to-detail mapping.
