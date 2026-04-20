@@ -65,12 +65,13 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 - The first Alice vertical slice is auth, protected shell, Gmail connection, and raw source-email ingestion before fit analysis.
 - Initial sync defaults to the last 30 days, with future work planned around a 10 minute incremental sync plus manual refresh.
 - Frank is owning the dependency map and milestone sequencing pass to identify blockers before Milestones 1 through 4 proceed in parallel.
-- Marcus is owning the jobs dashboard contract shape so frontend and API work can converge on the same table payload, especially around match rating and flagged semantics.
+- Marcus is owning the jobs dashboard contract shape so frontend and API work can converge on the same table payload, especially around match rating, low-fit indicator semantics, and non-workflow table signals.
 - Job enrichment: scrape full details from job detail page linked in email.
 - Deduplication: match on job URL to merge repeated alerts for the same job.
 - Mandatory job record fields: id, title, company, description, salary range, location, fit score (nullable until analysis), skills, tags.
 - Fit display: show a user-facing match rating when fit analysis exists, while keeping fit state separate from workflow status.
 - Low-fit handling: jobs with fit score below 60 must follow the canonical low-fit contract and must not introduce `not a match` as a workflow status.
+- Dashboard semantics: match rating and low-fit indicators are fit signals, not workflow states, and table payload wording should reflect that distinction.
 - Notifications: no email/push notifications; user reviews jobs in UI.
 - Status model: new, interested, applied, interviewing, offer, rejected.
 
@@ -122,7 +123,7 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 2. Implement dashboard page in Next.js
 3. Add header with account controls and logout
 4. Create filters row shell (status, location, date range, search)
-5. Build jobs table component with required columns (company, title, location, source, date found, fit flag, status)
+5. Build jobs table component with required columns (company, title, location, source, date found, match rating, status)
 6. Implement row interaction pattern (click to expand detail drawer)
 7. Add loading states for table
 8. Add empty states for no jobs
@@ -217,15 +218,15 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 1. Design fit scoring algorithm (compare job vs resume skills/experience)
 2. Implement fit scoring service (score 1-100)
 3. Add fit analysis trigger on job creation
-4. Store nullable fit score, fit flag, and rationale in the job record
+4. Store nullable fit score, low-fit indicator metadata, and rationale in the job record
 5. Implement canonical low-fit handling for jobs below 60 without writing a non-canonical workflow status
-6. Add fit flag logic as a fit indicator, not a workflow status
+6. Add low-fit indicator logic as a fit signal, not a workflow status
 7. Display fit score in the table column as the user-facing match rating
 8. Add fit badge/color coding (high score vs low score)
 9. Show fit rationale in the job detail drawer
 10. Test fit analysis with sample jobs and resume
 11. Verify jobs receive fit results
-12. Verify the dashboard clearly shows fit indicators and pending-fit states
+12. Verify the dashboard clearly shows match rating, low-fit signals, and pending-fit states without implying a workflow transition
 13. Verify low-fit handling works for jobs below 60 score without mutating workflow state incorrectly
 
 **Exit Criteria:**
