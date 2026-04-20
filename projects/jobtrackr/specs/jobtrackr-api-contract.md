@@ -332,6 +332,8 @@ List payload notes:
 ### GET /jobs/:id
 Returns a single job detail.
 
+Interaction and section-order expectations for this payload are defined in `specs/jobtrackr-detail-view-contract-2026-04-20.md`.
+
 Response:
 ```json
 {
