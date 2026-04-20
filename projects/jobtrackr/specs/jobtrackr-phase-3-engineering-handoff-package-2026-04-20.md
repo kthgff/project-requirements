@@ -19,19 +19,21 @@ Engineers should use these files in this order when there is any conflict.
    - live task ownership, active branches, dependencies, and delivery sequencing
 2. `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
    - canonical product decisions where older specs differ
-3. `projects/jobtrackr/specs/jobtrackr-api-contract.md`
+3. `projects/jobtrackr/specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
+   - compact Gate A drift check for workflow, archive, fit-nullability, and source-email linkage semantics
+4. `projects/jobtrackr/specs/jobtrackr-api-contract.md`
    - shared API payload expectations
-4. `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
+5. `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
    - locked detail view structure and editing expectations
-5. `projects/jobtrackr/specs/jobtrackr-list-detail-examples-2026-04-20.md`
+6. `projects/jobtrackr/specs/jobtrackr-list-detail-examples-2026-04-20.md`
    - canonical examples for list selection, detail continuity, and edit behavior alignment
-6. `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
+7. `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
    - locked workspace interaction expectations
-7. `projects/jobtrackr/specs/jobtrackr-dependency-map-and-sequencing-2026-04-19.md`
+8. `projects/jobtrackr/specs/jobtrackr-dependency-map-and-sequencing-2026-04-19.md`
    - milestone dependencies and parallel-safe sequencing
-8. `projects/jobtrackr/specs/jobtrackr-milestones-1-to-4-engineering-tickets-2026-04-20.md`
+9. `projects/jobtrackr/specs/jobtrackr-milestones-1-to-4-engineering-tickets-2026-04-20.md`
    - implementation-ready ticket map for Milestones 1 to 4
-9. `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`
+10. `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`
    - current QA expectations for in-flight slices
 
 ## Contract Gates
@@ -48,10 +50,11 @@ Lock shared state semantics before more backend and frontend coupling lands.
 - dashboard-facing canonical job fields
 
 **Status**
-- In closeout, with T-017 carrying the final reconciliation pass
+- In closeout, with T-017 carrying the final reconciliation pass and T-025 now publishing the compact reconciliation matrix engineers can use before pickup
 
 **Engineering rule**
 Do not implement new state handling from older model docs until Gate A references are reconciled.
+Use `specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md` as the quick drift check before implementation or review.
 
 ### Gate B: Shared dashboard query and Gmail connection contracts
 
@@ -138,7 +141,7 @@ Gmail connection state contract, readonly OAuth wiring, source-email ingestion, 
 
 ## Open Risks To Watch
 
-- Older docs may still imply stale workflow semantics or archive behavior
+- Older docs may still imply stale workflow semantics or archive behavior, especially the auto-close and older story docs called out in the Gate A reconciliation matrix
 - Gmail connection state can drift if reconnect and error handling fields are not shared consistently
 - Job detail UI and API can drift if detail examples diverge from the locked contract
 - Hourly kickoff becomes noisy if this package stops reflecting the actual latest canonical files
