@@ -25,6 +25,22 @@ Recommendation:
 
 This section flags the current contract mismatches that would make QA expectations unstable if engineering follows `projects/jobtrackr/api-contract.md` while reviewers or implementers still rely on `specs/jobtrackr-gmail-ingestion-spec-v1.md`.
 
+## Quick mismatch matrix
+
+| ID | Area | Current state | QA risk |
+|---|---|---|---|
+| M1 | P0 decision drift | Contract reflects PM memo, older docs may still be read as unresolved | Different expected behavior by source doc |
+| M2 | Parsed-job threshold | Contract is deterministic, older language is looser | Unstable partial-job expectations |
+| M3 | Candidate retention | Contract says persist relevant/uncertain/pipeline-failed only | Debug counts and retained-message expectations drift |
+| M4 | Uncertain-email handling | Contract is more deterministic than older wording | Uncertain-message outcomes vary in tests |
+| M5 | Incremental sync cadence | Contract fixes 10-minute default | Scheduling and stale-state tests drift |
+| M6 | Gmail scope | Contract fixes exact scopes | OAuth consent and reconnect tests drift |
+| M7 | One-message-to-many-jobs traceability | Contract exposes linked job collections | Digest and duplicate traceability tests drift |
+| M8 | Manual job creation | MVP contract removes `POST /jobs` | Legacy QA may still test manual create flow |
+| M9 | Archived handling | Contract uses `archivedAt` only | Archive and status-filter tests drift |
+| M10 | Saved handling | Contract uses boolean `saved` flag | Saved-view semantics drift |
+| M11 | Sync run statuses | Contract defines canonical enum | Sync run UI/API assertions drift |
+
 ## M1. Source-of-truth drift on P0 decisions
 ### Current state
 - `projects/jobtrackr/api-contract.md` says it incorporates `specs/jobtrackr-pm-decision-memo-2026-04-19.md`.

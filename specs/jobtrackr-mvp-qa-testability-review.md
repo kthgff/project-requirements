@@ -34,6 +34,7 @@ Main blockers to reliable implementation and QA sign-off:
 
 Recommendation:
 - Use `specs/jobtrackr-pm-decision-memo-2026-04-19.md` as the current source of truth for the former P0 blockers.
+- Use `specs/jobtrackr-qa-blocker-checklist-2026-04-19.md` as the shortest implementation-facing QA blocker reference.
 - Do not begin implementation until those decisions are reflected consistently in the ingestion spec, API contract, and development handoff.
 - Treat the checklist below as the minimum QA gate for MVP.
 
