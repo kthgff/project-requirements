@@ -1,0 +1,267 @@
+# JobTrakr Engineering Handoff v1
+
+## Purpose
+
+Provide an engineer-ready implementation handoff for the JobTrakr MVP based on the approved PM specs.
+
+## Product Summary
+
+JobTrakr is a single-user job search assistant that:
+- authenticates the user with Google login
+- scans Gmail for job alert emails
+- extracts and enriches job records
+- stores normalized job data
+- compares each job to the uploaded resume
+- flags likely good-fit roles
+- presents all jobs in a dashboard table UI
+
+## Locked Product Decisions
+
+- implementation language: TypeScript
+- authentication: Google federated login
+- login page required
+- primary input source: Gmail inbox job alert emails
+- relevant alert sources include LinkedIn, Indeed, and other relevant job alert emails
+- resume source: uploaded file
+- main UI: dashboard with jobs table
+- good-fit action: flag it, do not auto-apply in MVP
+- initial workflow statuses:
+  - `new`
+  - `flagged`
+  - `reviewing`
+  - `skipped`
+  - `applied`
+  - `interview`
+  - `rejected`
+  - `offer`
+
+## Recommended MVP Technical Direction
+
+### Frontend
+- Next.js
+- React
+- TypeScript
+
+### Backend
+- TypeScript service or Next.js server routes for MVP simplicity
+
+### Core integrations
+- Google authentication
+- Gmail read access
+- database for normalized jobs and resume metadata
+- AI fit analysis service
+
+## Recommended Vertical Slice Strategy
+
+Build the MVP in narrow end-to-end slices rather than subsystem silos.
+
+### Slice 1. Auth shell
+Goal:
+- user can log in with Google and reach a protected dashboard shell
+
+### Slice 2. Dashboard with mock jobs
+Goal:
+- authenticated user can see dashboard layout and jobs table with mock data
+
+### Slice 3. Real job list persistence
+Goal:
+- dashboard reads real job records from database
+
+### Slice 4. Gmail raw ingestion
+Goal:
+- system can scan Gmail and persist source email plus parsed job records
+
+### Slice 5. Resume upload
+Goal:
+- user can upload a resume and persist active resume state
+
+### Slice 6. Fit analysis
+Goal:
+- system compares jobs against resume and flags good fits
+
+### Slice 7. Detail and workflow controls
+Goal:
+- user can inspect a job in detail and update status
+
+---
+
+## Recommended Build Order
+
+1. Google login page and protected app shell
+2. Dashboard page with table and placeholder states
+3. Database schema for users, resumes, source emails, jobs, fit analysis, and status history
+4. Read jobs from database into dashboard
+5. Resume upload flow
+6. Gmail connection and inbox scan trigger
+7. Job extraction and persistence pipeline
+8. Job enrichment and deduplication behavior
+9. Fit analysis pipeline and fit display
+10. Job detail drawer and status update interactions
+11. Filter and search refinement
+12. QA pass and launch checklist
+
+---
+
+## Dependency Map
+
+### Auth dependencies
+Needed before:
+- protected dashboard
+- user-specific data reads
+- resume upload
+- Gmail integration
+
+### Data model dependencies
+Needed before:
+- real dashboard list
+- ingestion persistence
+- fit analysis persistence
+- status updates
+
+### Gmail ingestion dependencies
+Needed before:
+- automated job population
+- meaningful dashboard data without mocks
+
+### Resume dependencies
+Needed before:
+- fit analysis
+- flagged jobs
+
+### Fit analysis dependencies
+Needed before:
+- fit flag in table
+- fit summary in detail drawer
+
+---
+
+## Frontend Delivery Plan
+
+### FE-1. Login page
+Deliver:
+- `/login`
+- Google sign-in button
+- loading and error states
+
+### FE-2. Protected shell
+Deliver:
+- auth gate
+- redirect unauthenticated users to login
+- top navigation shell
+
+### FE-3. Dashboard layout
+Deliver:
+- page header
+- filters row
+- empty states
+- account/logout controls
+
+### FE-4. Jobs table
+Deliver:
+- required columns
+- default sorting
+- loading and empty states
+- mock data first, real data second
+
+### FE-5. Detail drawer
+Deliver:
+- row click or title click opens detail
+- fit summary
+- source link
+- job description area
+- status control
+
+### FE-6. Resume upload entry point
+Deliver:
+- resume state indicator
+- upload action
+- post-upload state refresh
+
+---
+
+## Backend Delivery Plan
+
+### BE-1. User and session support
+Deliver:
+- Google auth callback handling
+- user record creation
+- session enforcement
+
+### BE-2. Data schema
+Deliver:
+- tables/collections for user, resume, source_email, job, job_fit_analysis, job_status_history
+
+### BE-3. Job query APIs
+Deliver:
+- authenticated list endpoint for dashboard
+- single-job detail endpoint
+- status update endpoint
+
+### BE-4. Resume upload APIs
+Deliver:
+- upload endpoint
+- active resume retrieval
+
+### BE-5. Gmail ingestion pipeline
+Deliver:
+- inbox scan trigger
+- candidate email classification
+- extraction
+- persistence
+
+### BE-6. Enrichment and deduplication
+Deliver:
+- enrichment lookup step
+- duplicate detection and upsert behavior
+
+### BE-7. Fit analysis pipeline
+Deliver:
+- resume-to-job analysis
+- fit persistence
+- mirrored fit fields for dashboard query speed
+
+---
+
+## QA Focus Areas
+
+- login success/failure behavior
+- protected route enforcement
+- Gmail permission and auth edge cases
+- duplicate alert handling
+- jobs with partial extracted data
+- resume missing vs present fit behavior
+- status update persistence
+- dashboard empty, loading, and filtered states
+
+---
+
+## Risks
+
+- Gmail auth and Gmail read permissions may create onboarding friction
+- extraction quality may vary by email format
+- enrichment quality depends on source page consistency
+- fit analysis quality depends on resume parsing quality
+
+---
+
+## Files Engineering Should Use
+
+- `prd/jobtrackr-prd-v1.md`
+- `stories/jobtrackr-mvp-stories-v1.md`
+- `specs/jobtrackr-data-model-v1.md`
+- `specs/jobtrackr-gmail-ingestion-spec-v1.md`
+- `specs/jobtrackr-fit-analysis-spec-v1.md`
+- `specs/jobtrakr-auth-spec-v1.md`
+- `specs/jobtrackr-frontend-plan-v1.md`
+- `specs/jobtrackr-table-ui-spec-v1.md`
+
+---
+
+## Immediate Recommendation
+
+Engineering should start with the smallest meaningful vertical slice:
+- Google login
+- protected dashboard shell
+- jobs table with mock data
+
+This creates visible progress quickly and gives a safe base for real-data integration.

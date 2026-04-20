@@ -56,6 +56,8 @@ JobTrakr has moved from vague concept into defined MVP discovery. Core product d
 - Auth and login spec v1 created
 - Frontend plan v1 created
 - Table UI spec v1 created
+- Engineering handoff v1 created
+- Implementation milestones v1 created
 
 ## What Is In Progress
 
@@ -103,10 +105,10 @@ New implementation-ready artifacts created:
 
 ## Next Recommended Steps
 
-1. Finalize dependency map and engineering handoff summary
-2. Lock the first shared schema and API interfaces for the raw-ingestion vertical slice
-3. Start the smallest Gmail auth plus raw ingestion vertical slice
-4. Prepare frontend implementation breakdown for login and dashboard
+1. Lock the first shared schema and API interfaces for the raw-ingestion vertical slice
+2. Confirm TypeScript framework choices with Engineering
+3. Decide Google auth access policy for MVP
+4. Start the smallest Gmail auth plus protected-dashboard vertical slice
 
 ## Key Files
 
@@ -144,7 +146,7 @@ New implementation-ready artifacts created:
 - [x] Create engineering handoff summary
 - [x] Break work into implementation milestones
 - [x] Define recommended build order
-- [ ] Identify dependencies and blockers
+- [x] Identify dependencies and blockers
 - [ ] Hand off final PM package to Engineering
 
 ### Phase 4. Build and implementation
