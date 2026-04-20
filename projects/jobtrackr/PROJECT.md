@@ -39,15 +39,16 @@ JobTrakr has moved from vague concept into defined MVP discovery. Core product d
 - Each job should include a **match percentage** showing alignment with Keith's resume and known profile
 - Project language direction defined as **TypeScript**
 - Good-fit action defined as **flag it**, not auto-apply
-- Initial statuses defined:
+- Canonical workflow statuses defined:
   - `new`
-  - `flagged`
-  - `reviewing`
-  - `skipped`
+  - `interested`
   - `applied`
-  - `interview`
-  - `rejected`
+  - `interviewing`
   - `offer`
+  - `rejected`
+- Separate state concepts locked:
+  - `saved` for shortlist behavior
+  - `archivedAt` for archive behavior
 
 ### PM artifacts completed
 - PRD v1 created
@@ -96,7 +97,7 @@ In progress:
 
 - ~~job detail enrichment source is not yet fully specified~~ **Answered: scrape from job detail page linked in email**
 - dependency map across implementation milestones still needs to be finalized
-- status semantics differ between PM tracker and development plan and need reconciliation
+- some older docs still expose stale workflow semantics and need cleanup against the Gate A canonical set
 - ~~Google auth access policy is not yet finalized, single approved account vs broader sign-in~~ **Answered: allow anyone with Google account**
 
 ## Next Recommended Steps

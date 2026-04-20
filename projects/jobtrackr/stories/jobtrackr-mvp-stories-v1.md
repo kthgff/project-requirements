@@ -54,7 +54,7 @@ As Keith, I want tracked jobs compared against my uploaded resume so that strong
 - The system uses the uploaded resume as fit context
 - The system produces a fit evaluation for tracked jobs
 - The system calculates a match percentage for each tracked job
-- Good-fit jobs are clearly flagged
+- Good-fit jobs are clearly highlighted through fit score, fit state, and shortlist cues without treating `flagged` as a workflow status
 - The system stores at least a short fit rationale
 
 ## Epic 5: Table review workflow
@@ -67,4 +67,6 @@ As Keith, I want to review tracked jobs in a table so that I can quickly scan an
 - The table shows company, title, location, source, date found, fit flag, and status
 - I can filter or sort the table at minimum by status and date found
 - I can update a job status manually
-- Available statuses are new, flagged, reviewing, skipped, applied, interview, rejected, and offer
+- Available workflow statuses are new, interested, applied, interviewing, offer, and rejected
+- Shortlist behavior uses `saved`
+- Archive behavior uses `archivedAt`, not a workflow status
