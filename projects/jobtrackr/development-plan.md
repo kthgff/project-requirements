@@ -245,6 +245,29 @@ A monorepo is recommended for MVP speed and shared context.
 ## Delivery Strategy
 Implementation should move in milestones that each produce a usable proof point and reduce downstream ambiguity.
 
+## Frontend Implementation Thread
+The frontend should be built in the same order the user experiences the product, with each step depending on stable backend contracts from earlier milestones.
+
+### Frontend workstream order
+1. login page UI and auth loading/error states
+2. protected app shell and authenticated redirects
+3. dashboard frame with top bar, header, summary area, and empty states
+4. jobs table shell with required MVP columns rendered from mock data
+5. real jobs list integration from backend APIs
+6. search, filters, and supported sorting
+7. job detail drawer opened from row or title click
+8. status update interaction in the detail drawer, with inline editing only if low-risk
+9. resume upload entry point and no-resume guidance
+10. sync status visibility and dashboard hardening states
+
+### Frontend implementation guardrails
+- keep the MVP to two primary app states, `/login` and authenticated dashboard flows
+- prefer a right-side job detail drawer over a separate first-pass detail page
+- default table sort is newest first by `Date Found`
+- required MVP table columns are `Fit`, `Company`, `Title`, `Location`, `Source`, `Date Found`, and `Status`
+- status editing should land in the detail drawer before any inline table control
+- accessibility for keyboard navigation, labels, focus treatment, and non-color fit/status indicators is part of MVP, not a later enhancement
+
 ## Milestone 0. Contract lock and implementation package
 Purpose:
 - freeze the MVP decision package before code starts
@@ -293,6 +316,7 @@ Exit criteria:
 ## Milestone 2. OAuth and authenticated session flow
 Purpose:
 - prove the app can sign in a user and persist an authenticated web session
+- complete the first user-facing frontend slice with the login experience and protected shell behavior
 
 Dependencies:
 - Milestone 1
@@ -305,15 +329,20 @@ Implementation package:
 - implement `GET /auth/google/callback`
 - implement secure session cookies and auth middleware
 - implement `GET /auth/session` and `POST /auth/logout`
-- build login page and post-auth redirect flow
+- build `/login` with product value statement, one primary `Sign in with Google` CTA, and retryable auth error state
+- build auth loading state and post-auth redirect flow
+- implement protected route handling so unauthenticated access redirects to `/login`
+- scaffold the authenticated top-level app shell that will host the dashboard
 
 Primary deliverables:
 - user can complete Google sign-in
 - session persists across page loads
 - frontend can load current authenticated user
+- `/login` and protected app routing work end to end
 
 Exit criteria:
 - authenticated browser session works end to end in local and preview environments
+- login success, login failure, and logout all produce the expected frontend route behavior
 
 ## Milestone 3. Gmail account persistence and reconnect semantics
 Purpose:
@@ -368,9 +397,10 @@ Primary deliverables:
 Exit criteria:
 - the team can inspect account state, latest runs, and stored candidate messages through the UI and API
 
-## Milestone 5. Parsed job creation, dedupe, and first job surfaces
+## Milestone 5. Parsed job creation, dedupe, and first dashboard/table surfaces
 Purpose:
 - turn raw candidate ingestion into reliable job creation with deterministic MVP rules
+- deliver the first real jobs dashboard experience on top of parsed job data
 
 Dependencies:
 - Milestone 4
@@ -383,37 +413,51 @@ Implementation package:
 - persist `discovered_at` and `last_seen_at`
 - support one-message-to-many-jobs linkage
 - expose `GET /jobs`, `GET /jobs/:id`, `PATCH /jobs/:id`, `POST /jobs/:id/archive`, and `POST /jobs/:id/unarchive`
-- build initial list and detail views for parsed jobs
+- build dashboard frame with top bar, jobs header, count summary, and empty states
+- build jobs table with required MVP columns: `Fit`, `Company`, `Title`, `Location`, `Source`, `Date Found`, and `Status`
+- default table sort to newest first by `Date Found`
+- render job detail in a right-side drawer or panel opened from the table
+- support detail-first status changes from the dashboard experience
 
 Primary deliverables:
 - relevant candidate emails create editable jobs when the threshold is met
 - duplicate alerts attach to existing jobs deterministically
-- users can inspect and update parsed jobs
+- users can inspect and update parsed jobs from the dashboard
+- the dashboard table is functional with real backend data
 
 Exit criteria:
 - the first true user-facing job-tracking slice works end to end
+- an authenticated user can open the dashboard, review parsed jobs in the table, open detail, and change status
 
-## Milestone 6. Search, tags, notes, and workflow views
+## Milestone 6. Dashboard workflow polish, search, tags, notes, and workflow views
 Purpose:
 - complete the day-to-day job management surface for MVP
+- finish the remaining dashboard interactions defined in the frontend plan and table UI spec
 
 Dependencies:
 - Milestone 5
 
 Implementation package:
+- implement keyword search over title, company, and description snippet
+- implement status, fit, and source filters in the dashboard filter row
+- implement supported sorting by `Date Found`, `Company`, and `Status`
+- add filtered empty states and clear-filters actions
+- add sync status visibility and warning states in the dashboard top area
+- add resume upload entry point and no-resume prompt behavior
 - add tag tables and tag endpoints
 - add notes support if separate endpoint is still needed
 - add saved flag editing and UI
 - add inbox, all jobs, saved, and archived views derived from canonical fields
-- implement keyword search, date filters, location filters, and status filters using locked semantics
 - add filter metadata endpoint and UI wiring
 
 Primary deliverables:
 - users can manage jobs efficiently across the main dashboard views
 - frontend and backend share deterministic filter behavior
+- the dashboard covers login-adjacent onboarding needs like resume visibility
 
 Exit criteria:
 - the core personal job-management workflow is complete without manual data entry
+- the dashboard supports search, filtering, sorting, resume-state guidance, and sync-state visibility as defined for MVP
 
 ## Milestone 7. MVP hardening
 Purpose:
@@ -455,11 +499,11 @@ That slice is complete only when the following dependency chain works end to end
 
 ## Recommended Implementation Order
 1. Milestone 1, repository scaffolding and local developer loop
-2. Milestone 2, OAuth and authenticated session flow
+2. Milestone 2, OAuth and authenticated session flow, including the login page and protected shell
 3. Milestone 3, Gmail account persistence and reconnect semantics
 4. Milestone 4, raw Gmail ingestion and run observability
-5. Milestone 5, parsed job creation, dedupe, and first job surfaces
-6. Milestone 6, search, tags, notes, and workflow views
+5. Milestone 5, parsed job creation, dedupe, and first dashboard/table surfaces
+6. Milestone 6, dashboard workflow polish, search, tags, notes, and workflow views
 7. Milestone 7, MVP hardening
 
 ## Key Risks
