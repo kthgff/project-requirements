@@ -27,6 +27,7 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - T-021: Assemble the final Phase 3 engineering handoff package with source-of-truth links, dependency gates, owner mapping, and immediate pickup guidance
 - T-022: Wire the authenticated frontend shell to the new auth session and Gmail connection endpoints for the first vertical slice
 - T-023: Add canonical list-to-detail contract examples so the jobs workspace and detail UI stay aligned with the locked section order and edit model
+- T-024: Add canonical workspace session-state examples for deterministic row-selection continuity across filters, sorting, and dashboard return flows
 
 ---
 
@@ -968,14 +969,11 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 ## Current QA coverage gaps
 1. No tasks are marked `done` or moved to QA in `DEVELOPMENT_PLAN.md`, so this hour remains acceptance-coverage and blocker surfacing work rather than runnable execution validation.
 2. T-006 is still blocked by status-model drift in `jobtrackr-auto-close-logic-spec-v1.md`, which still references pre-decision statuses like `flagged`, `reviewing`, `skipped`, `interview`, and `not a match` instead of the canonical workflow model.
-3. T-002 still describes a Go web app in the plan, while the PM memo and implementation package point to a TypeScript frontend plus Go API split, so QA cannot lock environment-specific execution steps until those docs are reconciled.
+3. T-002 still describes a Go web app in the live plan, while Milestone 1 and the handoff package describe a Next.js frontend plus Go API split, so QA cannot lock environment-specific execution steps until those docs are reconciled.
 4. Jimmy's cron note points QA at `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, but the live plan is actually `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
-5. Gate A is not fully closed yet because the schema spec still includes a direct `job_id` pattern in the raw-ingestion implementation package while the canonical schema uses the `job_source_emails` join model for one-email-to-many-jobs traceability.
-6. Real API payload examples for the jobs table are still needed before fixture-based UI checks can graduate into integration tests for T-007, T-011, T-013, and T-016.
-7. The detail-view contract now gives QA a usable payload target for T-008, T-012, and T-015, but engineering still needs to keep it cross-linked from the main API contract and tickets so implementation does not drift.
-8. Gmail connection-state edge cases like `expired`, `revoked`, and `denied` now have acceptance coverage, but QA still needs runnable fixtures or test accounts before T-018 can be signed off.
+5. Gate A is still not fully closed, because older schema and ingestion references can still imply stale linkage or workflow assumptions even though the handoff package now warns engineers not to implement from them.
+6. Real runnable API fixtures are still needed before list and workspace checks for T-007, T-011, T-013, T-016, T-020, and T-024 can graduate from contract validation into executable integration tests.
+7. The Phase 3 handoff artifact now exists, but it references `jobtrackr-list-detail-examples-2026-04-20.md` while the current canonical file on disk is `jobtrackr-list-detail-contract-examples-2026-04-20.md`; QA considers that a source-of-truth drift risk until reconciled.
+8. Gmail connection-state edge cases like `expired`, `revoked`, and `denied` now have acceptance coverage, but QA still needs runnable fixtures or test accounts before T-018 and T-022 can be signed off.
 9. T-010 and T-014 ticket work now describe Gate A and Gate B, but QA still needs engineering to treat those gates as hard blockers before live-data integration starts.
-10. T-020 now has QA coverage for selection persistence, clearing, and restoration, but frontend still needs deterministic session-state handling across dashboard return and filter churn before QA can sign it off.
-11. T-021 remains blocked on producing one actual handoff artifact that consolidates source-of-truth links, gate status, and lane guidance into a single engineer-usable document.
-12. T-022 needs runnable frontend states or fixtures for signed-out, connected, expired, revoked, and denied Gmail account scenarios before UX sign-off is possible.
-13. T-023 still needs the canonical examples document itself; until that lands, list/detail alignment remains partially spec-driven and vulnerable to interpretation drift.
+10. T-023 and T-024 now have canonical example docs, which reduces interpretation drift, but those examples still need explicit cross-links from the API contract, workspace contract, and handoff package so implementation teams do not fork behavior.
