@@ -67,8 +67,9 @@ JobTrakr has moved from vague concept into defined MVP discovery. Core product d
 
 ### PM cleanup
 Still needed:
-- open decision cleanup where specs and development-plan semantics differ
+- open decision cleanup where older specs, handoff notes, and development-plan semantics differ
 - tracker alignment so task status reflects actual implementation progress
+- legacy handoff references cleanup so canonical workflow and fit language stays consistent across entrypoint docs
 
 ### Engineering kickoff
 In progress:
@@ -109,14 +110,14 @@ In progress:
 
 ## Key Files
 
-- `prd/jobtrakr-prd-v1.md`
-- `stories/jobtrakr-mvp-stories-v1.md`
-- `specs/jobtrakr-data-model-v1.md`
-- `specs/jobtrakr-gmail-ingestion-spec-v1.md`
-- `specs/jobtrakr-fit-analysis-spec-v1.md`
-- `projects/jobtrackr/scaffolding-plan.md`
-- `projects/jobtrackr/gmail-auth-ingestion-implementation-package.md`
-- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+- `DEVELOPMENT_PLAN.md`
+- `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+- `specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
+- `specs/jobtrackr-api-contract.md`
+- `specs/jobtrackr-detail-view-contract-2026-04-20.md`
+- `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
+- `specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
+- `specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
 ## Project Plan to Completion
 

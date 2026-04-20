@@ -128,12 +128,12 @@ Needed before:
 ### Resume dependencies
 Needed before:
 - fit analysis
-- flagged jobs
+- match rating and low-fit signals in the dashboard
 
 ### Fit analysis dependencies
 Needed before:
-- fit flag in table
-- fit summary in detail drawer
+- match rating and low-fit signal display in the table
+- fit summary in the detail drawer
 
 ---
 
@@ -248,14 +248,16 @@ Deliver:
 
 ## Files Engineering Should Use
 
-- `prd/jobtrackr-prd-v1.md`
-- `stories/jobtrackr-mvp-stories-v1.md`
-- `specs/jobtrackr-data-model-v1.md`
-- `specs/jobtrackr-gmail-ingestion-spec-v1.md`
-- `specs/jobtrackr-fit-analysis-spec-v1.md`
-- `specs/jobtrakr-auth-spec-v1.md`
-- `specs/jobtrackr-frontend-plan-v1.md`
-- `specs/jobtrackr-table-ui-spec-v1.md`
+When older docs conflict, use these current files first:
+
+- `DEVELOPMENT_PLAN.md`
+- `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+- `specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
+- `specs/jobtrackr-api-contract.md`
+- `specs/jobtrackr-detail-view-contract-2026-04-20.md`
+- `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
+- `specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
+- `specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
 ---
 
@@ -267,3 +269,8 @@ Engineering should start with the smallest meaningful vertical slice:
 - jobs table with mock data
 
 This creates visible progress quickly and gives a safe base for real-data integration.
+
+Guardrails:
+- workflow statuses are `new`, `interested`, `applied`, `interviewing`, `offer`, `rejected`
+- match rating and low-fit are fit semantics, not workflow states
+- shortlist/save and archive behavior must stay separate from workflow status
