@@ -1,11 +1,11 @@
-# JobTrackr In-Progress Test Cases — 2026-04-19
+# JobTrackr In-Progress Test Cases — 2026-04-20
 
 ## Purpose
-Test cases for active development work in `DEVELOPMENT_PLAN.md`, with emphasis on the current kickoff slice and the newly locked PM semantics.
+Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELOPMENT_PLAN.md`, updated after Jimmy's latest sequencing pass and the Milestones 1 to 4 engineering ticket breakdown.
 
 ## Source tasks covered
 - T-001: Finalize PM decision alignment in JobTrackr API contract and debug semantics
-- T-002: Build local web app for Gmail inbox job search, protected shell, and raw source-email ingestion
+- T-002: Build local Go web app for Gmail inbox job search, protected shell, and raw source-email ingestion
 - T-003: Produce JobTrakr dependency map and milestone sequencing pass for parallel-safe delivery
 - T-004: Lock jobs dashboard contract for match rating, flagged semantics, and table payload shape
 - T-005: Scaffold protected jobs dashboard web shell with mock table data for the first vertical slice
@@ -14,9 +14,8 @@ Test cases for active development work in `DEVELOPMENT_PLAN.md`, with emphasis o
 - T-008: Implement job details page to view full job information
 - T-009: Polish jobs table interaction states and shared dashboard UX for the mock-data frontend slice
 - T-010: Break the approved dependency sequencing into implementation-ready engineering tickets for Milestones 1 to 4
-- T-011: Add persistence and filtering improvements to the Gmail job search web app after the initial scaffold
-- T-012: Break finalized parser and ingestion contract changes into implementation-ready engineering tickets
-- T-013: Add responsive job list cards and active filter summary to the mock-data frontend slice
+- T-011: Improve the responsive jobs list UX with mobile cards, clearer active filter context, and compact results navigation
+- T-012: Add editable notes and tag management interactions to the job details page using the agreed detail-view contract
 
 ---
 
@@ -490,97 +489,86 @@ Test cases for active development work in `DEVELOPMENT_PLAN.md`, with emphasis o
 
 ---
 
-## T-011 Persistence and Filtering Test Cases
+## T-011 Responsive Jobs List UX Test Cases
 
-### TC-1001 Synced jobs persist across refresh for authenticated users
+### TC-1001 Mobile jobs view preserves essential job context
 **Steps**
-1. Run a successful Gmail sync for an authenticated user.
-2. Open the jobs list.
-3. Refresh the app and revisit the list.
+1. Open the jobs view at tablet and mobile breakpoints.
+2. Inspect each responsive row or card.
+3. Compare the compact layout to the desktop job list.
 
 **Expected**
-- Previously synced jobs remain visible after refresh.
-- No duplicate rows appear from simple page reload behavior.
-- Persisted records remain scoped to the authenticated user.
+- Each item still exposes title, company, status, and fit context.
+- A user can open the job detail view without relying on hover-only controls.
+- Compact navigation does not hide the currently selected or active job context.
 
-### TC-1002 Stored job list filtering works with persisted data
+### TC-1002 Active filter context remains visible and removable on smaller screens
 **Steps**
-1. Seed or sync jobs spanning multiple statuses, dates, and search terms.
-2. Apply status, search, and date filters individually and in combination.
-3. Clear filters.
+1. Apply multiple filters on the jobs page.
+2. Inspect the active filter summary at desktop, tablet, and mobile widths.
+3. Remove one filter, then clear all filters.
 
 **Expected**
-- Persisted records filter correctly.
-- Combined filters follow AND-across-family behavior.
-- Reset returns the full persisted list without requiring another sync.
+- Active filters remain visible without reopening every filter control.
+- Individual filters can be removed directly from the summary state.
+- The summary and results stay in sync after each change.
 
-### TC-1003 Stored jobs remain accessible when Gmail is temporarily disconnected
+### TC-1003 Compact results navigation preserves browsing context
 **Steps**
-1. Sync jobs successfully.
-2. Simulate Gmail account state changing to `expired`, `revoked`, or `denied`.
-3. Reopen the stored jobs list.
+1. Apply filters and search text on the jobs page.
+2. Move between result items using the compact navigation affordance.
+3. Open a job detail view, then return to the list.
 
 **Expected**
-- Existing persisted jobs remain browseable.
-- Reconnect messaging is visible where appropriate.
-- Disconnect state does not wipe or hide already stored jobs.
+- Users can move through filtered results without losing place.
+- Returning from details preserves list context.
+- Compact navigation does not drop active filters or search state.
 
 ---
 
-## T-012 Parser and Ingestion Ticket Breakdown QA Checks
+## T-012 Job Details Editing Test Cases
 
-### TC-1101 Parser follow-on tickets cover classification, extraction, enrichment, and dedupe separately
+### TC-1101 Notes editing is inline, recoverable, and persistence-ready
 **Steps**
-1. Review the parser and ingestion ticket breakdown.
-2. Map tickets to the required follow-on areas: classification, extraction, enrichment, dedupe, and QA handoff.
+1. Open a job details page with existing notes.
+2. Edit the notes inline.
+3. Save the change, then refresh the page.
+4. Repeat with an empty notes field and with a simulated save failure.
 
 **Expected**
-- Each major ingestion concern is represented explicitly.
-- Ownership boundaries are clear enough to avoid duplicate engineering work.
-- QA can identify where debug verification should happen for each stage.
+- Notes can be edited without leaving the page.
+- Successful saves persist after refresh.
+- Empty-state notes are supported without breaking the layout.
+- Failed saves surface clear error feedback and do not silently discard prior saved content.
 
-### TC-1102 Parser ticket breakdown preserves source-email-only fallback behavior
+### TC-1102 Tag add and remove controls are clear and prevent duplicate state
 **Steps**
-1. Inspect tickets touching low-confidence parsing and uncertain classification.
-2. Verify fallback handling is described when parsed-job thresholds are not met.
+1. Add a new tag from the details page.
+2. Add an already-present tag.
+3. Remove a tag, then refresh the page.
 
 **Expected**
-- Ticket breakdown preserves source-email-only persistence behavior.
-- No ticket quietly assumes every matched email becomes a job row.
-- Debug visibility remains testable for low-confidence or partial parses.
+- Add and remove controls are obvious and usable.
+- Duplicate tags are prevented or normalized.
+- The visible tag set remains consistent after refresh.
 
----
-
-## T-013 Responsive Job List Test Cases
-
-### TC-1201 Mobile job list card fallback preserves essential job context
+### TC-1103 Detail editing interactions match the agreed job-detail contract
 **Steps**
-1. Open dashboard and jobs views at mobile breakpoints.
-2. Inspect responsive card or list fallback for each job.
+1. Compare notes and tag interactions to `jobtrackr-api-contract.md` and the detail payload shape.
+2. Verify the UI does not invent unsupported fields or save paths.
 
 **Expected**
-- Each item still exposes title, company, fit/status context, and a clear way to open details.
-- Essential job context is not hidden behind hover-only behavior.
-- Selected-job context remains understandable when the table collapses.
-
-### TC-1202 Active filter summary is visible and removable on smaller screens
-**Steps**
-1. Apply multiple filters on the jobs view.
-2. Inspect the active filter summary on tablet and mobile widths.
-3. Remove filters from the summary controls.
-
-**Expected**
-- Active filters are visible without reopening every filter control.
-- Individual filters can be removed from the summary affordance.
-- Filter summary state stays in sync with the underlying results.
+- Editing behavior maps to the documented detail contract.
+- Notes update paths and tag-management flows are implementation-ready for API wiring.
+- No UI state depends on fields that are absent from the agreed contract.
 
 ---
 
 ## Current QA coverage gaps
 1. No tasks are marked `done` or moved to QA in `DEVELOPMENT_PLAN.md`, so this hour remains acceptance-coverage and blocker surfacing work rather than runnable execution validation.
 2. T-006 is blocked by status-model drift: `jobtrackr-auto-close-logic-spec-v1.md` still uses `flagged`, `reviewing`, `skipped`, `interview`, and `not a match`, while `jobtrackr-api-contract.md` defines the canonical workflow enum as `new`, `interested`, `applied`, `interviewing`, `offer`, and `rejected`.
-3. `DEVELOPMENT_PLAN.md` still says T-002 is a Go web app, while Milestone 1 and other engineering docs point toward a Next.js plus TypeScript frontend, so QA cannot lock environment-specific execution steps until implementation direction is reconciled.
-4. The root path in Jimmy's latest note is stale for QA consumption: `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` does not exist, and the live plan is under `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
-5. Real API payload examples for the jobs table and job details page are still needed before fixture-based UI checks can graduate into integration tests for T-007, T-008, T-011, and T-013.
+3. `DEVELOPMENT_PLAN.md` still says T-002 is a Go web app, while Milestone 1 and Milestone 2 execution docs describe a Next.js plus TypeScript frontend and shared web shell, so QA cannot lock environment-specific execution steps until implementation direction is reconciled.
+4. Jimmy's cron note points QA at `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, but the live plan is actually `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
+5. Real API payload examples for the jobs table and job details page are still needed before fixture-based UI checks can graduate into integration tests for T-007, T-008, T-011, and T-012.
 6. Gmail connection-state edge cases like `expired`, `revoked`, and `denied` still need explicit runnable acceptance coverage before QA can sign off on auth-plus-ingestion-plus-persistence behavior.
-7. T-010 and T-012 need implementation-ready ticket artifacts committed before QA can verify whether engineering handoffs are actually parallel-safe and testable.
+7. T-010 now has a ticket artifact (`jobtrackr-milestones-1-to-4-engineering-tickets-2026-04-20.md`), but QA still needs engineering to treat Gate A and Gate B as hard blockers before live-data integration starts.
