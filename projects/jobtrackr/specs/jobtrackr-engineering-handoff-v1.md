@@ -27,13 +27,15 @@ JobTrakr is a single-user job search assistant that:
 - good-fit action: flag it, do not auto-apply in MVP
 - initial workflow statuses:
   - `new`
-  - `flagged`
-  - `reviewing`
-  - `skipped`
+  - `interested`
   - `applied`
-  - `interview`
-  - `rejected`
+  - `interviewing`
   - `offer`
+  - `rejected`
+- `saved` is a separate boolean, not a status
+- archive state is `archivedAt`, not a workflow value
+- fit fields stay nullable until analysis runs
+- one source email may link to multiple jobs
 
 ## Recommended MVP Technical Direction
 

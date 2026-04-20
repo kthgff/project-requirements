@@ -35,7 +35,6 @@ Represents the user-uploaded resume used for fit analysis.
 - `mime_type` string, nullable
 - `file_size_bytes` integer, nullable
 - `parsed_text` text, required
-- `is_active` boolean, required, default `true`
 - `uploaded_at` timestamp, required
 - `replaced_at` timestamp, nullable
 - `created_at` timestamp, required
@@ -92,7 +91,6 @@ Represents a normalized tracked job opportunity.
 - `job_title` string, required
 - `job_url` string, nullable
 - `source_platform` enum/string, nullable
-- `source_email_id` UUID, foreign key to `source_email.id`, nullable
 - `external_job_id` string, nullable
 - `location_text` string, nullable
 - `location_type` enum/string, nullable
@@ -115,13 +113,14 @@ Represents a normalized tracked job opportunity.
 - `discovered_at` timestamp, required
 - `last_seen_at` timestamp, required
 - `status` enum/string, required
-  - `new`, `flagged`, `reviewing`, `skipped`, `applied`, `interview`, `rejected`, `offer`
-- `fit_flag` boolean, required, default `false`
+  - `new`, `interested`, `applied`, `interviewing`, `offer`, `rejected`
+- `saved` boolean, required, default `false`
+- `archived_at` timestamp, nullable
+- `fit_flag` boolean, nullable
 - `fit_score` integer, nullable
 - `match_percentage` integer, nullable
 - `fit_summary` text, nullable
 - `duplicate_of_job_id` UUID, nullable
-- `is_active` boolean, required, default `true`
 - `created_at` timestamp, required
 - `updated_at` timestamp, required
 
@@ -129,7 +128,8 @@ Represents a normalized tracked job opportunity.
 
 - `canonical_key` should help deduplicate the same role across repeated alerts.
 - Suggested canonical key input: normalized company + normalized title + normalized location + external job id if present.
-- `fit_score` is optional in MVP, even if UI initially only shows a flag.
+- `saved` and `archived_at` are separate from workflow status.
+- fit outputs stay nullable until analysis has actually run.
 
 ---
 
@@ -185,7 +185,7 @@ Stores audit trail of job status changes.
 
 - One `resume` belongs to one user
 - One `source_email` belongs to one user
-- One `source_email` may produce one or more `job` records
+- One `source_email` may produce one or more `job` records through a `job_source_email` linkage table
 - One `job` may have one latest or many historical `job_fit_analysis` records
 - One `job` may have many `job_status_history` records
 
@@ -201,6 +201,8 @@ Minimum fields needed for the initial table UI:
 - `job.location_text`
 - `job.source_platform`
 - `job.discovered_at`
+- `job.saved`
+- `job.archived_at`
 - `job.fit_flag`
 - `job.match_percentage`
 - `job.status`
