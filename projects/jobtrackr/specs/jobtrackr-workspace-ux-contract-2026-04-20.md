@@ -187,6 +187,8 @@ This contract does not lock final API payloads beyond the frontend states needed
 
 Selection examples that bridge this workspace contract to the detail-view contract are documented in `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`.
 
+Deterministic session-state transitions for preserve, clear, and restore behavior are documented in `specs/jobtrackr-workspace-session-state-examples-2026-04-20.md`.
+
 ## Open Questions
 
 1. Should mobile use a card list for all job rows, or only below a specific width threshold?

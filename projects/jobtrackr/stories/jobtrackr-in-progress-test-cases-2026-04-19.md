@@ -232,6 +232,41 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Selection is restored only if the selected job still matches the active result set.
 - If the job no longer matches, selection stays cleared and helper copy explains why.
 
+## T-024 Workspace Session-State Example Test Cases
+
+### TC-1920 Hidden selection keeps lastSelectedJobId for same-session restoration
+**Steps**
+1. Select a job in the workspace.
+2. Apply filters that hide it.
+3. Inspect the stored workspace session state.
+
+**Expected**
+- `selectedJobId` clears immediately.
+- `lastSelectedJobId` still points to the hidden job.
+- Helper mode is set to a hidden-selection state instead of picking a replacement row.
+
+### TC-1921 Dashboard re-entry restores snapshot before selection logic runs
+**Steps**
+1. Enter the jobs workspace from dashboard.
+2. Apply filters, pick a job, and return to dashboard.
+3. Re-enter the jobs workspace in the same session.
+
+**Expected**
+- Filters and sort restore first.
+- Selection restores only if the last selected job is visible in the restored result set.
+- The workspace does not open stale detail for a hidden job.
+
+### TC-1922 Mobile detail return preserves list context by job id
+**Steps**
+1. Open a job from the mobile jobs list.
+2. Return from full-page detail to the list.
+3. Compare selection and scroll behavior before and after the return.
+
+**Expected**
+- The list restores the same filters and sort.
+- The user lands near the previously selected job when it still matches.
+- If that job no longer matches, selection clears and helper copy appears.
+
 ## T-003 Dependency and Sequencing QA Checks
 
 ### TC-201 First slice is independently testable
