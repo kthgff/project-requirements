@@ -56,6 +56,12 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 - PR must reference the Task ID in the title
 - Do not merge without Sam (QA) sign-off on feature work
 
+## Task Workflow
+- When SWE completes DoD for a task, move task status to "QA" and assign to Sam
+- Sam (QA) validates DoD criteria are met before approving PR
+- If DoD not met, Sam returns task to SWE with feedback
+- Only after QA approval can task be moved to "Completed"
+
 ## Development Steps
 
 ### Milestone 1: Auth Foundation
