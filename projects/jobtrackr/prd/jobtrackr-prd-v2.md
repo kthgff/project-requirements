@@ -87,12 +87,24 @@ Views:
 - Saved
 - Archived
 
+View semantics:
+- Inbox shows non-archived jobs with `status = new`
+- Saved shows non-archived jobs with `saved = true`
+- Archived shows jobs with `archivedAt != null`
+- Archived is a view/archive state, not a workflow status
+
 Default job fields shown:
+- Match rating
 - Title
 - Company
 - Location
 - Status
 - Date received
+
+Fit treatment:
+- Match rating is a user-facing fit signal when fit analysis exists
+- Low-fit behavior stays a fit signal and must not mutate workflow status
+- Pending or unavailable fit analysis should render as a non-workflow pending state
 
 ### 4. Status Tracking
 Supported statuses:
@@ -102,7 +114,6 @@ Supported statuses:
 - Interviewing
 - Offer
 - Rejected
-- Archived
 
 ### 5. Search and Filters
 - Search by keyword

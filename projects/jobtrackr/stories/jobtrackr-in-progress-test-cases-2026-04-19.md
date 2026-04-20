@@ -9,7 +9,7 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - T-003: Produce JobTrakr dependency map and milestone sequencing pass for parallel-safe delivery
 - T-004: Lock jobs dashboard contract for match rating, flagged semantics, and table payload shape
 - T-005: Scaffold protected jobs dashboard web shell with mock table data for the first vertical slice
-- T-006: Implement auto-close logic for jobs with match score below 60
+- T-006: Implement canonical low-fit handling for jobs with match score below 60 without workflow mutation
 - T-007: Implement view all jobs page with full job details and filtering
 - T-008: Implement job details page to view full job information
 - T-009: Polish jobs table interaction states and shared dashboard UX for the mock-data frontend slice
@@ -42,6 +42,7 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - T-046: Reconcile PRD and QA test-case references so legacy workflow and auto-close language no longer conflicts with the canonical workflow and fit model
 - T-047: Reconcile remaining product/spec references so legacy flagged and stale workflow language no longer conflicts with the canonical workflow and fit-signal model
 - T-048: Reconcile parser and ingestion ticket wording so milestone follow-through docs stop implying deprecated auto-close or workflow-state behavior for low-fit jobs
+- T-050: Reconcile PRD v2 dashboard, status, and fit-language sections plus in-progress QA coverage so archived stays out of workflow state and low-fit remains a fit signal
 
 ---
 
@@ -1223,11 +1224,12 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 ### TC-2040 PRD no longer exposes legacy workflow or auto-close semantics
 **Steps**
 1. Review the PRD and related MVP story docs.
-2. Inspect workflow, low-fit, and flagged language.
+2. Inspect workflow, archive, match-rating, low-fit, and flagged language.
 
 **Expected**
 - PRD does not present legacy statuses as canonical workflow states.
-- Low-fit behavior is described through fit-signal semantics rather than workflow mutation.
+- PRD does not present `archived` as a workflow status.
+- Dashboard language describes match rating and low-fit as fit signals rather than workflow mutation.
 - If older language must remain for history, it is clearly marked non-canonical.
 
 ### TC-2041 QA-owned test cases align with the canonical workflow and fit model
@@ -1238,6 +1240,7 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 **Expected**
 - QA cases test canonical workflow statuses only.
 - QA coverage for low-fit behavior checks fit-signal handling, not fake status transitions.
+- QA docs keep archived behavior separate from workflow status expectations.
 - QA docs do not keep stale expectations alive after the reconciliation pass.
 
 ## T-047 Remaining Product and Spec Reference Reconciliation Test Cases
