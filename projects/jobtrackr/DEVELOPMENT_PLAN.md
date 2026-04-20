@@ -21,6 +21,7 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 | T-005 | Scaffold protected jobs dashboard web shell with mock table data for the first vertical slice | Priya | in-progress | feat/jobs-dashboard-mock-shell | — |
 | T-006 | Implement auto-close logic for jobs with match score below 60 (set to 'not a match' status) | — | pending | — | — |
 | T-007 | Implement view all jobs page with full job details and filtering | — | pending | — | — |
+| T-008 | Implement job details page to view full job information (description, skills, tags, notes, source link) | — | pending | — | — |
 
 ## Completed
 | ID | Task | Owner | Merged |
@@ -208,18 +209,19 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 **Goal:** Complete the core triage and review workflow.
 
 **Steps:**
-1. Implement job detail drawer or detail page
-2. Add status update endpoint (`PATCH /api/v1/jobs/:id/status`)
-3. Add tag management endpoints (CRUD)
-4. Add notes endpoint (CRUD)
-5. Implement filter refinements (by status, fit score, date, tags)
-6. Add source link access (open job URL in new tab)
-7. Add better error states and retry logic
-8. Implement job archival logic
-9. Add search across title, company, description
-10. Implement view all jobs page with full job details and advanced filtering
-11. Test end-to-end workflow (login → view jobs → update status → add tags)
-12. Verify user can review, inspect, and update jobs end to end
+1. Implement job detail drawer or detail page with full job information
+2. Display job description, skills, tags, notes, and source link on details page
+3. Add status update endpoint (`PATCH /api/v1/jobs/:id/status`)
+4. Add tag management endpoints (CRUD)
+5. Add notes endpoint (CRUD)
+6. Implement filter refinements (by status, fit score, date, tags)
+7. Add source link access (open job URL in new tab)
+8. Add better error states and retry logic
+9. Implement job archival logic
+10. Add search across title, company, description
+11. Implement view all jobs page with full job details and advanced filtering
+12. Test end-to-end workflow (login → view jobs → view details → update status → add tags)
+13. Verify user can review, inspect, and update jobs end to end
 
 **Exit Criteria:**
 - User can review, inspect, and update jobs end to end
