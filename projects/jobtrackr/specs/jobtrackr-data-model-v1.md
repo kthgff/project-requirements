@@ -118,6 +118,7 @@ Represents a normalized tracked job opportunity.
   - `new`, `flagged`, `reviewing`, `skipped`, `applied`, `interview`, `rejected`, `offer`
 - `fit_flag` boolean, required, default `false`
 - `fit_score` integer, nullable
+- `match_percentage` integer, nullable
 - `fit_summary` text, nullable
 - `duplicate_of_job_id` UUID, nullable
 - `is_active` boolean, required, default `true`
@@ -144,6 +145,7 @@ Stores the current or historical AI evaluation for a job against a resume.
 - `model_name` string, nullable
 - `fit_flag` boolean, required
 - `fit_score` integer, nullable
+- `match_percentage` integer, nullable
 - `summary` text, required
 - `strengths` json/text, nullable
 - `gaps` json/text, nullable
@@ -200,6 +202,7 @@ Minimum fields needed for the initial table UI:
 - `job.source_platform`
 - `job.discovered_at`
 - `job.fit_flag`
+- `job.match_percentage`
 - `job.status`
 
 Recommended supporting detail fields:

@@ -31,6 +31,7 @@ The MVP should automatically turn job alert emails into structured tracked jobs 
 - Include a login page for user sign-in
 - Allow Keith to upload a resume for fit evaluation
 - Use AI to compare each job against the uploaded resume
+- Calculate a match percentage for each job
 - Flag jobs that look like good fits
 - Show tracked jobs in a table UI
 - Support manual status management for tracked jobs
@@ -82,6 +83,7 @@ The MVP should automatically turn job alert emails into structured tracked jobs 
 - job description or summary
 - date found
 - fit flag
+- match percentage
 - fit rationale
 - status
 
@@ -91,6 +93,7 @@ The MVP should automatically turn job alert emails into structured tracked jobs 
 - flagged
 - reviewing
 - skipped
+- not a match
 - applied
 - interview
 - rejected
@@ -149,13 +152,16 @@ The system shall present tracked jobs in a table interface.
 ### FR11. Status tracking
 The system shall support manual job status updates using the initial status model.
 
+### FR12. Auto-close low-fit jobs
+The system shall automatically set jobs with a match score below 60 to "not a match" status.
+
 ## 13. Open Questions
 
-- What fields are mandatory for a useful job record?
-- What enrichment sources should be used when the email itself lacks detail?
-- Should fit be shown as a boolean flag only, or as a score plus rationale?
-- What deduplication logic should merge repeated alerts for the same job?
-- Should the system notify Keith when new flagged jobs appear?
+- ~~What fields are mandatory for a useful job record?~~ **Answered: id, title, company, description, salary range, location, match, skills, tags**
+- ~~What enrichment sources should be used when the email itself lacks detail?~~ **Answered: scrape from job detail page linked in email**
+- ~~Should fit be shown as a boolean flag only, or as a score plus rationale?~~ **Answered: score from 1 to 100**
+- ~~What deduplication logic should merge repeated alerts for the same job?~~ **Answered: match on job URL**
+- ~~Should the system notify Keith when new flagged jobs appear?~~ **Answered: no, can view UI**
 
 ## 14. Success Criteria
 

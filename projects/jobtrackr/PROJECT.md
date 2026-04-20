@@ -35,6 +35,8 @@ JobTrakr has moved from vague concept into defined MVP discovery. Core product d
 - Supported email sources clarified to include **all relevant alerts**, including **LinkedIn** and **Indeed**
 - Resume source defined as **uploaded file**
 - Main initial UI defined as **table view**
+- Main jobs page should be a **searchable jobs table backed by database data**
+- Each job should include a **match percentage** showing alignment with Keith's resume and known profile
 - Project language direction defined as **TypeScript**
 - Good-fit action defined as **flag it**, not auto-apply
 - Initial statuses defined:
@@ -99,9 +101,9 @@ New implementation-ready artifacts created:
 
 ## Active Risks / Gaps
 
-- job detail enrichment source is not yet fully specified
+- ~~job detail enrichment source is not yet fully specified~~ **Answered: scrape from job detail page linked in email**
 - dependency map across implementation milestones still needs to be finalized
-- Google auth access policy is not yet finalized, single approved account vs broader sign-in
+- ~~Google auth access policy is not yet finalized, single approved account vs broader sign-in~~ **Answered: allow anyone with Google account**
 
 ## Next Recommended Steps
 

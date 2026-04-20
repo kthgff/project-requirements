@@ -13,10 +13,10 @@ Allow the user to scan all tracked jobs quickly, identify flagged opportunities,
 The jobs table is the primary dashboard component in MVP.
 
 It should:
-- display all tracked jobs for the authenticated user
+- display all tracked jobs for the authenticated user from the database
 - prioritize fast scanning
 - highlight good-fit jobs
-- support filtering and sorting
+- support searching, filtering, and sorting
 - provide access to full job detail
 
 ---
@@ -25,12 +25,13 @@ It should:
 
 ### Required columns
 1. `Fit`
-2. `Company`
-3. `Title`
-4. `Location`
-5. `Source`
-6. `Date Found`
-7. `Status`
+2. `Match %`
+3. `Company`
+4. `Title`
+5. `Location`
+6. `Source`
+7. `Date Found`
+8. `Status`
 
 ### Optional future columns
 - Salary
@@ -42,11 +43,13 @@ It should:
 ## Column Requirements
 
 ### Fit
-- show a strong visual indicator for flagged jobs
-- support three states:
-  - flagged
-  - not flagged
-  - unavailable/pending
+- show both a numeric `match rating` from 0 to 100 and a simple flagged/not-flagged state
+- support three fit availability states:
+  - flagged or not flagged with a computed rating
+  - analyzed but below flag threshold
+  - unavailable or pending because resume or job data is incomplete
+- numeric rating should be sortable
+- flagged state should remain visually obvious for fast triage
 
 ### Company
 - display normalized company name
@@ -81,19 +84,22 @@ PM recommendation:
 
 ### Sorting behavior
 At minimum support sorting by:
+- Match %
 - Date Found
 - Company
 - Status
+- Match rating
 
 Default sort:
 - Date Found descending
 
 ### Filtering behavior
 At minimum support:
-- text search
+- text search across database-backed job records
 - status filter
 - fit filter
 - source filter
+- optional match-rating sort without needing a separate filter in MVP
 
 ### Pagination or virtualization
 PM recommendation:
@@ -119,13 +125,14 @@ Reason:
 ## Visual Hierarchy
 
 The table should make these things easy to notice first:
-1. flagged jobs
+1. flagged jobs and match percentage
 2. title and company
 3. current status
 4. recency
 
 ### Recommended treatment
 - flagged jobs use a badge or colored icon
+- match rating appears as a compact score, such as `84/100`, near the fit state
 - title text should be visually stronger than metadata
 - muted styling for lower-priority metadata like source/date
 
@@ -146,6 +153,7 @@ Show:
 ### Missing fit data
 Show:
 - neutral placeholder such as `Pending` or `No resume`
+- no misleading numeric score when analysis has not run yet
 
 ### Long text
 - truncate in cells
@@ -165,27 +173,27 @@ Show:
 ## Functional Requirements
 
 ### FR1. Primary jobs list
-The dashboard shall present jobs in a structured table.
+The dashboard shall present database-backed jobs in a structured table.
 
 ### FR2. Fit visibility
-The table shall visually distinguish flagged jobs.
+The table shall visually distinguish flagged jobs and display a numeric match rating when analysis exists.
 
 ### FR3. Row detail access
 The user shall be able to open fuller job detail from the table.
 
-### FR4. Search
-The user shall be able to search across tracked jobs.
+### FR5. Search
+The user shall be able to search across tracked jobs stored in the database.
 
-### FR5. Filtering
+### FR6. Filtering
 The user shall be able to filter by status, fit state, and source.
 
-### FR6. Sorting
-The user shall be able to sort by supported columns.
+### FR7. Sorting
+The user shall be able to sort by supported columns, including match percentage.
 
-### FR7. Status visibility
+### FR8. Status visibility
 The table shall show workflow status for every job.
 
-### FR8. Status editing
+### FR9. Status editing
 The product shall support updating job status from the dashboard experience.
 
 ---

@@ -88,13 +88,14 @@ Provide a single clear entry point into the product using Gmail federated login.
 ### 2. Jobs Dashboard
 
 #### Purpose
-Provide the main operational screen for viewing and managing all tracked jobs.
+Provide the main operational screen for viewing and managing all tracked jobs stored in the database.
 
 #### Primary goals
-- show all jobs in one place
+- show all jobs in the database in one place
 - make good-fit roles obvious
 - support quick scanning and filtering
 - support fast status updates
+- support searchable retrieval across tracked jobs
 
 #### Recommended layout
 
@@ -119,7 +120,7 @@ Provide the main operational screen for viewing and managing all tracked jobs.
 - clear filters action
 
 ##### Main content
-- jobs table occupying most of the page width
+- searchable jobs table occupying most of the page width
 
 ##### Optional side panel or drawer
 - opens selected job detail without leaving context
@@ -133,6 +134,7 @@ Enable rapid review of tracked jobs with enough information to decide what deser
 
 ### Required columns for MVP
 - Fit
+- Match %
 - Company
 - Title
 - Location
@@ -147,6 +149,7 @@ Enable rapid review of tracked jobs with enough information to decide what deser
 
 ### Column behavior
 - Fit should be visually distinct, badge/icon/color state
+- Match % should display the computed alignment percentage
 - Status should be editable inline if implementation is straightforward
 - Title should open job detail
 - Date Found should support sorting
@@ -198,6 +201,7 @@ Reason:
 - source platform
 - apply/job link
 - job summary or description
+- match percentage
 - fit summary
 - strengths
 - gaps
@@ -272,13 +276,13 @@ The frontend shall provide a login page with a Google sign-in action.
 The frontend shall restrict dashboard access to authenticated users.
 
 ### FR3. Dashboard page
-The frontend shall provide a main dashboard showing tracked jobs.
+The frontend shall provide a main dashboard showing tracked jobs from the database.
 
 ### FR4. Table view
-The dashboard shall present jobs in a table view.
+The dashboard shall present jobs in a searchable table view.
 
 ### FR5. Filtering and search
-The dashboard shall support search and basic filtering.
+The dashboard shall support search across tracked jobs and basic filtering.
 
 ### FR6. Sorting
 The dashboard shall support basic table sorting.

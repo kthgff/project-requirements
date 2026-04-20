@@ -53,6 +53,7 @@ As Keith, I want tracked jobs compared against my uploaded resume so that strong
 **Acceptance criteria**
 - The system uses the uploaded resume as fit context
 - The system produces a fit evaluation for tracked jobs
+- The system calculates a match percentage for each tracked job
 - Good-fit jobs are clearly flagged
 - The system stores at least a short fit rationale
 
