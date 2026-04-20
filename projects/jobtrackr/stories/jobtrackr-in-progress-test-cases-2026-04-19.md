@@ -36,6 +36,12 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - T-030: Harden the job details editing UI with contract-aligned save/cancel notes flow, in-context tag edits, and shared section structure across drawer and page views
 - T-031: Implement deterministic row-selection continuity in the mock jobs workspace across filter changes, pagination, and dashboard return flows
 - T-032: Rewrite stale Gate A docs so legacy workflow statuses and auto-close behavior no longer conflict with the canonical PM memo, API contract, and reconciliation matrix
+- T-033: Reconcile DEVELOPMENT_PLAN ticket language with the canonical workflow, fit, and table-contract decisions so engineers stop inheriting stale implementation assumptions
+- T-034: Audit and reconcile milestone and ticket wording in DEVELOPMENT_PLAN so canonical workflow, fit, and table semantics stay consistent after the ticket rewrite pass
+- T-045: Reconcile PROJECT, milestone, and handoff references so the plan rewrite stays aligned outside the task table
+- T-046: Reconcile PRD and QA test-case references so legacy workflow and auto-close language no longer conflicts with the canonical workflow and fit model
+- T-047: Reconcile remaining product/spec references so legacy flagged and stale workflow language no longer conflicts with the canonical workflow and fit-signal model
+- T-048: Reconcile parser and ingestion ticket wording so milestone follow-through docs stop implying deprecated auto-close or workflow-state behavior for low-fit jobs
 
 ---
 
@@ -1147,6 +1153,137 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Cleaned docs point back to the PM memo, API contract, and reconciliation matrix.
 - Engineering cannot reasonably mistake stale semantics for current source of truth.
 
+## T-033 Development Plan Ticket Language Reconciliation Test Cases
+
+### TC-2010 Active ticket language no longer treats fit signals as workflow state
+**Steps**
+1. Review all active-ticket rows in `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
+2. Inspect task names, DoD text, AC text, and gap notes for low-fit, flagged, match-rating, and table-state wording.
+
+**Expected**
+- Active-ticket language does not present `flagged` or low-fit handling as workflow status.
+- Match rating and low-fit wording are consistently described as fit signals or table semantics.
+- Ticket copy points back to canonical source docs when implementation detail depends on locked contracts.
+
+### TC-2011 Reconciled development plan keeps canonical workflow enum intact
+**Steps**
+1. Review all workflow references in the active-task table and notes sections.
+2. Compare them to the canonical workflow enum in the PM memo and API contract.
+
+**Expected**
+- Only `new`, `interested`, `applied`, `interviewing`, `offer`, and `rejected` appear as workflow statuses.
+- `not a match`, `flagged`, `reviewing`, `skipped`, and `interview` do not appear as canonical workflow outcomes in the development plan.
+- Any legacy phrasing is removed or clearly marked superseded.
+
+## T-034 Milestone and Ticket Wording Reconciliation Test Cases
+
+### TC-2020 Milestone steps align with active-ticket semantics after the rewrite pass
+**Steps**
+1. Compare Milestones 1 to 8 in `DEVELOPMENT_PLAN.md` against the active-ticket table.
+2. Inspect workflow, fit, and table semantics across both sections.
+
+**Expected**
+- Milestone steps do not contradict the active-ticket wording.
+- Low-fit handling remains separate from workflow state throughout milestone text.
+- Table payload and match-rating semantics stay consistent between milestone steps and active tasks.
+
+### TC-2021 Milestone 6 low-fit wording stays canonical end to end
+**Steps**
+1. Review Milestone 6 steps and exit criteria.
+2. Compare low-fit handling wording with T-006, T-033, and the Gate A reconciliation docs.
+
+**Expected**
+- Milestone 6 does not imply auto-close workflow mutation for low-fit jobs.
+- Exit criteria describe fit indicators separately from workflow state.
+- Low-fit jobs remain representable without introducing a synthetic workflow enum.
+
+## T-045 PROJECT and Handoff Reference Reconciliation Test Cases
+
+### TC-2030 PROJECT.md uses the same workflow and fit language as DEVELOPMENT_PLAN
+**Steps**
+1. Review `projects/jobtrackr/PROJECT.md`.
+2. Compare status-model, fit, and flagged references with `DEVELOPMENT_PLAN.md` and the PM memo.
+
+**Expected**
+- PROJECT.md uses the canonical workflow enum only.
+- Fit percentage, low-fit, and flagged behavior are described as separate signals, not workflow transitions.
+- Next steps and active risks do not reintroduce stale semantics.
+
+### TC-2031 Handoff-facing references point to reconciled source documents
+**Steps**
+1. Review PROJECT links to handoff, contract, and reconciliation docs.
+2. Verify linked files represent the current canonical source set.
+
+**Expected**
+- PROJECT.md points engineers to the reconciled development plan, PM memo, API contract, and handoff package.
+- Deprecated or compatibility-shim references are not presented as the preferred implementation path.
+
+## T-046 PRD and QA Reference Reconciliation Test Cases
+
+### TC-2040 PRD no longer exposes legacy workflow or auto-close semantics
+**Steps**
+1. Review the PRD and related MVP story docs.
+2. Inspect workflow, low-fit, and flagged language.
+
+**Expected**
+- PRD does not present legacy statuses as canonical workflow states.
+- Low-fit behavior is described through fit-signal semantics rather than workflow mutation.
+- If older language must remain for history, it is clearly marked non-canonical.
+
+### TC-2041 QA-owned test cases align with the canonical workflow and fit model
+**Steps**
+1. Review in-progress QA test cases and continuity matrices.
+2. Inspect whether any QA case still expects stale workflow enums or auto-close behavior.
+
+**Expected**
+- QA cases test canonical workflow statuses only.
+- QA coverage for low-fit behavior checks fit-signal handling, not fake status transitions.
+- QA docs do not keep stale expectations alive after the reconciliation pass.
+
+## T-047 Remaining Product and Spec Reference Reconciliation Test Cases
+
+### TC-2050 Remaining specs stop using flagged as workflow shorthand
+**Steps**
+1. Review remaining product and implementation specs called out by the reconciliation pass.
+2. Inspect flagged references in table UI, fit-analysis, and data-model-facing docs.
+
+**Expected**
+- `flagged` is not described as a workflow state.
+- Any flagged behavior is clearly framed as shortlist or fit-signal behavior only where canonically supported.
+- Spec wording does not let engineering confuse fit indicators with workflow state.
+
+### TC-2051 Cross-spec workflow and fit language is internally consistent
+**Steps**
+1. Compare PM memo, API contract, schema, table UI spec, fit-analysis spec, and first-slice docs.
+2. Check for conflicting workflow, archive, and fit-signal language.
+
+**Expected**
+- Cross-spec language is consistent enough for engineering pickup without PM clarification.
+- Archive, saved, workflow, and fit concepts remain distinct across all reviewed docs.
+- Any surviving stale references are isolated and clearly marked as blockers.
+
+## T-048 Parser and Ingestion Ticket Wording Reconciliation Test Cases
+
+### TC-2060 Parser follow-through docs do not imply parser-driven workflow mutation
+**Steps**
+1. Review Milestone 4 ticket breakdown and parser follow-through docs.
+2. Inspect references to low-fit, rejected outcomes, and parser responsibilities.
+
+**Expected**
+- Parser work is limited to ingestion, extraction, dedupe, and persistence concerns.
+- Parser docs do not imply `not a match` or any other non-canonical workflow outcome.
+- Low-fit handling points back to the canonical fit-analysis contract where relevant.
+
+### TC-2061 Parser and ingestion tickets preserve source-email retention and debug traceability
+**Steps**
+1. Review parser and ingestion acceptance language after reconciliation.
+2. Inspect source-email retention, extraction-threshold, and dedupe wording.
+
+**Expected**
+- Tickets still require source-email retention even when no job row is created.
+- Debug traceability remains explicit.
+- Workflow-state semantics stay separate from parser acceptance criteria.
+
 ## Current QA coverage gaps
 1. No tasks are marked `done` or moved to QA in `DEVELOPMENT_PLAN.md`, so this hour remains acceptance-coverage and blocker surfacing work rather than runnable execution validation.
 2. T-006 is still blocked by status-model drift in `jobtrackr-auto-close-logic-spec-v1.md`, which still references pre-decision statuses like `flagged`, `reviewing`, `skipped`, `interview`, and `not a match` instead of the canonical workflow model.
@@ -1161,3 +1298,6 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 11. T-026 and T-029 still lack runnable persisted-jobs fixtures or endpoint examples in QA-owned docs, so execution coverage is blocked at contract level until engineering exposes deterministic sample responses.
 12. T-030 and T-031 now have acceptance coverage, but QA still needs a real branch build to verify drawer/page parity, session-state transitions, and no-fallback selection behavior in the UI.
 13. T-032 is still an active blocker area because older docs continue to advertise legacy workflow states that conflict with the canonical PM memo and current Gate A reconciliation work.
+14. T-033 through T-048 now have contract-level QA coverage in this file, but execution coverage is still blocked until the reconciled downstream docs actually land and can be diff-verified against the PM memo, API contract, and reconciliation matrix.
+15. Jimmy plan fetch is still blocked on Discord API auth from this environment, so QA cannot confirm whether the latest PM pickup order changed outside the local repo state.
+16. The hourly prompt referenced `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, but the live source file remains `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`; that path drift is itself a coordination gap worth fixing.
