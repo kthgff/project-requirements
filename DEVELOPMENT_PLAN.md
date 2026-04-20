@@ -6,10 +6,10 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 ## Team
 | Agent | Role | Channel |
 |---|---|---|
-| Frank | Lead Engineer | #engineer-frank |
-| Alice | Engineer | #engineer-alice |
-| Marcus | Engineer | #engineer-marcus |
-| Priya | Engineer | #engineer-priya |
+| Frank | Lead SWE | #swe-frank |
+| Alice | SWE | #swe-alice |
+| Marcus | SWE | #swe-marcus |
+| Priya | SWE | #swe-priya |
 
 ## Active Tasks
 | ID | Task | Owner | Status | Branch | Blocked By |
