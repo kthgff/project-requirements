@@ -20,6 +20,7 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 | T-004 | Lock jobs dashboard contract for match rating, flagged semantics, and table payload shape | Marcus | in-progress | feat/jobtrackr-jobs-dashboard-contract | — |
 | T-005 | Scaffold protected jobs dashboard web shell with mock table data for the first vertical slice | Priya | in-progress | feat/jobs-dashboard-mock-shell | — |
 | T-006 | Implement auto-close logic for jobs with match score below 60 (set to 'not a match' status) | — | pending | — | — |
+| T-007 | Implement view all jobs page with full job details and filtering | — | pending | — | — |
 
 ## Completed
 | ID | Task | Owner | Merged |
@@ -216,8 +217,9 @@ Build and ship the current AI-powered app initiative quickly with clean, maintai
 7. Add better error states and retry logic
 8. Implement job archival logic
 9. Add search across title, company, description
-10. Test end-to-end workflow (login → view jobs → update status → add tags)
-11. Verify user can review, inspect, and update jobs end to end
+10. Implement view all jobs page with full job details and advanced filtering
+11. Test end-to-end workflow (login → view jobs → update status → add tags)
+12. Verify user can review, inspect, and update jobs end to end
 
 **Exit Criteria:**
 - User can review, inspect, and update jobs end to end
