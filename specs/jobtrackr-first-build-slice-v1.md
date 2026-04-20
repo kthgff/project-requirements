@@ -122,6 +122,7 @@ Next slice should be:
 - real job list from DB instead of mock data
 
 Then:
+- real database-backed jobs page
 - Gmail ingestion
 - resume upload
 - fit analysis

@@ -13,10 +13,10 @@ Allow the user to scan all tracked jobs quickly, identify flagged opportunities,
 The jobs table is the primary dashboard component in MVP.
 
 It should:
-- display all tracked jobs for the authenticated user
+- display all tracked jobs for the authenticated user from the database
 - prioritize fast scanning
 - highlight good-fit jobs
-- support filtering and sorting
+- support searching, filtering, and sorting
 - provide access to full job detail
 
 ---
@@ -93,7 +93,7 @@ Default sort:
 
 ### Filtering behavior
 At minimum support:
-- text search
+- text search across database-backed job records
 - status filter
 - fit filter
 - source filter
@@ -171,7 +171,7 @@ Show:
 ## Functional Requirements
 
 ### FR1. Primary jobs list
-The dashboard shall present jobs in a structured table.
+The dashboard shall present database-backed jobs in a structured table.
 
 ### FR2. Fit visibility
 The table shall visually distinguish flagged jobs and display a numeric match rating when analysis exists.
@@ -180,7 +180,7 @@ The table shall visually distinguish flagged jobs and display a numeric match ra
 The user shall be able to open fuller job detail from the table.
 
 ### FR4. Search
-The user shall be able to search across tracked jobs.
+The user shall be able to search across tracked jobs stored in the database.
 
 ### FR5. Filtering
 The user shall be able to filter by status, fit state, and source.

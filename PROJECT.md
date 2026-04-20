@@ -35,6 +35,7 @@ JobTrakr has moved from vague concept into defined MVP discovery. Core product d
 - Supported email sources clarified to include **all relevant alerts**, including **LinkedIn** and **Indeed**
 - Resume source defined as **uploaded file**
 - Main initial UI defined as **table view**
+- Main jobs page should be a **searchable jobs table backed by database data**
 - Project language direction defined as **TypeScript**
 - Good-fit action defined as **flag it**, not auto-apply
 - Initial statuses defined:
