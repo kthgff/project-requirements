@@ -25,8 +25,9 @@ Engineers should use these files in this order when there is any conflict.
    - shared API payload expectations
 5. `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
    - locked detail view structure and editing expectations
-6. `projects/jobtrackr/specs/jobtrackr-list-detail-examples-2026-04-20.md`
+6. `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
    - canonical examples for list selection, detail continuity, and edit behavior alignment
+   - if you encounter `jobtrackr-list-detail-examples-2026-04-20.md`, treat it as a compatibility shim that defers to this canonical file
 7. `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
    - locked workspace interaction expectations
 8. `projects/jobtrackr/specs/jobtrackr-dependency-map-and-sequencing-2026-04-19.md`
