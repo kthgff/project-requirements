@@ -9,14 +9,15 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
-## Hourly QA review — 2026-04-21 12:26 America/Chicago
+## Hourly QA review — 2026-04-21 18:56 America/Chicago
 
 ### Results
-- PASS: PRD v2, the QA blocker checklist, and the active QA coverage now use the same recovery text, path order, and current implementation-lane wording for stale kickoff prompt recovery.
-- PASS: Jimmy's current QA priorities remain aligned to T-070, T-066, and T-062, with the active slice still defined as auth -> session -> Gmail readonly connect -> persisted jobs.
+- PASS: PRD v2, the QA blocker checklist, and the active QA coverage still reuse the same recovery text, path order, and current implementation-lane wording for stale kickoff prompt recovery.
+- PASS: Jimmy's latest plan fetch succeeded again, and Priya's current QA priorities remain aligned to T-070, T-075, and the broader QA recovery lane.
+- PASS: Jimmy's latest QA note still keeps the active slice on auth -> session -> Gmail readonly connect -> persisted jobs, with no new repo-side blockers logged.
 - GAP: The hourly QA cron prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so external automation remains out of sync with the repo's corrected recovery guidance.
 - GAP: No tasks are marked `done` or moved to QA in `projects/jobtrackr/DEVELOPMENT_PLAN.md`, so this hour still supports coverage maintenance and blocker surfacing rather than execution sign-off.
-- GAP: The mandatory team check-in request failed with `401 Unauthorized` using the provided Discord bot token, so team visibility is externally blocked even though repo-side QA work continued.
+- GAP: Repo-side QA wording is aligned, but kickoff-facing and preserved-doc recovery changes outside the QA trio still need diff-level verification before QA can close the broader recovery-drift lane.
 
 ## Source tasks covered
 - T-001: Finalize PM decision alignment in JobTrackr API contract and debug semantics
@@ -1729,3 +1730,4 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 23. T-070 now covers wording normalization across PRD v2, the QA blocker checklist, and in-progress QA coverage so QA can recover from stale automation prompts without comparing three slightly different recovery notes by hand.
 24. T-069, T-071, T-072, and T-073 extend the same recovery coverage into automation examples and preserved handoff docs, so hourly kickoff recovery can be tested against one canonical path order instead of doc-specific variants.
 25. T-074, T-075, and T-076 are now represented in QA coverage, but they still need diff-level verification across preserved implementation-facing docs, the shared QA recovery note set, and preserved planning/handoff artifacts before QA can confirm the recovery wording is truly normalized end to end.
+26. T-086 now tracks the hourly QA coverage refresh so the latest Jimmy fetch success, current external kickoff-path drift, and remaining repo-side verification work stay visible in the active QA handoff notes.
