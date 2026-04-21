@@ -1,28 +1,38 @@
 # JobTrakr First Build Slice v1
 
+> Historical kickoff note: this file captures the original mock-first slice. For the current implementation lane, use `projects/jobtrackr/DEVELOPMENT_PLAN.md` and `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+
 ## Purpose
 
-Define the first implementation slice that Engineering should start coding immediately.
+Define the original first implementation slice that Engineering used to start coding.
 
 ## Canonical source-of-truth reminder
 
-Before implementing this slice, align with:
-- `DEVELOPMENT_PLAN.md`
-- `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
-- `specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
-- `specs/jobtrackr-api-contract.md`
+Before implementing or extending this slice, align with:
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+- `projects/jobtrackr/specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-api-contract.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
 If an older note conflicts with those files, follow the canonical source set above.
 
 ## Recommendation
 
-Start with the smallest visible end-to-end slice:
+This document's original recommendation was to start with the smallest visible end-to-end slice:
 - Google login page
 - authenticated session
 - protected dashboard shell
 - jobs dashboard with table UI using mock data
 
-This gives the team a real working product surface fast and creates the base for real backend integration.
+That kickoff goal is still useful as historical context, but the current team pickup has moved one step further to the first real vertical slice:
+- Google login page
+- authenticated session
+- Gmail readonly connection
+- persisted jobs retrieval
+- jobs dashboard rendering server-backed results
+
+This updated direction keeps the original shell work while moving implementation toward the current auth to Gmail to persisted-jobs handoff lane.
 
 ---
 
@@ -134,12 +144,13 @@ Use a temporary static dataset with 5 to 10 representative rows covering:
 
 ## Immediately After This Slice
 
-Next slice should be:
-- real job list from DB instead of mock data
+What followed this original slice is now the active implementation path:
+- Gmail readonly connection
+- persisted real job list from DB instead of mock data
+- dashboard rendering server-backed jobs through the authenticated session
 
 Then:
-- real database-backed jobs page
-- Gmail ingestion
+- broader Gmail ingestion baseline
 - resume upload
 - fit analysis
 

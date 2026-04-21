@@ -6,10 +6,10 @@ Provide one source-of-truth handoff package for engineering so hourly kickoff an
 
 ## Current Delivery Status
 
-- Project phase: MVP specification finishing, engineering handoff package being finalized
+- Project phase: Phase 3 engineering handoff and kickoff, with the first real implementation lane now active
 - Active handoff owner: Frank
-- Immediate goal: close the gap between PM-approved contracts and implementation pickup guidance
-- Primary risk: contract drift across older docs if teams implement from stale assumptions
+- Immediate goal: close the gap between PM-approved contracts and implementation pickup guidance while keeping kickoff entrypoints aligned to the current auth to Gmail to persisted-jobs slice
+- Primary risk: contract drift across older docs if teams implement from stale assumptions or from stale kickoff paths
 
 ## Canonical Source of Truth
 
@@ -90,8 +90,9 @@ Focus on the first backend vertical slice.
 
 Priority order:
 1. T-018 auth callback, session flow, Gmail readonly connection path
-2. T-002 only where it directly supports the first end-to-end slice
-3. T-011 after auth and Gmail connection state are stable
+2. T-029 authenticated persisted-jobs vertical slice once auth and connection state are usable
+3. T-002 only where it directly supports the first end-to-end slice
+4. T-011 after auth, Gmail connection state, and persisted-job rendering are stable
 
 ### Marcus
 Focus on shared contracts and reconciliation docs that keep implementation entrypoints aligned.
@@ -133,6 +134,9 @@ Schema correction, canonical jobs contracts, repository/query layer, then fronte
 
 ### Milestone 4
 Gmail connection state contract, readonly OAuth wiring, source-email ingestion, extraction plus dedupe, and dashboard refresh against real ingestion output.
+
+### Current kickoff reality
+The team is no longer only preparing a mock-first shell. The active cross-lane direction is the authenticated auth to Gmail to persisted-jobs slice, with README, PROJECT, and kickoff docs expected to reflect that current pickup lane.
 
 ## Recommended Next Picks By Lane
 

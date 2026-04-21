@@ -70,12 +70,14 @@ Still needed:
 - final drift cleanup where older specs and handoff notes still differ from the canonical workflow, archive, and fit-signal contracts
 - tracker alignment so task status reflects actual implementation progress
 - final historical-doc cleanup so preserved drafts and clarification notes point back to the canonical source-of-truth set instead of leaving legacy fit-flag shorthand open to interpretation
+- kickoff entrypoint cleanup so README, handoff docs, and milestone guidance all point at the same current implementation slice and valid project-root paths
 
 ### Engineering kickoff
 In progress:
 - engineering development plan actively populated with implementation tasks
 - dependency map and milestone sequencing being finalized
-- frontend and auth kickoff slices prepared for development
+- auth to Gmail to persisted-jobs vertical slice is now the active implementation lane
+- kickoff entrypoints are being reconciled so engineers do not start from stale mock-only framing
 
 ## What Is Not Started
 
@@ -103,10 +105,10 @@ In progress:
 
 ## Next Recommended Steps
 
-1. Finish reconciling PROJECT, milestone, and handoff references against the canonical workflow and fit-signal contract
-2. Lock the first shared schema and API interfaces for the raw-ingestion vertical slice
+1. Finish reconciling PROJECT, README, milestone, and handoff references against the canonical workflow, fit-signal contract, and current auth to Gmail to persisted-jobs pickup lane
+2. Lock the first shared schema and API interfaces for the raw-ingestion and persisted-jobs vertical slice
 3. Keep the engineering handoff entrypoints current as implementation pickup accelerates
-4. Move the first build slice into active coding with verifiable completion states
+4. Move the current auth and persisted-jobs slice forward with verifiable completion states
 
 ## Key Files
 
@@ -177,6 +179,7 @@ In progress:
 
 Use these files as the canonical implementation references when PROJECT, older drafts, or preserved clarification notes summarize the work at a higher level:
 - `DEVELOPMENT_PLAN.md`
+- `README.md`
 - `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
 - `specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
 - `specs/jobtrackr-api-contract.md`
