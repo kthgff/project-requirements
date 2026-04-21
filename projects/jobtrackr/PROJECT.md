@@ -110,6 +110,7 @@ In progress:
 
 ## Key Files
 
+- `projects/jobtrackr/ROADMAP.md`
 - `DEVELOPMENT_PLAN.md`
 - `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
 - `specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
