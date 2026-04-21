@@ -17,6 +17,7 @@ Engineers should use these files in this order when there is any conflict.
 
 Recovery note for automation-facing handoffs:
 - if an hourly kickoff prompt still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that path as stale drift and recover to `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- when a kickoff note says to start with PROJECT, use `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md` so the recovery path stays explicit alongside the live development plan
 - the current implementation slice for pickup remains Google auth -> session -> Gmail readonly connect -> persisted jobs UI
 
 1. `projects/jobtrackr/DEVELOPMENT_PLAN.md`
@@ -146,7 +147,7 @@ The team is no longer only preparing a mock-first shell. The active cross-lane d
 
 - Frank: finish Gate A reconciliation and keep engineering package current
 - Alice: auth callback, session flow, Gmail readonly connect path
-- Marcus: detail contract examples, detail editing alignment, and entrypoint-doc reconciliation so milestone and handoff wording stay canonical
+- Marcus: detail contract examples, detail editing alignment, and explicit kickoff-entrypoint path normalization so milestone and handoff wording stay canonical during hourly recovery
 - Priya: row-selection continuity, active-filter context, empty-result recovery
 
 ## Open Risks To Watch

@@ -113,14 +113,14 @@ In progress:
 ## Key Files
 
 - `projects/jobtrackr/ROADMAP.md`
-- `DEVELOPMENT_PLAN.md`
-- `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
-- `specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
-- `specs/jobtrackr-api-contract.md`
-- `specs/jobtrackr-detail-view-contract-2026-04-20.md`
-- `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
-- `specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
-- `specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+- `projects/jobtrackr/specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-api-contract.md`
+- `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
 ## Project Plan to Completion
 
@@ -178,12 +178,12 @@ In progress:
 ## Source-of-Truth Reminder
 
 Use these files as the canonical implementation references when PROJECT, older drafts, or preserved clarification notes summarize the work at a higher level:
-- `DEVELOPMENT_PLAN.md`
-- `README.md`
-- `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
-- `specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
-- `specs/jobtrackr-api-contract.md`
-- `specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `projects/jobtrackr/README.md`
+- `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+- `projects/jobtrackr/specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-api-contract.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
 Historical references to fit flags, flagged jobs, or older workflow examples should be read as legacy shorthand only, not as current product-state vocabulary.
 

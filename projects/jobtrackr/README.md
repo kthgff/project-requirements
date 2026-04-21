@@ -12,12 +12,12 @@ This repository is no longer discovery-only. Engineers should treat the canonica
 
 If you are picking up implementation or reconciliation work, read these files first:
 
-1. `DEVELOPMENT_PLAN.md`
-2. `PROJECT.md`
-3. `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
-4. `specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
-5. `specs/jobtrackr-api-contract.md`
-6. `specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+1. `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+2. `projects/jobtrackr/PROJECT.md`
+3. `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+4. `projects/jobtrackr/specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
+5. `projects/jobtrackr/specs/jobtrackr-api-contract.md`
+6. `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
 ## Kickoff Build Slice
 
@@ -34,7 +34,7 @@ The **current implementation pickup direction** extends that into the first real
 - persisted jobs retrieval
 - jobs dashboard rendering server-backed results
 
-Use `specs/jobtrackr-first-build-slice-v1.md` as historical kickoff context only, and use `DEVELOPMENT_PLAN.md` plus `specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md` for the current lane and ownership guidance. All work should still follow canonical workflow and fit-signal language:
+Use `projects/jobtrackr/specs/jobtrackr-first-build-slice-v1.md` as historical kickoff context only, and use `projects/jobtrackr/DEVELOPMENT_PLAN.md` plus `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md` for the current lane and ownership guidance. All work should still follow canonical workflow and fit-signal language:
 - workflow status is only `new`, `interested`, `applied`, `interviewing`, `offer`, `rejected`
 - match rating and low-fit are fit signals, not workflow states
 - archive behavior remains separate from workflow status
