@@ -180,10 +180,16 @@ Supported statuses:
 - Do we need manual job entry in MVP as a fallback?
 
 ## Canonical Reference Notes
-For implementation-facing workflow, archive, and fit semantics, defer to:
-- `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
-- `specs/jobtrackr-api-contract.md`
-- `DEVELOPMENT_PLAN.md`
+For implementation-facing workflow, archive, and fit semantics, defer to the live project-root source files:
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+- `projects/jobtrackr/specs/jobtrackr-api-contract.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+
+Recovery note for automation-facing handoffs:
+- If a kickoff prompt or older note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift and recover to `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`.
+- The active implementation context is the Next.js web shell plus Go API, on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
+- Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
 ## Recommended MVP Cut
 If speed matters most, first release should focus on:
