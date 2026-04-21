@@ -2,7 +2,7 @@
 
 > Superseded draft retained for history only.
 > For implementation, use the PM decision memo, API contract, and current DEVELOPMENT_PLAN as the canonical source set.
-> In this older file, references to fit "flagging" should be read as fit-signal highlighting, not workflow state changes.
+> In this older file, references to fit "flagging", `flagged`, or `unflagged` are legacy shorthand only and should be read as fit-signal highlighting, not current product-state vocabulary or workflow state changes.
 
 ## Epic: Inbox scanning and job ingestion
 

@@ -2,7 +2,7 @@
 
 > Superseded PRD draft retained for history.
 > Do not implement directly from this file. Use the PM decision memo, API contract, and current DEVELOPMENT_PLAN for canonical workflow, archive, and fit-signal semantics.
-> References below to fit flags or flagged jobs should be interpreted as fit-signal presentation, not workflow status changes.
+> References below to fit flags, `flagged`, or `unflagged` should be interpreted as legacy fit-signal presentation only, not current product-state vocabulary or workflow status changes.
 
 ## Product Summary
 
