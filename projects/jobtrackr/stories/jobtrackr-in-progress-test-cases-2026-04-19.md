@@ -3,11 +3,20 @@
 ## Purpose
 Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELOPMENT_PLAN.md`, updated for Jimmy's latest kickoff emphasis on QA recovery wording normalization, kickoff-entrypoint safety, and the active auth -> session -> Gmail readonly connect -> persisted jobs implementation slice.
 
-## Recovery note for automation-facing handoffs
+## Recovery note for automation-facing handoffs:
 - If a kickoff prompt or older note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift.
 - Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/prd/jobtrackr-prd-v2.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
+
+## Hourly QA review — 2026-04-21 12:26 America/Chicago
+
+### Results
+- PASS: PRD v2, the QA blocker checklist, and the active QA coverage now use the same recovery text, path order, and current implementation-lane wording for stale kickoff prompt recovery.
+- PASS: Jimmy's current QA priorities remain aligned to T-070, T-066, and T-062, with the active slice still defined as auth -> session -> Gmail readonly connect -> persisted jobs.
+- GAP: The hourly QA cron prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so external automation remains out of sync with the repo's corrected recovery guidance.
+- GAP: No tasks are marked `done` or moved to QA in `projects/jobtrackr/DEVELOPMENT_PLAN.md`, so this hour still supports coverage maintenance and blocker surfacing rather than execution sign-off.
+- GAP: The mandatory team check-in request failed with `401 Unauthorized` using the provided Discord bot token, so team visibility is externally blocked even though repo-side QA work continued.
 
 ## Source tasks covered
 - T-001: Finalize PM decision alignment in JobTrackr API contract and debug semantics
