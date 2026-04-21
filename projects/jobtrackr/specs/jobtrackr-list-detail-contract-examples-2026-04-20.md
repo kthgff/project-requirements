@@ -75,7 +75,7 @@ For `job_123`, the table can render everything required for scan and selection w
 - source: `linkedin`
 - date found: `2026-04-20`
 - fit column: `91`
-- flagged indicator: visible because `fitFlag = true`
+- strong-fit indicator: visible because `fitFlag = true`, but the user-facing label stays a fit signal rather than a workflow or product state
 - workflow state: `new`
 - lightweight tag hints are allowed, but not required
 

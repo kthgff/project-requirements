@@ -541,7 +541,7 @@ Response:
 ### GET /filters
 Returns filter options and counts used by the dashboard.
 
-The initial dashboard should support fit-state filtering and match-rating sorting without requiring a separate ratings endpoint.
+The initial dashboard should support fit-signal filtering and match-rating sorting without requiring a separate ratings endpoint. Filter labels should use canonical user-facing wording such as `strong-fit`, `low-fit`, and `pending-fit`, even if implementation stores separate nullable fit fields under the hood.
 
 Response:
 ```json
@@ -552,9 +552,9 @@ Response:
       { "value": "applied", "count": 12 }
     ],
     "fitStates": [
-      { "value": "flagged", "count": 6 },
-      { "value": "unflagged", "count": 18 },
-      { "value": "pending", "count": 4 }
+      { "value": "strong-fit", "count": 6 },
+      { "value": "fit-ready", "count": 18 },
+      { "value": "pending-fit", "count": 4 }
     ],
     "locations": [
       { "value": "Remote", "count": 14 }

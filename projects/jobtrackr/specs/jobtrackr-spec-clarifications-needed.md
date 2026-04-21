@@ -469,7 +469,7 @@ Use:
 - `fit_flag = null` when no analysis exists
 - `fit_score = null` when no analysis exists
 - `fit_summary = null` when no analysis exists
-This cleanly distinguishes not analyzed from analyzed-and-not-flagged.
+This cleanly distinguishes not analyzed from analyzed-and-fit-ready without forcing `flagged` or `unflagged` into the canonical user-facing vocabulary.
 
 ## P1-7. Manual Job Creation Scope for MVP
 ### Problem
