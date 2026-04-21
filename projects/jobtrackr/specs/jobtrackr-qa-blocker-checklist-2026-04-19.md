@@ -20,10 +20,11 @@ Current implementation context for QA:
 - the active implementation slice is Google auth -> session -> Gmail readonly connect -> persisted jobs UI
 - older local-Go-app wording should be treated as historical unless a task explicitly says otherwise
 
-Recovery note for stale automation prompts:
-- if a kickoff prompt or older note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift
-- recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/prd/jobtrackr-prd-v2.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
-- keep the current architecture framed as Next.js web plus Go API, not the older local-Go-app shorthand
+Recovery note for automation-facing handoffs:
+- If a kickoff prompt or older note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift.
+- Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/prd/jobtrackr-prd-v2.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
+- Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
 Status:
 - Product decisions are resolved in the PM memo.
