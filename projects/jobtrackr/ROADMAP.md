@@ -210,10 +210,11 @@ Current implementation slice:
 Current lane ownership for this slice:
 - Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
 - Marcus: frontend recovery-entrypoint and kickoff-doc alignment so frontend pickup stays safe during hourly handoffs
+- Frank: source-of-truth maintenance across roadmap-facing and preserved planning docs so the live kickoff set and current slice wording stay aligned
 - remaining SWE lanes: backend implementation and shared contract follow-through
 
 1. Finish execution cleanup so engineering codes against one source of truth
-2. Keep Alice and Marcus explicitly on frontend work while the remaining SWE lanes stay on backend and shared-contract follow-through
+2. Keep Alice and Marcus explicitly on frontend work, keep Frank on source-of-truth maintenance, and keep the remaining SWE lanes on backend and shared-contract follow-through
 3. Complete the auth -> session -> Gmail readonly connect -> persisted-jobs slice before widening scope
 4. Move immediately into the real persisted-jobs workspace so the dashboard stops depending on mock-only flows
 5. Add Gmail ingestion before spending heavily on advanced AI features

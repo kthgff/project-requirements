@@ -23,6 +23,12 @@ Recovery note:
 Current implementation slice:
 - Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
 
+Current lane ownership for this slice:
+- Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
+- Marcus: frontend recovery-entrypoint and kickoff-doc alignment so frontend pickup stays safe during hourly handoffs
+- Frank: source-of-truth maintenance across roadmap-facing and preserved planning docs so the live kickoff set and current slice wording stay aligned
+- remaining SWE lanes: backend implementation and shared contract follow-through
+
 ## Decisions
 
 ### 1. Canonical job state model
