@@ -37,6 +37,8 @@ Job seekers receive job leads, recruiter outreach, and application updates acros
 
 ## MVP Scope
 
+The MVP remains intentionally narrower than the long-term AIApply-style vision. It should establish the foundation with login, searchable jobs workspace, Gmail ingestion, resume-based match percentage, and fit signals.
+
 ### In Scope
 - Gmail OAuth connection
 - Polling Gmail inbox for relevant messages

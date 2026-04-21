@@ -112,6 +112,7 @@ In progress:
 
 ## Key Files
 
+- `projects/jobtrackr/COMPETITOR_NOTES_AIAPPLY.md`
 - `projects/jobtrackr/ROADMAP.md`
 - `projects/jobtrackr/DEVELOPMENT_PLAN.md`
 - `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
