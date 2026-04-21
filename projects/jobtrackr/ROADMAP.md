@@ -105,7 +105,7 @@ Add resume-based fit evaluation so jobs can be prioritized intelligently.
 - resume upload
 - resume parsing
 - match percentage generation
-- fit flag logic
+- canonical fit-signal derivation (for example low-fit, fit-ready, and strong-fit)
 - fit rationale in job detail
 - match % visible in jobs table
 
@@ -114,7 +114,7 @@ Keith can quickly identify which jobs align best with his background.
 
 ### Exit criteria
 - each analyzed job gets a match percentage
-- flagged jobs are visible in the dashboard
+- dashboard clearly surfaces fit signals such as low-fit, fit-ready, or strong-fit without treating them as workflow states
 - fit rationale is shown in detail view
 
 ---
@@ -179,8 +179,8 @@ JobTrakr is ready for regular real-world use.
 ## Recommended Immediate Priorities
 
 1. Finish execution cleanup so engineering codes against one source of truth
-2. Build Release 0 completely
-3. Move immediately into Release 1 so the jobs workspace becomes real
+2. Complete the authenticated dashboard shell and current engineering handoff slice
+3. Move immediately into the real persisted-jobs workspace so the dashboard stops depending on mock-only flows
 4. Add Gmail ingestion before spending heavily on advanced AI features
 5. Add match intelligence once enough real job data exists
 
