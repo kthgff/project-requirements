@@ -13,6 +13,22 @@ Help Keith move from inbound job email to prioritized job review faster by autom
 
 ---
 
+## Strategic Product Direction
+
+JobTrakr should develop toward an AIApply-style AI job search copilot.
+
+That means the roadmap should eventually cover:
+- job discovery and ingestion
+- match scoring and prioritization
+- resume tailoring
+- cover letter generation
+- application workflow support
+- interview preparation
+
+The MVP should still start narrow, but the long-term product direction is broader than job tracking alone.
+
+---
+
 ## Now: Execution Shift
 
 ### Goal
