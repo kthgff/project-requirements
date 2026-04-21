@@ -19,15 +19,17 @@ JobTrakr is a single-user job search assistant that:
 
 This file is preserved handoff context, not the primary kickoff entrypoint.
 
-If an hourly kickoff prompt or older note points you here first, recover in this order:
-1. `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`
-2. `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md`
-3. `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+Implementation kickoff redirect:
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `projects/jobtrackr/PROJECT.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
-Treat `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` as stale external drift only, not a live repo entrypoint.
-Treat bare filenames in older notes as historical shorthand only, not as live repo-root entrypoints.
+Recovery note:
+- If a kickoff prompt or older preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift only.
+- Recover in this order: `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`, `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md`, `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- Treat bare filenames in preserved notes as historical shorthand only, not live repo-root entrypoints.
 
-Current implementation slice for pickup:
+Current implementation slice:
 - Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
 
 ## Locked Product Decisions

@@ -12,16 +12,20 @@ Source documents:
 - `projects/jobtrackr/specs/jobtrackr-api-contract.md`
 
 Implementation kickoff redirect:
-- `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`
-- `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md`
-- `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
-- treat `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` as stale external drift only, not a live repo entrypoint
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `projects/jobtrackr/PROJECT.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
-Active implementation slice:
+Recovery note:
+- If a kickoff prompt or older preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift only.
+- Recover in this order: `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`, `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md`, `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- Treat bare filenames in preserved notes as historical shorthand only, not live repo-root entrypoints.
+
+Current implementation slice:
 - Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
 
 Architecture note:
-- treat older local-Go-app wording in preserved docs as historical framing only; the live implementation lane is the Next.js web plus Go API slice above
+- Treat older local-Go-app wording in preserved docs as historical framing only; the live implementation lane is the Next.js web plus Go API slice above.
 
 Primary focus areas for MVP QA:
 - Gmail connection

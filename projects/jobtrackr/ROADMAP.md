@@ -199,11 +199,13 @@ Current source-of-truth kickoff set:
 - `projects/jobtrackr/PROJECT.md`
 - `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
+Recovery note:
+- If a kickoff prompt or older preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift only.
+- Recover in this order: `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`, `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md`, `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- Treat bare filenames in preserved notes as historical shorthand only, not live repo-root entrypoints.
+
 Current implementation slice:
 - Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
-
-Recovery note:
-- if an older kickoff prompt or preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift and recover to `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`
 
 1. Finish execution cleanup so engineering codes against one source of truth
 2. Complete the auth -> session -> Gmail readonly connect -> persisted-jobs slice before widening scope
