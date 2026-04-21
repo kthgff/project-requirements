@@ -12,10 +12,10 @@ Source documents:
 - `projects/jobtrackr/specs/jobtrackr-api-contract.md`
 
 Implementation kickoff redirect:
-- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
-- `projects/jobtrackr/PROJECT.md`
-- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
-- if an automation prompt still references `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, recover to `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md` instead
+- `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md`
+- `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+- treat `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` as stale external drift only, not a live repo entrypoint
 
 Active implementation slice:
 - Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI

@@ -20,12 +20,11 @@ JobTrakr is a single-user job search assistant that:
 This file is preserved handoff context, not the primary kickoff entrypoint.
 
 If an hourly kickoff prompt or older note points you here first, recover in this order:
-1. `projects/jobtrackr/DEVELOPMENT_PLAN.md`
-2. `projects/jobtrackr/PROJECT.md`
-3. `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+1. `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`
+2. `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md`
+3. `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
-If an external prompt still references `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale drift and use `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md` instead.
-
+Treat `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` as stale external drift only, not a live repo entrypoint.
 Treat bare filenames in older notes as historical shorthand only, not as live repo-root entrypoints.
 
 Current implementation slice for pickup:
