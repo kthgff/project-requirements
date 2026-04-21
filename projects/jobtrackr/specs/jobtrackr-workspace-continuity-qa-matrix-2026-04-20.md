@@ -9,6 +9,12 @@ This matrix is the implementation-facing test companion to:
 - `specs/jobtrackr-workspace-session-state-examples-2026-04-20.md`
 - `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
 
+Shared QA recovery note:
+- If a kickoff prompt or older note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift.
+- Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/prd/jobtrackr-prd-v2.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
+- Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
+
 ## Canonical Assertions
 
 - Selection is always tracked by job id, never row index.
