@@ -21,7 +21,7 @@ Recovery note:
 - Treat bare filenames in preserved notes as historical shorthand only, not live repo-root entrypoints.
 
 Current implementation slice:
-- Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
+- Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs UI lane
 
 Current lane ownership for this slice:
 - Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
