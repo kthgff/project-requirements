@@ -16,9 +16,12 @@ Provide one source-of-truth handoff package for engineering so hourly kickoff an
 Engineers should use these files in this order when there is any conflict.
 
 Recovery note for automation-facing handoffs:
-- if an hourly kickoff prompt still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that path as stale drift and recover to `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- if an hourly kickoff prompt still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that path as stale drift and recover in this order:
+  1. `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`
+  2. `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md`
+  3. `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 - when a kickoff note says to start with PROJECT, use `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md` so the recovery path stays explicit alongside the live development plan
-- the current implementation slice for pickup remains Google auth -> session -> Gmail readonly connect -> persisted jobs UI
+- the current implementation slice for pickup remains Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
 
 1. `projects/jobtrackr/DEVELOPMENT_PLAN.md`
    - live task ownership, active branches, dependencies, and delivery sequencing
@@ -91,13 +94,14 @@ Priority order:
 4. Keep this handoff package current so the repo always has one single-file engineering entrypoint
 
 ### Alice
-Focus on the first backend vertical slice.
+Focus on the first backend vertical slice and the automation-facing recovery notes that keep hourly kickoff safe.
 
 Priority order:
 1. T-018 auth callback, session flow, Gmail readonly connection path
 2. T-029 authenticated persisted-jobs vertical slice once auth and connection state are usable
-3. T-002 only where it directly supports the first end-to-end slice
-4. T-011 after auth, Gmail connection state, and persisted-job rendering are stable
+3. T-064 and T-069 automation-facing kickoff recovery cleanup where stale root-level path examples could misroute pickup
+4. T-002 only where it directly supports the first end-to-end slice
+5. T-011 after auth, Gmail connection state, and persisted-job rendering are stable
 
 ### Marcus
 Focus on shared contracts and reconciliation docs that keep implementation entrypoints aligned.

@@ -2,9 +2,12 @@
 
 > Historical kickoff note: this file captures the original mock-first slice. For the current implementation lane, use `projects/jobtrackr/DEVELOPMENT_PLAN.md` and `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
 >
-> Recovery note for automation-facing handoffs: if a kickoff prompt or preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale drift and recover to `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`.
+> Recovery note for automation-facing handoffs: if a kickoff prompt or preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale drift and recover in this order:
+> 1. `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`
+> 2. `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md`
+> 3. `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 >
-> Current live pickup lane: Google auth -> session -> Gmail readonly connect -> persisted jobs UI.
+> Current live pickup lane: Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI.
 
 ## Purpose
 
@@ -187,7 +190,9 @@ Then:
 
 Engineering originally began programming from this slice as the kickoff scope.
 
-Current implementation pickup should start from the live project-root source set instead:
+Current implementation pickup should start from the live project-root source set instead, in this order:
 - `projects/jobtrackr/DEVELOPMENT_PLAN.md`
 - `projects/jobtrackr/PROJECT.md`
 - `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+
+Treat any older local-Go-app framing in preserved kickoff notes as historical context only. The live implementation path is the Next.js web plus Go API slice above.
