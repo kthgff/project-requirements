@@ -81,6 +81,8 @@ Approach:
 - Later versions may use AI parsing
 
 ### 3. Dashboard
+The dashboard is the main jobs workspace and primary searchable review surface for MVP.
+
 Views:
 - Inbox (new jobs)
 - All jobs
@@ -89,6 +91,7 @@ Views:
 
 View semantics:
 - Inbox shows non-archived jobs with `status = new`
+- All jobs shows all non-archived jobs
 - Saved shows non-archived jobs with `saved = true`
 - Archived shows jobs with `archivedAt != null`
 - Archived is a view/archive state, not a workflow status
@@ -105,6 +108,7 @@ Fit treatment:
 - Match rating is a user-facing fit signal when fit analysis exists
 - Low-fit behavior stays a fit signal and must not mutate workflow status
 - Pending or unavailable fit analysis should render as a non-workflow pending state
+- Any shortlist or review-style labels are presentation helpers only, not additions to the canonical workflow enum
 
 ### 4. Status Tracking
 Supported statuses:
@@ -171,11 +175,15 @@ Supported statuses:
 - Update emails may be misclassified as new opportunities
 
 ## Open Questions
-- Should saved be modeled as a status or a separate view state?
-- Should archived be a status or a separate archived flag?
 - How should duplicates be handled, automatic merge or review queue?
 - Should application update emails attach to an existing job timeline?
 - Do we need manual job entry in MVP as a fallback?
+
+## Canonical Reference Notes
+For implementation-facing workflow, archive, and fit semantics, defer to:
+- `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+- `specs/jobtrackr-api-contract.md`
+- `DEVELOPMENT_PLAN.md`
 
 ## Recommended MVP Cut
 If speed matters most, first release should focus on:

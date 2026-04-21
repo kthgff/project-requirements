@@ -5,10 +5,12 @@ This checklist converts the former open P0 product decisions into concrete QA bl
 
 Primary source documents:
 - `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
-- `projects/jobtrackr/api-contract.md`
+- `specs/jobtrackr-api-contract.md`
 - `specs/jobtrackr-gmail-ingestion-spec-v1.md`
 - `specs/jobtrackr-mvp-qa-testability-review.md`
 - `specs/jobtrackr-spec-clarifications-needed.md`
+- `prd/jobtrackr-prd-v2.md`
+- `DEVELOPMENT_PLAN.md`
 
 Status:
 - Product decisions are resolved in the PM memo.
@@ -23,6 +25,7 @@ Status:
 - `saved` is a boolean flag
 - archive state is controlled by `archivedAt`
 - `archived` is not a workflow status
+- match rating, low-fit, and pending-fit are fit signals, not workflow transitions
 
 ### Blocked test cases
 - [ ] Status edit coverage for only `new`, `interested`, `applied`, `interviewing`, `offer`, `rejected`
@@ -34,7 +37,7 @@ Status:
 - [ ] Saved + archived interactions exclude archived jobs from saved view by default
 
 ### Blocking condition
-QA cannot lock expected datasets for inbox, all jobs, saved, archived, or status filters if archive is modeled both as a state and as an attribute.
+QA cannot lock expected datasets for inbox, all jobs, saved, archived, or status filters if archive is modeled both as a state and as an attribute, or if fit signals are described like workflow outcomes in implementation-facing docs.
 
 ---
 

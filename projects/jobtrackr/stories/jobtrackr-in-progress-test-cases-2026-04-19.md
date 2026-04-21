@@ -42,7 +42,12 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - T-046: Reconcile PRD and QA test-case references so legacy workflow and auto-close language no longer conflicts with the canonical workflow and fit model
 - T-047: Reconcile remaining product/spec references so legacy flagged and stale workflow language no longer conflicts with the canonical workflow and fit-signal model
 - T-048: Reconcile parser and ingestion ticket wording so milestone follow-through docs stop implying deprecated auto-close or workflow-state behavior for low-fit jobs
+- T-049: Remove legacy workflow alias handling from the persisted jobs UI mapping and surface canonical fit-signal defaults for server-backed job results
 - T-050: Reconcile PRD v2 dashboard, status, and fit-language sections plus in-progress QA coverage so archived stays out of workflow state and low-fit remains a fit signal
+- T-052: Harden the persisted jobs frontend mapping so server-backed results stay canonical when fit analysis is missing or legacy workflow aliases leak through old data
+- T-053: Reconcile remaining legacy workflow and fit-signal wording in older stories and superseded PRD/spec drafts so stale docs stop leaking non-canonical states back into implementation
+- T-054: Reconcile entrypoint and clarification docs so historical context keeps pointing engineers back to the canonical workflow and fit-signal vocabulary
+- T-057: Reconcile PRD v2 and QA blocker checklist source-of-truth references so archive and fit-signal guidance stay canonical in implementation-facing QA docs
 
 ---
 
@@ -1287,6 +1292,118 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Debug traceability remains explicit.
 - Workflow-state semantics stay separate from parser acceptance criteria.
 
+## T-049 Persisted Jobs UI Mapping Reconciliation Test Cases
+
+### TC-2070 Persisted jobs UI rejects legacy workflow aliases from server-backed data
+**Steps**
+1. Review persisted-jobs frontend mapping docs and sample payload handling.
+2. Inspect how `flagged`, `not a match`, and any other legacy alias values are treated when received from old data.
+
+**Expected**
+- UI mapping does not accept legacy workflow aliases as canonical workflow state.
+- Legacy alias values are normalized to a safe canonical fallback or blocked with explicit handling.
+- The rendered UI never shows `flagged` or `not a match` as workflow statuses.
+
+### TC-2071 Server-backed rows show canonical fit defaults when analysis data is absent
+**Steps**
+1. Review server-backed job-result examples with null or missing fit fields.
+2. Compare the displayed match and low-fit treatment to the canonical fit-signal contract.
+
+**Expected**
+- Missing fit analysis produces a deterministic pending-fit or equivalent canonical state.
+- UI does not infer low-fit or match rating from freeform text.
+- Fallback behavior is documented clearly enough for QA and frontend sign-off.
+
+## T-050 PRD v2 and Active QA Coverage Reconciliation Test Cases
+
+### TC-2080 PRD v2 keeps archived separate from workflow state in dashboard and status sections
+**Steps**
+1. Review `prd/jobtrackr-prd-v2.md` dashboard, status, and fit-language sections.
+2. Compare workflow and archive wording against the PM memo and development plan.
+
+**Expected**
+- Archived remains a view or archive-state concept only.
+- PRD v2 uses the canonical workflow enum only.
+- Match rating and low-fit are described as fit signals, not workflow mutation.
+
+### TC-2081 In-progress QA coverage mirrors PRD v2 after reconciliation
+**Steps**
+1. Compare active QA test cases with PRD v2 after the reconciliation pass.
+2. Inspect whether any QA case still expects stale workflow or auto-close behavior.
+
+**Expected**
+- QA cases align with reconciled PRD wording.
+- Archived behavior stays separate from workflow status expectations.
+- Low-fit coverage remains fit-signal based instead of expecting a status change.
+
+## T-052 Persisted Jobs Frontend Hardening Test Cases
+
+### TC-2090 Unknown workflow values degrade safely in persisted jobs UI
+**Steps**
+1. Review frontend fallback handling for persisted job rows containing unknown workflow values.
+2. Inspect how the UI renders those rows before and after normalization.
+
+**Expected**
+- Unknown workflow values do not surface raw legacy text to users.
+- UI falls back to one safe canonical presentation path.
+- Fallback handling is deterministic and documented for QA.
+
+### TC-2091 Missing fit analysis preserves pending-fit behavior without alias inference
+**Steps**
+1. Review persisted job payload examples with missing match rating, low-fit metadata, or fit summary.
+2. Inspect UI behavior for those rows.
+
+**Expected**
+- UI preserves a pending-fit or equivalent canonical state when fit data is absent.
+- It does not infer legacy workflow aliases or synthetic low-fit workflow state.
+- Behavior matches the current API and fit-signal contracts.
+
+## T-053 Legacy Story and Draft Spec Reconciliation Test Cases
+
+### TC-2100 Older stories and superseded drafts are marked non-canonical or rewritten cleanly
+**Steps**
+1. Review older story files and superseded PRD or spec drafts still present in the repo.
+2. Inspect workflow, fit-signal, and auto-close wording.
+
+**Expected**
+- Historical files are either reconciled or explicitly marked non-canonical.
+- They do not present legacy workflow states as current implementation truth.
+- Each preserved historical file points readers back to the canonical source set.
+
+## T-054 Entrypoint and Clarification Doc Reconciliation Test Cases
+
+### TC-2110 PROJECT and clarification docs redirect engineers to the canonical source set
+**Steps**
+1. Review `PROJECT.md` and clarification-style docs.
+2. Inspect top-level references to workflow, fit signals, and source-of-truth guidance.
+
+**Expected**
+- High-level entrypoint docs point first to the reconciled development plan, PM memo, API contract, and handoff package.
+- Historical shorthand like `flagged` or `unflagged` is framed as legacy wording only, if retained at all.
+- Engineers are unlikely to start implementation from stale context.
+
+## T-057 PRD and QA Blocker Checklist Reconciliation Test Cases
+
+### TC-2120 PRD v2 removes stale archive-status ambiguity and points to current source docs
+**Steps**
+1. Review `prd/jobtrackr-prd-v2.md`.
+2. Inspect dashboard, workflow, archive, and fit-signal wording plus any implementation-facing reference notes.
+
+**Expected**
+- PRD v2 does not leave `saved` or `archived` framed as unresolved status-model questions.
+- Archived remains separate from workflow state.
+- PRD v2 points readers to the current PM memo, API contract, and development plan for canonical semantics.
+
+### TC-2121 QA blocker checklist uses current paths and canonical fit-signal wording
+**Steps**
+1. Review `specs/jobtrackr-qa-blocker-checklist-2026-04-19.md`.
+2. Inspect source-document references and the shortest implementation-facing blocker rules.
+
+**Expected**
+- The checklist points to valid current project paths.
+- Archive, match-rating, low-fit, and pending-fit semantics remain clearly separated from workflow state.
+- QA can use the checklist without inheriting stale status-model ambiguity.
+
 ## Current QA coverage gaps
 1. No tasks are marked `done` or moved to QA in `DEVELOPMENT_PLAN.md`, so this hour remains acceptance-coverage and blocker surfacing work rather than runnable execution validation.
 2. T-006 is still blocked by status-model drift in `jobtrackr-auto-close-logic-spec-v1.md`, which still references pre-decision statuses like `flagged`, `reviewing`, `skipped`, `interview`, and `not a match` instead of the canonical workflow model.
@@ -1301,6 +1418,9 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 11. T-026 and T-029 still lack runnable persisted-jobs fixtures or endpoint examples in QA-owned docs, so execution coverage is blocked at contract level until engineering exposes deterministic sample responses.
 12. T-030 and T-031 now have acceptance coverage, but QA still needs a real branch build to verify drawer/page parity, session-state transitions, and no-fallback selection behavior in the UI.
 13. T-032 is still an active blocker area because older docs continue to advertise legacy workflow states that conflict with the canonical PM memo and current Gate A reconciliation work.
-14. T-033 through T-048 now have contract-level QA coverage in this file, but execution coverage is still blocked until the reconciled downstream docs actually land and can be diff-verified against the PM memo, API contract, and reconciliation matrix.
-15. Jimmy plan fetch is still blocked on Discord API auth from this environment, so QA cannot confirm whether the latest PM pickup order changed outside the local repo state.
-16. The hourly prompt referenced `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, but the live source file remains `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`; that path drift is itself a coordination gap worth fixing.
+14. T-033 through T-054 now have contract-level QA coverage in this file, but execution coverage is still blocked until the reconciled downstream docs actually land and can be diff-verified against the PM memo, API contract, and reconciliation matrix.
+15. Alice's persisted-jobs follow-through tasks T-049 and T-052 now have QA coverage for canonical workflow fallback and pending-fit handling, but QA still needs real API payload fixtures that include missing-fit and legacy-data edge cases before sign-off.
+16. Frank's doc-cleanup follow-through tasks T-053 and T-054 still require the older stories, draft PRDs, PROJECT, and clarification docs to be visibly annotated or rewritten before QA can confirm stale wording is no longer implementation-facing.
+17. T-057 now adds contract-level QA coverage for PRD v2 source references and the QA blocker checklist, but QA still needs the surrounding docs to keep pointing at valid current paths so the shortest implementation-facing checklist stays trustworthy.
+18. Jimmy plan fetch is still blocked on Discord API auth from this environment, so QA cannot confirm whether the latest PM pickup order changed outside the local repo state.
+19. The hourly prompt referenced `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, but the live source file remains `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`; that path drift is itself a coordination gap worth fixing.
