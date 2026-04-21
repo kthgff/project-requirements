@@ -1457,6 +1457,28 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Match rating, low-fit, fit-ready, strong-fit, and pending-fit stay separate from workflow state.
 - Roadmap wording does not reopen already-locked workflow semantics.
 
+## T-062 QA Source-Path and Environment Alignment Test Cases
+
+### TC-2140 QA entrypoint docs point to the live project root
+**Steps**
+1. Review `specs/jobtrackr-qa-blocker-checklist-2026-04-19.md` and any QA-facing source-document lists in active docs.
+2. Verify path references against the actual repo layout under `projects/jobtrackr/`.
+
+**Expected**
+- QA-facing entrypoint docs point to valid `projects/jobtrackr/...` paths.
+- No implementation-facing QA doc sends engineers to the dead root-level `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` path.
+- The shortest blocker checklist remains safe to use from the shared project root.
+
+### TC-2141 QA environment notes match the current web-plus-API implementation slice
+**Steps**
+1. Review active QA notes that mention runtime or app shape, especially around auth, Gmail connect, and persisted-jobs flows.
+2. Compare those notes with the current handoff and milestone docs.
+
+**Expected**
+- QA docs treat the Next.js web shell plus Go API split as the current implementation context.
+- Older local-Go-app wording is explicitly framed as historical or task-scoped, not as the default environment assumption for new execution coverage.
+- QA guidance does not force engineers to infer which app shape governs the active auth -> Gmail -> persisted-jobs slice.
+
 ## T-059 Protected Session Shell and Gmail Disconnect Test Cases
 
 ### TC-2130 Local shell requires authenticated session before inbox-derived jobs are visible
@@ -1484,8 +1506,8 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 ## Current QA coverage gaps
 1. No tasks are marked `done` or moved to QA in `DEVELOPMENT_PLAN.md`, so this hour remains acceptance-coverage and blocker surfacing work rather than runnable execution validation.
 2. T-006 is still blocked by status-model drift in `jobtrackr-auto-close-logic-spec-v1.md`, which still references pre-decision statuses like `flagged`, `reviewing`, `skipped`, `interview`, and `not a match` instead of the canonical workflow model.
-3. T-002 and T-059 still describe a local Go web app in the live plan, while Milestone 1 and the handoff package describe a Next.js frontend plus Go API split, so QA cannot lock environment-specific execution steps until those docs are reconciled.
-4. Jimmy's cron note points QA at `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, but the live plan is actually `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
+3. T-062 now covers the remaining QA-owned environment drift between older local-Go-app wording and the current Next.js web plus Go API handoff, but execution coverage still depends on downstream task docs making that split explicit where needed.
+4. Jimmy's cron note still points QA at `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, but the live plan is actually `projects/jobtrackr/DEVELOPMENT_PLAN.md`; T-062 now tracks that coordination gap inside the repo-facing QA docs.
 5. Gate A is still not fully closed, because the reconciliation matrix exists but older schema, story, PRD, and auto-close references still expose stale workflow or linkage assumptions.
 6. Real runnable API fixtures are still needed before list and workspace checks for T-007, T-011, T-013, T-016, T-020, T-024, and T-025 can graduate from contract validation into executable integration tests.
 7. The duplicate list/detail example naming issue is now partially mitigated: `jobtrackr-list-detail-examples-2026-04-20.md` is retained only as a compatibility shim, and `jobtrackr-list-detail-contract-examples-2026-04-20.md` is the canonical source. QA should verify new cross-links keep pointing only to the canonical file.
@@ -1498,6 +1520,6 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 14. T-033 through T-058 now have contract-level QA coverage in this file, but execution coverage is still blocked until the reconciled downstream docs actually land and can be diff-verified against the PM memo, API contract, reconciliation matrix, and roadmap/entrypoint docs.
 15. Alice's persisted-jobs follow-through tasks T-049, T-052, and T-055 now have QA coverage for canonical workflow fallback, pending-fit handling, and fallback-reason visibility, but QA still needs real API payload fixtures that include missing-fit and legacy-data edge cases before sign-off.
 16. Frank's doc-cleanup follow-through tasks T-053, T-054, and T-058 still require the older stories, draft PRDs, PROJECT, clarification docs, and roadmap to be visibly annotated or rewritten before QA can confirm stale wording is no longer implementation-facing.
-17. T-057 now adds contract-level QA coverage for PRD v2 source references and the QA blocker checklist, but QA still needs the surrounding docs to keep pointing at valid current paths so the shortest implementation-facing checklist stays trustworthy.
+17. T-057 and T-062 now cover PRD v2 source references plus QA-owned path and environment notes, but QA still needs surrounding non-QA docs and automation prompts to keep pointing at valid current paths so the shortest implementation-facing checklist stays trustworthy.
 18. Jimmy plan fetch succeeded from this environment at 10:08 PM and the latest PM priority remains the auth -> Gmail readonly connect -> persisted-jobs vertical slice plus ongoing reconciliation cleanup.
-19. The hourly prompt referenced `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, but the live source file remains `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`; that path drift is itself a coordination gap worth fixing.
+19. The hourly prompt still referenced `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, while the live source file remains `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`; that external path drift remains a coordination gap even after the repo-facing QA docs were updated.
