@@ -15,10 +15,15 @@ Primary source documents (project root: `projects/jobtrackr/`):
 - `projects/jobtrackr/prd/jobtrackr-prd-v2.md`
 
 Current implementation context for QA:
-- frontend shell is the Next.js web app described in the handoff and milestone docs
+- frontend is the Next.js web app described in the handoff and milestone docs
 - backend remains the Go API and Gmail integration lane
 - the active implementation slice is Google auth -> session -> Gmail readonly connect -> persisted jobs UI
 - older local-Go-app wording should be treated as historical unless a task explicitly says otherwise
+
+Recovery note for stale automation prompts:
+- if a kickoff prompt or older note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift
+- recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/prd/jobtrackr-prd-v2.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+- keep the current architecture framed as Next.js web plus Go API, not the older local-Go-app shorthand
 
 Status:
 - Product decisions are resolved in the PM memo.

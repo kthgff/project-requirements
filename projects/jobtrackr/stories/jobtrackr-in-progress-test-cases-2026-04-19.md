@@ -62,6 +62,7 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - T-066: Reconcile remaining QA recovery references in PRD v2 and in-progress test coverage so QA can recover from stale automation prompts without guessing the live project-root entrypoints or current web-plus-API slice
 - T-067: Reconcile roadmap and legacy review-doc kickoff notes so planning artifacts explicitly recover to the live project-root source files and current Next.js web plus Go API delivery slice
 - T-068: Normalize kickoff entrypoint path examples so README, PROJECT, and the Phase 3 handoff package all point to the same explicit `projects/jobtrackr/...` source-of-truth files during hourly recovery
+- T-070: Align QA recovery wording across PRD v2, the QA blocker checklist, and in-progress QA coverage so all three use the same explicit project-root entrypoints and current Next.js web plus Go API framing
 
 ---
 
@@ -1536,6 +1537,18 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Both docs treat the dead root-level development-plan path as stale external drift.
 - Both docs describe the current implementation as Next.js web plus Go API on the auth -> session -> Gmail readonly connect -> persisted jobs slice.
 
+## T-070 QA Recovery Wording Normalization Test Cases
+
+### TC-2148 PRD, blocker checklist, and active QA coverage use one recovery pattern
+**Steps**
+1. Review `prd/jobtrackr-prd-v2.md`, `specs/jobtrackr-qa-blocker-checklist-2026-04-19.md`, and `stories/jobtrackr-in-progress-test-cases-2026-04-19.md`.
+2. Compare their stale-path recovery notes, ordered source-of-truth references, and architecture wording.
+
+**Expected**
+- All three docs redirect readers away from `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` as stale external drift.
+- All three docs point QA back to the same explicit `projects/jobtrackr/...` source files.
+- All three docs describe the active implementation as Next.js web plus Go API on the auth -> session -> Gmail readonly connect -> persisted jobs slice.
+
 ## T-067 Roadmap and Legacy Review Kickoff Recovery Test Cases
 
 ### TC-2146 Planning artifacts recover to the current web-plus-API delivery slice
@@ -1607,3 +1620,4 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 20. The hourly kickoff prompt still referenced `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, while the live source file remains `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`; QA-facing repo docs now explicitly treat that mismatch as external coordination drift and tell engineers how to recover safely.
 21. No active tasks are marked `done` in the live development plan, so this hour's QA output remains documentation and acceptance-coverage maintenance rather than execution sign-off.
 22. T-063 through T-068 still need diff-level verification in roadmap, README, PROJECT, handoff, and preserved kickoff docs before QA can close the remaining recovery-path drift called out by Jimmy's latest plan.
+23. T-070 now covers wording normalization across PRD v2, the QA blocker checklist, and in-progress QA coverage so QA can recover from stale automation prompts without comparing three slightly different recovery notes by hand.
