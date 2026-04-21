@@ -454,9 +454,9 @@ Trigger reanalysis when any of these change:
 - active resume
 Do not rerun for notes, tags, saved, archive, or status changes.
 
-## P1-6. Fit Flag Nullability Semantics
+## P1-6. Fit Signal Nullability Semantics
 ### Problem
-The fit-analysis spec recommends nullable score and summary when no resume exists, but also says `fit_flag` may be false or null depending on implementation preference.
+The fit-analysis spec recommends nullable score and summary when no resume exists, but also says fit-signal metadata may be false or null depending on implementation preference.
 
 ### Risk
 This will create avoidable UI ambiguity and inconsistent filtering.
@@ -469,7 +469,7 @@ Use:
 - `fit_flag = null` when no analysis exists
 - `fit_score = null` when no analysis exists
 - `fit_summary = null` when no analysis exists
-This cleanly distinguishes not analyzed from analyzed-and-fit-ready without forcing `flagged` or `unflagged` into the canonical user-facing vocabulary.
+This cleanly distinguishes not analyzed from analyzed-and-fit-ready without leaving legacy `flagged` or `unflagged` shorthand in the canonical user-facing vocabulary.
 
 ## P1-7. Manual Job Creation Scope for MVP
 ### Problem
