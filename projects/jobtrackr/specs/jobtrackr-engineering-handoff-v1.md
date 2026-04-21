@@ -32,6 +32,7 @@ Recovery note:
 Current implementation slice:
 - Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs UI lane
 - Current lane ownership keeps Alice and Marcus on frontend-facing pickup inside that slice, while the remaining SWE lanes stay on backend and shared contract follow-through unless a task explicitly says otherwise
+- Alice's current preserved-doc lane note: stay on frontend-facing recovery and persisted-jobs UI pickup inside the current slice, and treat auth/session/Gmail path details as implementation context that supports that frontend work rather than a separate backend-only lane
 
 ## Locked Product Decisions
 
