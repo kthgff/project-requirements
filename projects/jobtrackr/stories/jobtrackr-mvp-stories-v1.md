@@ -1,5 +1,8 @@
 # JobTrakr MVP Stories v1
 
+> Historical story draft. Use the PM decision memo, API contract, and current DEVELOPMENT_PLAN for implementation truth.
+> Terms like fit flag in this file should be read as fit-signal display only. Canonical workflow statuses remain `new`, `interested`, `applied`, `interviewing`, `offer`, and `rejected`.
+
 ## Epic 0: Authentication
 
 ### Story 0
@@ -64,7 +67,7 @@ As Keith, I want to review tracked jobs in a table so that I can quickly scan an
 
 **Acceptance criteria**
 - The UI presents tracked jobs in a table
-- The table shows company, title, location, source, date found, fit flag, and status
+- The table shows company, title, location, source, date found, match rating / fit signal, and status
 - I can filter or sort the table at minimum by status and date found
 - I can update a job status manually
 - Available workflow statuses are new, interested, applied, interviewing, offer, and rejected

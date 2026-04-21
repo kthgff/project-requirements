@@ -1,5 +1,9 @@
 # JobTrackr PRD v0
 
+> Superseded PRD draft retained for history.
+> Do not implement directly from this file. Use the PM decision memo, API contract, and current DEVELOPMENT_PLAN for canonical workflow, archive, and fit-signal semantics.
+> References below to fit flags or flagged jobs should be interpreted as fit-signal presentation, not workflow status changes.
+
 ## Product Summary
 
 JobTrackr is a job-search workflow tool for Keith Goff. It scans Gmail inbox job alert emails, identifies jobs, looks up fuller job details, saves them to a database, and helps Keith quickly see which roles are worth attention by comparing each job against his resume.
@@ -20,7 +24,7 @@ Reduce the time from job alert email to a clear decision about whether the oppor
 
 - When job alert emails arrive, I want the system to automatically find and track the jobs so I do not miss them.
 - When a job is tracked, I want the system to gather useful details so I do not have to research every role from scratch.
-- When I review jobs, I want AI to compare them to my resume and flag likely fits so I can focus faster.
+- When I review jobs, I want AI to compare them to my resume and highlight likely fits so I can focus faster.
 
 ## MVP Scope
 
@@ -31,12 +35,12 @@ Reduce the time from job alert email to a clear decision about whether the oppor
 - Save job details to a database
 - Show tracked jobs in a table UI
 - Compare jobs against Keith's resume
-- Flag jobs that appear to be a good fit
+- Highlight jobs that appear to be a good fit through fit signals
 
 ### Out of scope for v0
 - Automatic job application submission
 - Multi-user support
-- Advanced workflow automation beyond tracking, lookup, and fit flagging
+- Advanced workflow automation beyond tracking, lookup, and fit-signal evaluation
 
 ## Proposed Workflow
 
@@ -45,7 +49,7 @@ Reduce the time from job alert email to a clear decision about whether the oppor
 3. System looks up each job to gather fuller details
 4. System creates or updates a job record in the database
 5. System compares the role against Keith's resume
-6. System flags the job if it appears to be a good fit
+6. System highlights the job with fit signals if it appears to be a good fit
 7. Keith reviews jobs in a table UI
 
 ## Core Data Needed Per Job
@@ -59,7 +63,7 @@ Initial assumption:
 - source email
 - source link
 - job description or summary
-- fit flag
+- fit signal / match rating
 - fit rationale
 - status
 - date found
@@ -75,7 +79,7 @@ Likely useful columns:
 - location
 - source
 - date found
-- fit flag
+- fit signal / match rating
 - status
 
 ## Key Open Questions
@@ -84,12 +88,12 @@ Likely useful columns:
 - Which external sources should be used to look up fuller job details?
 - What exact file or profile source should be used as the resume input?
 - What statuses should jobs support?
-- How should fit be represented, boolean flag only, score plus flag, or rationale plus flag?
+- How should fit be represented, score plus fit signal, rationale, or both?
 - What level of deduplication is required when multiple emails mention the same role?
 
 ## Success Criteria
 
 - Inbox job alert emails are converted into structured job records
 - Keith can review tracked jobs in a simple table
-- Good-fit roles are clearly flagged using resume-based evaluation
+- Good-fit roles are clearly highlighted using resume-based evaluation
 - Keith spends materially less time triaging job opportunities

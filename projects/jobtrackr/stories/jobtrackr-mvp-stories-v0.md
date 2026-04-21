@@ -1,5 +1,9 @@
 # JobTrackr MVP Stories v0
 
+> Superseded draft retained for history only.
+> For implementation, use the PM decision memo, API contract, and current DEVELOPMENT_PLAN as the canonical source set.
+> In this older file, references to fit "flagging" should be read as fit-signal highlighting, not workflow state changes.
+
 ## Epic: Inbox scanning and job ingestion
 
 ### Story 1
@@ -22,12 +26,12 @@ As Keith, I want detected jobs to be looked up and saved to the database so that
 ## Epic: Fit evaluation
 
 ### Story 3
-As Keith, I want each tracked job compared against my resume so that likely fits are flagged for review.
+As Keith, I want each tracked job compared against my resume so that likely fits are highlighted for review.
 
 **Acceptance criteria**
 - System uses Keith's resume as fit context
 - System generates a fit result for tracked jobs
-- Good-fit jobs are clearly flagged
+- Good-fit jobs are clearly highlighted through fit signals, not workflow-state mutation
 - Fit output includes at least a short rationale
 
 ## Epic: Job review UI
