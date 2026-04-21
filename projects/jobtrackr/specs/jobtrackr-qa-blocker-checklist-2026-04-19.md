@@ -4,17 +4,20 @@
 This checklist converts the former open P0 product decisions into concrete QA blockers and blocked test coverage. It is the shortest implementation-facing QA artifact for the current MVP handoff.
 
 Primary source documents (project root: `projects/jobtrackr/`):
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
 - `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+- `projects/jobtrackr/specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
 - `projects/jobtrackr/specs/jobtrackr-api-contract.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 - `projects/jobtrackr/specs/jobtrackr-gmail-ingestion-spec-v1.md`
 - `projects/jobtrackr/specs/jobtrackr-mvp-qa-testability-review.md`
 - `projects/jobtrackr/specs/jobtrackr-spec-clarifications-needed.md`
 - `projects/jobtrackr/prd/jobtrackr-prd-v2.md`
-- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
 
 Current implementation context for QA:
 - frontend shell is the Next.js web app described in the handoff and milestone docs
 - backend remains the Go API and Gmail integration lane
+- the active implementation slice is Google auth -> session -> Gmail readonly connect -> persisted jobs UI
 - older local-Go-app wording should be treated as historical unless a task explicitly says otherwise
 
 Status:

@@ -1,7 +1,7 @@
 # JobTrackr In-Progress Test Cases — 2026-04-20
 
 ## Purpose
-Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELOPMENT_PLAN.md`, updated after Jimmy's latest sequencing pass and the Milestones 1 to 4 engineering ticket breakdown.
+Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELOPMENT_PLAN.md`, updated for Jimmy's latest kickoff emphasis on T-057 and T-062 plus the active auth -> Gmail readonly connect -> persisted-jobs implementation slice.
 
 ## Source tasks covered
 - T-001: Finalize PM decision alignment in JobTrackr API contract and debug semantics
@@ -1521,5 +1521,6 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 15. Alice's persisted-jobs follow-through tasks T-049, T-052, and T-055 now have QA coverage for canonical workflow fallback, pending-fit handling, and fallback-reason visibility, but QA still needs real API payload fixtures that include missing-fit and legacy-data edge cases before sign-off.
 16. Frank's doc-cleanup follow-through tasks T-053, T-054, and T-058 still require the older stories, draft PRDs, PROJECT, clarification docs, and roadmap to be visibly annotated or rewritten before QA can confirm stale wording is no longer implementation-facing.
 17. T-057 and T-062 now cover PRD v2 source references plus QA-owned path and environment notes, but QA still needs surrounding non-QA docs and automation prompts to keep pointing at valid current paths so the shortest implementation-facing checklist stays trustworthy.
-18. Jimmy plan fetch succeeded from this environment at 10:08 PM and the latest PM priority remains the auth -> Gmail readonly connect -> persisted-jobs vertical slice plus ongoing reconciliation cleanup.
-19. The hourly prompt still referenced `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, while the live source file remains `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`; that external path drift remains a coordination gap even after the repo-facing QA docs were updated.
+18. Jimmy's latest plan keeps the highest-value QA work on T-057 and T-062, with the shortest QA entrypoints expected to reference valid `projects/jobtrackr/...` paths and the current Next.js web plus Go API architecture.
+19. The active PM implementation slice remains auth -> session -> Gmail readonly connect -> persisted jobs UI, so QA-owned docs should treat older local-Go-app wording as historical unless a task explicitly scopes back to that earlier path.
+20. The hourly kickoff prompt still referenced `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, while the live source file remains `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`; that external path drift remains a coordination gap even after the repo-facing QA docs were updated.
