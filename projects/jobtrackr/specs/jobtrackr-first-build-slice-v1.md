@@ -4,6 +4,16 @@
 
 Define the first implementation slice that Engineering should start coding immediately.
 
+## Canonical source-of-truth reminder
+
+Before implementing this slice, align with:
+- `DEVELOPMENT_PLAN.md`
+- `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+- `specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
+- `specs/jobtrackr-api-contract.md`
+
+If an older note conflicts with those files, follow the canonical source set above.
+
 ## Recommendation
 
 Start with the smallest visible end-to-end slice:
@@ -22,7 +32,7 @@ This gives the team a real working product surface fast and creates the base for
 - it validates auth and route protection early
 - it lets frontend and backend work in parallel after the shell exists
 - it creates a visible product demo fast
-- it avoids blocking on Gmail parsing and AI work before the UX exists
+- it avoids blocking on Gmail parsing and fit analysis before the UX exists
 
 ---
 
@@ -31,7 +41,7 @@ This gives the team a real working product surface fast and creates the base for
 ### Frontend
 - `/login` page
 - Google sign-in button
-- auth loading/error states
+- auth loading and error states
 - protected `/dashboard` route
 - dashboard header
 - jobs table with mock data
@@ -42,7 +52,7 @@ This gives the team a real working product surface fast and creates the base for
 - Google auth integration
 - user session creation
 - user record creation on first login
-- protected route/session middleware
+- protected route and session middleware
 
 ---
 
@@ -64,7 +74,7 @@ This gives the team a real working product surface fast and creates the base for
 1. Login page implemented
 2. Protected dashboard page implemented
 3. Dashboard renders table with required columns:
-   - fit, showing both match rating and a fit indicator state
+   - match rating, with support for pending-fit and low-fit presentation as fit signals
    - company
    - title
    - location
@@ -104,10 +114,16 @@ This gives the team a real working product surface fast and creates the base for
 ### Mock data guidance
 Use a temporary static dataset with 5 to 10 representative rows covering:
 - stronger-fit and lower-fit examples
-- visible match ratings from 0 to 100 plus at least one pending fit state
+- visible match ratings from 0 to 100 plus at least one pending-fit state
 - different canonical workflow statuses
 - different sources such as LinkedIn and Indeed
 - at least one remote role
+
+### Canonical semantics guardrails
+- workflow status is only `new`, `interested`, `applied`, `interviewing`, `offer`, or `rejected`
+- low-fit and stronger-fit cues are fit signals, not workflow states
+- archive behavior remains separate from workflow status
+- do not invent placeholder workflow labels for mock data just to make table states feel richer
 
 ### UX guidance
 - keep styling simple
