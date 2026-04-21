@@ -20,18 +20,20 @@ JobTrakr is a single-user job search assistant that:
 This file is preserved handoff context, not the primary kickoff entrypoint.
 
 If an hourly kickoff prompt or older note points you here first, recover in this order:
-- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
-- `projects/jobtrackr/PROJECT.md`
-- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+1. `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+2. `projects/jobtrackr/PROJECT.md`
+3. `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
 If an external prompt still references `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale drift and use `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md` instead.
 
-Current implementation slice:
+Treat bare filenames in older notes as historical shorthand only, not as live repo-root entrypoints.
+
+Current implementation slice for pickup:
 - Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
 
 ## Locked Product Decisions
 
-- implementation language: TypeScript
+- implementation language direction: TypeScript for the web app and shared typed contracts, with the current backend delivery slice implemented as a Go API
 - authentication: Google federated login
 - login page required
 - primary input source: Gmail inbox job alert emails
@@ -280,12 +282,15 @@ When older docs conflict, use these current files first:
 
 ## Immediate Recommendation
 
-Engineering should start with the smallest meaningful vertical slice:
+The mock-first shell guidance below is preserved historical context.
+
+For live pickup, engineering should start with the current smallest meaningful vertical slice:
 - Google login
 - protected dashboard shell
-- jobs table with mock data
+- Gmail readonly connection state
+- persisted jobs retrieval in the jobs UI
 
-This creates visible progress quickly and gives a safe base for real-data integration.
+Use the Phase 3 handoff package and active development plan when current pickup guidance conflicts with the older build-order notes in this file.
 
 Guardrails:
 - workflow statuses are `new`, `interested`, `applied`, `interviewing`, `offer`, `rejected`
