@@ -18,7 +18,11 @@ Implementation kickoff redirect:
 - if an automation prompt still references `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, recover to `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md` instead
 
 Active implementation slice:
-- Google auth -> session -> Gmail readonly connect -> persisted jobs UI
+- Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
+
+Architecture note:
+- treat older local-Go-app wording in preserved docs as historical framing only; the live implementation lane is the Next.js web plus Go API slice above
+
 Primary focus areas for MVP QA:
 - Gmail connection
 - ingestion

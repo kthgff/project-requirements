@@ -16,7 +16,10 @@ For implementation pickup, pair this memo with:
 - `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
 Active implementation slice:
-- Google auth -> session -> Gmail readonly connect -> persisted jobs UI
+- Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
+
+Recovery note:
+- if an older kickoff prompt or preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift and recover to `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`
 
 ## Decisions
 
