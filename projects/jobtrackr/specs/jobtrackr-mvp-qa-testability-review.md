@@ -15,6 +15,7 @@ Implementation kickoff redirect:
 - `projects/jobtrackr/DEVELOPMENT_PLAN.md`
 - `projects/jobtrackr/PROJECT.md`
 - `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+- if an automation prompt still references `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, recover to `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md` instead
 
 Active implementation slice:
 - Google auth -> session -> Gmail readonly connect -> persisted jobs UI

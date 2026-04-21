@@ -15,6 +15,10 @@ Provide one source-of-truth handoff package for engineering so hourly kickoff an
 
 Engineers should use these files in this order when there is any conflict.
 
+Recovery note for automation-facing handoffs:
+- if an hourly kickoff prompt still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that path as stale drift and recover to `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- the current implementation slice for pickup remains Google auth -> session -> Gmail readonly connect -> persisted jobs UI
+
 1. `projects/jobtrackr/DEVELOPMENT_PLAN.md`
    - live task ownership, active branches, dependencies, and delivery sequencing
 2. `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
