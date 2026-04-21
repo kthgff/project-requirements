@@ -1,7 +1,7 @@
 # JobTrackr In-Progress Test Cases — 2026-04-20
 
 ## Purpose
-Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELOPMENT_PLAN.md`, updated for Jimmy's latest kickoff emphasis on T-057 and T-062 plus the active auth -> Gmail readonly connect -> persisted-jobs implementation slice.
+Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELOPMENT_PLAN.md`, updated for Jimmy's latest kickoff emphasis on QA recovery wording normalization, kickoff-entrypoint safety, and the active auth -> Gmail readonly connect -> persisted-jobs implementation slice.
 
 ## Source tasks covered
 - T-001: Finalize PM decision alignment in JobTrackr API contract and debug semantics
@@ -62,7 +62,11 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - T-066: Reconcile remaining QA recovery references in PRD v2 and in-progress test coverage so QA can recover from stale automation prompts without guessing the live project-root entrypoints or current web-plus-API slice
 - T-067: Reconcile roadmap and legacy review-doc kickoff notes so planning artifacts explicitly recover to the live project-root source files and current Next.js web plus Go API delivery slice
 - T-068: Normalize kickoff entrypoint path examples so README, PROJECT, and the Phase 3 handoff package all point to the same explicit `projects/jobtrackr/...` source-of-truth files during hourly recovery
+- T-069: Normalize automation-facing recovery examples so hourly kickoff prompts can recover from the stale root-level development-plan path without ambiguity about the current project-root source set or live web-plus-API slice
 - T-070: Align QA recovery wording across PRD v2, the QA blocker checklist, and in-progress QA coverage so all three use the same explicit project-root entrypoints and current Next.js web plus Go API framing
+- T-071: Reconcile preserved engineering handoff guidance so legacy kickoff docs recover to the live project-root source files and current Next.js web plus Go API delivery slice
+- T-072: Normalize kickoff-facing path examples and lane wording so README, PROJECT, and the handoff package use the same explicit recovery order and active implementation language
+- T-073: Normalize preserved engineering handoff recovery wording so older handoff docs use the same explicit project-root entrypoints, legacy-context labeling, and current Next.js web plus Go API pickup language
 
 ---
 
@@ -1549,6 +1553,18 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - All three docs point QA back to the same explicit `projects/jobtrackr/...` source files.
 - All three docs describe the active implementation as Next.js web plus Go API on the auth -> session -> Gmail readonly connect -> persisted jobs slice.
 
+## T-069 Automation Recovery Example Normalization Test Cases
+
+### TC-2149 Automation-facing examples recover to one canonical source-of-truth set
+**Steps**
+1. Review preserved hourly kickoff guidance, automation-facing recovery notes, and any copied example path lists used during recovery work.
+2. Compare the example recovery order and architecture wording against `PROJECT.md`, `DEVELOPMENT_PLAN.md`, and the Phase 3 handoff package.
+
+**Expected**
+- Recovery examples point first to the same explicit `projects/jobtrackr/...` files.
+- Example wording treats the dead root-level development-plan path as stale prompt drift only.
+- The current implementation is described consistently as Next.js web plus Go API on the auth -> session -> Gmail readonly connect -> persisted jobs slice.
+
 ## T-067 Roadmap and Legacy Review Kickoff Recovery Test Cases
 
 ### TC-2146 Planning artifacts recover to the current web-plus-API delivery slice
@@ -1572,6 +1588,42 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - All kickoff entrypoints use the same explicit `projects/jobtrackr/...` paths.
 - Bare repo-root filenames are not left ambiguous in implementation-facing recovery notes.
 - Engineers can move between README, PROJECT, and handoff docs without path drift.
+
+## T-071 Preserved Engineering Handoff Recovery Test Cases
+
+### TC-2150 Legacy handoff docs redirect to live project-root files and current slice
+**Steps**
+1. Review preserved engineering handoff docs and older kickoff guidance kept for historical context.
+2. Inspect whether they label older build-order guidance as historical and point to the live project-root source set.
+
+**Expected**
+- Preserved handoff docs explicitly label legacy guidance as historical context.
+- They redirect readers to `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, and the current Phase 3 handoff package.
+- They describe the active implementation as Next.js web plus Go API on the auth -> session -> Gmail readonly connect -> persisted jobs slice.
+
+## T-072 Kickoff Recovery Order and Lane Wording Test Cases
+
+### TC-2151 README, PROJECT, and handoff package use the same ordered recovery path
+**Steps**
+1. Review kickoff-facing entrypoint docs updated during T-072.
+2. Compare their ordered source-of-truth lists and active implementation wording.
+
+**Expected**
+- All kickoff-facing docs use the same ordered recovery sequence.
+- Active lane wording is consistent across README, PROJECT, and handoff package.
+- Bare filenames do not force engineers to guess whether a path is live, shorthand, or historical.
+
+## T-073 Preserved Handoff Wording Normalization Test Cases
+
+### TC-2152 Older handoff docs share the same recovery wording and legacy labeling
+**Steps**
+1. Review older preserved handoff docs after wording-normalization changes.
+2. Compare recovery notes, legacy labels, and architecture wording against current kickoff-facing entrypoints.
+
+**Expected**
+- Older handoff docs use the same explicit project-root entrypoints as current kickoff docs.
+- Historical build-order or mock-first notes are clearly labeled as preserved context.
+- Recovery wording does not reintroduce older local-Go-app framing as the default implementation context.
 
 ## T-059 Protected Session Shell and Gmail Disconnect Test Cases
 
@@ -1621,3 +1673,4 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 21. No active tasks are marked `done` in the live development plan, so this hour's QA output remains documentation and acceptance-coverage maintenance rather than execution sign-off.
 22. T-063 through T-068 still need diff-level verification in roadmap, README, PROJECT, handoff, and preserved kickoff docs before QA can close the remaining recovery-path drift called out by Jimmy's latest plan.
 23. T-070 now covers wording normalization across PRD v2, the QA blocker checklist, and in-progress QA coverage so QA can recover from stale automation prompts without comparing three slightly different recovery notes by hand.
+24. T-069, T-071, T-072, and T-073 extend the same recovery coverage into automation examples and preserved handoff docs, so hourly kickoff recovery can be tested against one canonical path order instead of doc-specific variants.
