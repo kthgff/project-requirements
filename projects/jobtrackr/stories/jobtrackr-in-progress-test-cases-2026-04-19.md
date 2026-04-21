@@ -44,10 +44,15 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - T-048: Reconcile parser and ingestion ticket wording so milestone follow-through docs stop implying deprecated auto-close or workflow-state behavior for low-fit jobs
 - T-049: Remove legacy workflow alias handling from the persisted jobs UI mapping and surface canonical fit-signal defaults for server-backed job results
 - T-050: Reconcile PRD v2 dashboard, status, and fit-language sections plus in-progress QA coverage so archived stays out of workflow state and low-fit remains a fit signal
+- T-051: Reconcile remaining fit-signal wording in API, frontend, and clarification docs so `flagged` and `unflagged` stop reading like canonical product states
 - T-052: Harden the persisted jobs frontend mapping so server-backed results stay canonical when fit analysis is missing or legacy workflow aliases leak through old data
 - T-053: Reconcile remaining legacy workflow and fit-signal wording in older stories and superseded PRD/spec drafts so stale docs stop leaking non-canonical states back into implementation
 - T-054: Reconcile entrypoint and clarification docs so historical context keeps pointing engineers back to the canonical workflow and fit-signal vocabulary
+- T-055: Surface canonical persisted-jobs fallback reasons in the frontend so missing fit data and normalized workflow values are visible per result set without implying stale workflow aliases
+- T-056: Reconcile kickoff entrypoint docs so README and first-build-slice guidance point engineers at the canonical auth/dashboard vertical slice and current project phase
 - T-057: Reconcile PRD v2 and QA blocker checklist source-of-truth references so archive and fit-signal guidance stay canonical in implementation-facing QA docs
+- T-058: Reconcile roadmap fit-language and release exit criteria so release sequencing keeps using canonical fit signals instead of legacy flagged wording
+- T-059: Add a protected local session shell and explicit Gmail disconnect flow for the Gmail job search vertical slice
 
 ---
 
@@ -1336,6 +1341,18 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Archived behavior stays separate from workflow status expectations.
 - Low-fit coverage remains fit-signal based instead of expecting a status change.
 
+## T-051 Fit-Signal Wording Reconciliation Test Cases
+
+### TC-2085 API, frontend, and clarification docs stop using flagged/unflagged as canonical product states
+**Steps**
+1. Review `specs/jobtrackr-api-contract.md`, `specs/jobtrackr-frontend-plan-v1.md`, and `specs/jobtrackr-spec-clarifications-needed.md`.
+2. Inspect workflow, filters, fit-display, and fallback wording.
+
+**Expected**
+- `flagged` and `unflagged` do not appear as canonical workflow, filter, or user-facing state names.
+- Canonical fit-signal wording uses match rating, low-fit, strong-fit, fit-ready, or pending-fit where applicable.
+- Any retained legacy wording is explicitly labeled historical or superseded.
+
 ## T-052 Persisted Jobs Frontend Hardening Test Cases
 
 ### TC-2090 Unknown workflow values degrade safely in persisted jobs UI
@@ -1382,6 +1399,30 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Historical shorthand like `flagged` or `unflagged` is framed as legacy wording only, if retained at all.
 - Engineers are unlikely to start implementation from stale context.
 
+## T-055 Persisted Jobs Fallback Visibility Test Cases
+
+### TC-2115 Persisted-jobs UI exposes canonical fallback reasons without surfacing legacy aliases
+**Steps**
+1. Review persisted-jobs UI states or examples that cover missing fit data and normalized workflow values.
+2. Inspect per-row or result-set messaging for fallback explanation.
+
+**Expected**
+- Users can tell when a row is pending fit versus using normalized canonical workflow output.
+- Fallback copy avoids legacy aliases like `flagged` or `not a match`.
+- The explanation is specific enough for QA to assert against deterministic UI text or state.
+
+## T-056 Kickoff Entrypoint Reconciliation Test Cases
+
+### TC-2116 README and first-build-slice docs point engineers at the active auth-to-dashboard vertical slice
+**Steps**
+1. Review `README.md` and `specs/jobtrackr-first-build-slice-v1.md`.
+2. Compare the kickoff guidance to `PROJECT.md`, `DEVELOPMENT_PLAN.md`, and the engineering handoff package.
+
+**Expected**
+- Entrypoint docs describe the current project phase accurately.
+- The first build slice points to the canonical auth, Gmail connect, and persisted-jobs vertical-slice direction.
+- Source-of-truth links are current and reduce the risk of engineers starting from stale discovery framing.
+
 ## T-057 PRD and QA Blocker Checklist Reconciliation Test Cases
 
 ### TC-2120 PRD v2 removes stale archive-status ambiguity and points to current source docs
@@ -1404,23 +1445,59 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Archive, match-rating, low-fit, and pending-fit semantics remain clearly separated from workflow state.
 - QA can use the checklist without inheriting stale status-model ambiguity.
 
+## T-058 Roadmap Fit-Language Reconciliation Test Cases
+
+### TC-2125 ROADMAP uses canonical fit-signal language in release scope and exit criteria
+**Steps**
+1. Review `ROADMAP.md` release goals, milestone language, and exit criteria.
+2. Compare fit-language usage against the PM memo, DEVELOPMENT_PLAN, and reconciliation matrix.
+
+**Expected**
+- Release sequencing does not present `flagged` or `unflagged` as product-state vocabulary.
+- Match rating, low-fit, fit-ready, strong-fit, and pending-fit stay separate from workflow state.
+- Roadmap wording does not reopen already-locked workflow semantics.
+
+## T-059 Protected Session Shell and Gmail Disconnect Test Cases
+
+### TC-2130 Local shell requires authenticated session before inbox-derived jobs are visible
+**Steps**
+1. Launch the local app without an active app session.
+2. Attempt to open the jobs workspace or any inbox-derived results surface.
+3. Complete auth, then retry access.
+
+**Expected**
+- Unauthenticated access is redirected, denied, or gated behind the local shell.
+- Inbox-derived jobs are not exposed before session establishment.
+- Authenticated users can reach the intended workspace after session setup.
+
+### TC-2131 Gmail disconnect cleanly removes Gmail access without breaking local app session handling
+**Steps**
+1. Start from an authenticated user with Gmail connected.
+2. Trigger Gmail disconnect.
+3. Refresh the app and inspect connection state plus session state.
+
+**Expected**
+- Gmail connection state changes to a disconnected or reconnect-required canonical state.
+- The app does not require manual local-state deletion to recover.
+- Session handling and reconnect affordances remain deterministic after disconnect.
+
 ## Current QA coverage gaps
 1. No tasks are marked `done` or moved to QA in `DEVELOPMENT_PLAN.md`, so this hour remains acceptance-coverage and blocker surfacing work rather than runnable execution validation.
 2. T-006 is still blocked by status-model drift in `jobtrackr-auto-close-logic-spec-v1.md`, which still references pre-decision statuses like `flagged`, `reviewing`, `skipped`, `interview`, and `not a match` instead of the canonical workflow model.
-3. T-002 still describes a Go web app in the live plan, while Milestone 1 and the handoff package describe a Next.js frontend plus Go API split, so QA cannot lock environment-specific execution steps until those docs are reconciled.
+3. T-002 and T-059 still describe a local Go web app in the live plan, while Milestone 1 and the handoff package describe a Next.js frontend plus Go API split, so QA cannot lock environment-specific execution steps until those docs are reconciled.
 4. Jimmy's cron note points QA at `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, but the live plan is actually `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
 5. Gate A is still not fully closed, because the reconciliation matrix exists but older schema, story, PRD, and auto-close references still expose stale workflow or linkage assumptions.
 6. Real runnable API fixtures are still needed before list and workspace checks for T-007, T-011, T-013, T-016, T-020, T-024, and T-025 can graduate from contract validation into executable integration tests.
 7. The duplicate list/detail example naming issue is now partially mitigated: `jobtrackr-list-detail-examples-2026-04-20.md` is retained only as a compatibility shim, and `jobtrackr-list-detail-contract-examples-2026-04-20.md` is the canonical source. QA should verify new cross-links keep pointing only to the canonical file.
-8. Gmail connection-state edge cases like `expired`, `revoked`, and `denied` now have acceptance coverage, but QA still needs runnable fixtures or test accounts before T-018 and T-022 can be signed off.
+8. Gmail connection-state edge cases like `expired`, `revoked`, and `denied` now have acceptance coverage, but QA still needs runnable fixtures or test accounts before T-018, T-022, and T-059 can be signed off.
 9. T-010 and T-014 ticket work now describe Gate A and Gate B, but QA still needs engineering to treat those gates as hard blockers before live-data integration starts.
 10. T-023, T-024, and T-025 now have stronger canonical docs, but those examples and reconciliation rules still need explicit cross-links from the API contract, workspace contract, and handoff package so implementation teams do not fork behavior.
-11. T-026 and T-029 still lack runnable persisted-jobs fixtures or endpoint examples in QA-owned docs, so execution coverage is blocked at contract level until engineering exposes deterministic sample responses.
+11. T-026, T-029, T-052, and T-055 still lack runnable persisted-jobs fixtures or endpoint examples in QA-owned docs, so execution coverage is blocked at contract level until engineering exposes deterministic sample responses.
 12. T-030 and T-031 now have acceptance coverage, but QA still needs a real branch build to verify drawer/page parity, session-state transitions, and no-fallback selection behavior in the UI.
 13. T-032 is still an active blocker area because older docs continue to advertise legacy workflow states that conflict with the canonical PM memo and current Gate A reconciliation work.
-14. T-033 through T-054 now have contract-level QA coverage in this file, but execution coverage is still blocked until the reconciled downstream docs actually land and can be diff-verified against the PM memo, API contract, and reconciliation matrix.
-15. Alice's persisted-jobs follow-through tasks T-049 and T-052 now have QA coverage for canonical workflow fallback and pending-fit handling, but QA still needs real API payload fixtures that include missing-fit and legacy-data edge cases before sign-off.
-16. Frank's doc-cleanup follow-through tasks T-053 and T-054 still require the older stories, draft PRDs, PROJECT, and clarification docs to be visibly annotated or rewritten before QA can confirm stale wording is no longer implementation-facing.
+14. T-033 through T-058 now have contract-level QA coverage in this file, but execution coverage is still blocked until the reconciled downstream docs actually land and can be diff-verified against the PM memo, API contract, reconciliation matrix, and roadmap/entrypoint docs.
+15. Alice's persisted-jobs follow-through tasks T-049, T-052, and T-055 now have QA coverage for canonical workflow fallback, pending-fit handling, and fallback-reason visibility, but QA still needs real API payload fixtures that include missing-fit and legacy-data edge cases before sign-off.
+16. Frank's doc-cleanup follow-through tasks T-053, T-054, and T-058 still require the older stories, draft PRDs, PROJECT, clarification docs, and roadmap to be visibly annotated or rewritten before QA can confirm stale wording is no longer implementation-facing.
 17. T-057 now adds contract-level QA coverage for PRD v2 source references and the QA blocker checklist, but QA still needs the surrounding docs to keep pointing at valid current paths so the shortest implementation-facing checklist stays trustworthy.
-18. Jimmy plan fetch is still blocked on Discord API auth from this environment, so QA cannot confirm whether the latest PM pickup order changed outside the local repo state.
+18. Jimmy plan fetch succeeded from this environment at 10:08 PM and the latest PM priority remains the auth -> Gmail readonly connect -> persisted-jobs vertical slice plus ongoing reconciliation cleanup.
 19. The hourly prompt referenced `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, but the live source file remains `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`; that path drift is itself a coordination gap worth fixing.
