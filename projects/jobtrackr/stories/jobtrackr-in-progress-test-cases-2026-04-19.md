@@ -73,6 +73,9 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - T-071: Reconcile preserved engineering handoff guidance so legacy kickoff docs recover to the live project-root source files and current Next.js web plus Go API delivery slice
 - T-072: Normalize kickoff-facing path examples and lane wording so README, PROJECT, and the handoff package use the same explicit recovery order and active implementation language
 - T-073: Normalize preserved engineering handoff recovery wording so older handoff docs use the same explicit project-root entrypoints, legacy-context labeling, and current Next.js web plus Go API pickup language
+- T-074: Normalize preserved implementation-facing recovery notes so older handoff and QA review docs use the same explicit absolute-path recovery order and current Next.js web plus Go API lane wording
+- T-075: Normalize the shared QA recovery note across PRD v2, the blocker checklist, and in-progress QA coverage so the path-recovery order and current implementation lane wording are byte-for-byte aligned
+- T-076: Normalize preserved planning and handoff recovery notes so ROADMAP, the PM memo, QA testability review, and legacy handoff docs share the same explicit recovery order and active implementation lane wording
 
 ---
 
@@ -1631,6 +1634,42 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Historical build-order or mock-first notes are clearly labeled as preserved context.
 - Recovery wording does not reintroduce older local-Go-app framing as the default implementation context.
 
+## T-074 Preserved Implementation-Facing Recovery Note Test Cases
+
+### TC-2153 Older handoff and QA review docs share one absolute-path recovery order
+**Steps**
+1. Review preserved implementation-facing handoff and QA review docs updated during T-074.
+2. Compare their stale-path recovery notes and ordered absolute-path examples.
+
+**Expected**
+- Both doc families use the same explicit absolute-path recovery order.
+- The dead root-level development-plan path is framed only as stale prompt drift.
+- Current lane wording stays aligned with the Next.js web plus Go API auth -> session -> Gmail readonly connect -> persisted jobs slice.
+
+## T-075 Shared QA Recovery Note Normalization Test Cases
+
+### TC-2154 PRD, blocker checklist, and active QA coverage reuse the same recovery note verbatim
+**Steps**
+1. Review `prd/jobtrackr-prd-v2.md`, `specs/jobtrackr-qa-blocker-checklist-2026-04-19.md`, and `stories/jobtrackr-in-progress-test-cases-2026-04-19.md`.
+2. Compare the recovery note text, path order, and active-lane wording byte for byte.
+
+**Expected**
+- All three docs reuse the same recovery note without path-order drift.
+- The note names the stale root-level development-plan path explicitly.
+- The active implementation lane wording matches exactly across all three docs.
+
+## T-076 Preserved Planning and Handoff Recovery Note Test Cases
+
+### TC-2155 ROADMAP, PM memo, QA review, and preserved handoff docs share one recovery pattern
+**Steps**
+1. Review ROADMAP, the PM memo, QA testability review notes, and preserved handoff docs touched during T-076.
+2. Compare recovery order, stale-path labeling, and implementation-lane wording.
+
+**Expected**
+- Preserved planning and handoff docs use one consistent recovery pattern.
+- Recovery order points to the same live `projects/jobtrackr/...` kickoff set.
+- The current Next.js web plus Go API lane wording is consistent across all preserved planning and handoff entrypoints.
+
 ## T-059 Protected Session Shell and Gmail Disconnect Test Cases
 
 ### TC-2130 Local shell requires authenticated session before inbox-derived jobs are visible
@@ -1680,3 +1719,4 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 22. T-063 through T-068 still need diff-level verification in roadmap, README, PROJECT, handoff, and preserved kickoff docs before QA can close the remaining recovery-path drift called out by Jimmy's latest plan.
 23. T-070 now covers wording normalization across PRD v2, the QA blocker checklist, and in-progress QA coverage so QA can recover from stale automation prompts without comparing three slightly different recovery notes by hand.
 24. T-069, T-071, T-072, and T-073 extend the same recovery coverage into automation examples and preserved handoff docs, so hourly kickoff recovery can be tested against one canonical path order instead of doc-specific variants.
+25. T-074, T-075, and T-076 are now represented in QA coverage, but they still need diff-level verification across preserved implementation-facing docs, the shared QA recovery note set, and preserved planning/handoff artifacts before QA can confirm the recovery wording is truly normalized end to end.
