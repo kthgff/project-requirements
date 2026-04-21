@@ -22,28 +22,34 @@ Recovery note for automation-facing handoffs:
   3. `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 - when a kickoff note says to start with PROJECT, use `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md` so the recovery path stays explicit alongside the live development plan
 - the current implementation slice for pickup remains Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
-- current lane split: Alice and Marcus are frontend owners for this slice, while the remaining SWE lanes stay on backend and shared contract follow-through
+- current lane split for this slice:
+  - Alice and Marcus: frontend owners for the current slice
+  - remaining SWE lanes: backend and shared contract follow-through
 
 1. `projects/jobtrackr/DEVELOPMENT_PLAN.md`
    - live task ownership, active branches, dependencies, and delivery sequencing
-2. `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+2. `projects/jobtrackr/PROJECT.md`
+   - current project status, phase wording, and kickoff entrypoint guidance
+3. `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+   - single-file engineering handoff entrypoint for hourly recovery
+4. `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
    - canonical product decisions where older specs differ
-3. `projects/jobtrackr/specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
+5. `projects/jobtrackr/specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
    - compact Gate A drift check for workflow, archive, fit-nullability, and source-email linkage semantics
-4. `projects/jobtrackr/specs/jobtrackr-api-contract.md`
+6. `projects/jobtrackr/specs/jobtrackr-api-contract.md`
    - shared API payload expectations
-5. `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
+7. `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
    - locked detail view structure and editing expectations
-6. `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
+8. `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
    - canonical examples for list selection, detail continuity, and edit behavior alignment
    - if you encounter `jobtrackr-list-detail-examples-2026-04-20.md`, treat it as a compatibility shim that defers to this canonical file
-7. `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
+9. `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
    - locked workspace interaction expectations
-8. `projects/jobtrackr/specs/jobtrackr-dependency-map-and-sequencing-2026-04-19.md`
+10. `projects/jobtrackr/specs/jobtrackr-dependency-map-and-sequencing-2026-04-19.md`
    - milestone dependencies and parallel-safe sequencing
-9. `projects/jobtrackr/specs/jobtrackr-milestones-1-to-4-engineering-tickets-2026-04-20.md`
+11. `projects/jobtrackr/specs/jobtrackr-milestones-1-to-4-engineering-tickets-2026-04-20.md`
    - implementation-ready ticket map for Milestones 1 to 4
-10. `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`
+12. `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`
    - current QA expectations for in-flight slices
 
 ## Contract Gates
