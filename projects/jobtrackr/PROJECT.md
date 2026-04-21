@@ -10,7 +10,7 @@
 
 ## Current Position
 
-JobTrakr has moved from vague concept into defined MVP discovery. Core product direction is now clear, the canonical PM contracts are locked for engineering pickup, and TypeScript is the implementation language direction.
+JobTrakr has moved from vague concept into defined MVP discovery. Core product direction is now clear, the canonical PM contracts are locked for engineering pickup, and the active implementation lane is the Next.js web plus Go API slice covering Google auth, app session, Gmail readonly connect, and persisted jobs retrieval.
 
 ## Current Phase
 
@@ -178,12 +178,14 @@ In progress:
 ## Source-of-Truth Reminder
 
 Use these files as the canonical implementation references when PROJECT, older drafts, or preserved clarification notes summarize the work at a higher level:
-- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
-- `projects/jobtrackr/README.md`
-- `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
-- `projects/jobtrackr/specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
-- `projects/jobtrackr/specs/jobtrackr-api-contract.md`
-- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+1. `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+2. `projects/jobtrackr/PROJECT.md`
+3. `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+4. `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+5. `projects/jobtrackr/specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
+6. `projects/jobtrackr/specs/jobtrackr-api-contract.md`
+
+If an hourly kickoff or preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale automation drift and recover to the ordered project-root files above.
 
 Historical references to fit flags, flagged jobs, or older workflow examples should be read as legacy shorthand only, not as current product-state vocabulary.
 

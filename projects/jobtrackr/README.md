@@ -10,14 +10,16 @@ This repository is no longer discovery-only. Engineers should treat the canonica
 
 ## Start Here
 
-If you are picking up implementation or reconciliation work, read these files first:
+If you are picking up implementation or reconciliation work, use this recovery order first:
 
 1. `projects/jobtrackr/DEVELOPMENT_PLAN.md`
 2. `projects/jobtrackr/PROJECT.md`
-3. `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
-4. `projects/jobtrackr/specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
-5. `projects/jobtrackr/specs/jobtrackr-api-contract.md`
-6. `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+3. `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+4. `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+5. `projects/jobtrackr/specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
+6. `projects/jobtrackr/specs/jobtrackr-api-contract.md`
+
+If an hourly kickoff prompt still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale drift and recover to the project-root files above.
 
 ## Kickoff Build Slice
 
@@ -41,15 +43,17 @@ Use `projects/jobtrackr/specs/jobtrackr-first-build-slice-v1.md` as historical k
 
 ## Structure
 
+All live kickoff files below are project-root paths, not stale workspace-root shorthand:
+
 ```
-/
-├── README.md           — workspace entrypoint and source-of-truth pointers
-├── PROJECT.md          — project overview, roadmap, and status
-├── DEVELOPMENT_PLAN.md — active engineering task tracker and milestone plan
-├── prd/               — Product Requirements Documents
-├── stories/           — User stories and acceptance criteria
-├── specs/             — Technical specs, contracts, and handoff docs
-└── BLOCKERS.md        — active blocker tracker
+projects/jobtrackr/
+├── README.md            — workspace entrypoint and source-of-truth pointers
+├── PROJECT.md           — project overview, roadmap, and status
+├── DEVELOPMENT_PLAN.md  — active engineering task tracker and milestone plan
+├── prd/                 — Product Requirements Documents
+├── stories/             — User stories and acceptance criteria
+├── specs/               — Technical specs, contracts, and handoff docs
+└── BLOCKERS.md          — active blocker tracker
 ```
 
 ## Roles

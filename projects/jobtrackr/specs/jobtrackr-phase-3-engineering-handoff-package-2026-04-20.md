@@ -104,14 +104,14 @@ Priority order:
 5. T-011 after auth, Gmail connection state, and persisted-job rendering are stable
 
 ### Marcus
-Focus on shared contracts and reconciliation docs that keep implementation entrypoints aligned.
+Focus on kickoff-entrypoint and recovery-doc alignment so implementation pickup stays safe during hourly handoffs.
 
 Priority order:
-1. T-015 detail-view contract as the shared source for section order and editing behavior
-2. T-019 detail UI alignment against that contract
-3. T-023 list-to-detail contract examples so selection, payloads, and edit flows stay concrete
-4. T-045 reconciliation of PROJECT, milestone, and handoff references so engineers do not inherit stale workflow or fit wording while moving between entrypoint docs
-5. Keep T-001 and T-004 aligned so list/detail payload semantics do not drift
+1. T-061 reconcile README, PROJECT, and kickoff handoff entrypoints around the live auth -> session -> Gmail readonly connect -> persisted jobs slice
+2. T-065 keep preserved kickoff docs clearly historical and recoverable to the live project-root source set
+3. T-068 normalize README, PROJECT, and handoff package path examples so they all use the same explicit `projects/jobtrackr/...` entrypoints
+4. T-072 remove remaining bare-path and lane-wording ambiguity across kickoff-facing docs during hourly recovery
+5. Keep T-001 and T-004 aligned so list/detail payload semantics do not drift while kickoff docs stabilize
 
 ### Priya
 Focus on workspace behavior in the mock-data frontend slice.
@@ -151,7 +151,7 @@ The team is no longer only preparing a mock-first shell. The active cross-lane d
 
 - Frank: finish Gate A reconciliation and keep engineering package current
 - Alice: auth callback, session flow, Gmail readonly connect path
-- Marcus: detail contract examples, detail editing alignment, and explicit kickoff-entrypoint path normalization so milestone and handoff wording stay canonical during hourly recovery
+- Marcus: kickoff-entrypoint path normalization, preserved-doc recovery cleanup, and explicit lane wording alignment so hourly recovery always lands on the live project-root source set
 - Priya: row-selection continuity, active-filter context, empty-result recovery
 
 ## Open Risks To Watch
