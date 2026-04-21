@@ -207,11 +207,17 @@ Recovery note:
 Current implementation slice:
 - Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
 
+Current lane ownership for this slice:
+- Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
+- Marcus: frontend recovery-entrypoint and kickoff-doc alignment so frontend pickup stays safe during hourly handoffs
+- remaining SWE lanes: backend implementation and shared contract follow-through
+
 1. Finish execution cleanup so engineering codes against one source of truth
-2. Complete the auth -> session -> Gmail readonly connect -> persisted-jobs slice before widening scope
-3. Move immediately into the real persisted-jobs workspace so the dashboard stops depending on mock-only flows
-4. Add Gmail ingestion before spending heavily on advanced AI features
-5. Add match intelligence once enough real job data exists
+2. Keep Alice and Marcus explicitly on frontend work while the remaining SWE lanes stay on backend and shared-contract follow-through
+3. Complete the auth -> session -> Gmail readonly connect -> persisted-jobs slice before widening scope
+4. Move immediately into the real persisted-jobs workspace so the dashboard stops depending on mock-only flows
+5. Add Gmail ingestion before spending heavily on advanced AI features
+6. Add match intelligence once enough real job data exists
 
 ---
 
