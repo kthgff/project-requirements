@@ -15,6 +15,20 @@ JobTrakr is a single-user job search assistant that:
 - surfaces match rating and low-fit indicators as fit signals, not workflow-state changes
 - presents all jobs in a dashboard table UI
 
+## Recovery Note for Preserved Handoff Guidance
+
+This file is preserved handoff context, not the primary kickoff entrypoint.
+
+If an hourly kickoff prompt or older note points you here first, recover in this order:
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `projects/jobtrackr/PROJECT.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+
+If an external prompt still references `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale drift and use `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md` instead.
+
+Current implementation slice:
+- Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
+
 ## Locked Product Decisions
 
 - implementation language: TypeScript
@@ -39,13 +53,15 @@ JobTrakr is a single-user job search assistant that:
 
 ## Recommended MVP Technical Direction
 
+This section is preserved historical guidance. For live implementation pickup, prefer the current Phase 3 handoff package and development plan.
+
 ### Frontend
 - Next.js
 - React
 - TypeScript
 
 ### Backend
-- TypeScript service or Next.js server routes for MVP simplicity
+- Go API for the current delivery slice
 
 ### Core integrations
 - Google authentication
@@ -250,14 +266,15 @@ Deliver:
 
 When older docs conflict, use these current files first:
 
-- `DEVELOPMENT_PLAN.md`
-- `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
-- `specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
-- `specs/jobtrackr-api-contract.md`
-- `specs/jobtrackr-detail-view-contract-2026-04-20.md`
-- `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
-- `specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
-- `specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `projects/jobtrackr/PROJECT.md`
+- `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+- `projects/jobtrackr/specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-api-contract.md`
+- `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
 ---
 
