@@ -1,6 +1,10 @@
 # JobTrakr First Build Slice v1
 
 > Historical kickoff note: this file captures the original mock-first slice. For the current implementation lane, use `projects/jobtrackr/DEVELOPMENT_PLAN.md` and `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+>
+> Recovery note for automation-facing handoffs: if a kickoff prompt or preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale drift and recover to `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`.
+>
+> Current live pickup lane: Google auth -> session -> Gmail readonly connect -> persisted jobs UI.
 
 ## Purpose
 
@@ -18,6 +22,8 @@ Before implementing or extending this slice, align with:
 If an older note conflicts with those files, follow the canonical source set above.
 
 ## Recommendation
+
+This document remains preserved historical context only. It should not be used as the standalone implementation kickoff entrypoint now that the live engineering lane has moved beyond the mock-first shell.
 
 This document's original recommendation was to start with the smallest visible end-to-end slice:
 - Google login page
@@ -68,6 +74,7 @@ This updated direction keeps the original shell work while moving implementation
 
 ## Out of Scope
 
+For this preserved historical slice, the following items stayed out of scope at kickoff time:
 - Gmail inbox scanning
 - job extraction
 - enrichment
@@ -75,6 +82,8 @@ This updated direction keeps the original shell work while moving implementation
 - fit analysis
 - real jobs API
 - status persistence
+
+For the current implementation lane, treat Gmail readonly connection and persisted jobs retrieval as active in-scope work governed by `projects/jobtrackr/DEVELOPMENT_PLAN.md` and the current engineering handoff package.
 
 ---
 
@@ -176,4 +185,9 @@ Then:
 
 ## PM Decision
 
-Engineering should begin programming now using this slice as the kickoff scope.
+Engineering originally began programming from this slice as the kickoff scope.
+
+Current implementation pickup should start from the live project-root source set instead:
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `projects/jobtrackr/PROJECT.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
