@@ -77,6 +77,7 @@ In progress:
 - engineering development plan actively populated with implementation tasks
 - dependency map and milestone sequencing being finalized
 - auth to Gmail to persisted-jobs vertical slice is now the active implementation lane
+- Alice and Marcus are now explicitly split onto frontend work, while the remaining SWE lanes stay focused on backend and shared contract follow-through
 - kickoff entrypoints are being reconciled so engineers do not start from stale mock-only framing
 
 ## What Is Not Started
@@ -106,9 +107,10 @@ In progress:
 ## Next Recommended Steps
 
 1. Finish reconciling PROJECT, README, milestone, and handoff references against the canonical workflow, fit-signal contract, and current auth to Gmail to persisted-jobs pickup lane
-2. Lock the first shared schema and API interfaces for the raw-ingestion and persisted-jobs vertical slice
-3. Keep the engineering handoff entrypoints current as implementation pickup accelerates
-4. Move the current auth and persisted-jobs slice forward with verifiable completion states
+2. Keep the frontend ownership split explicit in kickoff-facing docs so Marcus and Alice land on the same live source-of-truth set during hourly recovery
+3. Lock the first shared schema and API interfaces for the raw-ingestion and persisted-jobs vertical slice
+4. Keep the engineering handoff entrypoints current as implementation pickup accelerates
+5. Move the current auth and persisted-jobs slice forward with verifiable completion states
 
 ## Key Files
 

@@ -22,6 +22,7 @@ Recovery note for automation-facing handoffs:
   3. `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 - when a kickoff note says to start with PROJECT, use `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md` so the recovery path stays explicit alongside the live development plan
 - the current implementation slice for pickup remains Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
+- current lane split: Alice and Marcus are frontend owners for this slice, while the remaining SWE lanes stay on backend and shared contract follow-through
 
 1. `projects/jobtrackr/DEVELOPMENT_PLAN.md`
    - live task ownership, active branches, dependencies, and delivery sequencing
@@ -104,14 +105,15 @@ Priority order:
 5. T-011 after auth, Gmail connection state, and persisted-job rendering are stable
 
 ### Marcus
-Focus on kickoff-entrypoint and recovery-doc alignment so implementation pickup stays safe during hourly handoffs.
+Focus on frontend-facing kickoff-entrypoint and recovery-doc alignment so implementation pickup stays safe during hourly handoffs and reflects the current frontend ownership split.
 
 Priority order:
-1. T-061 reconcile README, PROJECT, and kickoff handoff entrypoints around the live auth -> session -> Gmail readonly connect -> persisted jobs slice
-2. T-065 keep preserved kickoff docs clearly historical and recoverable to the live project-root source set
-3. T-068 normalize README, PROJECT, and handoff package path examples so they all use the same explicit `projects/jobtrackr/...` entrypoints
-4. T-072 remove remaining bare-path and lane-wording ambiguity across kickoff-facing docs during hourly recovery
-5. Keep T-001 and T-004 aligned so list/detail payload semantics do not drift while kickoff docs stabilize
+1. T-078 normalize README, PROJECT, and the handoff package so Marcus and Alice show up explicitly as the frontend owners for the current slice
+2. T-061 reconcile README, PROJECT, and kickoff handoff entrypoints around the live auth -> session -> Gmail readonly connect -> persisted jobs slice
+3. T-065 keep preserved kickoff docs clearly historical and recoverable to the live project-root source set
+4. T-068 normalize README, PROJECT, and handoff package path examples so they all use the same explicit `projects/jobtrackr/...` entrypoints
+5. T-072 remove remaining bare-path and lane-wording ambiguity across kickoff-facing docs during hourly recovery
+6. Keep T-001 and T-004 aligned so list/detail payload semantics do not drift while kickoff docs stabilize
 
 ### Priya
 Focus on workspace behavior in the mock-data frontend slice.

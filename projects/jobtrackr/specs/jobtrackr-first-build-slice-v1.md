@@ -7,9 +7,9 @@
 > 2. `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md`
 > 3. `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 >
-> Current live pickup lane: Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI.
->
-> Current lane ownership: Alice and Marcus are frontend owners for this slice, while the remaining SWE lanes stay on backend and shared contract follow-through.
+> Current implementation slice:
+> - Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs UI lane
+> - Current lane ownership keeps Alice and Marcus on frontend-facing pickup inside that slice, while the remaining SWE lanes stay on backend and shared contract follow-through unless a task explicitly says otherwise
 
 ## Purpose
 

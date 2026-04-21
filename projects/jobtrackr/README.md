@@ -36,6 +36,11 @@ The **current implementation pickup direction** extends that into the first real
 - persisted jobs retrieval
 - jobs dashboard rendering server-backed results
 
+Current ownership split for this slice:
+- Alice: frontend work on the auth to Gmail to persisted-jobs experience
+- Marcus: frontend work on kickoff-facing entrypoints, recovery notes, and related handoff UX safety
+- other SWE lanes: backend and shared contract follow-through
+
 Use `projects/jobtrackr/specs/jobtrackr-first-build-slice-v1.md` as historical kickoff context only, and use `projects/jobtrackr/DEVELOPMENT_PLAN.md` plus `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md` for the current lane and ownership guidance. All work should still follow canonical workflow and fit-signal language:
 - workflow status is only `new`, `interested`, `applied`, `interviewing`, `offer`, `rejected`
 - match rating and low-fit are fit signals, not workflow states
