@@ -5,12 +5,19 @@ This document translates the current MVP stories and requirements into a testabi
 
 ## Scope Reviewed
 Source documents:
-- `projects/jobtrackr/stories.md`
-- `projects/jobtrackr/requirements.md`
-- `specs/jobtrackr-gmail-ingestion-spec-v1.md`
-- `specs/jobtrackr-fit-analysis-spec-v1.md`
-- `projects/jobtrackr/api-contract.md`
+- `projects/jobtrackr/stories/jobtrackr-stories.md`
+- `projects/jobtrackr/specs/jobtrackr-requirements.md`
+- `projects/jobtrackr/specs/jobtrackr-gmail-ingestion-spec-v1.md`
+- `projects/jobtrackr/specs/jobtrackr-fit-analysis-spec-v1.md`
+- `projects/jobtrackr/specs/jobtrackr-api-contract.md`
 
+Implementation kickoff redirect:
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `projects/jobtrackr/PROJECT.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+
+Active implementation slice:
+- Google auth -> session -> Gmail readonly connect -> persisted jobs UI
 Primary focus areas for MVP QA:
 - Gmail connection
 - ingestion

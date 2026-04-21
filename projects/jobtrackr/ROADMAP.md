@@ -178,8 +178,16 @@ JobTrakr is ready for regular real-world use.
 
 ## Recommended Immediate Priorities
 
+Current source-of-truth kickoff set:
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `projects/jobtrackr/PROJECT.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+
+Current implementation slice:
+- Google auth -> session -> Gmail readonly connect -> persisted jobs UI
+
 1. Finish execution cleanup so engineering codes against one source of truth
-2. Complete the authenticated dashboard shell and current engineering handoff slice
+2. Complete the auth -> session -> Gmail readonly connect -> persisted-jobs slice before widening scope
 3. Move immediately into the real persisted-jobs workspace so the dashboard stops depending on mock-only flows
 4. Add Gmail ingestion before spending heavily on advanced AI features
 5. Add match intelligence once enough real job data exists
@@ -198,3 +206,5 @@ JobTrakr is ready for regular real-world use.
 ## PM Guidance
 
 This roadmap should be treated as a sequencing tool, not a promise of exact dates. The main goal is to keep the team building the next highest-value slice without losing alignment.
+
+If roadmap wording conflicts with implementation-facing docs, defer to the current source-of-truth kickoff set above and keep fit signals separate from workflow status vocabulary.

@@ -4,10 +4,19 @@
 Resolve the remaining P0 product decisions blocking MVP implementation and align the engineering handoff around one canonical set of behaviors.
 
 ## Source Inputs
-- `projects/jobtrackr/api-contract.md`
-- `projects/jobtrackr/requirements.md`
-- `specs/jobtrackr-gmail-ingestion-spec-v1.md`
-- `specs/jobtrackr-spec-clarifications-needed.md`
+- `projects/jobtrackr/specs/jobtrackr-api-contract.md`
+- `projects/jobtrackr/specs/jobtrackr-requirements.md`
+- `projects/jobtrackr/specs/jobtrackr-gmail-ingestion-spec-v1.md`
+- `projects/jobtrackr/specs/jobtrackr-spec-clarifications-needed.md`
+
+## Current kickoff references
+For implementation pickup, pair this memo with:
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `projects/jobtrackr/PROJECT.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+
+Active implementation slice:
+- Google auth -> session -> Gmail readonly connect -> persisted jobs UI
 
 ## Decisions
 
