@@ -53,6 +53,15 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - T-057: Reconcile PRD v2 and QA blocker checklist source-of-truth references so archive and fit-signal guidance stay canonical in implementation-facing QA docs
 - T-058: Reconcile roadmap fit-language and release exit criteria so release sequencing keeps using canonical fit signals instead of legacy flagged wording
 - T-059: Add a protected local session shell and explicit Gmail disconnect flow for the Gmail job search vertical slice
+- T-060: Reconcile lingering legacy fit-flag shorthand in preserved story drafts and clarification docs so historical references stop leaking stale product vocabulary
+- T-061: Reconcile README, PROJECT, and kickoff handoff entrypoints so engineers land on the current auth to Gmail to persisted-jobs slice with correct project-root paths
+- T-062: Reconcile QA-owned source-path and environment notes so implementation-facing test guidance points at the live project root and current web-plus-API architecture
+- T-063: Reconcile roadmap and legacy review-doc source references so preserved planning docs point back to the current auth -> Gmail -> persisted-jobs source-of-truth set
+- T-064: Reconcile automation-facing kickoff references so hourly Alice and QA prompts stop pointing at the dead root-level development-plan path and instead call out the live project-root source-of-truth set
+- T-065: Reconcile historical kickoff slice guidance so preserved first-build docs explicitly recover to the live project-root source files and current auth -> session -> Gmail readonly connect -> persisted jobs lane
+- T-066: Reconcile remaining QA recovery references in PRD v2 and in-progress test coverage so QA can recover from stale automation prompts without guessing the live project-root entrypoints or current web-plus-API slice
+- T-067: Reconcile roadmap and legacy review-doc kickoff notes so planning artifacts explicitly recover to the live project-root source files and current Next.js web plus Go API delivery slice
+- T-068: Normalize kickoff entrypoint path examples so README, PROJECT, and the Phase 3 handoff package all point to the same explicit `projects/jobtrackr/...` source-of-truth files during hourly recovery
 
 ---
 
@@ -1479,6 +1488,78 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Older local-Go-app wording is explicitly framed as historical or task-scoped, not as the default environment assumption for new execution coverage.
 - QA guidance does not force engineers to infer which app shape governs the active auth -> Gmail -> persisted-jobs slice.
 
+## T-063 Roadmap and Legacy Review Source-Reference Reconciliation Test Cases
+
+### TC-2142 Preserved planning docs recover to live project-root source files
+**Steps**
+1. Review `ROADMAP.md` plus preserved PM and QA review docs referenced during kickoff recovery work.
+2. Inspect implementation-facing source-document lists and recovery notes.
+
+**Expected**
+- Planning and review docs point to valid `projects/jobtrackr/...` paths.
+- Recovery notes explicitly redirect readers away from the dead root-level development-plan path.
+- The active auth -> session -> Gmail readonly connect -> persisted jobs slice is called out clearly enough for safe pickup.
+
+## T-064 Automation-Facing Kickoff Reference Reconciliation Test Cases
+
+### TC-2143 Hourly recovery notes call out the live development-plan path explicitly
+**Steps**
+1. Review automation-facing kickoff guidance and QA-facing recovery notes.
+2. Inspect whether the stale `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` path is still presented as an active source.
+
+**Expected**
+- Automation-facing guidance names `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md` as the live file.
+- The dead root-level path is framed only as historical drift or an external coordination issue.
+- QA can recover safely without guessing which development plan is current.
+
+## T-065 Historical Kickoff Slice Recovery Test Cases
+
+### TC-2144 Preserved first-build docs label mock-first guidance as historical
+**Steps**
+1. Review preserved first-build and kickoff docs.
+2. Inspect their recovery notes, path examples, and architecture framing.
+
+**Expected**
+- Preserved kickoff docs explicitly label mock-first guidance as historical context.
+- They redirect readers to the live `projects/jobtrackr/...` source files.
+- The current auth -> session -> Gmail readonly connect -> persisted jobs lane is described as the active pickup path.
+
+## T-066 QA Recovery Reference Reconciliation Test Cases
+
+### TC-2145 PRD v2 and active QA coverage share the same recovery note
+**Steps**
+1. Review `prd/jobtrackr-prd-v2.md` and `stories/jobtrackr-in-progress-test-cases-2026-04-19.md`.
+2. Compare their source-of-truth references, stale-path recovery guidance, and implementation-context notes.
+
+**Expected**
+- Both docs point to the same live `projects/jobtrackr/...` entrypoints.
+- Both docs treat the dead root-level development-plan path as stale external drift.
+- Both docs describe the current implementation as Next.js web plus Go API on the auth -> session -> Gmail readonly connect -> persisted jobs slice.
+
+## T-067 Roadmap and Legacy Review Kickoff Recovery Test Cases
+
+### TC-2146 Planning artifacts recover to the current web-plus-API delivery slice
+**Steps**
+1. Review roadmap and preserved review artifacts updated during kickoff recovery.
+2. Inspect architecture wording and implementation-slice references.
+
+**Expected**
+- Planning artifacts describe the active implementation as Next.js web plus Go API.
+- They point to the current auth -> session -> Gmail readonly connect -> persisted jobs lane.
+- Older local-Go-app wording is clearly marked historical where it still appears.
+
+## T-068 Kickoff Entrypoint Path Normalization Test Cases
+
+### TC-2147 README, PROJECT, and handoff package use the same explicit project-root paths
+**Steps**
+1. Review `README.md`, `PROJECT.md`, and the Phase 3 handoff package.
+2. Compare ordered source-of-truth lists and any example file paths used during recovery guidance.
+
+**Expected**
+- All kickoff entrypoints use the same explicit `projects/jobtrackr/...` paths.
+- Bare repo-root filenames are not left ambiguous in implementation-facing recovery notes.
+- Engineers can move between README, PROJECT, and handoff docs without path drift.
+
 ## T-059 Protected Session Shell and Gmail Disconnect Test Cases
 
 ### TC-2130 Local shell requires authenticated session before inbox-derived jobs are visible
@@ -1521,6 +1602,8 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 15. Alice's persisted-jobs follow-through tasks T-049, T-052, and T-055 now have QA coverage for canonical workflow fallback, pending-fit handling, and fallback-reason visibility, but QA still needs real API payload fixtures that include missing-fit and legacy-data edge cases before sign-off.
 16. Frank's doc-cleanup follow-through tasks T-053, T-054, and T-058 still require the older stories, draft PRDs, PROJECT, clarification docs, and roadmap to be visibly annotated or rewritten before QA can confirm stale wording is no longer implementation-facing.
 17. T-057, T-062, and T-066 now cover PRD v2 source references plus QA-owned path and environment notes, but QA still needs surrounding non-QA docs and automation prompts to keep pointing at valid current paths so the shortest implementation-facing checklist stays trustworthy.
-18. Jimmy's latest plan keeps the highest-value QA work on T-057 and T-062, with T-066 extending the same recovery-note cleanup into PRD v2 and the active in-progress QA coverage.
+18. Jimmy's latest plan keeps the highest-value QA work on T-057, T-062, and T-066, with T-063 through T-068 extending the same recovery cleanup into roadmap, kickoff, handoff, and automation-facing entrypoint docs.
 19. The active PM implementation slice remains auth -> session -> Gmail readonly connect -> persisted jobs UI, so QA-owned docs should treat the Next.js web shell plus Go API split as current and older local-Go-app wording as historical unless a task explicitly scopes back to that earlier path.
 20. The hourly kickoff prompt still referenced `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, while the live source file remains `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`; QA-facing repo docs now explicitly treat that mismatch as external coordination drift and tell engineers how to recover safely.
+21. No active tasks are marked `done` in the live development plan, so this hour's QA output remains documentation and acceptance-coverage maintenance rather than execution sign-off.
+22. T-063 through T-068 still need diff-level verification in roadmap, README, PROJECT, handoff, and preserved kickoff docs before QA can close the remaining recovery-path drift called out by Jimmy's latest plan.
