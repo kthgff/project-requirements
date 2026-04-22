@@ -257,8 +257,9 @@ Because fit depends on a resume, the frontend should make resume state visible.
 ### Table row
 - normal
 - selected
-- flagged fit
-- missing fit data
+- strong-fit highlight
+- low-fit cue
+- pending or missing fit data
 
 ### Job detail panel
 - loading
