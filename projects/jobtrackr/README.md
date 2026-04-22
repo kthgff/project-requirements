@@ -67,3 +67,13 @@ projects/jobtrackr/
 | PM | Owns PRDs, user stories, backlog, and canonical product decisions |
 | Engineer | Owns specs, contracts, implementation planning, and reconciliation work |
 | QA | Owns test plans, blocker validation, and acceptance review |
+
+
+## Ticket Tracking
+
+GitHub issues are now the primary ticket system for JobTrakr.
+
+- Repo: `kthgff/project-requirements`
+- Use GitHub issues for active ticket assignment, status, and discussion
+- The markdown development plan remains useful as a planning and milestone artifact, but GitHub should be treated as the operational source for tickets
+- Legacy `T-###` IDs may remain in docs for continuity, but new execution updates should point to GitHub issue numbers and links
