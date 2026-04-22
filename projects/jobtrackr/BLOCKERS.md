@@ -5,8 +5,8 @@ This file tracks active and resolved blockers for the JobTrackr project. Jimmy (
 ## Active Blockers
 | ID | Who | Blocker | What I've Tried | Need From | Status |
 |---|---|---|---|---|---|
-| B-001 | Alice | Next.js compile failure in `apps/web/components/JobsTable.tsx` with `Unexpected token `div`. Expected jsx identifier` at line 44 blocks the jobs dashboard frontend from running | Keith reported the stack trace from the local app compile failure | Alice | open |
 
 ## Resolved Blockers
 | ID | Who | Blocker | Resolution |
 |---|---|---|---|
+| B-001 | Alice | Next.js compile failure in `apps/web/components/JobsTable.tsx` with `Unexpected token `div`. Expected jsx identifier` at line 44 blocks the jobs dashboard frontend from running | Priya re-ran `npm --prefix apps/web run build` in `/Users/keith.goff/Documents/jobtrackr` on 2026-04-22 and the Next.js production build completed successfully, so the compile failure no longer reproduces. Treat this as resolved engineering work plus QA verification evidence, not an active blocker. |

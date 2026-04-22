@@ -9,16 +9,16 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
-## Hourly QA review — 2026-04-21 18:59 America/Chicago
+## Hourly QA review — 2026-04-22 06:50 America/Chicago
 
 ### Results
-- PASS: Jimmy's latest plan fetch succeeded, and the active QA lane is still centered on T-070, T-075, and T-086 with no new blockers logged in `projects/jobtrackr/BLOCKERS.md`.
+- PASS: Jimmy's latest plan fetch succeeded again during this kickoff, and the active QA lane remains centered on T-070, T-075, T-086, and the new blocker-verification follow-through captured under T-090.
+- PASS: `npm --prefix apps/web run build` in `/Users/keith.goff/Documents/jobtrackr` completed successfully on 2026-04-22, so the old `JobsTable.tsx` JSX parse failure is now verified as resolved and no longer belongs in the active blocker list.
 - PASS: PRD v2, the QA blocker checklist, and this in-progress QA coverage file still reuse the same recovery note, path order, and current Next.js web plus Go API wording for stale kickoff prompt recovery.
 - PASS: README, PROJECT, and the Phase 3 handoff package all point recovery back to the same live `projects/jobtrackr/...` source-of-truth set for the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - PASS: Kickoff-facing docs still reflect Jimmy's current ownership split, with Alice and Marcus called out as frontend owners for the active slice.
 - GAP: The hourly QA cron prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so external automation remains out of sync with the repo's corrected recovery guidance.
-- GAP: No tasks are marked `done` or moved to QA in `projects/jobtrackr/DEVELOPMENT_PLAN.md`, so this hour still supports coverage maintenance and blocker surfacing rather than execution sign-off.
-- GAP: README, PROJECT, and the handoff package now align at a high level, but preserved kickoff and implementation-facing docs outside the QA trio still need diff-level verification before QA can close the broader recovery-drift lane.
+- GAP: T-090 is now ready for Sam QA review, but the broader repo-side recovery-drift lane still needs diff-level verification across preserved kickoff and implementation-facing docs outside the primary QA trio.
 
 ## Source tasks covered
 - T-001: Finalize PM decision alignment in JobTrackr API contract and debug semantics

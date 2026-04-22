@@ -106,6 +106,7 @@ If a requirement appears ambiguous, check the canonical PM specs first and escal
 | T-085 | Byte-align kickoff-facing recovery order and lane wording so README, PROJECT, and the Phase 3 handoff package all use the same explicit project-root sequence and current frontend split | Marcus | completed | chore/jobtrackr-kickoff-recovery-docs | T-072, T-078, T-081 | README, PROJECT, and the Phase 3 handoff package reuse one explicit `projects/jobtrackr/...` recovery order, the same current Next.js web plus Go API lane wording, and the same frontend-ownership note for Alice and Marcus | Engineers opening any kickoff-facing entrypoint can recover from stale hourly prompts without path-order drift, and they see the same current Alice-and-Marcus frontend ownership wording in every live kickoff doc Marcus owns | Completed during hourly kickoff after Marcus found the remaining drift in the Phase 3 handoff package's Alice lane guidance, rewrote it to match the current frontend ownership split, and re-verified the shared recovery order stayed aligned with README and PROJECT. |
 | T-086 | Refresh QA hourly coverage and blocker notes so Priya's implementation-facing test docs reflect the latest Jimmy fetch, current external kickoff drift, and the still-live QA doc-alignment lane | Priya | in-progress | chore/jobtrackr-kickoff-recovery-docs | T-070, T-075 | The in-progress QA coverage captures the latest Jimmy guidance, records that Jimmy fetch now succeeds again, and keeps the remaining blocker focus on stale external kickoff prompts plus repo-side doc verification work | QA can recover from the latest hourly kickoff without inheriting the older 401-fetch story, and the active blocker notes still point engineers at the shared QA recovery docs plus the remaining diff-verification work across repo entrypoints | Claimed during hourly kickoff after Jimmy fetch succeeded again and no unclaimed Priya task remained, so Priya pulled the next QA coverage refresh pass on the active kickoff-recovery branch |
 | T-087 | Label and verify the shared Alice frontend lane note in preserved implementation-facing docs so the handoff v1 and QA testability review expose the same byte-aligned pickup wording | Alice | in-progress | chore/jobtrackr-kickoff-recovery-docs | T-082 | The preserved engineering handoff v1 and QA testability review both expose one explicit Alice lane note block with identical frontend-focused wording, and active QA coverage records the byte-alignment check for future hourly recovery verification | Engineers opening either preserved implementation-facing doc can find the same Alice-specific lane note immediately, confirm the same absolute-path recovery order and active slice wording nearby, and avoid doc-specific drift about Alice's current frontend responsibilities | Claimed during hourly kickoff after Jimmy's latest plan kept Alice on frontend-facing recovery work and no unclaimed active task remained, so Alice pulled the next explicit note-labeling and verification pass on the active kickoff-recovery branch |
+| T-090 | Verify the resolved JobsTable compile blocker and update QA-facing blocker notes so repo docs stop treating the dashboard build as currently blocked | Sam | QA | chore/jobtrackr-kickoff-recovery-docs | T-086 | The repo-side blocker tracker and in-progress QA coverage reflect the verified green web build, preserve the external stale-path blocker as the remaining coordination gap, and point QA at the fresh verification evidence | Running the Next.js web build succeeds, the open blocker entry for the `JobsTable.tsx` JSX parse failure is moved out of Active, and QA-facing notes describe the compile issue as resolved verification evidence instead of an active engineering blocker | Claimed by Priya during hourly kickoff from an unassigned QA verification gap after the web build passed again; implementation docs updated and handed to Sam for sign-off. |
 
 | T-088 | Fix Next.js JSX parse failure in `apps/web/components/JobsTable.tsx` caused by `Unexpected token `div`` so the jobs dashboard can compile again | Alice | in-progress | fix/jobtrackr-jobs-table-jsx-parse | — | JobsTable compiles cleanly, the Next.js build/dev server no longer throws the JSX parser error at line 44, and the dashboard table renders again in the current frontend slice | Running the web app no longer fails with `Unexpected token `div`. Expected jsx identifier`, the component compiles in TypeScript/Next.js, and the jobs table renders in the browser without syntax errors | Logged from Keith bug report on 2026-04-21 after a compile failure in `/Users/keith.goff/Documents/jobtrackr/apps/web/components/JobsTable.tsx` blocked the dashboard frontend |
 
@@ -116,6 +117,7 @@ If a requirement appears ambiguous, check the canonical PM specs first and escal
 | T-093 | Reconcile blocker-tracking docs so the JobsTable compile issue is shown as a QA verification item instead of an open engineering blocker | Frank | No |
 | T-094 | Align PROJECT lane ownership and recovery guidance with the README and Phase 3 handoff package so kickoff-facing docs keep the same current pickup story | Alice | No |
 | T-085 | Byte-align kickoff-facing recovery order and lane wording so README, PROJECT, and the Phase 3 handoff package all use the same explicit project-root sequence and current frontend split | Marcus | No |
+| T-090 | Verify the resolved JobsTable compile blocker and update QA-facing blocker notes so repo docs stop treating the dashboard build as currently blocked | Priya | No |
 
 ## Upcoming
 - T-034 was pulled into Active during hourly kickoff so Marcus could finish the reconciliation pass all the way through the milestone plan.
@@ -158,12 +160,17 @@ If a requirement appears ambiguous, check the canonical PM specs first and escal
 - T-085 was pulled into Active during hourly kickoff after Jimmy's latest plan kept Marcus on kickoff-entrypoint normalization and the live kickoff docs still needed one byte-aligned recovery order plus shared frontend-ownership note.
 - T-086 was pulled into Active during hourly kickoff after Jimmy fetch succeeded again and no unclaimed Priya task remained, so Priya claimed the next QA coverage refresh pass on the active kickoff-recovery branch.
 - T-087 was pulled into Active during hourly kickoff after Jimmy's latest plan kept Alice on frontend-facing recovery work and the preserved implementation-facing docs still needed one explicit shared Alice lane note plus verification coverage on the active kickoff-recovery branch.
+- T-090 was pulled into QA during hourly kickoff after Priya re-ran the web build, confirmed the old `JobsTable.tsx` JSX parse blocker no longer reproduces, and updated the blocker tracker plus QA coverage to treat the stale external kickoff path as the remaining coordination gap.
 
 ## Decisions & Notes
 - Keep task ownership explicit to avoid duplicate work across SWE agents.
 - Branch naming should track the task focus and remain one task per branch.
 - Gmail integration for the new job search project will use Gmail API with local web OAuth flow and env-based secrets, not embedded credentials.
 - Gmail access remains Gmail readonly scope only for MVP.
+- GOG is the preferred operator workflow for searching Gmail job-alert emails and validating ingestion queries during MVP development.
+- The ingestion pipeline must not stop at email search. Relevant Gmail messages should be captured as raw source-email records, parsed into candidate jobs, deduplicated, and persisted into the jobs database with source-email linkage.
+- Source-email persistence should store Gmail message id, thread id, sender, subject, received timestamp, labels, raw or normalized message body, parse status, and processed timestamp.
+- Parsed jobs should retain a linkage back to one or more source emails so repeated alerts can merge onto one job record without losing provenance.
 - Google auth policy: allow anyone with a Google account to sign in (not single approved account only).
 - The first Alice vertical slice is auth, protected shell, Gmail connection, and raw source-email ingestion before fit analysis.
 - Initial sync defaults to the last 30 days, with future work planned around a 10 minute incremental sync plus manual refresh.
@@ -285,26 +292,39 @@ If a requirement appears ambiguous, check the canonical PM specs first and escal
 ### Milestone 4: Gmail Ingestion Baseline
 **Goal:** Populate real jobs from Gmail inbox scanning.
 
+**Locked product semantics for this milestone:**
+- GOG-powered Gmail search is the preferred operator path for finding job-related emails and validating search queries during MVP development
+- ingestion must persist raw source-email records before or alongside parsed job creation
+- parsed jobs must keep provenance back to source emails
+- duplicate alerts for the same job should merge onto one job record without losing email history
+
 **Steps:**
 1. Configure Gmail API OAuth scope (readonly)
 2. Implement Gmail token storage (encrypted at rest)
 3. Add Gmail token refresh logic
 4. Build Gmail client wrapper for API calls
-5. Implement scheduled polling worker (configurable interval)
-6. Fetch recent messages from Gmail (incremental from last checkpoint)
-7. Implement job email detection rules (sender, subject keywords, labels)
-8. Persist Gmail message metadata
-9. Build rule-based job parser (extract title, company, location, link, salary)
-10. Implement deduplication logic (match on job URL)
-11. Create or update job records from parsed data
-12. Add ingestion logging and error handling
-13. Test sync with test Gmail account
-14. Verify inbox scan creates job records from relevant emails
-15. Verify duplicate obvious repeats do not create duplicate active rows
+5. Install and validate the GOG Gmail workflow used for operator search, debugging, and ingestion-query development
+6. Define canonical GOG Gmail search queries for job-alert discovery (sender, subject, label, and date-window patterns)
+7. Implement scheduled polling worker (configurable interval)
+8. Fetch recent messages from Gmail (incremental from last checkpoint)
+9. Implement job email detection rules (sender, subject keywords, labels)
+10. Persist raw source-email records including Gmail message id, thread id, sender, subject, labels, received timestamp, and raw or normalized body content
+11. Build rule-based job parser (extract title, company, location, link, salary)
+12. Implement deduplication logic (match on job URL)
+13. Create or update job records from parsed data
+14. Persist email-to-job linkage so one job can trace back to one or more source emails
+15. Add ingestion logging, parse status tracking, and error handling
+16. Test sync with test Gmail account
+17. Verify GOG search queries return the expected job-alert emails
+18. Verify inbox scan creates job records from relevant emails
+19. Verify duplicate obvious repeats do not create duplicate active rows
+20. Verify raw source-email records and source-email linkage are queryable for debugging and review
 
 **Exit Criteria:**
+- GOG search queries reliably find relevant job-alert emails
 - Inbox scan creates job records from relevant emails
 - Duplicate obvious repeats do not create duplicate active rows
+- Raw source-email records and email-to-job linkage are persisted for debugging and provenance
 
 ---
 
