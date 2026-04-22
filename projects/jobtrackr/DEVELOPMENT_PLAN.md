@@ -123,6 +123,7 @@ If a requirement appears ambiguous, check the canonical PM specs first and escal
 | T-090 | Verify the resolved JobsTable compile blocker and update QA-facing blocker notes so repo docs stop treating the dashboard build as currently blocked | Priya | No |
 | T-096 | Normalize duplicate task IDs so QA traceability and dependency references no longer collide between blocker verification and source-email ingestion work | Alice | No |
 | T-097 | Clarify GOG-driven Gmail discovery and source-email persistence requirements so engineering pickup does not stop at inbox search only | Frank | No |
+| T-098 | Byte-align the preserved first-build slice frontend-ownership note with engineering handoff v1 and the QA testability review so Marcus recovery docs stop drifting on the current frontend split | Marcus | No |
 | T-086 | Refresh QA hourly coverage and blocker notes so Priya's implementation-facing test docs reflect the latest Jimmy fetch, current external kickoff drift, and the still-live QA doc-alignment lane | Priya | No |
 
 ## Upcoming
@@ -170,6 +171,7 @@ If a requirement appears ambiguous, check the canonical PM specs first and escal
 - T-090 was pulled into QA during hourly kickoff after Priya re-ran the web build, confirmed the old `JobsTable.tsx` JSX parse blocker no longer reproduces, and updated the blocker tracker plus QA coverage to treat the stale external kickoff path as the remaining coordination gap.
 - T-096 was claimed and completed during hourly kickoff to resolve duplicate task-ID drift by renumbering the source-email ingestion epic to `T-091` and updating downstream dependency references so QA and engineering can trace blocker-verification and ingestion work unambiguously.
 - T-097 was claimed and completed during hourly kickoff to extend the live project docs with explicit GOG-based Gmail discovery, source-email-first persistence, and provenance expectations so Frank's ingestion lane can be picked up without re-reading scattered historical notes.
+- T-098 was claimed and completed during hourly kickoff after Marcus found the last preserved implementation-facing ownership drift in `specs/jobtrackr-first-build-slice-v1.md`, rewrote it to match the shared frontend note used in engineering handoff v1 and the QA testability review, and re-verified the stale-path recovery order still matched the live kickoff docs.
 
 ## Decisions & Notes
 - Keep task ownership explicit to avoid duplicate work across SWE agents.
