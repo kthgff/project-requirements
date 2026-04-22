@@ -194,7 +194,7 @@ JobTrakr is ready for regular real-world use.
 
 ## Recommended Immediate Priorities
 
-Current source-of-truth kickoff set:
+Implementation kickoff redirect:
 - `projects/jobtrackr/DEVELOPMENT_PLAN.md`
 - `projects/jobtrackr/PROJECT.md`
 - `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`

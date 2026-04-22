@@ -10,7 +10,7 @@ Resolve the remaining P0 product decisions blocking MVP implementation and align
 - `projects/jobtrackr/specs/jobtrackr-spec-clarifications-needed.md`
 
 ## Current kickoff references
-For implementation pickup, pair this memo with:
+Implementation kickoff redirect:
 - `projects/jobtrackr/DEVELOPMENT_PLAN.md`
 - `projects/jobtrackr/PROJECT.md`
 - `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
