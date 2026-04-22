@@ -87,17 +87,21 @@ The MVP should automatically turn job alert emails into structured tracked jobs 
 - fit rationale
 - status
 
-## 10. Initial Status Model
+## 10. Canonical Status Model
 
+Canonical workflow statuses:
 - new
-- flagged
-- reviewing
-- skipped
-- not a match
+- interested
 - applied
-- interview
-- rejected
+- interviewing
 - offer
+- rejected
+
+Separate fit and state signals:
+- fit score is nullable until analysis completes
+- low-fit is a fit signal for jobs with score below 60, not a workflow status
+- shortlist or quick-triage cues must not introduce extra workflow enums
+- archive behavior remains separate from workflow status
 
 ## 11. UI Direction
 
@@ -109,11 +113,12 @@ Recommended columns:
 - location
 - source
 - date found
-- fit flag
+- match percentage
+- low-fit or fit-state cue
 - status
 
 Likely first interactions:
-- sort by fit flag or date found
+- sort by match rating or date found
 - filter by status
 - open row for job detail
 
@@ -143,17 +148,17 @@ The system shall allow Keith to upload a resume file to be used for fit evaluati
 ### FR8. AI fit analysis
 The system shall compare tracked jobs against the uploaded resume and produce a fit result.
 
-### FR9. Fit flagging
-The system shall clearly flag jobs identified as likely good fits.
+### FR9. Fit signals
+The system shall clearly surface match rating, low-fit cues, and fit rationale without treating fit as workflow state.
 
 ### FR10. Table review UI
 The system shall present tracked jobs in a table interface.
 
 ### FR11. Status tracking
-The system shall support manual job status updates using the initial status model.
+The system shall support manual job status updates using the canonical workflow status model.
 
-### FR12. Auto-close low-fit jobs
-The system shall automatically set jobs with a match score below 60 to "not a match" status.
+### FR12. Canonical low-fit handling
+The system shall handle jobs with a match score below 60 as low-fit according to the canonical fit contract, without mutating workflow status to a non-canonical value.
 
 ### FR13. Job details page
 The system shall provide a dedicated page to view full job details including description, skills, tags, notes, and source link.
@@ -164,7 +169,7 @@ The system shall provide a dedicated page to view full job details including des
 - ~~What enrichment sources should be used when the email itself lacks detail?~~ **Answered: scrape from job detail page linked in email**
 - ~~Should fit be shown as a boolean flag only, or as a score plus rationale?~~ **Answered: score from 1 to 100**
 - ~~What deduplication logic should merge repeated alerts for the same job?~~ **Answered: match on job URL**
-- ~~Should the system notify Keith when new flagged jobs appear?~~ **Answered: no, can view UI**
+- ~~Should the system notify Keith when new likely good-fit jobs appear?~~ **Answered: no, can view UI**
 
 ## 14. Success Criteria
 
