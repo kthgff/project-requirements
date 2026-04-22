@@ -116,10 +116,11 @@ Focus on frontend-facing kickoff-entrypoint and recovery-doc alignment so implem
 Priority order:
 1. T-078 normalize README, PROJECT, and the handoff package so Marcus and Alice show up explicitly as the frontend owners for the current slice
 2. T-061 reconcile README, PROJECT, and kickoff handoff entrypoints around the live auth -> session -> Gmail readonly connect -> persisted jobs slice
-3. T-065 keep preserved kickoff docs clearly historical and recoverable to the live project-root source set
-4. T-068 normalize README, PROJECT, and handoff package path examples so they all use the same explicit `projects/jobtrackr/...` entrypoints
-5. T-072 remove remaining bare-path and lane-wording ambiguity across kickoff-facing docs during hourly recovery
-6. Keep T-001 and T-004 aligned so list/detail payload semantics do not drift while kickoff docs stabilize
+3. Keep README, PROJECT, and the handoff package pointing frontend pickup back to the canonical detail-view, list-to-detail, and workspace continuity contracts
+4. T-065 keep preserved kickoff docs clearly historical and recoverable to the live project-root source set
+5. T-068 normalize README, PROJECT, and handoff package path examples so they all use the same explicit `projects/jobtrackr/...` entrypoints
+6. T-072 remove remaining bare-path and lane-wording ambiguity across kickoff-facing docs during hourly recovery
+7. Keep T-001 and T-004 aligned so list/detail payload semantics do not drift while kickoff docs stabilize
 
 ### Priya
 Focus on workspace behavior in the mock-data frontend slice.
@@ -137,6 +138,7 @@ Priority order:
 - Empty results are not the same as no-data state.
 - Detail view should follow the locked section order.
 - Row-selection persistence should follow the workspace continuity rules.
+- Frontend kickoff docs should point engineers at the canonical detail-view, list-to-detail, and workspace continuity contracts before they rely on preserved frontend plans.
 
 ## Milestones 1 to 4 Summary
 

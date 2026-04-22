@@ -1106,6 +1106,18 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The frontend plan no longer presents `strengths`, `gaps`, or `notes/tags later if available` as the active detail model.
 - The table UI spec points table-to-detail continuity, drawer-versus-route parity, and selected-row behavior back to the canonical list-to-detail examples.
 
+## T-105 Kickoff-Facing Frontend Continuity Pointer Test Cases
+
+### TC-2161 Kickoff-facing docs route frontend pickup to the canonical detail continuity files
+**Steps**
+1. Review `README.md`, `PROJECT.md`, and `specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+2. Confirm each file explicitly points frontend pickup to `specs/jobtrackr-detail-view-contract-2026-04-20.md`, `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`, and `specs/jobtrackr-workspace-ux-contract-2026-04-20.md`.
+
+**Expected**
+- All three kickoff-facing docs mention the same canonical detail continuity files.
+- The handoff package keeps Marcus's lane focused on frontend continuity alignment rather than preserved-doc-only wording.
+- An engineer recovering from an hourly kickoff can reach the live detail continuity contracts without starting from preserved frontend-plan language.
+
 ## T-028 Workspace Continuity QA Matrix Test Cases
 
 ### TC-1940 Continuity matrix covers preserve, clear, restore, and no-fallback rules

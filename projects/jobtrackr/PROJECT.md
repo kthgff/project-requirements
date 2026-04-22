@@ -16,6 +16,11 @@ Current lane split for this slice:
 - Alice and Marcus: frontend owners for the current slice
 - remaining SWE lanes: backend and shared contract follow-through
 
+Frontend continuity for this slice should stay anchored to:
+- `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
+
 ## Current Phase
 
 **Phase 3: Engineering handoff and kickoff**
@@ -115,10 +120,11 @@ In progress:
 
 1. Finish reconciling PROJECT, README, milestone, and handoff references against the canonical workflow, fit-signal contract, and current auth to Gmail to persisted-jobs pickup lane
 2. Keep the frontend ownership split explicit in kickoff-facing docs so Marcus and Alice land on the same live source-of-truth set during hourly recovery
-3. Lock the first shared schema and API interfaces for the raw-ingestion and persisted-jobs vertical slice
-4. Add explicit product and engineering guidance for GOG-based Gmail job-email discovery, raw message capture, parsing, deduplication, and persistence into the jobs database
-5. Keep the engineering handoff entrypoints current as implementation pickup accelerates
-6. Move the current auth and persisted-jobs slice forward with verifiable completion states
+3. Keep kickoff-facing docs pointing frontend pickup back to the canonical detail-view, list-to-detail, and workspace continuity contracts so drawer, route, notes, tags, and row-selection behavior do not drift
+4. Lock the first shared schema and API interfaces for the raw-ingestion and persisted-jobs vertical slice
+5. Add explicit product and engineering guidance for GOG-based Gmail job-email discovery, raw message capture, parsing, deduplication, and persistence into the jobs database
+6. Keep the engineering handoff entrypoints current as implementation pickup accelerates
+7. Move the current auth and persisted-jobs slice forward with verifiable completion states
 
 ## Key Files
 
@@ -132,6 +138,8 @@ In progress:
 - `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
 - `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
 - `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-frontend-plan-v1.md` (preserved, should defer to the canonical detail and list-to-detail contracts)
+- `projects/jobtrackr/specs/jobtrackr-table-ui-spec-v1.md` (preserved, should defer to the canonical detail and list-to-detail contracts)
 
 ## Project Plan to Completion
 

@@ -40,7 +40,12 @@ Current lane split for this slice:
 - Alice and Marcus: frontend owners for the current slice
 - remaining SWE lanes: backend and shared contract follow-through
 
-Use `projects/jobtrackr/specs/jobtrackr-first-build-slice-v1.md` as historical kickoff context only, and use `projects/jobtrackr/DEVELOPMENT_PLAN.md` plus `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md` for the current lane and ownership guidance. All work should still follow canonical workflow and fit-signal language:
+Use `projects/jobtrackr/specs/jobtrackr-first-build-slice-v1.md` as historical kickoff context only, and use `projects/jobtrackr/DEVELOPMENT_PLAN.md` plus `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md` for the current lane and ownership guidance. Frontend pickup should also treat these detail-continuity docs as part of the live kickoff set:
+- `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
+
+All work should still follow canonical workflow and fit-signal language:
 - workflow status is only `new`, `interested`, `applied`, `interviewing`, `offer`, `rejected`
 - match rating and low-fit are fit signals, not workflow states
 - archive behavior remains separate from workflow status
@@ -68,6 +73,10 @@ projects/jobtrackr/
 | Engineer | Owns specs, contracts, implementation planning, and reconciliation work |
 | QA | Owns test plans, blocker validation, and acceptance review |
 
+
+## Frontend continuity reminder
+
+For the current frontend slice, treat drawer and full-page detail as one behavior surface. Notes must use explicit save/cancel, tags must edit in context, and selected-row continuity should follow the canonical list-to-detail examples instead of older preserved wording.
 
 ## Ticket Tracking
 
