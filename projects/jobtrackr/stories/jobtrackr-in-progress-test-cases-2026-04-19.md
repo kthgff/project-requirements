@@ -7,18 +7,21 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - If a kickoff prompt or older note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift.
 - Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/prd/jobtrackr-prd-v2.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
+- Current lane split for this slice: Alice and Marcus own frontend follow-through, while Frank and the remaining backend lanes own backend and shared-contract follow-through.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
+- QA should continue treating `apps/web/components/JobsTable.tsx` verification as the live frontend blocker until T-089 is explicitly signed off.
 
-## Hourly QA review — 2026-04-22 00:20 America/Chicago
+## Hourly QA review — 2026-04-22 00:50 America/Chicago
 
 ### Results
-- PASS: Jimmy's latest plan fetch succeeded, and the latest PM guidance still points QA at source-of-truth recovery, the current auth -> session -> Gmail readonly connect -> persisted jobs slice, and the open `JobsTable.tsx` compile-risk lane.
-- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` still has no `done` rows, and T-089 is now explicitly in QA with SWE reporting `npm test` plus `npm run build` green in `apps/web` for the canonical jobs-table follow-through.
-- PASS: PRD v2, the QA blocker checklist, and this in-progress QA coverage file still reuse the same recovery note, path order, and current Next.js web plus Go API wording for stale kickoff prompt recovery.
+- PASS: Jimmy's latest plan fetch succeeded, and the latest PM guidance still points QA at source-of-truth recovery, the current auth -> session -> Gmail readonly connect -> persisted jobs slice, and the open `JobsTable.tsx` verification-risk lane.
+- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now records T-091 in QA after Priya refreshed the repo-side QA recovery guidance and blocker notes during this hourly kickoff.
+- PASS: PRD v2, the QA blocker checklist, and this in-progress QA coverage file now reuse the same recovery note, path order, lane split, and current Next.js web plus Go API wording for stale kickoff prompt recovery.
+- PASS: The QA-facing docs now all call out Alice and Marcus as frontend owners for the current slice, with Frank and the remaining SWE lanes on backend and shared-contract follow-through, matching Jimmy's latest pickup guidance.
 - PASS: README, PROJECT, and the Phase 3 handoff package still point recovery back to the same live `projects/jobtrackr/...` source-of-truth set for the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - GAP: The hourly QA cron prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so external automation remains out of sync with the repo's corrected recovery guidance.
-- GAP: Jimmy's latest watchout still names `apps/web/components/JobsTable.tsx` as an open compile blocker owned by Alice, so T-089 cannot be signed off until QA reruns the web build and confirms the dashboard renders with canonical workflow plus fit-signal behavior intact.
-- GAP: README, PROJECT, and the handoff package now align at a high level, but preserved kickoff and implementation-facing docs outside the QA trio still need diff-level verification before QA can close the broader recovery-drift lane.
+- GAP: Jimmy's latest watchout still names `apps/web/components/JobsTable.tsx` as the live frontend blocker owned by Alice, so T-089 cannot be signed off until QA reruns the web build and confirms the dashboard renders with canonical workflow plus fit-signal behavior intact.
+- GAP: Preserved kickoff and implementation-facing docs outside the core QA trio still need diff-level verification before QA can close the broader recovery-drift lane.
 
 ## Source tasks covered
 - T-001: Finalize PM decision alignment in JobTrackr API contract and debug semantics

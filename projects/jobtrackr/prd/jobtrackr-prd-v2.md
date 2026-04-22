@@ -192,7 +192,9 @@ Shared QA recovery note:
 - If a kickoff prompt or older note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift.
 - Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/prd/jobtrackr-prd-v2.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
+- Current lane split for this slice: Alice and Marcus own frontend follow-through, while Frank and the remaining backend lanes own backend and shared-contract follow-through.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
+- QA should continue treating `apps/web/components/JobsTable.tsx` verification as the live frontend blocker until T-089 is explicitly signed off.
 
 ## Recommended MVP Cut
 If speed matters most, first release should focus on:
