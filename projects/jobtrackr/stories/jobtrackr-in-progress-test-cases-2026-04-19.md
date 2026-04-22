@@ -17,7 +17,7 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now shows T-085, T-099, T-100, and T-101 as completed alongside the earlier kickoff-recovery cleanup, so README, PROJECT, and the Phase 3 handoff package all have plan-level completion evidence for the shared recovery order.
 - PASS: Spot-check review confirms README, PRD v2, the QA blocker checklist, this QA coverage file, the preserved engineering handoff v1, the preserved QA testability review, and the Phase 3 handoff package still align on the live `projects/jobtrackr/...` recovery path and current Next.js web plus Go API implementation slice.
 - PASS: The preserved implementation-facing docs still expose the same explicit Alice frontend lane note, so the byte-alignment work for T-087 remains intact instead of drifting back apart.
-- PASS: T-095 remains the clearest QA sign-off target this hour because the plan says implementation is complete on `feat/jobtrackr-source-email-persistence`, the evidence note records passing `go test ./...` and `go build ./...`, and the current PM plan explicitly calls for Sam QA sign-off.
+- PASS: T-095 remains the clearest QA sign-off target this hour because the plan says implementation is complete on `feat/jobtrackr-source-email-persistence`, the evidence note records passing `go test ./...` and `go build ./...`, the new sign-off checklist now consolidates the fixture-backed validation path, and the current PM plan explicitly calls for Sam QA sign-off.
 - GAP: The hourly QA cron prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so stale external kickoff wording remains the live coordination gap even though the repo-side recovery docs are aligned.
 - GAP: Final T-095 sign-off still needs fixture-backed database verification for persisted `source_emails` and `job_source_emails` rows during a live or seeded sync run.
 
@@ -1751,7 +1751,7 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 
 Evidence note:
 - `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md`
-
+- `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md`
 
 ### TC-2159 Gmail sync persists provenance before job upsert
 **Steps**
@@ -1839,4 +1839,4 @@ Evidence note:
 27. Jimmy's latest hourly plan shifts Priya's active QA-facing lane to T-070 and T-075 while Marcus remains on T-078, T-080, and T-081, so QA should continue treating shared recovery-note parity plus preserved-doc frontend-ownership verification as the highest-value doc-verification lane until more tasks move to QA.
 28. README, PROJECT, the Phase 3 handoff package, preserved engineering handoff v1, and the QA testability review were spot-checked again this hour and remain aligned on project-root recovery order plus current frontend lane wording. Keep this as regression monitoring rather than an active mismatch.
 29. Jimmy fetch is no longer a blocker story. If future hourly notes regress to the old 401 narrative, QA should treat that as stale context unless a fresh fetch actually fails again.
-30. T-095 now has stronger contract-level QA coverage for provenance persistence, explicit reprocess idempotence, and GOG discovery sufficiency, and the repo-side evidence bundle now exists at `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md`, but final sign-off still depends on fixture-backed verification.
+30. T-095 now has stronger contract-level QA coverage for provenance persistence, explicit reprocess idempotence, and GOG discovery sufficiency, the repo-side evidence bundle exists at `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md`, and the Sam-facing sign-off path is now consolidated in `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md`, but final sign-off still depends on fixture-backed verification.

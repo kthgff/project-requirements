@@ -10,7 +10,7 @@ Current note:
 - There are no active repo-side blockers right now.
 - The remaining coordination gap is external kickoff drift when hourly prompts still point to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` instead of `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
 - Repo-side follow-through is QA doc verification across the shared recovery-note set and kickoff-facing entrypoints, not a reopened engineering blocker.
-- T-095 now has a repo-side evidence bundle at `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md`; remaining sign-off work is fixture-backed QA validation, not missing implementation proof.
+- T-095 now has a repo-side evidence bundle at `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md` plus a Sam-facing sign-off checklist at `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md`; remaining sign-off work is fixture-backed QA validation, not missing implementation proof.
 
 ## Resolved Blockers
 | ID | Who | Blocker | Resolution |
