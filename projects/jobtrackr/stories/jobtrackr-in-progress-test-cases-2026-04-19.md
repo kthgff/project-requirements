@@ -1,4 +1,4 @@
-# JobTrackr In-Progress Test Cases — 2026-04-20
+# JobTrackr In-Progress and Recent Completion Test Cases — 2026-04-22
 
 ## Purpose
 Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELOPMENT_PLAN.md`, updated for Jimmy's latest kickoff emphasis on QA recovery wording normalization, kickoff-entrypoint safety, and the active auth -> session -> Gmail readonly connect -> persisted jobs implementation slice.
@@ -9,16 +9,17 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
-## Hourly QA review — 2026-04-22 06:50 America/Chicago
+## Hourly QA review — 2026-04-22 09:20 America/Chicago
 
 ### Results
-- PASS: Jimmy's latest plan fetch succeeded again during this kickoff, and the active QA lane remains centered on T-070, T-075, T-086, and the new blocker-verification follow-through captured under T-090.
-- PASS: `npm --prefix apps/web run build` in `/Users/keith.goff/Documents/jobtrackr` completed successfully on 2026-04-22, so the old `JobsTable.tsx` JSX parse failure is now verified as resolved and no longer belongs in the active blocker list.
-- PASS: PRD v2, the QA blocker checklist, and this in-progress QA coverage file still reuse the same recovery note, path order, and current Next.js web plus Go API wording for stale kickoff prompt recovery.
-- PASS: README, PROJECT, and the Phase 3 handoff package all point recovery back to the same live `projects/jobtrackr/...` source-of-truth set for the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
-- PASS: Kickoff-facing docs still reflect Jimmy's current ownership split, with Alice and Marcus called out as frontend owners for the active slice.
-- GAP: The hourly QA cron prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so external automation remains out of sync with the repo's corrected recovery guidance.
-- GAP: T-090 is now ready for Sam QA review, but the broader repo-side recovery-drift lane still needs diff-level verification across preserved kickoff and implementation-facing docs outside the primary QA trio.
+- PASS: Jimmy's latest fetch succeeded, and his current priority remains the auth -> session -> Gmail readonly connect -> persisted jobs frontend slice, with T-022, T-029, T-049, T-052, and T-055 still called out as the active Alice lane.
+- PASS: Jimmy's latest plan confirms there are no active repo blockers, and the old `JobsTable.tsx` JSX parse/build failure remains verified closed.
+- PASS: T-085 is now marked completed in `projects/jobtrackr/DEVELOPMENT_PLAN.md`, so kickoff-facing recovery order and current frontend lane wording are aligned across README, PROJECT, and the Phase 3 handoff package.
+- PASS: The active QA lane remains centered on T-086, the shared QA recovery-note set, and follow-through verification that preserved implementation-facing docs stay byte-aligned with the live project-root paths.
+- PASS: PRD v2, the QA blocker checklist, and this QA coverage file still use the same recovery pattern for stale kickoff prompt recovery.
+- GAP: The hourly QA cron prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so external automation remains the live coordination gap even though repo docs are converging.
+- PASS: Duplicate task-ID drift in `DEVELOPMENT_PLAN.md` has been normalized by splitting the source-email ingestion epic onto `T-091`, so QA and dependency references no longer collide with the completed compile-blocker verification task.
+- GAP: T-095 is described as implementation-complete and awaiting Sam QA sign-off, but no runnable evidence or source-email persistence fixture references are linked yet from the QA-owned docs.
 
 ## Source tasks covered
 - T-001: Finalize PM decision alignment in JobTrackr API contract and debug semantics
@@ -1669,6 +1670,32 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The note names the stale root-level development-plan path explicitly.
 - The active implementation lane wording matches exactly across all three docs.
 
+## T-085 Kickoff Recovery Byte-Alignment Completion Test Cases
+
+### TC-2157 README, PROJECT, and handoff package now share one recovery order and frontend ownership note
+**Steps**
+1. Review `README.md`, `PROJECT.md`, and `specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+2. Compare the ordered `projects/jobtrackr/...` recovery path examples.
+3. Compare the current lane note for Alice and Marcus.
+
+**Expected**
+- All three kickoff-facing docs use the same explicit project-root recovery order.
+- All three describe Alice and Marcus as frontend owners for the active slice.
+- No kickoff-facing doc falls back to the stale root-level `DEVELOPMENT_PLAN.md` path as the live entrypoint.
+
+## T-086 QA Hourly Coverage Refresh Test Cases
+
+### TC-2158 Active QA coverage reflects latest Jimmy fetch and current repo blocker state
+**Steps**
+1. Review the latest five messages from `#pm-jimmy`.
+2. Compare the current QA hourly summary against `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
+3. Inspect whether active blocker notes still mention the old Jimmy-fetch 401 story or the resolved JobsTable compile blocker as live blockers.
+
+**Expected**
+- QA hourly coverage records that Jimmy fetch succeeds again.
+- QA notes treat the stale external kickoff path as the remaining coordination gap.
+- Resolved JobsTable compile/build failure is preserved as verification evidence, not an active engineering blocker.
+
 ## T-087 Shared Alice Lane Note Verification Test Cases
 
 ### TC-2156 Preserved handoff v1 and QA testability review expose the same explicit Alice lane note
@@ -1718,8 +1745,44 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The app does not require manual local-state deletion to recover.
 - Session handling and reconnect affordances remain deterministic after disconnect.
 
+## T-095 Source-Email Persistence Sign-off Test Cases
+
+### TC-2159 Gmail sync persists provenance before job upsert
+**Steps**
+1. Run the Gmail sync flow against a fixture mailbox with at least one new job-alert email and one duplicate alert.
+2. Inspect persisted records in `source_emails`, `job_source_emails`, and the jobs table.
+3. Re-run the sync against the same fixture mailbox.
+
+**Expected**
+- Each Gmail message is persisted once in `source_emails` before or alongside parsed job creation.
+- Saved jobs retain linkage rows in `job_source_emails` back to one or more source emails.
+- Re-running sync does not duplicate source-email rows or break provenance on the merged job record.
+
+### TC-2160 Source-email persistence evidence is attached to QA handoff
+**Steps**
+1. Review QA-facing docs for T-095.
+2. Check for linked test evidence covering `go test ./...`, `go build ./...`, fixture setup, and persisted-record examples.
+
+**Expected**
+- QA handoff includes concrete build/test evidence, not just narrative status.
+- Fixture or sample-record references are available for provenance verification.
+- Missing evidence is treated as a QA blocker for final sign-off.
+
+## T-096 Duplicate Task-ID Normalization Test Cases
+
+### TC-2161 DEVELOPMENT_PLAN uses unique IDs for blocker verification and source-email ingestion
+**Steps**
+1. Review `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
+2. Find the compile-blocker verification task and the source-email ingestion epic.
+3. Verify downstream dependency references for the source-email persistence task.
+
+**Expected**
+- The compile-blocker verification task remains `T-090`.
+- The source-email ingestion epic is renumbered to `T-091`.
+- Dependent tasks such as `T-095` point at `T-091`, not the blocker-verification task.
+
 ## Current QA coverage gaps
-1. No tasks are marked `done` or moved to QA in `DEVELOPMENT_PLAN.md`, so this hour remains acceptance-coverage and blocker surfacing work rather than runnable execution validation.
+1. T-085 is marked completed in the plan, but preserved implementation-facing docs still need byte-level spot checks before QA can declare the broader recovery cleanup lane done.
 2. T-006 is still blocked by status-model drift in `jobtrackr-auto-close-logic-spec-v1.md`, which still references pre-decision statuses like `flagged`, `reviewing`, `skipped`, `interview`, and `not a match` instead of the canonical workflow model.
 3. T-062 now covers the remaining QA-owned environment drift between older local-Go-app wording and the current Next.js web plus Go API handoff, but execution coverage still depends on downstream task docs making that split explicit where needed.
 4. Jimmy's cron note still points QA at `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, but the live plan is actually `projects/jobtrackr/DEVELOPMENT_PLAN.md`; T-062 now tracks that coordination gap inside the repo-facing QA docs.
