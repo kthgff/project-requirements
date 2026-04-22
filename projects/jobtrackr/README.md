@@ -19,7 +19,13 @@ If you are picking up implementation or reconciliation work, use this recovery o
 5. `projects/jobtrackr/specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
 6. `projects/jobtrackr/specs/jobtrackr-api-contract.md`
 
-If an hourly kickoff prompt still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale drift and recover to the project-root files above.
+Recovery note for automation-facing handoffs:
+- if an hourly kickoff prompt still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that path as stale drift and recover in this order:
+  1. `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`
+  2. `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md`
+  3. `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+- when a kickoff note says to start with PROJECT, use `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md` so the recovery path stays explicit alongside the live development plan
+- treat bare filenames in preserved notes as historical shorthand only, not live repo-root entrypoints
 
 ## Kickoff Build Slice
 
@@ -36,9 +42,17 @@ The **current implementation pickup direction** extends that into the first real
 - persisted jobs retrieval
 - jobs dashboard rendering server-backed results
 
-Current lane split for this slice:
-- Alice and Marcus: frontend owners for the current slice
-- remaining SWE lanes: backend and shared contract follow-through
+Current lane ownership for this slice:
+- Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
+- Marcus: frontend recovery-entrypoint and kickoff-doc alignment so frontend pickup stays safe during hourly handoffs
+- Frank: source-of-truth maintenance across roadmap-facing and preserved planning docs so the live kickoff set and current slice wording stay aligned
+- remaining SWE lanes: backend implementation and shared contract follow-through
+
+Shared Alice lane note:
+- Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
+
+Shared Marcus lane note:
+- Marcus: frontend recovery-entrypoint and kickoff-doc alignment so frontend pickup stays safe during hourly handoffs
 
 Use `projects/jobtrackr/specs/jobtrackr-first-build-slice-v1.md` as historical kickoff context only, and use `projects/jobtrackr/DEVELOPMENT_PLAN.md` plus `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md` for the current lane and ownership guidance. All work should still follow canonical workflow and fit-signal language:
 - workflow status is only `new`, `interested`, `applied`, `interviewing`, `offer`, `rejected`
