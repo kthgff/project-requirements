@@ -37,6 +37,8 @@ Current lane split for this slice:
 - Core problem defined: job searching and applying takes too long
 - Core input source defined: **Gmail inbox job alert emails**
 - Supported email sources clarified to include **all relevant alerts**, including **LinkedIn** and **Indeed**
+- Local/operator Gmail discovery may use the **gog CLI** to search job-related emails and persist them as source-email records before parsing into jobs
+- Gmail job-alert discovery should support **GOG-powered search of job-related emails** so inbox search can reliably find digest and alert messages before parsing and persistence
 - Resume source defined as **uploaded file**
 - Main initial UI defined as **table view**
 - Main jobs page should be a **searchable jobs table backed by database data**
@@ -88,7 +90,7 @@ In progress:
 
 ### Build phase not yet verified complete
 - Gmail integration implementation
-- ingestion pipeline implementation
+- GOG-powered Gmail search and ingestion pipeline implementation
 - resume upload implementation
 - fit analysis implementation
 - job table UI implementation
@@ -106,6 +108,7 @@ In progress:
 - ~~job detail enrichment source is not yet fully specified~~ **Answered: scrape from job detail page linked in email**
 - dependency map across implementation milestones still needs to be finalized
 - some older docs still expose stale workflow semantics and need cleanup against the Gate A canonical set
+- the current ingestion docs need to explicitly call out how GOG-based Gmail search feeds the persisted jobs database so implementation does not stop at inbox search only
 - ~~Google auth access policy is not yet finalized, single approved account vs broader sign-in~~ **Answered: allow anyone with Google account**
 
 ## Next Recommended Steps
@@ -113,8 +116,9 @@ In progress:
 1. Finish reconciling PROJECT, README, milestone, and handoff references against the canonical workflow, fit-signal contract, and current auth to Gmail to persisted-jobs pickup lane
 2. Keep the frontend ownership split explicit in kickoff-facing docs so Marcus and Alice land on the same live source-of-truth set during hourly recovery
 3. Lock the first shared schema and API interfaces for the raw-ingestion and persisted-jobs vertical slice
-4. Keep the engineering handoff entrypoints current as implementation pickup accelerates
-5. Move the current auth and persisted-jobs slice forward with verifiable completion states
+4. Add explicit product and engineering guidance for GOG-based Gmail job-email discovery, raw message capture, parsing, deduplication, and persistence into the jobs database
+5. Keep the engineering handoff entrypoints current as implementation pickup accelerates
+6. Move the current auth and persisted-jobs slice forward with verifiable completion states
 
 ## Key Files
 
@@ -160,10 +164,11 @@ In progress:
 
 ### Phase 4. Build and implementation
 - [ ] Set up code repositories and environment
-- [ ] Implement Gmail auth and inbox scanning
+- [ ] Implement Gmail auth, GOG-powered inbox search, and inbox scanning
 - [ ] Implement email classification and extraction
+- [ ] Implement raw Gmail message capture plus parser pipeline for job-alert emails
 - [ ] Implement job enrichment and deduplication
-- [ ] Implement database schema and persistence
+- [ ] Implement database schema and persistence for raw source emails, parsed jobs, and email-to-job linkage
 - [ ] Implement resume upload flow
 - [ ] Implement fit analysis pipeline
 - [ ] Implement table UI and job detail view
