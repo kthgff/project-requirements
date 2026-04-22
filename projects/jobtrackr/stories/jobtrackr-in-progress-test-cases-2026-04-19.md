@@ -9,16 +9,17 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
-## Hourly QA review — 2026-04-22 09:20 America/Chicago
+## Hourly QA review — 2026-04-22 09:50 America/Chicago
 
 ### Results
-- PASS: Jimmy's latest fetch succeeded, and his current priority remains the auth -> session -> Gmail readonly connect -> persisted jobs frontend slice, with T-022, T-029, T-049, T-052, and T-055 still called out as the active Alice lane.
-- PASS: Jimmy's latest plan confirms there are no active repo blockers, and the old `JobsTable.tsx` JSX parse/build failure remains verified closed.
-- PASS: T-085 is now marked completed in `projects/jobtrackr/DEVELOPMENT_PLAN.md`, so kickoff-facing recovery order and current frontend lane wording are aligned across README, PROJECT, and the Phase 3 handoff package.
-- PASS: The active QA lane remains centered on T-086, the shared QA recovery-note set, and follow-through verification that preserved implementation-facing docs stay byte-aligned with the live project-root paths.
-- PASS: PRD v2, the QA blocker checklist, and this QA coverage file still use the same recovery pattern for stale kickoff prompt recovery.
-- GAP: The hourly QA cron prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so external automation remains the live coordination gap even though repo docs are converging.
-- PASS: Duplicate task-ID drift in `DEVELOPMENT_PLAN.md` has been normalized by splitting the source-email ingestion epic onto `T-091`, so QA and dependency references no longer collide with the completed compile-blocker verification task.
+- PASS: Jimmy's latest fetch succeeded again, and his current lane callouts still center the auth -> session -> Gmail readonly connect -> persisted jobs slice, with Alice on T-022, T-029, T-049, T-052, and T-055 plus Priya on the QA recovery/doc-alignment lane.
+- PASS: Jimmy's latest plan confirms there are no active repo blockers, and the old `JobsTable.tsx` JSX parse/build failure remains verified closed as QA evidence rather than a live engineering blocker.
+- PASS: T-085 remains completed in `projects/jobtrackr/DEVELOPMENT_PLAN.md`, so README, PROJECT, and the Phase 3 handoff package still share the same kickoff-facing recovery order and current lane wording.
+- PASS: PRD v2, the QA blocker checklist, and this QA coverage file still reuse the same shared QA recovery note for stale kickoff prompt recovery.
+- PASS: The active QA lane is now best framed as T-086 coverage refresh plus follow-through diff verification across the shared QA recovery docs and kickoff-facing entrypoints.
+- GAP: The hourly QA cron prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so stale external kickoff wording remains the live coordination gap even though the repo-side recovery docs now point to the correct project-root files.
+- GAP: Remaining repo-side QA work is diff verification, not blocker discovery. README, PROJECT, the handoff package, and preserved implementation-facing docs still need ongoing byte-level checks so recovery wording does not drift back out of alignment.
+- PASS: Duplicate task-ID drift in `DEVELOPMENT_PLAN.md` remains normalized by splitting the source-email ingestion epic onto `T-091`, so QA and dependency references no longer collide with the completed compile-blocker verification task.
 - GAP: T-095 is described as implementation-complete and awaiting Sam QA sign-off, but no runnable evidence or source-email persistence fixture references are linked yet from the QA-owned docs.
 
 ## Source tasks covered
@@ -1690,10 +1691,12 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 1. Review the latest five messages from `#pm-jimmy`.
 2. Compare the current QA hourly summary against `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
 3. Inspect whether active blocker notes still mention the old Jimmy-fetch 401 story or the resolved JobsTable compile blocker as live blockers.
+4. Verify the QA hourly summary distinguishes external kickoff-path drift from repo-side diff-verification follow-through.
 
 **Expected**
 - QA hourly coverage records that Jimmy fetch succeeds again.
 - QA notes treat the stale external kickoff path as the remaining coordination gap.
+- Repo-side follow-through is described as shared QA recovery-doc and kickoff-entrypoint verification work, not a newly reopened engineering blocker.
 - Resolved JobsTable compile/build failure is preserved as verification evidence, not an active engineering blocker.
 
 ## T-087 Shared Alice Lane Note Verification Test Cases
@@ -1807,6 +1810,7 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 23. T-070 now covers wording normalization across PRD v2, the QA blocker checklist, and in-progress QA coverage so QA can recover from stale automation prompts without comparing three slightly different recovery notes by hand.
 24. T-069, T-071, T-072, and T-073 extend the same recovery coverage into automation examples and preserved handoff docs, so hourly kickoff recovery can be tested against one canonical path order instead of doc-specific variants.
 25. T-074, T-075, and T-076 are now represented in QA coverage, but they still need diff-level verification across preserved implementation-facing docs, the shared QA recovery note set, and preserved planning/handoff artifacts before QA can confirm the recovery wording is truly normalized end to end.
-26. T-086 now tracks the hourly QA coverage refresh so the latest Jimmy fetch success, current external kickoff-path drift, and remaining repo-side verification work stay visible in the active QA handoff notes.
-27. Jimmy's latest hourly plan specifically keeps Marcus on T-068 and T-072 plus Priya on T-070, so QA should continue treating kickoff-entrypoint alignment and shared QA recovery-note parity as the highest-value doc-verification lane until tasks begin moving to QA status.
+26. T-086 now tracks the hourly QA coverage refresh so the latest Jimmy fetch success, current external kickoff-path drift, and remaining repo-side diff verification work stay visible in the active QA handoff notes.
+27. Jimmy's latest hourly plan keeps Priya on T-086 while Marcus remains on kickoff-entrypoint alignment follow-through, so QA should continue treating shared recovery-note parity plus kickoff-entrypoint verification as the highest-value doc-verification lane until tasks begin moving to QA status.
 28. README, PROJECT, and the Phase 3 handoff package now appear aligned on project-root recovery order and current lane wording, but preserved kickoff docs still need the same byte-level verification before QA can declare the wider recovery-path cleanup done.
+29. Jimmy fetch is no longer a blocker story. If future hourly notes regress to the old 401 narrative, QA should treat that as stale context unless a fresh fetch actually fails again.

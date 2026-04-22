@@ -6,6 +6,11 @@ This file tracks active and resolved blockers for the JobTrackr project. Jimmy (
 | ID | Who | Blocker | What I've Tried | Need From | Status |
 |---|---|---|---|---|---|
 
+Current note:
+- There are no active repo-side blockers right now.
+- The remaining coordination gap is external kickoff drift when hourly prompts still point to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` instead of `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
+- Repo-side follow-through is QA doc verification across the shared recovery-note set and kickoff-facing entrypoints, not a reopened engineering blocker.
+
 ## Resolved Blockers
 | ID | Who | Blocker | Resolution |
 |---|---|---|---|
