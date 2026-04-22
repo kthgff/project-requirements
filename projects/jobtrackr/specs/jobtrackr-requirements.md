@@ -173,3 +173,16 @@ Not required for MVP:
 ## Decisions Still Open
 - Whether update emails should appear in a job activity timeline
 - What enrichment source should be authoritative when email data conflicts with the linked job page
+
+
+## Strategic Product Direction
+
+JobTrakr should evolve toward an AIApply-style AI job search copilot.
+
+This means post-MVP planning should include:
+- resume tailoring
+- cover letter generation
+- application workflow support or automation
+- interview preparation support
+
+The MVP does not need to ship all of these immediately, but the architecture and roadmap should allow expansion in that direction.

@@ -328,9 +328,14 @@ List payload notes:
 - `fitFlag` stays as the quick triage boolean
 - `fitState` supports `pending`, `scored`, or `unavailable` so the UI can distinguish missing analysis from a low score
 - `source` is included in the list payload because it is a required dashboard column
+- canonical list-to-detail examples for row selection, drawer continuity, and detail handoff live in `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
 
 ### GET /jobs/:id
 Returns a single job detail.
+
+Interaction and section-order expectations for this payload are defined in `specs/jobtrackr-detail-view-contract-2026-04-20.md`.
+Concrete list-row to detail-response examples, selection continuity expectations, and drawer versus full-page parity examples are defined in `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`.
+Use that file as the single canonical example set for list-to-detail continuity, selected-row behavior, and edit-flow expectations.
 
 Response:
 ```json
@@ -536,7 +541,7 @@ Response:
 ### GET /filters
 Returns filter options and counts used by the dashboard.
 
-The initial dashboard should support fit-state filtering and match-rating sorting without requiring a separate ratings endpoint.
+The initial dashboard should support fit-signal filtering and match-rating sorting without requiring a separate ratings endpoint. Filter labels should use canonical user-facing wording such as `strong-fit`, `low-fit`, and `pending-fit`, even if implementation stores separate nullable fit fields under the hood.
 
 Response:
 ```json
@@ -547,9 +552,9 @@ Response:
       { "value": "applied", "count": 12 }
     ],
     "fitStates": [
-      { "value": "flagged", "count": 6 },
-      { "value": "unflagged", "count": 18 },
-      { "value": "pending", "count": 4 }
+      { "value": "strong-fit", "count": 6 },
+      { "value": "fit-ready", "count": 18 },
+      { "value": "pending-fit", "count": 4 }
     ],
     "locations": [
       { "value": "Remote", "count": 14 }

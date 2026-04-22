@@ -1,5 +1,9 @@
 # JobTrakr MVP Stories v1
 
+> Historical story draft. Use the PM decision memo, API contract, and current DEVELOPMENT_PLAN for implementation truth.
+> Terms like fit flag, flagged, or unflagged in this file are retained as legacy shorthand only and should be read as fit-signal display, not as current product vocabulary or workflow-state behavior.
+> Canonical workflow statuses remain `new`, `interested`, `applied`, `interviewing`, `offer`, and `rejected`.
+
 ## Epic 0: Authentication
 
 ### Story 0
@@ -54,7 +58,7 @@ As Keith, I want tracked jobs compared against my uploaded resume so that strong
 - The system uses the uploaded resume as fit context
 - The system produces a fit evaluation for tracked jobs
 - The system calculates a match percentage for each tracked job
-- Good-fit jobs are clearly flagged
+- Good-fit jobs are clearly highlighted through fit score, fit-signal state, and shortlist cues without treating legacy terms like `flagged` as workflow or current product-state vocabulary
 - The system stores at least a short fit rationale
 
 ## Epic 5: Table review workflow
@@ -64,7 +68,9 @@ As Keith, I want to review tracked jobs in a table so that I can quickly scan an
 
 **Acceptance criteria**
 - The UI presents tracked jobs in a table
-- The table shows company, title, location, source, date found, fit flag, and status
+- The table shows company, title, location, source, date found, match rating / fit signal, and status
 - I can filter or sort the table at minimum by status and date found
 - I can update a job status manually
-- Available statuses are new, flagged, reviewing, skipped, applied, interview, rejected, and offer
+- Available workflow statuses are new, interested, applied, interviewing, offer, and rejected
+- Shortlist behavior uses `saved`
+- Archive behavior uses `archivedAt`, not a workflow status

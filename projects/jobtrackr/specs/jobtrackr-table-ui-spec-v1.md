@@ -6,7 +6,7 @@ Define the MVP table UI for reviewing tracked jobs in JobTrakr.
 
 ## Goal
 
-Allow the user to scan all tracked jobs quickly, identify flagged opportunities, and update workflow status with minimal friction.
+Allow the user to scan all tracked jobs quickly, identify likely good-fit opportunities through fit signals, and update workflow status with minimal friction.
 
 ## Table Overview
 
@@ -43,13 +43,14 @@ It should:
 ## Column Requirements
 
 ### Fit
-- show both a numeric `match rating` from 0 to 100 and a simple flagged/not-flagged state
+- show a numeric `match rating` from 0 to 100 plus a simple fit-priority indicator derived from the canonical fit contract
 - support three fit availability states:
-  - flagged or not flagged with a computed rating
-  - analyzed but below flag threshold
+  - analyzed with a computed rating and fit indicator
+  - analyzed but below the fit-priority threshold
   - unavailable or pending because resume or job data is incomplete
 - numeric rating should be sortable
-- flagged state should remain visually obvious for fast triage
+- fit-priority state should remain visually obvious for fast triage
+- fit treatment must not introduce or imply a workflow status
 
 ### Company
 - display normalized company name
@@ -125,13 +126,13 @@ Reason:
 ## Visual Hierarchy
 
 The table should make these things easy to notice first:
-1. flagged jobs and match percentage
+1. fit indicators and match percentage
 2. title and company
 3. current status
 4. recency
 
 ### Recommended treatment
-- flagged jobs use a badge or colored icon
+- fit-priority jobs use a badge or colored icon
 - match rating appears as a compact score, such as `84/100`, near the fit state
 - title text should be visually stronger than metadata
 - muted styling for lower-priority metadata like source/date
@@ -176,7 +177,7 @@ Show:
 The dashboard shall present database-backed jobs in a structured table.
 
 ### FR2. Fit visibility
-The table shall visually distinguish flagged jobs and display a numeric match rating when analysis exists.
+The table shall visually distinguish stronger-fit jobs through fit indicators and display a numeric match rating when analysis exists.
 
 ### FR3. Row detail access
 The user shall be able to open fuller job detail from the table.
@@ -202,4 +203,4 @@ The product shall support updating job status from the dashboard experience.
 
 - Should multi-select bulk actions exist in MVP, or later?
 - Should row click and title click both open detail, or title only?
-- Should flagged jobs float to top as an optional sort preset?
+- Should stronger-fit jobs float to top as an optional sort preset?
