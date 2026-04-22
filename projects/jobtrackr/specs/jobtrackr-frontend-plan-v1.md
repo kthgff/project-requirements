@@ -4,6 +4,8 @@
 
 Define the frontend plan for JobTrakr MVP, focused on the login experience and the main jobs dashboard with a table view.
 
+This preserved plan should follow the canonical detail-view contract in `specs/jobtrackr-detail-view-contract-2026-04-20.md` and the canonical list-to-detail examples in `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md` whenever older wording here drifts.
+
 ## Frontend Goal
 
 The frontend should let Keith:
@@ -201,15 +203,17 @@ Reason:
 - source platform
 - apply/job link
 - job summary or description
-- match percentage
-- fit summary
-- strengths
-- gaps
+- match percentage when available
+- fit state and fit summary
 - status control
-- notes/tags later if available
+- notes with explicit save/cancel
+- editable tags
+- source and activity context when present
 
 ### Actions in detail view
 - change status
+- edit notes with explicit save/cancel
+- add or remove tags in context
 - open original job link
 - close drawer
 
@@ -265,6 +269,9 @@ Because fit depends on a resume, the frontend should make resume state visible.
 - loading
 - loaded
 - error
+- empty notes state
+- empty tags state
+- inline save failure that preserves unsaved note edits
 
 ---
 
@@ -292,12 +299,15 @@ The dashboard shall support basic table sorting.
 The user shall be able to open a job detail view from the table.
 
 ### FR8. Status update
-The user shall be able to update job status from the dashboard or detail view.
+The user shall be able to update job status from the detail view, with optional table-side affordances only if they stay aligned with the canonical detail interaction model.
 
-### FR9. Resume visibility
+### FR9. Notes and tags editing
+The user shall be able to edit notes with explicit save/cancel and add or remove tags from the shared detail experience.
+
+### FR10. Resume visibility
 The frontend shall indicate whether a resume has been uploaded.
 
-### FR10. Logout
+### FR11. Logout
 The frontend shall provide a logout action.
 
 ---
@@ -326,15 +336,17 @@ Reason:
 4. Render static jobs table with mock data
 5. Connect table to real backend job list
 6. Add filters and sorting
-7. Add detail drawer
-8. Add inline or detail-based status updates
+7. Add detail drawer using the canonical shared section order
+8. Add detail-based status, notes, and tags interactions that match the canonical detail contract
 9. Add resume upload entry point and empty states
 
 ---
 
 ## Open Questions
 
-- Should dashboard detail use a side drawer or dedicated detail route in MVP?
 - Should fit use icon-only, badge-only, or score plus badge in the initial table?
-- Should status be editable inline in the table or only in the detail drawer?
 - Should resume upload live in dashboard header, settings, or onboarding?
+
+## Canonical continuity note
+
+For current implementation pickup, treat the shared detail drawer and full-page detail route as one behavioral surface. Notes must use explicit save/cancel, tags must edit in context, and list-to-detail mapping should follow `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md` instead of older simplified wording in this preserved plan.

@@ -1094,6 +1094,18 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Older example files are either compatibility shims or explicitly marked non-canonical.
 - New implementation-facing docs point only to the canonical file.
 
+## T-103 Preserved Frontend Detail Continuity Alignment Test Cases
+
+### TC-2160 Preserved frontend specs defer to the canonical detail-view and list-to-detail contracts
+**Steps**
+1. Review `specs/jobtrackr-frontend-plan-v1.md` and `specs/jobtrackr-table-ui-spec-v1.md`.
+2. Compare their detail-flow wording against `specs/jobtrackr-detail-view-contract-2026-04-20.md` and `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`.
+
+**Expected**
+- Both preserved frontend docs explicitly defer to the canonical detail-view and list-to-detail files when older wording drifts.
+- The frontend plan no longer presents `strengths`, `gaps`, or `notes/tags later if available` as the active detail model.
+- The table UI spec points table-to-detail continuity, drawer-versus-route parity, and selected-row behavior back to the canonical list-to-detail examples.
+
 ## T-028 Workspace Continuity QA Matrix Test Cases
 
 ### TC-1940 Continuity matrix covers preserve, clear, restore, and no-fallback rules
