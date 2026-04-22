@@ -101,13 +101,13 @@ Priority order:
 4. Keep this handoff package current so the repo always has one single-file engineering entrypoint
 
 ### Alice
-Focus on the first backend vertical slice and the automation-facing recovery notes that keep hourly kickoff safe.
+Focus on the frontend side of the auth -> session -> Gmail readonly connect -> persisted-jobs slice, plus the automation-facing recovery notes that keep hourly kickoff safe.
 
 Priority order:
-1. T-018 auth callback, session flow, Gmail readonly connection path
+1. T-022 wire the authenticated frontend shell to the auth session and Gmail connection endpoints
 2. T-029 authenticated persisted-jobs vertical slice once auth and connection state are usable
-3. T-064 and T-069 automation-facing kickoff recovery cleanup where stale root-level path examples could misroute pickup
-4. T-002 only where it directly supports the first end-to-end slice
+3. T-055 surface canonical persisted-jobs fallback reasons in the frontend while fit data is still incomplete
+4. T-064 and T-069 automation-facing kickoff recovery cleanup where stale root-level path examples could misroute pickup
 5. T-011 after auth, Gmail connection state, and persisted-job rendering are stable
 
 ### Marcus
