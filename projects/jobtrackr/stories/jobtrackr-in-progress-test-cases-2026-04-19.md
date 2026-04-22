@@ -16,10 +16,11 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - PASS: Jimmy's latest plan confirms there are no active repo blockers, and the old `JobsTable.tsx` JSX parse/build failure remains verified closed as QA evidence rather than a live engineering blocker.
 - PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now records completed work for T-085, T-086, T-090, T-093, T-094, T-096, and T-097, so kickoff-entrypoint recovery, blocker-note cleanup, duplicate task-ID normalization, and GOG/source-email requirement clarification all have plan-level completion evidence.
 - PASS: PRD v2, the QA blocker checklist, and this QA coverage file still reuse the same shared QA recovery note for stale kickoff prompt recovery.
-- PASS: T-095 remains the clearest QA sign-off target this hour because the plan says implementation is complete on `feat/jobtrackr-source-email-persistence` and local `go test ./...` plus `go build ./...` passed on 2026-04-22.
+- PASS: T-095 remains the clearest QA sign-off target this hour because the plan says implementation is complete on `feat/jobtrackr-source-email-persistence`, local `go test ./...` plus `go build ./...` passed again at 12:52 PM America/Chicago on 2026-04-22, and the repo now includes a dedicated evidence note at `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md`.
 - GAP: The hourly QA cron prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so stale external kickoff wording remains the live coordination gap even though the repo-side recovery docs now point to the correct project-root files.
 - GAP: Remaining repo-side QA work is diff verification, not blocker discovery. Preserved implementation-facing docs still need ongoing byte-level checks so recovery wording and frontend-ownership wording do not drift back out of alignment.
-- GAP: T-095 is described as implementation-complete and awaiting Sam QA sign-off, but no runnable evidence bundle or source-email persistence fixture references are linked yet from the QA-owned docs.
+- PASS: T-095 now has a repo-side evidence bundle with the reviewed code path, focused ingest regression test, API README proof, current implementation branch, current commit, and rerun command list recorded for Sam at `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md`.
+- GAP: Final T-095 sign-off still needs fixture-backed database verification for persisted `source_emails` and `job_source_emails` rows during a live or seeded sync run.
 
 ## Source tasks covered
 - T-001: Finalize PM decision alignment in JobTrackr API contract and debug semantics
@@ -1749,6 +1750,10 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 
 ## T-095 Source-Email Persistence Sign-off Test Cases
 
+Evidence note:
+- `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md`
+
+
 ### TC-2159 Gmail sync persists provenance before job upsert
 **Steps**
 1. Run the Gmail sync flow against a fixture mailbox with at least one new job-alert email and one duplicate alert.
@@ -1835,4 +1840,4 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 27. Jimmy's latest hourly plan shifts Priya's active QA-facing lane to T-070 and T-075 while Marcus remains on T-078, T-080, and T-081, so QA should continue treating shared recovery-note parity plus preserved-doc frontend-ownership verification as the highest-value doc-verification lane until more tasks move to QA.
 28. README, PROJECT, and the Phase 3 handoff package now appear aligned on project-root recovery order and current lane wording, but preserved kickoff docs still need the same byte-level verification before QA can declare the wider recovery-path cleanup done.
 29. Jimmy fetch is no longer a blocker story. If future hourly notes regress to the old 401 narrative, QA should treat that as stale context unless a fresh fetch actually fails again.
-30. T-095 now has stronger contract-level QA coverage for provenance persistence, explicit reprocess idempotence, and GOG discovery sufficiency, but final sign-off still depends on attached runnable evidence and fixture-backed verification.
+30. T-095 now has stronger contract-level QA coverage for provenance persistence, explicit reprocess idempotence, and GOG discovery sufficiency, and the repo-side evidence bundle now exists at `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md`, but final sign-off still depends on fixture-backed verification.

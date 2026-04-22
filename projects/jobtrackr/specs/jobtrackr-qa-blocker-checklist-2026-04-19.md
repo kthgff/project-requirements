@@ -156,6 +156,10 @@ These are the highest-risk contract mismatches to re-check during implementation
 
 ---
 
+## T-095 QA evidence handoff
+- Source-email persistence evidence bundle: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md`
+- Use it when validating the current provenance-first Gmail sync slice before moving T-095 from QA to Completed.
+
 ## 6. QA Gate Decision
 
 ### Build readiness
