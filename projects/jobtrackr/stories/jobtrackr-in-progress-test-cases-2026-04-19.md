@@ -1669,6 +1669,19 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The note names the stale root-level development-plan path explicitly.
 - The active implementation lane wording matches exactly across all three docs.
 
+## T-087 Shared Alice Lane Note Verification Test Cases
+
+### TC-2156 Preserved handoff v1 and QA testability review expose the same explicit Alice lane note
+**Steps**
+1. Review `specs/jobtrackr-engineering-handoff-v1.md` and `specs/jobtrackr-mvp-qa-testability-review.md`.
+2. Locate the `Shared Alice lane note` block in each preserved implementation-facing doc.
+3. Compare the Alice lane note text byte for byte.
+
+**Expected**
+- Both docs expose the same `Shared Alice lane note` label.
+- Both docs reuse the same Alice lane wording: `Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience`.
+- The shared Alice note appears alongside the same absolute-path recovery order and active Next.js web plus Go API slice wording.
+
 ## T-076 Preserved Planning and Handoff Recovery Note Test Cases
 
 ### TC-2155 ROADMAP, PM memo, QA review, and preserved handoff docs share one recovery pattern

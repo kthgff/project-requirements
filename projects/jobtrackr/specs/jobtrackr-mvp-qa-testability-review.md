@@ -30,6 +30,9 @@ Current lane ownership for this slice:
 - Frank: source-of-truth maintenance across roadmap-facing and preserved planning docs so the live kickoff set and current slice wording stay aligned
 - remaining SWE lanes: backend implementation and shared contract follow-through
 
+Shared Alice lane note:
+- Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
+
 Architecture note:
 - Treat older local-Go-app wording in preserved docs as historical framing only; the live implementation lane is the Next.js web plus Go API slice above.
 

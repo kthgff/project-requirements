@@ -38,6 +38,9 @@ Current lane ownership for this slice:
 - Frank: source-of-truth maintenance across roadmap-facing and preserved planning docs so the live kickoff set and current slice wording stay aligned
 - remaining SWE lanes: backend implementation and shared contract follow-through
 
+Shared Alice lane note:
+- Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
+
 ## Locked Product Decisions
 
 - implementation language direction: TypeScript for the web app and shared typed contracts, with the current backend delivery slice implemented as a Go API
