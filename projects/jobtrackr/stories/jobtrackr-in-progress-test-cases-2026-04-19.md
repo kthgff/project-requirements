@@ -9,15 +9,16 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
-## Hourly QA review — 2026-04-21 18:56 America/Chicago
+## Hourly QA review — 2026-04-21 18:59 America/Chicago
 
 ### Results
-- PASS: PRD v2, the QA blocker checklist, and the active QA coverage still reuse the same recovery text, path order, and current implementation-lane wording for stale kickoff prompt recovery.
-- PASS: Jimmy's latest plan fetch succeeded again, and Priya's current QA priorities remain aligned to T-070, T-075, and the broader QA recovery lane.
-- PASS: Jimmy's latest QA note still keeps the active slice on auth -> session -> Gmail readonly connect -> persisted jobs, with no new repo-side blockers logged.
+- PASS: Jimmy's latest plan fetch succeeded, and the active QA lane is still centered on T-070, T-075, and T-086 with no new blockers logged in `projects/jobtrackr/BLOCKERS.md`.
+- PASS: PRD v2, the QA blocker checklist, and this in-progress QA coverage file still reuse the same recovery note, path order, and current Next.js web plus Go API wording for stale kickoff prompt recovery.
+- PASS: README, PROJECT, and the Phase 3 handoff package all point recovery back to the same live `projects/jobtrackr/...` source-of-truth set for the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
+- PASS: Kickoff-facing docs still reflect Jimmy's current ownership split, with Alice and Marcus called out as frontend owners for the active slice.
 - GAP: The hourly QA cron prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so external automation remains out of sync with the repo's corrected recovery guidance.
 - GAP: No tasks are marked `done` or moved to QA in `projects/jobtrackr/DEVELOPMENT_PLAN.md`, so this hour still supports coverage maintenance and blocker surfacing rather than execution sign-off.
-- GAP: Repo-side QA wording is aligned, but kickoff-facing and preserved-doc recovery changes outside the QA trio still need diff-level verification before QA can close the broader recovery-drift lane.
+- GAP: README, PROJECT, and the handoff package now align at a high level, but preserved kickoff and implementation-facing docs outside the QA trio still need diff-level verification before QA can close the broader recovery-drift lane.
 
 ## Source tasks covered
 - T-001: Finalize PM decision alignment in JobTrackr API contract and debug semantics
@@ -1731,3 +1732,5 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 24. T-069, T-071, T-072, and T-073 extend the same recovery coverage into automation examples and preserved handoff docs, so hourly kickoff recovery can be tested against one canonical path order instead of doc-specific variants.
 25. T-074, T-075, and T-076 are now represented in QA coverage, but they still need diff-level verification across preserved implementation-facing docs, the shared QA recovery note set, and preserved planning/handoff artifacts before QA can confirm the recovery wording is truly normalized end to end.
 26. T-086 now tracks the hourly QA coverage refresh so the latest Jimmy fetch success, current external kickoff-path drift, and remaining repo-side verification work stay visible in the active QA handoff notes.
+27. Jimmy's latest hourly plan specifically keeps Marcus on T-068 and T-072 plus Priya on T-070, so QA should continue treating kickoff-entrypoint alignment and shared QA recovery-note parity as the highest-value doc-verification lane until tasks begin moving to QA status.
+28. README, PROJECT, and the Phase 3 handoff package now appear aligned on project-root recovery order and current lane wording, but preserved kickoff docs still need the same byte-level verification before QA can declare the wider recovery-path cleanup done.
