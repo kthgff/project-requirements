@@ -9,18 +9,17 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
-## Hourly QA review — 2026-04-22 09:50 America/Chicago
+## Hourly QA review — 2026-04-22 12:20 America/Chicago
 
 ### Results
-- PASS: Jimmy's latest fetch succeeded again, and his current lane callouts still center the auth -> session -> Gmail readonly connect -> persisted jobs slice, with Alice on T-022, T-029, T-049, T-052, and T-055 plus Priya on the QA recovery/doc-alignment lane.
+- PASS: Jimmy's latest fetch succeeded again, and his current lane callouts still center the auth -> session -> Gmail readonly connect -> persisted jobs slice, with Frank on T-091 plus Alice on T-018, T-022, T-029, T-049, T-052, and T-055, Marcus on T-078, T-080, and T-081, and Priya on T-070 and T-075.
 - PASS: Jimmy's latest plan confirms there are no active repo blockers, and the old `JobsTable.tsx` JSX parse/build failure remains verified closed as QA evidence rather than a live engineering blocker.
-- PASS: T-085 remains completed in `projects/jobtrackr/DEVELOPMENT_PLAN.md`, so README, PROJECT, and the Phase 3 handoff package still share the same kickoff-facing recovery order and current lane wording.
+- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now records completed work for T-085, T-086, T-090, T-093, T-094, T-096, and T-097, so kickoff-entrypoint recovery, blocker-note cleanup, duplicate task-ID normalization, and GOG/source-email requirement clarification all have plan-level completion evidence.
 - PASS: PRD v2, the QA blocker checklist, and this QA coverage file still reuse the same shared QA recovery note for stale kickoff prompt recovery.
-- PASS: The active QA lane is now best framed as T-086 coverage refresh plus follow-through diff verification across the shared QA recovery docs and kickoff-facing entrypoints.
+- PASS: T-095 remains the clearest QA sign-off target this hour because the plan says implementation is complete on `feat/jobtrackr-source-email-persistence` and local `go test ./...` plus `go build ./...` passed on 2026-04-22.
 - GAP: The hourly QA cron prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so stale external kickoff wording remains the live coordination gap even though the repo-side recovery docs now point to the correct project-root files.
-- GAP: Remaining repo-side QA work is diff verification, not blocker discovery. README, PROJECT, the handoff package, and preserved implementation-facing docs still need ongoing byte-level checks so recovery wording does not drift back out of alignment.
-- PASS: Duplicate task-ID drift in `DEVELOPMENT_PLAN.md` remains normalized by splitting the source-email ingestion epic onto `T-091`, so QA and dependency references no longer collide with the completed compile-blocker verification task.
-- GAP: T-095 is described as implementation-complete and awaiting Sam QA sign-off, but no runnable evidence or source-email persistence fixture references are linked yet from the QA-owned docs.
+- GAP: Remaining repo-side QA work is diff verification, not blocker discovery. Preserved implementation-facing docs still need ongoing byte-level checks so recovery wording and frontend-ownership wording do not drift back out of alignment.
+- GAP: T-095 is described as implementation-complete and awaiting Sam QA sign-off, but no runnable evidence bundle or source-email persistence fixture references are linked yet from the QA-owned docs.
 
 ## Source tasks covered
 - T-001: Finalize PM decision alignment in JobTrackr API contract and debug semantics
@@ -1771,6 +1770,28 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Fixture or sample-record references are available for provenance verification.
 - Missing evidence is treated as a QA blocker for final sign-off.
 
+### TC-2162 Reprocessing a persisted source email preserves idempotent job linkage
+**Steps**
+1. Persist a source email that already produced a job row.
+2. Trigger the explicit reprocess path for that saved source email.
+3. Inspect the resulting job row, `job_source_emails` linkage, and source-email processing metadata.
+
+**Expected**
+- Reprocessing does not create a duplicate source-email row.
+- Reprocessing does not create a duplicate job when the normalized job identity is unchanged.
+- Provenance linkage remains attached to the existing job, and processing metadata reflects the replay cleanly.
+
+### TC-2163 GOG discovery output is sufficient to persist source-email-first ingestion
+**Steps**
+1. Run the documented GOG Gmail discovery query flow against a fixture or sample mailbox.
+2. Confirm the discovered message payload includes the identifiers and metadata needed for `source_emails` persistence.
+3. Compare the observed discovery fields with the source-email persistence requirements in the plan and ingestion specs.
+
+**Expected**
+- GOG discovery returns enough metadata to persist Gmail message id, thread id, sender, subject, received timestamp, and body content or normalized equivalent.
+- Discovery findings can be handed into source-email persistence without relying on manual inbox-only copy/paste steps.
+- Any missing discovery field is treated as a blocker against T-091 and T-095 sign-off.
+
 ## T-096 Duplicate Task-ID Normalization Test Cases
 
 ### TC-2161 DEVELOPMENT_PLAN uses unique IDs for blocker verification and source-email ingestion
@@ -1805,12 +1826,13 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 18. Jimmy's latest plan keeps the highest-value QA work on T-057, T-062, and T-066, with T-063 through T-068 extending the same recovery cleanup into roadmap, kickoff, handoff, and automation-facing entrypoint docs.
 19. The active PM implementation slice remains auth -> session -> Gmail readonly connect -> persisted jobs UI, so QA-owned docs should treat the Next.js web shell plus Go API split as current and older local-Go-app wording as historical unless a task explicitly scopes back to that earlier path.
 20. The hourly kickoff prompt still referenced `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, while the live source file remains `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`; QA-facing repo docs now explicitly treat that mismatch as external coordination drift and tell engineers how to recover safely.
-21. No active tasks are marked `done` in the live development plan, so this hour's QA output remains documentation and acceptance-coverage maintenance rather than execution sign-off.
+21. The live development plan now has completed entries again, including T-085, T-086, T-090, T-093, T-094, T-096, and T-097, so this hour's QA output should keep distinguishing plan-complete documentation work from still-open execution sign-off work like T-095.
 22. T-063 through T-068 still need diff-level verification in roadmap, README, PROJECT, handoff, and preserved kickoff docs before QA can close the remaining recovery-path drift called out by Jimmy's latest plan.
 23. T-070 now covers wording normalization across PRD v2, the QA blocker checklist, and in-progress QA coverage so QA can recover from stale automation prompts without comparing three slightly different recovery notes by hand.
 24. T-069, T-071, T-072, and T-073 extend the same recovery coverage into automation examples and preserved handoff docs, so hourly kickoff recovery can be tested against one canonical path order instead of doc-specific variants.
 25. T-074, T-075, and T-076 are now represented in QA coverage, but they still need diff-level verification across preserved implementation-facing docs, the shared QA recovery note set, and preserved planning/handoff artifacts before QA can confirm the recovery wording is truly normalized end to end.
 26. T-086 now tracks the hourly QA coverage refresh so the latest Jimmy fetch success, current external kickoff-path drift, and remaining repo-side diff verification work stay visible in the active QA handoff notes.
-27. Jimmy's latest hourly plan keeps Priya on T-086 while Marcus remains on kickoff-entrypoint alignment follow-through, so QA should continue treating shared recovery-note parity plus kickoff-entrypoint verification as the highest-value doc-verification lane until tasks begin moving to QA status.
+27. Jimmy's latest hourly plan shifts Priya's active QA-facing lane to T-070 and T-075 while Marcus remains on T-078, T-080, and T-081, so QA should continue treating shared recovery-note parity plus preserved-doc frontend-ownership verification as the highest-value doc-verification lane until more tasks move to QA.
 28. README, PROJECT, and the Phase 3 handoff package now appear aligned on project-root recovery order and current lane wording, but preserved kickoff docs still need the same byte-level verification before QA can declare the wider recovery-path cleanup done.
 29. Jimmy fetch is no longer a blocker story. If future hourly notes regress to the old 401 narrative, QA should treat that as stale context unless a fresh fetch actually fails again.
+30. T-095 now has stronger contract-level QA coverage for provenance persistence, explicit reprocess idempotence, and GOG discovery sufficiency, but final sign-off still depends on attached runnable evidence and fixture-backed verification.
