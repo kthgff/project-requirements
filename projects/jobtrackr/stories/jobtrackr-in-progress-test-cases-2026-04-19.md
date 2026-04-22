@@ -9,17 +9,17 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
-## Hourly QA review — 2026-04-22 15:20 America/Chicago
+## Hourly QA review — 2026-04-22 18:20 America/Chicago
 
 ### Results
-- PASS: Jimmy's latest fetch still centers the auth -> session -> Gmail readonly connect -> persisted jobs slice, with Frank prioritized on T-091 and Priya prioritized on QA-facing validation plus recovery-note consistency around T-095.
-- PASS: Jimmy's latest plan still says T-095 implementation is done and waiting on QA sign-off, with repo-side evidence bundled at `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md`.
-- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now shows T-085, T-099, T-100, and T-101 as completed alongside the earlier kickoff-recovery cleanup, so README, PROJECT, and the Phase 3 handoff package all have plan-level completion evidence for the shared recovery order.
-- PASS: Spot-check review confirms README, PRD v2, the QA blocker checklist, this QA coverage file, the preserved engineering handoff v1, the preserved QA testability review, and the Phase 3 handoff package still align on the live `projects/jobtrackr/...` recovery path and current Next.js web plus Go API implementation slice.
-- PASS: The preserved implementation-facing docs still expose the same explicit Alice frontend lane note, so the byte-alignment work for T-087 remains intact instead of drifting back apart.
-- PASS: T-095 remains the clearest QA sign-off target this hour because the plan says implementation is complete on `feat/jobtrackr-source-email-persistence`, the evidence note records passing `go test ./...` and `go build ./...`, the new sign-off checklist now consolidates the fixture-backed validation path, and the current PM plan explicitly calls for Sam QA sign-off.
-- GAP: The hourly QA cron prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so stale external kickoff wording remains the live coordination gap even though the repo-side recovery docs are aligned.
-- GAP: Final T-095 sign-off still needs fixture-backed database verification for persisted `source_emails` and `job_source_emails` rows during a live or seeded sync run.
+- PASS: Jimmy's latest fetch still centers the current Next.js web plus Go API lane, explicitly keeps Alice and Marcus as frontend owners, and says T-095 is implementation-complete and waiting on Sam QA sign-off.
+- PASS: Jimmy's latest plan keeps Frank on T-091 source-email ingestion and provenance follow-through, while Priya stays on QA-facing recovery-note alignment and verification support.
+- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now shows T-080, T-081, T-085, T-099, T-100, T-101, T-102, and T-103 as completed, which gives current plan-level evidence for the preserved-doc recovery work plus the T-095 QA sign-off package.
+- PASS: The live plan language still says the current implementation lane is auth -> session -> Gmail readonly connect -> persisted jobs, and it keeps the dead root-level `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` reference framed as stale external drift rather than repo truth.
+- PASS: T-095 remains the highest-value QA target this hour because the plan says implementation completed on `feat/jobtrackr-source-email-persistence`, the evidence bundle is published, and the sign-off checklist gives one fixture-backed validation path.
+- PASS: Existing T-095 cases in this file still cover provenance-first persistence, idempotent repeat sync, reprocess behavior, and GOG discovery sufficiency, so no new acceptance gap appeared from Jimmy's latest plan.
+- GAP: The hourly QA cron prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so stale external kickoff wording remains the active coordination gap.
+- GAP: Final T-095 sign-off still needs fixture-backed verification of `source_emails` and `job_source_emails` outcomes during a deterministic sync or reprocess run.
 
 ## Source tasks covered
 - T-001: Finalize PM decision alignment in JobTrackr API contract and debug semantics
