@@ -33,6 +33,9 @@ Current lane ownership for this slice:
 Shared Alice lane note:
 - Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
 
+Shared Marcus lane note:
+- Marcus: frontend recovery-entrypoint and kickoff-doc alignment so frontend pickup stays safe during hourly handoffs
+
 Architecture note:
 - Treat older local-Go-app wording in preserved docs as historical framing only; the live implementation lane is the Next.js web plus Go API slice above.
 
