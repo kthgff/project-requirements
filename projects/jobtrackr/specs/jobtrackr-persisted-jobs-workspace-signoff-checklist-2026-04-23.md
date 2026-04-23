@@ -12,7 +12,11 @@ Give Sam one implementation-facing checklist for final QA validation of T-106 wi
 ## Task under sign-off
 - Task: `T-106`
 - Current implementation branch: `feat/jobtrackr-persisted-jobs-workspace`
-- Current evidence commit: `unknown in repo docs, verify from branch history before final Sam sign-off`
+- Current evidence commit: `858127d` (`feat(web): wire persisted jobs into dashboard and workspace`)
+- Evidence scope at that commit:
+  - wires `/dashboard` and `/jobs` to the persisted-jobs data layer
+  - adds API-mapping coverage in `apps/web/lib/jobApiMapping.test.ts`
+  - updates `apps/web/README.md` for the server-backed workspace handoff
 
 ## Preconditions
 - Repo available at `~/Documents/jobtrackr`
@@ -84,6 +88,7 @@ At minimum, confirm:
 
 ## Code and doc pointers
 - Frontend README note: `~/Documents/jobtrackr/apps/web/README.md`
+- T-106 evidence commit to inspect in the app repo: `858127d` on `feat/jobtrackr-persisted-jobs-workspace`
 - Active handoff note: `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 - Active QA coverage: `~/Documents/project-requirements/projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`
 - Live task plan: `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`

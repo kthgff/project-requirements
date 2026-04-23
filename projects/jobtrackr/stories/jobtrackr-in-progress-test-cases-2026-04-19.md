@@ -9,6 +9,27 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
+## Hourly QA review — 2026-04-23 09:50 America/Chicago
+
+### Results
+- PASS: Jimmy's latest 08:02 handoff still narrows live QA to the same two real gates, T-106 for the server-backed persisted-jobs workspace and T-095 for source-email persistence, with no new repo-side engineering blocker opened.
+- PASS: The T-106 sign-off checklist no longer leaves the implementation proof ambiguous. QA can now anchor frontend evidence to commit `858127d` on `feat/jobtrackr-persisted-jobs-workspace`, which is the commit that wired `/dashboard` and `/jobs` to the persisted-jobs data layer and added API-mapping coverage.
+- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now records T-125 as completed, keeping the live frontend QA handoff centered on one deterministic checklist plus one concrete frontend evidence commit instead of branch-history reconstruction.
+- GAP: T-106 still needs executed QA evidence for API-up `/dashboard` and `/jobs`, safe API-down mock fallback, and visible pending-fit or workflow-normalization notices before it can move from QA to Completed.
+- GAP: T-095 still needs fixture-backed execution against `source_emails`, `job_source_emails`, and repeat-sync idempotence before the provenance-first sign-off gate can close.
+- GAP: The external hourly kickoff prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so automation-facing prompt drift remains unresolved outside the repo.
+
+## Hourly QA review — 2026-04-23 09:20 America/Chicago
+
+### Results
+- PASS: Jimmy's latest 08:02 handoff still narrows live QA to the same two real gates, T-106 for the server-backed persisted-jobs workspace and T-095 for source-email persistence, with no new repo-side engineering blocker opened.
+- PASS: Jimmy's latest pickup note makes the stale-path recovery rule explicit again, confirming QA should ignore `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` and recover through `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, and `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now records T-117, T-116, and T-115 as completed, which keeps the live frontend QA entrypoint centered on the dedicated T-106 sign-off checklist and the refreshed persisted-jobs-first dashboard copy instead of older mock-only shell wording.
+- PASS: The latest plan still points frontend continuity back to the canonical detail-view, list-to-detail, and workspace continuity contracts after the live T-106 and T-107 handoff checkpoints, so QA coverage can stay anchored to the current workspace behavior contract instead of preserved doc drift.
+- GAP: T-106 still needs executed QA evidence for API-up `/dashboard` and `/jobs`, safe API-down mock fallback, and visible pending-fit or workflow-normalization notices before it can move from QA to Completed.
+- GAP: T-095 still needs fixture-backed execution against `source_emails`, `job_source_emails`, and repeat-sync idempotence before the provenance-first sign-off gate can close.
+- GAP: The external hourly kickoff prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so automation-facing prompt drift remains unresolved outside the repo.
+
 ## Hourly QA review — 2026-04-23 06:50 America/Chicago
 
 ### Results
