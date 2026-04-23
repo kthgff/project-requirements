@@ -194,6 +194,12 @@ Shared QA recovery note:
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
+Live QA sign-off entrypoints:
+- T-095 source-email persistence sign-off checklist: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md`
+- T-095 supporting evidence bundle: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md`
+- T-106 persisted-jobs workspace sign-off checklist: `projects/jobtrackr/specs/jobtrackr-persisted-jobs-workspace-signoff-checklist-2026-04-23.md`
+- Use the T-095 and T-106 sign-off checklists as the two live QA paths before moving either task from QA to Completed.
+
 ## Recommended MVP Cut
 If speed matters most, first release should focus on:
 - Gmail OAuth

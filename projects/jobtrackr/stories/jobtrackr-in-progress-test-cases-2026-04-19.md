@@ -9,6 +9,28 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
+## Hourly QA review — 2026-04-23 12:50 America/Chicago
+
+### Results
+- PASS: Jimmy's latest 12:02 PM plan still keeps the repo-side QA surface narrowed to T-106 for the server-backed persisted-jobs workspace and T-095 for source-email persistence, with stale root-path wording still framed as external coordination drift instead of repo ambiguity.
+- PASS: `projects/jobtrackr/prd/jobtrackr-prd-v2.md` now exposes the same live QA gate pair and sign-off entrypoints already used in the blocker checklist, so product-facing recovery notes no longer require QA to infer T-116 and T-102 from other files.
+- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now records T-130 as the PRD follow-through for that QA-gate alignment, which closes the remaining repo-side gap between the shared QA recovery note and the explicit sign-off entrypoint block.
+- PASS: The shared QA recovery note remains byte-aligned across PRD v2, the blocker checklist, and active QA coverage, and all three still describe the active implementation as the Next.js web plus Go API auth -> session -> Gmail readonly connect -> persisted jobs slice.
+- GAP: T-106 still needs executed QA evidence for API-up `/dashboard` and `/jobs`, safe API-down mock fallback, and visible pending-fit or workflow-normalization notices before it can move from QA to Completed.
+- GAP: T-095 still needs fixture-backed execution against `source_emails`, `job_source_emails`, and repeat-sync idempotence before the provenance-first sign-off gate can close.
+- GAP: The external hourly kickoff prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so automation-facing prompt drift remains unresolved outside the repo.
+
+## Hourly QA review — 2026-04-23 12:20 America/Chicago
+
+### Results
+- PASS: Jimmy's latest 12:02 PM plan still keeps the repo-side QA surface narrow and explicit, with T-106 as the live frontend handoff, T-095 as the remaining provenance sign-off gate, and stale external kickoff drift still framed as an external coordination problem instead of repo ambiguity.
+- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now shows T-073 as completed, and its completion note matches Jimmy's latest requirement that preserved handoff docs recover to `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, and the live Phase 3 handoff package in that same order.
+- PASS: The live plan still shows T-070 in progress, and the active QA recovery note in this file plus the QA blocker checklist still matches Jimmy's latest wording goal: explicit project-root entrypoints plus the current Next.js web plus Go API implementation slice.
+- PASS: The live plan still shows T-108 in QA, and the active test coverage already includes endpoint-level checks for `GET /api/v1/source-emails` with `limit`, `matchedAsJob`, `fromEmail`, and `search` filters, which stays aligned with the current backend/shared-contract handoff lane.
+- GAP: T-106 still needs executed QA evidence for API-up `/dashboard` and `/jobs`, safe API-down mock fallback, and visible pending-fit or workflow-normalization notices before it can move from QA to Completed.
+- GAP: T-095 still needs fixture-backed execution against `source_emails`, `job_source_emails`, and repeat-sync idempotence before the provenance-first sign-off gate can close.
+- GAP: The external hourly kickoff prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so automation-facing prompt drift remains unresolved outside the repo.
+
 ## Hourly QA review — 2026-04-23 09:50 America/Chicago
 
 ### Results
@@ -1955,6 +1977,32 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Response exposes enough provenance detail to validate `source_emails` records and job linkage follow-through.
 - Debug read stays read-only.
 - QA can inspect recent source emails without reconstructing state from sync logs.
+
+## T-127 Repo Root README Kickoff Alignment Test Cases
+
+### TC-2175 Repo root README surfaces the live QA gate pair and project-root recovery order
+**Steps**
+1. Review `README.md` at the repo root.
+2. Compare its kickoff note against `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/DEVELOPMENT_PLAN.md`, and Jimmy's latest PM note.
+3. Inspect whether the README points QA and engineering to the live T-106 and T-095 sign-off entrypoints before local setup details.
+
+**Expected**
+- The repo root README uses the same recovery order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, and `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- The README calls out T-106 and T-095 as the two live QA gates and points to T-116 and T-102 as their implementation-facing sign-off checklists.
+- The README frames the current implementation as the Next.js web plus Go API auth -> session -> Gmail readonly connect -> persisted jobs slice, not older mock-only or root-level-path guidance.
+
+## T-130 PRD Live QA Gate Alignment Test Cases
+
+### TC-2176 PRD v2 surfaces the live QA gate pair and sign-off entrypoints
+**Steps**
+1. Review `projects/jobtrackr/prd/jobtrackr-prd-v2.md`.
+2. Compare its QA recovery note and live QA entrypoints against `projects/jobtrackr/specs/jobtrackr-qa-blocker-checklist-2026-04-19.md` and `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
+3. Inspect whether PRD v2 points QA and engineering to the live T-106 and T-095 sign-off entrypoints without requiring a second recovery hop.
+
+**Expected**
+- PRD v2 uses the same recovery order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, and `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- PRD v2 calls out T-106 and T-095 as the two live QA gates and points to T-116, T-102, and the T-095 evidence bundle explicitly.
+- PRD v2 frames the current implementation as the Next.js web plus Go API auth -> session -> Gmail readonly connect -> persisted jobs slice, without reintroducing dead root-level path guidance.
 
 ## T-109 Frontend Continuity Handoff Refresh Test Cases
 
