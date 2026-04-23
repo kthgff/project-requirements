@@ -9,17 +9,17 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
-## Hourly QA review — 2026-04-22 18:20 America/Chicago
+## Hourly QA review — 2026-04-22 21:20 America/Chicago
 
 ### Results
-- PASS: Jimmy's latest fetch still centers the current Next.js web plus Go API lane, explicitly keeps Alice and Marcus as frontend owners, and says T-095 is implementation-complete and waiting on Sam QA sign-off.
-- PASS: Jimmy's latest plan keeps Frank on T-091 source-email ingestion and provenance follow-through, while Priya stays on QA-facing recovery-note alignment and verification support.
-- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now shows T-080, T-081, T-085, T-099, T-100, T-101, T-102, and T-103 as completed, which gives current plan-level evidence for the preserved-doc recovery work plus the T-095 QA sign-off package.
-- PASS: The live plan language still says the current implementation lane is auth -> session -> Gmail readonly connect -> persisted jobs, and it keeps the dead root-level `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` reference framed as stale external drift rather than repo truth.
-- PASS: T-095 remains the highest-value QA target this hour because the plan says implementation completed on `feat/jobtrackr-source-email-persistence`, the evidence bundle is published, and the sign-off checklist gives one fixture-backed validation path.
-- PASS: Existing T-095 cases in this file still cover provenance-first persistence, idempotent repeat sync, reprocess behavior, and GOG discovery sufficiency, so no new acceptance gap appeared from Jimmy's latest plan.
-- GAP: The hourly QA cron prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so stale external kickoff wording remains the active coordination gap.
-- GAP: Final T-095 sign-off still needs fixture-backed verification of `source_emails` and `job_source_emails` outcomes during a deterministic sync or reprocess run.
+- PASS: Jimmy's latest plan still centers the live auth -> session -> Gmail readonly connect -> persisted jobs slice, and it explicitly points the team back to `projects/jobtrackr/DEVELOPMENT_PLAN.md` and `projects/jobtrackr/PROJECT.md` instead of the dead root-level path.
+- PASS: Jimmy's latest lane split keeps Alice and Marcus on frontend continuity and vertical-slice delivery, keeps Frank on T-091 source-email persistence follow-through, and keeps Priya on QA recovery alignment with T-095 sign-off support.
+- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now shows T-075, T-076, T-078, T-080, T-081, T-083, T-085, T-099, T-100, T-101, T-102, T-103, T-104, and T-105 as completed, which gives plan-level evidence that the recovery-note cleanup, frontend continuity pointers, and T-095 QA sign-off package are all published.
+- PASS: The live plan language still frames the current implementation context as Next.js web plus Go API, and it keeps the stale `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` prompt wording categorized as external coordination drift rather than repo truth.
+- PASS: Existing T-095 coverage in this file still matches the highest-risk open QA target this hour, specifically provenance-first persistence, duplicate-linkage idempotence, reprocess safety, and operator-visible GOG discovery behavior.
+- PASS: No new doc-side coverage gap appeared for the completed QA artifacts because the blocker checklist, in-progress test cases, and T-102 sign-off checklist all point to the same recovery order and active implementation slice.
+- GAP: The hourly QA cron prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so the external kickoff wording remains stale even though repo docs are aligned.
+- GAP: T-095 still needs fixture-backed verification of `source_emails`, `job_source_emails`, and repeat-sync idempotence before QA can move it from waiting-on-sign-off to completed.
 
 ## Source tasks covered
 - T-001: Finalize PM decision alignment in JobTrackr API contract and debug semantics
