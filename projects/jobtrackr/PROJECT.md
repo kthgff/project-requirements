@@ -25,8 +25,10 @@ Frontend continuity for this slice should stay anchored to:
 
 Live frontend recovery note:
 - Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+- Jimmy's latest hourly guidance keeps the live QA surface narrowed to T-106 for the server-backed persisted-jobs workspace and T-095 for source-email persistence, with stale external kickoff drift still the only non-repo blocker called out
 - Current frontend handoff checkpoints: T-106 is the live server-backed workspace handoff, T-107 is the current QA handoff summary, and the remaining blocker story stays narrowed to T-095 fixture-backed validation plus stale external kickoff drift
 - Current frontend QA entrypoint: `projects/jobtrackr/specs/jobtrackr-persisted-jobs-workspace-signoff-checklist-2026-04-23.md` (T-116)
+- Current backend/shared-contract QA entrypoint paired with that live frontend gate: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md` (T-102)
 - Canonical frontend continuity docs for follow-through after T-106 and T-107:
   - `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
   - `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
@@ -230,7 +232,7 @@ Current lane split for this slice:
 - Marcus: primary frontend continuity owner for kickoff docs, detail continuity entrypoints, and safe hourly pickup recovery
 - remaining SWE lanes: backend and shared contract follow-through
 
-If an hourly kickoff or preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale automation drift and recover to the ordered project-root files above.
+If an hourly kickoff or preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale automation drift and recover to the ordered project-root files above. Jimmy's latest hourly note re-confirmed that this dead root-level path is external coordination drift, not a repo-side source-of-truth change.
 
 If you are resuming frontend continuity after the latest server-backed workspace handoff, check T-106 and T-107 in `projects/jobtrackr/DEVELOPMENT_PLAN.md` first, then move into the canonical detail-view, list-to-detail, and workspace continuity contracts before touching preserved frontend planning notes.
 

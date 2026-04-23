@@ -17,10 +17,13 @@ Engineers should use these files in this order when there is any conflict.
 
 Recovery note for automation-facing handoffs:
 - if an hourly kickoff prompt still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that path as stale drift
+- Jimmy's latest hourly note re-confirmed that this dead root-level path is external coordination drift, not a repo-side source-of-truth change
 - Live frontend recovery note:
   - Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+  - Jimmy's latest hourly guidance keeps the live QA surface narrowed to T-106 for the server-backed persisted-jobs workspace and T-095 for source-email persistence, with stale external kickoff drift still the only non-repo blocker called out
   - Current frontend handoff checkpoints: T-106 is the live server-backed workspace handoff, T-107 is the current QA handoff summary, and the remaining blocker story stays narrowed to T-095 fixture-backed validation plus stale external kickoff drift
   - Current frontend QA entrypoint: `projects/jobtrackr/specs/jobtrackr-persisted-jobs-workspace-signoff-checklist-2026-04-23.md` (T-116)
+  - Current backend/shared-contract QA entrypoint paired with that live frontend gate: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md` (T-102)
   - Canonical frontend continuity docs for follow-through after T-106 and T-107:
     - `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
     - `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
