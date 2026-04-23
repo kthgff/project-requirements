@@ -33,6 +33,9 @@ Current lane ownership for this slice:
 Shared frontend ownership note:
 - Alice and Marcus are the frontend owners for the current slice.
 
+Shared Alice lane note:
+- Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
+
 Architecture note:
 - Treat older local-Go-app wording in preserved docs as historical framing only; the live implementation lane is the Next.js web plus Go API slice above.
 

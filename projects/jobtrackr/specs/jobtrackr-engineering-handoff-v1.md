@@ -41,6 +41,9 @@ Current lane ownership for this slice:
 Shared frontend ownership note:
 - Alice and Marcus are the frontend owners for the current slice.
 
+Shared Alice lane note:
+- Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
+
 ## Locked Product Decisions
 
 - implementation language direction: TypeScript for the web app and shared typed contracts, with the current backend delivery slice implemented as a Go API

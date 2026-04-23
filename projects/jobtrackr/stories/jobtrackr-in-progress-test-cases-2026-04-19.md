@@ -1723,6 +1723,19 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Repo-side follow-through is described as shared QA recovery-doc and kickoff-entrypoint verification work, not a newly reopened engineering blocker.
 - Resolved JobsTable compile/build failure is preserved as verification evidence, not an active engineering blocker.
 
+## T-111 Shared Alice Lane Note Closeout Test Cases
+
+### TC-2157 Active QA coverage records the byte-aligned shared Alice lane note check
+**Steps**
+1. Review `DEVELOPMENT_PLAN.md` plus the preserved implementation-facing docs touched by this closeout.
+2. Confirm `T-111` points to the preserved handoff v1 and QA testability review verification work.
+3. Compare the `Shared Alice lane note` block in `specs/jobtrackr-engineering-handoff-v1.md` and `specs/jobtrackr-mvp-qa-testability-review.md`.
+
+**Expected**
+- `DEVELOPMENT_PLAN.md` records the explicit shared-note closeout as the active implementation-facing verification task.
+- Both preserved docs expose the same `Shared Alice lane note` label.
+- Both preserved docs reuse the same Alice lane wording: `Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience`.
+
 ## T-087 Shared Alice Lane Note Verification Test Cases
 
 ### TC-2156 Preserved handoff v1 and QA testability review expose the same explicit Alice lane note
