@@ -133,12 +133,11 @@ Focus on frontend continuity, kickoff-entrypoint alignment, and safe hourly reco
 
 Priority order:
 1. Keep README, PROJECT, and the handoff package pointing frontend pickup first to T-106 and T-107, then to the canonical detail-view, list-to-detail, and workspace continuity contracts
-2. T-078 normalize README, PROJECT, and the handoff package so Marcus and Alice show up explicitly as the frontend owners for the current slice, with Marcus called out as the frontend continuity owner for kickoff-facing recovery
-3. T-061 reconcile README, PROJECT, and kickoff handoff entrypoints around the live auth -> session -> Gmail readonly connect -> persisted jobs slice
-4. T-065 keep preserved kickoff docs clearly historical and recoverable to the live project-root source set
-5. T-068 normalize README, PROJECT, and handoff package path examples so they all use the same explicit `projects/jobtrackr/...` entrypoints
-6. T-072 remove remaining bare-path and lane-wording ambiguity across kickoff-facing docs during hourly recovery
-7. Keep T-001 and T-004 aligned so list/detail payload semantics do not drift while kickoff docs stabilize
+2. Keep the live QA gate pair explicit in kickoff-facing docs so hourly recovery surfaces T-106 with `projects/jobtrackr/specs/jobtrackr-persisted-jobs-workspace-signoff-checklist-2026-04-23.md` and T-095 with `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md` together
+3. Keep Marcus and Alice labeled as the frontend owners for the current slice, with Marcus called out as the frontend continuity owner for kickoff-facing recovery
+4. Keep kickoff-facing and preserved implementation-facing docs using the same explicit `projects/jobtrackr/...` recovery order and the same current Next.js web plus Go API slice wording during hourly recovery
+5. Keep the handoff package's lane guidance updated when completed kickoff-alignment tasks roll forward, so Marcus pickup does not keep pointing back to already-completed T-078, T-061, T-065, T-068, or T-072 history as if it were still the live queue
+6. Keep T-001 and T-004 aligned so list/detail payload semantics do not drift while kickoff docs stabilize
 
 ### Priya
 Focus on workspace behavior in the mock-data frontend slice.
