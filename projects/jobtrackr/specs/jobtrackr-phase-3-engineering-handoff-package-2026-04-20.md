@@ -32,8 +32,8 @@ Recovery note for automation-facing handoffs:
   - Current QA and debug handoff docs for provenance work:
     - `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md` for the repo-side proof bundle behind T-095
     - `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md` for the active QA coverage and T-108 source-email debug-read test cases
-- when a kickoff note says to start with PROJECT, use `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md` so the recovery path stays explicit alongside the live development plan
-- the current implementation slice for pickup remains Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
+- when a kickoff note says to start with PROJECT, use `projects/jobtrackr/PROJECT.md` so the recovery path stays explicit alongside the live development plan and the ordered project-root handoff set
+- the current implementation slice for pickup remains the Next.js web plus Go API path covering Google auth -> session -> Gmail readonly connect -> persisted jobs retrieval
 - current lane ownership for this slice:
   - Alice and Marcus are the frontend owners for the current slice.
   - Alice: primary frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
