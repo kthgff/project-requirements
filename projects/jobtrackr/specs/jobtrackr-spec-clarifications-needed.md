@@ -4,17 +4,26 @@
 This document identifies requirement gaps, ambiguities, and untestable areas across the current JobTrackr specs and proposes the minimum clarifications needed before implementation starts.
 
 ## Documents Reviewed
-- `specs/jobtrackr-gmail-ingestion-spec-v1.md`
-- `specs/jobtrackr-fit-analysis-spec-v1.md`
-- `projects/jobtrackr/api-contract.md`
-- Cross-checks against `projects/jobtrackr/stories.md` and `projects/jobtrackr/requirements.md`
+- `projects/jobtrackr/specs/jobtrackr-gmail-ingestion-spec-v1.md`
+- `projects/jobtrackr/specs/jobtrackr-fit-analysis-spec-v1.md`
+- `projects/jobtrackr/specs/jobtrackr-api-contract.md`
+- Cross-checks against `projects/jobtrackr/stories/jobtrackr-stories.md` and `projects/jobtrackr/specs/jobtrackr-requirements.md`
+
+## Current implementation redirect
+This review is preserved for historical context. For active implementation pickup, start from:
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `projects/jobtrackr/PROJECT.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+
+Active implementation slice:
+- Google auth -> session -> Gmail readonly connect -> persisted jobs slice
 
 ## Executive Summary
 Current specs are sufficient for product direction, but not yet sufficient for low-risk implementation. The biggest issues are conflicting data semantics, underdefined edge-case behavior, and several places where APIs are drafted before product decisions are finalized.
 
 Recommendation:
-- The P0 product decisions are now answered in `specs/jobtrackr-pm-decision-memo-2026-04-19.md`.
-- Engineering should treat the PM memo plus `projects/jobtrackr/api-contract.md` as the canonical current direction.
+- The P0 product decisions are now answered in `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`.
+- Engineering should treat the PM memo plus `projects/jobtrackr/specs/jobtrackr-api-contract.md` as the canonical current direction.
 - Remaining risk is now spec drift: the ingestion spec and QA expectations must be updated so implementation is not driven by stale language.
 - Resolve P1 items before UI and API contracts are declared stable.
 - P2 items can follow shortly after implementation starts if needed, but earlier is better.
@@ -23,7 +32,7 @@ Recommendation:
 
 # API Contract vs Ingestion Spec Mismatch Review
 
-This section flags the current contract mismatches that would make QA expectations unstable if engineering follows `projects/jobtrackr/api-contract.md` while reviewers or implementers still rely on `specs/jobtrackr-gmail-ingestion-spec-v1.md`.
+This section flags the current contract mismatches that would make QA expectations unstable if engineering follows `projects/jobtrackr/specs/jobtrackr-api-contract.md` while reviewers or implementers still rely on `projects/jobtrackr/specs/jobtrackr-gmail-ingestion-spec-v1.md`.
 
 ## Quick mismatch matrix
 
@@ -43,7 +52,7 @@ This section flags the current contract mismatches that would make QA expectatio
 
 ## M1. Source-of-truth drift on P0 decisions
 ### Current state
-- `projects/jobtrackr/api-contract.md` says it incorporates `specs/jobtrackr-pm-decision-memo-2026-04-19.md`.
+- `projects/jobtrackr/specs/jobtrackr-api-contract.md` says it incorporates `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`.
 - `specs/jobtrackr-gmail-ingestion-spec-v1.md` still presents several of those same behaviors as open questions or PM recommendations.
 
 ### QA risk
@@ -61,7 +70,7 @@ Update the ingestion spec so these are stated as final MVP requirements, not unr
 
 ## M2. Parsed-job creation threshold is final in the contract, ambiguous in the ingestion spec
 ### Contract
-`projects/jobtrackr/api-contract.md` defines a hard parsed-job creation threshold in Validation Rules.
+`projects/jobtrackr/specs/jobtrackr-api-contract.md` defines a hard parsed-job creation threshold in Validation Rules.
 
 ### Ingestion spec
 `specs/jobtrackr-gmail-ingestion-spec-v1.md` still says partial jobs are allowed when there is a valid URL or enough identifying data, but does not define the threshold in the main extraction section.
@@ -454,9 +463,9 @@ Trigger reanalysis when any of these change:
 - active resume
 Do not rerun for notes, tags, saved, archive, or status changes.
 
-## P1-6. Fit Flag Nullability Semantics
+## P1-6. Fit Signal Nullability Semantics
 ### Problem
-The fit-analysis spec recommends nullable score and summary when no resume exists, but also says `fit_flag` may be false or null depending on implementation preference.
+The fit-analysis spec recommends nullable score and summary when no resume exists, but also says fit-signal metadata may be false or null depending on implementation preference.
 
 ### Risk
 This will create avoidable UI ambiguity and inconsistent filtering.
@@ -469,7 +478,7 @@ Use:
 - `fit_flag = null` when no analysis exists
 - `fit_score = null` when no analysis exists
 - `fit_summary = null` when no analysis exists
-This cleanly distinguishes not analyzed from analyzed-and-not-flagged.
+This cleanly distinguishes not analyzed from analyzed-and-fit-ready while keeping legacy `flagged` or `unflagged` shorthand out of the canonical user-facing vocabulary and preserved historical docs.
 
 ## P1-7. Manual Job Creation Scope for MVP
 ### Problem

@@ -12,30 +12,63 @@ JobTrakr is a single-user job search assistant that:
 - extracts and enriches job records
 - stores normalized job data
 - compares each job to the uploaded resume
-- flags likely good-fit roles
+- surfaces match rating and low-fit indicators as fit signals, not workflow-state changes
 - presents all jobs in a dashboard table UI
+
+## Recovery Note for Preserved Handoff Guidance
+
+This file is preserved handoff context, not the primary kickoff entrypoint.
+
+Implementation kickoff redirect:
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `projects/jobtrackr/PROJECT.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+
+Recovery note:
+- If a kickoff prompt or older preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift only.
+- Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- Treat bare filenames in preserved notes as historical shorthand only, not live repo-root entrypoints.
+
+Current implementation slice:
+- Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice
+
+Current lane ownership for this slice:
+- Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
+- Marcus: frontend recovery-entrypoint and kickoff-doc alignment so frontend pickup stays safe during hourly handoffs
+- Frank: source-of-truth maintenance across roadmap-facing and preserved planning docs so the live kickoff set and current slice wording stay aligned
+- remaining SWE lanes: backend and shared contract follow-through
+
+Shared frontend ownership note:
+- Alice and Marcus are the frontend owners for the current slice.
+
+Shared Alice lane note:
+- Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
 
 ## Locked Product Decisions
 
-- implementation language: TypeScript
+- implementation language direction: TypeScript for the web app and shared typed contracts, with the current backend delivery slice implemented as a Go API
 - authentication: Google federated login
 - login page required
 - primary input source: Gmail inbox job alert emails
 - relevant alert sources include LinkedIn, Indeed, and other relevant job alert emails
 - resume source: uploaded file
 - main UI: dashboard with jobs table
-- good-fit action: flag it, do not auto-apply in MVP
+- good-fit behavior: surface fit signals in the UI, do not auto-apply in MVP
 - initial workflow statuses:
   - `new`
-  - `flagged`
-  - `reviewing`
-  - `skipped`
+  - `interested`
   - `applied`
-  - `interview`
-  - `rejected`
+  - `interviewing`
   - `offer`
+  - `rejected`
+- `saved` is a separate boolean, not a status
+- archive state is `archivedAt`, not a workflow value
+- fit fields stay nullable until analysis runs
+- one source email may link to multiple jobs
 
 ## Recommended MVP Technical Direction
+
+This section is preserved historical guidance. For live implementation pickup, prefer the current Phase 3 handoff package and development plan.
 
 ### Frontend
 - Next.js
@@ -43,7 +76,7 @@ JobTrakr is a single-user job search assistant that:
 - TypeScript
 
 ### Backend
-- TypeScript service or Next.js server routes for MVP simplicity
+- Go API for the current delivery slice
 
 ### Core integrations
 - Google authentication
@@ -77,7 +110,7 @@ Goal:
 
 ### Slice 6. Fit analysis
 Goal:
-- system compares jobs against resume and flags good fits
+- system compares jobs against resume and surfaces match rating plus low-fit indicators without mutating workflow state
 
 ### Slice 7. Detail and workflow controls
 Goal:
@@ -126,12 +159,12 @@ Needed before:
 ### Resume dependencies
 Needed before:
 - fit analysis
-- flagged jobs
+- match rating and low-fit signals in the dashboard
 
 ### Fit analysis dependencies
 Needed before:
-- fit flag in table
-- fit summary in detail drawer
+- match rating and low-fit signal display in the table
+- fit summary in the detail drawer
 
 ---
 
@@ -246,22 +279,33 @@ Deliver:
 
 ## Files Engineering Should Use
 
-- `prd/jobtrackr-prd-v1.md`
-- `stories/jobtrackr-mvp-stories-v1.md`
-- `specs/jobtrackr-data-model-v1.md`
-- `specs/jobtrackr-gmail-ingestion-spec-v1.md`
-- `specs/jobtrackr-fit-analysis-spec-v1.md`
-- `specs/jobtrakr-auth-spec-v1.md`
-- `specs/jobtrackr-frontend-plan-v1.md`
-- `specs/jobtrackr-table-ui-spec-v1.md`
+When older docs conflict, use these current files first:
+
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `projects/jobtrackr/PROJECT.md`
+- `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+- `projects/jobtrackr/specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-api-contract.md`
+- `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
 ---
 
 ## Immediate Recommendation
 
-Engineering should start with the smallest meaningful vertical slice:
+The mock-first shell guidance below is preserved historical context.
+
+For live pickup, engineering should start with the current smallest meaningful vertical slice:
 - Google login
 - protected dashboard shell
-- jobs table with mock data
+- Gmail readonly connection state
+- persisted jobs retrieval in the jobs UI
 
-This creates visible progress quickly and gives a safe base for real-data integration.
+Use the Phase 3 handoff package and active development plan when current pickup guidance conflicts with the older build-order notes in this file.
+
+Guardrails:
+- workflow statuses are `new`, `interested`, `applied`, `interviewing`, `offer`, `rejected`
+- match rating and low-fit are fit semantics, not workflow states
+- shortlist/save and archive behavior must stay separate from workflow status
