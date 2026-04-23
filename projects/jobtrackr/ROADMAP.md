@@ -207,6 +207,11 @@ Recovery note:
 Current implementation slice:
 - Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs UI lane
 
+Current frontend handoff checkpoints:
+- T-106 is the live frontend handoff for the server-backed dashboard and jobs workspace slice
+- T-107 is the current QA handoff summary for that frontend slice
+- the remaining QA blocker story is still narrowed to T-095 fixture-backed validation, plus stale external kickoff drift when prompts reference the dead root-level development-plan path
+
 Current lane ownership for this slice:
 - Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
 - Marcus: frontend recovery-entrypoint and kickoff-doc alignment so frontend pickup stays safe during hourly handoffs
