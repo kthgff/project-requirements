@@ -14,6 +14,8 @@ JobTrakr has moved from vague concept into defined MVP discovery. Core product d
 
 Current lane split for this slice:
 - Alice and Marcus: frontend owners for the current slice
+- Alice: primary frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
+- Marcus: primary frontend continuity owner for kickoff docs, detail continuity entrypoints, and safe hourly pickup recovery
 - remaining SWE lanes: backend and shared contract follow-through
 
 Frontend continuity for this slice should stay anchored to:
@@ -207,6 +209,8 @@ Use these files as the canonical implementation references when PROJECT, older d
 
 Current lane split for this slice:
 - Alice and Marcus: frontend owners for the current slice
+- Alice: primary frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
+- Marcus: primary frontend continuity owner for kickoff docs, detail continuity entrypoints, and safe hourly pickup recovery
 - remaining SWE lanes: backend and shared contract follow-through
 
 If an hourly kickoff or preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale automation drift and recover to the ordered project-root files above.
