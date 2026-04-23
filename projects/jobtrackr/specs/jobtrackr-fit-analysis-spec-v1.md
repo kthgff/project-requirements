@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Define how JobTrackr evaluates job fit using Keith's uploaded resume, determines whether a role should be flagged, and stores output suitable for backend processing and table-based UI review.
+Define how JobTrackr evaluates job fit using Keith's uploaded resume, determines whether a role should be surfaced as a stronger-fit opportunity, and stores output suitable for backend processing and table-based UI review.
 
 ## Goal
 
@@ -14,7 +14,7 @@ In scope for MVP:
 - use uploaded resume as the fit-analysis input
 - compare each tracked job against the active resume
 - produce a fit result for each job
-- flag likely good-fit jobs
+- mark likely good-fit jobs with fit indicators
 - store a concise rationale
 - support table display and job-detail display
 
@@ -66,7 +66,7 @@ Each analyzed job should produce:
 
 ### MVP UI requirements
 In table view, show at minimum:
-- fit flag
+- fit indicator
 - fit score as the user-facing `match rating`
 
 In job detail view, show at minimum:
@@ -160,7 +160,7 @@ Each analysis must include:
 
 ---
 
-## Fit Flag Semantics
+## Fit Indicator Semantics
 
 `fit_flag = true` means:
 - the role appears worth Keith's attention
@@ -172,6 +172,10 @@ Each analysis must include:
 
 It only means:
 - the system does not currently see enough evidence to prioritize it as a strong match
+
+Canonical note:
+- `fit_flag` is a fit signal, not a workflow status
+- UI copy may describe this as a stronger-fit or priority-fit indicator, but stored workflow status remains limited to the canonical workflow enum
 
 ---
 
@@ -242,8 +246,8 @@ The system shall produce a numeric fit score from 0 to 100.
 ### FR4. Match percentage output
 The system shall expose a match percentage from 0 to 100 for each analyzed job.
 
-### FR5. Flag output
-The system shall produce a boolean fit flag derived from the fit result.
+### FR5. Fit indicator output
+The system shall produce a boolean fit indicator derived from the fit result.
 
 ### FR6. Human-readable rationale
 The system shall produce a concise human-readable fit summary.
@@ -272,7 +276,7 @@ The system shall support fit evaluation using partial job data when complete det
 
 ### Table view
 Show:
-- fit flag as a clear yes/no visual state
+- fit indicator as a clear visual state
 - fit score as a visible `match rating` from 0 to 100
 - pending or unavailable state when analysis has not run yet
 
@@ -285,8 +289,8 @@ Show:
 
 ### Filtering
 At minimum, support:
-- flagged only
-- unflagged only
+- stronger-fit only
+- lower-fit only
 - status filter
 
 ---

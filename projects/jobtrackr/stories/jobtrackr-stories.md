@@ -111,3 +111,12 @@ So that I can narrow down the list to what matters right now.
 - User can filter by date received
 - User can filter by location
 - Filters can be combined
+
+
+## Future Expansion Themes
+
+Post-MVP stories should expand toward an AIApply-style experience:
+- tailored resumes per job
+- cover letter generation
+- guided or automated applications
+- interview preparation

@@ -4,10 +4,35 @@
 Resolve the remaining P0 product decisions blocking MVP implementation and align the engineering handoff around one canonical set of behaviors.
 
 ## Source Inputs
-- `projects/jobtrackr/api-contract.md`
-- `projects/jobtrackr/requirements.md`
-- `specs/jobtrackr-gmail-ingestion-spec-v1.md`
-- `specs/jobtrackr-spec-clarifications-needed.md`
+- `projects/jobtrackr/specs/jobtrackr-api-contract.md`
+- `projects/jobtrackr/specs/jobtrackr-requirements.md`
+- `projects/jobtrackr/specs/jobtrackr-gmail-ingestion-spec-v1.md`
+- `projects/jobtrackr/specs/jobtrackr-spec-clarifications-needed.md`
+
+## Current kickoff references
+Implementation kickoff redirect:
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `projects/jobtrackr/PROJECT.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+
+Recovery note:
+- If a kickoff prompt or older preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift only.
+- Recover in this order: `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`, `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md`, `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- Treat bare filenames in preserved notes as historical shorthand only, not live repo-root entrypoints.
+
+Current implementation slice:
+- Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs UI lane
+
+Current frontend handoff checkpoints:
+- T-106 is the live frontend handoff for the server-backed dashboard and jobs workspace slice
+- T-107 is the current QA handoff summary for that frontend slice
+- the remaining QA blocker story is still narrowed to T-095 fixture-backed validation, plus stale external kickoff drift when prompts reference the dead root-level development-plan path
+
+Current lane ownership for this slice:
+- Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
+- Marcus: frontend recovery-entrypoint and kickoff-doc alignment so frontend pickup stays safe during hourly handoffs
+- Frank: source-of-truth maintenance across roadmap-facing and preserved planning docs so the live kickoff set and current slice wording stay aligned
+- remaining SWE lanes: backend implementation and shared contract follow-through
 
 ## Decisions
 
