@@ -1772,6 +1772,90 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The app does not require manual local-state deletion to recover.
 - Session handling and reconnect affordances remain deterministic after disconnect.
 
+## T-106 Persisted Jobs Workspace Handoff Test Cases
+
+### TC-2164 Dashboard loads persisted jobs when the API is available
+**Steps**
+1. Start the authenticated web app with the persisted-jobs API reachable.
+2. Open `/dashboard` with server-backed jobs available.
+3. Inspect the rendered rows, source labels, and fallback messaging.
+
+**Expected**
+- Dashboard loads persisted jobs through the shared data layer instead of mock-only fixtures.
+- Rows render canonical workflow values only.
+- Any pending-fit or workflow-normalization notice is visible without breaking table usability.
+
+### TC-2165 Jobs workspace falls back safely to mock data when the API is unavailable
+**Steps**
+1. Start the web app with the jobs API unavailable or forced into a fetch failure.
+2. Open `/jobs` from an authenticated session.
+3. Inspect rendered rows, navigation behavior, and fallback messaging.
+
+**Expected**
+- The workspace remains usable instead of blanking or crashing.
+- Mock fallback is clearly labeled as fallback behavior.
+- Selection continuity and dashboard-to-jobs navigation still work in fallback mode.
+
+### TC-2166 Persisted-job fallback reasons are visible at result-set level
+**Steps**
+1. Seed API results that include one row with missing fit data and one row normalized from a legacy workflow value.
+2. Open `/dashboard` and `/jobs`.
+3. Compare the fallback notices and row rendering.
+
+**Expected**
+- Missing fit data renders a canonical pending-fit state.
+- Normalized workflow values do not surface raw legacy aliases in the UI.
+- The result set explains why fallback handling was applied.
+
+## T-108 Source-Email Debug Read Endpoint Test Cases
+
+### TC-2167 Source-email debug endpoint returns persisted provenance rows with supported filters
+**Steps**
+1. Start the API with persisted `source_emails` data available.
+2. Call `GET /api/v1/source-emails` with no filters.
+3. Repeat with `limit`, `matchedAsJob`, `fromEmail`, and `search` filters.
+
+**Expected**
+- Endpoint returns persisted provenance rows without requiring direct database access.
+- Supported filters narrow results deterministically.
+- Response is stable enough for operator and QA inspection workflows.
+
+### TC-2168 Source-email debug reads preserve provenance inspection without exposing write behavior
+**Steps**
+1. Call `GET /api/v1/source-emails` against known persisted data.
+2. Inspect whether returned rows include message id, sender, subject, linkage-relevant fields, and parse-state context.
+3. Confirm no debug-read action mutates persistence state.
+
+**Expected**
+- Response exposes enough provenance detail to validate `source_emails` records and job linkage follow-through.
+- Debug read stays read-only.
+- QA can inspect recent source emails without reconstructing state from sync logs.
+
+## T-109 Frontend Continuity Handoff Refresh Test Cases
+
+### TC-2169 Kickoff-facing entrypoints route frontend recovery through T-106 and T-107 first
+**Steps**
+1. Review `README.md`, `PROJECT.md`, and `specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+2. Inspect the ordered frontend recovery guidance.
+3. Compare that guidance with Jimmy's latest plan and the live development plan.
+
+**Expected**
+- Entry points name T-106 as the live frontend handoff and T-107 as the current QA summary before older continuity-contract docs.
+- Recovery guidance keeps the remaining blocker story narrowed to T-095 plus stale external kickoff-path drift.
+- Older detail and workspace continuity docs remain secondary recovery material, not the first pickup.
+
+## T-110 Roadmap-Facing Handoff Refresh Test Cases
+
+### TC-2170 ROADMAP and PM memo point to the same live frontend handoff and blocker boundary
+**Steps**
+1. Review `ROADMAP.md` and `specs/jobtrackr-pm-decision-memo-2026-04-19.md`.
+2. Compare their current handoff note and blocker wording against `DEVELOPMENT_PLAN.md` and Jimmy's latest plan.
+
+**Expected**
+- Both docs call out T-106 as the live frontend handoff and T-107 as the latest QA summary.
+- Both docs keep T-095 fixture-backed validation and stale external kickoff drift as the remaining blocker boundary.
+- Roadmap-facing guidance matches kickoff-facing guidance instead of lagging behind it.
+
 ## T-095 Source-Email Persistence Sign-off Test Cases
 
 Evidence note:
