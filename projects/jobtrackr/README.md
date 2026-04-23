@@ -45,6 +45,7 @@ Current lane split for this slice:
 Live frontend recovery note:
 - Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 - Current frontend handoff checkpoints: T-106 is the live server-backed workspace handoff, T-107 is the current QA handoff summary, and the remaining blocker story stays narrowed to T-095 fixture-backed validation plus stale external kickoff drift
+- Current frontend QA entrypoint: `projects/jobtrackr/specs/jobtrackr-persisted-jobs-workspace-signoff-checklist-2026-04-23.md` (T-116)
 - Canonical frontend continuity docs for follow-through after T-106 and T-107:
   - `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
   - `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
@@ -53,8 +54,8 @@ Live frontend recovery note:
 Live backend/shared-contract recovery note:
 - Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 - Current backend/shared-contract pickup: T-091 remains the live source-email provenance and ingestion follow-through lane for Frank
+- Current backend/shared-contract QA entrypoint: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md` (T-102) for the live T-095 fixture-backed QA path
 - Current QA and debug handoff docs for provenance work:
-  - `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md` for the live T-095 fixture-backed QA path
   - `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md` for the repo-side proof bundle behind T-095
   - `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md` for the active QA coverage and T-108 source-email debug-read test cases
 

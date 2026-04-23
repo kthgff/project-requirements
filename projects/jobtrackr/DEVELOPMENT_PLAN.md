@@ -165,6 +165,7 @@ If a requirement appears ambiguous, check the canonical PM specs first and escal
 | T-116 | Publish a T-106 QA sign-off checklist so Sam can validate the server-backed dashboard and jobs workspace handoff from one implementation-facing note | Priya | No |
 | T-117 | Clarify hourly ticket-source recovery so kickoff work can safely continue when GitHub is the long-term tracker but `DEVELOPMENT_PLAN.md` still drives active claim flow | Marcus | No |
 | T-118 | Add backend/shared-contract provenance recovery pointers so kickoff docs route Frank pickup through the live T-091, T-095, and T-108 source-email handoff set | Frank | No |
+| T-120 | Surface the live QA sign-off entrypoints in kickoff-facing recovery notes so hourly pickup points directly at the current T-106 and T-095 validation checklists | Marcus | No |
 
 ## Upcoming
 This section now tracks only still-open carry-forward items. Older kickoff claim/completion history lives in the task tables above.
