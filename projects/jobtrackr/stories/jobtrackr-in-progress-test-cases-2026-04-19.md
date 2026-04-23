@@ -9,6 +9,19 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
+## Hourly QA review — 2026-04-23 06:20 America/Chicago
+
+### Results
+- PASS: Jimmy's 06:02 plan still keeps QA narrowed to the same two real gates, T-106 for the live frontend handoff and T-095 for source-email persistence sign-off, with no new repo-side blocker introduced.
+- PASS: Jimmy's latest recovery order matches the live repo state: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, and `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md` are still the correct ordered entrypoints.
+- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now records T-117 as completed, explicitly clarifying that hourly recovery should keep using the project-root markdown handoff set even while GitHub remains the longer-term tracker.
+- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now records T-118 as completed, and the live kickoff-facing docs now route Frank's backend/shared-contract recovery through the current T-091, T-095, and T-108 provenance handoff set.
+- PASS: T-116 remains the correct implementation-facing QA entrypoint for T-106 frontend verification, and the checklist still cleanly scopes API-up persisted-jobs behavior, API-down fallback, and canonical fallback-notice checks.
+- PASS: The live plan still shows T-106 in `QA` and T-095 as the remaining source-email persistence sign-off gate, which matches Jimmy's latest plan note that these are the only open QA surfaces worth active validation.
+- GAP: The external hourly kickoff prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so automation-facing prompt drift remains unresolved outside the repo.
+- GAP: T-106 still needs executed QA evidence for persisted `/dashboard` and `/jobs`, safe API-down mock fallback, and visible pending-fit or workflow-normalization notices before it can move from QA to Completed.
+- GAP: T-095 still needs fixture-backed execution against `source_emails`, `job_source_emails`, and repeat-sync idempotence before the provenance-first sign-off gate can close.
+
 ## Hourly QA review — 2026-04-23 03:20 America/Chicago
 
 ### Results
@@ -1798,6 +1811,58 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Gmail connection state changes to a disconnected or reconnect-required canonical state.
 - The app does not require manual local-state deletion to recover.
 - Session handling and reconnect affordances remain deterministic after disconnect.
+
+## T-116 T-106 Sign-off Checklist Publication Test Cases
+
+### TC-2171 T-106 checklist covers the full frontend QA gate from one note
+**Steps**
+1. Review `specs/jobtrackr-persisted-jobs-workspace-signoff-checklist-2026-04-23.md`.
+2. Compare its scope against `DEVELOPMENT_PLAN.md`, the live handoff package, and current QA coverage.
+3. Check whether repo-side verification, API-up validation, API-down fallback validation, and fallback-reason assertions are all included.
+
+**Expected**
+- One checklist covers the full T-106 QA path without requiring Sam to reconstruct the proof set from multiple files.
+- The checklist explicitly requires `npm test` and `npm run build` before UI QA starts.
+- The checklist names the live routes, fallback surfaces, and canonical pending-fit or workflow-normalization assertions that still gate sign-off.
+
+## T-117 Hourly Ticket-Source Recovery Test Cases
+
+### TC-2172 Hourly recovery guidance distinguishes live markdown recovery from long-term GitHub tracking
+**Steps**
+1. Review the recovery guidance added to `DEVELOPMENT_PLAN.md` and linked kickoff-facing docs.
+2. Compare the hourly recovery instructions with the current active and completed task tables.
+3. Inspect whether the docs explain what to do when no genuinely unclaimed row remains for the current lane.
+
+**Expected**
+- Docs explicitly say hourly recovery still starts from the project-root markdown handoff set.
+- Docs distinguish durable GitHub tracking from the live markdown recovery ledger.
+- Docs instruct the next agent to add the smallest safe follow-through task rather than hijacking a QA-owned or completed row.
+
+## T-118 Backend Provenance Recovery Pointer Test Cases
+
+### TC-2173 Kickoff-facing docs route backend provenance recovery through T-091, T-095, and T-108
+**Steps**
+1. Review `README.md`, `PROJECT.md`, and `specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+2. Inspect Frank-facing backend/shared-contract recovery notes.
+3. Compare those notes with the current live provenance tasks in `DEVELOPMENT_PLAN.md`.
+
+**Expected**
+- Kickoff-facing docs point Frank's recovery through T-091, T-095, and T-108 explicitly.
+- Provenance recovery notes do not force engineers to guess which source-email docs are current.
+- Backend/shared-contract pickup stays aligned with the live project-root recovery order and current provenance sign-off set.
+
+## T-119 Preserved Implementation Slice Wording Alignment Test Cases
+
+### TC-2174 Preserved implementation-facing docs reuse the same current slice wording
+**Steps**
+1. Review `specs/jobtrackr-first-build-slice-v1.md`, `specs/jobtrackr-engineering-handoff-v1.md`, and `specs/jobtrackr-mvp-qa-testability-review.md`.
+2. Inspect each file's current implementation slice note.
+3. Compare the wording against the live repo phrasing used in QA-facing recovery docs.
+
+**Expected**
+- All three preserved implementation-facing docs describe the active lane as `auth -> session -> Gmail readonly connect -> persisted jobs slice`.
+- None of the preserved docs reintroduce `persisted jobs UI lane` as the current recovery wording.
+- The preserved notes stay aligned with the live Next.js web plus Go API implementation framing used elsewhere in the repo.
 
 ## T-106 Persisted Jobs Workspace Handoff Test Cases
 

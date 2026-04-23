@@ -16,7 +16,7 @@ This review is preserved for historical context. For active implementation picku
 - `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
 Active implementation slice:
-- Google auth -> session -> Gmail readonly connect -> persisted jobs UI
+- Google auth -> session -> Gmail readonly connect -> persisted jobs slice
 
 ## Executive Summary
 Current specs are sufficient for product direction, but not yet sufficient for low-risk implementation. The biggest issues are conflicting data semantics, underdefined edge-case behavior, and several places where APIs are drafted before product decisions are finalized.
