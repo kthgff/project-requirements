@@ -201,11 +201,11 @@ Implementation kickoff redirect:
 
 Recovery note:
 - If a kickoff prompt or older preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift only.
-- Recover in this order: `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`, `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md`, `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
 - Treat bare filenames in preserved notes as historical shorthand only, not live repo-root entrypoints.
 
 Current implementation slice:
-- Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs UI lane
+- Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice
 
 Current frontend handoff checkpoints:
 - T-106 is the live frontend handoff for the server-backed dashboard and jobs workspace slice
