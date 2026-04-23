@@ -159,6 +159,7 @@ In progress:
 - `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
 - `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
 - `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-digitalocean-production-hosting-plan-2026-04-23.md`
 - `projects/jobtrackr/specs/jobtrackr-frontend-plan-v1.md` (preserved, should defer to the canonical detail and list-to-detail contracts)
 - `projects/jobtrackr/specs/jobtrackr-table-ui-spec-v1.md` (preserved, should defer to the canonical detail and list-to-detail contracts)
 

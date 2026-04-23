@@ -9,6 +9,17 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
+## Hourly QA review — 2026-04-23 15:20 America/Chicago
+
+### Results
+- PASS: Jimmy's latest 2:02 PM plan keeps the live QA gate pair unchanged, with T-106 as the server-backed persisted-jobs workspace handoff and T-095 as the provenance-first source-email persistence gate.
+- PASS: Jimmy's latest lane guidance explicitly treats the root-level `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` reference as stale external drift, and the current repo recovery order remains `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, then `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now records T-130 as complete, which keeps product-facing recovery notes aligned with the same live QA gate pair and sign-off entrypoints already used by the blocker checklist and this active QA coverage file.
+- PASS: The live repo state still narrows QA execution to two concrete sign-off paths only: `projects/jobtrackr/specs/jobtrackr-persisted-jobs-workspace-signoff-checklist-2026-04-23.md` for T-106 and `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md` for T-095.
+- GAP: T-106 still needs executed QA evidence for API-up `/dashboard` and `/jobs`, safe API-down mock fallback, and visible pending-fit or workflow-normalization notices before it can move from QA to Completed.
+- GAP: T-095 still needs fixture-backed execution against `source_emails`, `job_source_emails`, and repeat-sync idempotence before the provenance-first sign-off gate can close.
+- GAP: The external hourly kickoff prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so automation-facing prompt drift remains unresolved outside the repo.
+
 ## Hourly QA review — 2026-04-23 12:50 America/Chicago
 
 ### Results
@@ -1892,6 +1903,30 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Docs explicitly say hourly recovery still starts from the project-root markdown handoff set.
 - Docs distinguish durable GitHub tracking from the live markdown recovery ledger.
 - Docs instruct the next agent to add the smallest safe follow-through task rather than hijacking a QA-owned or completed row.
+
+## T-130 PRD QA Gate Pair Alignment Test Cases
+
+### TC-2175 PRD v2 surfaces the same live QA gate pair as blocker and active QA docs
+**Steps**
+1. Review `projects/jobtrackr/prd/jobtrackr-prd-v2.md`.
+2. Compare its implementation-facing QA recovery note against `projects/jobtrackr/specs/jobtrackr-qa-blocker-checklist-2026-04-19.md` and this active QA coverage file.
+3. Inspect whether the named live QA gates and sign-off entrypoints match exactly.
+
+**Expected**
+- PRD v2 names T-106 and T-095 as the live QA gate pair.
+- PRD v2 points directly to `projects/jobtrackr/specs/jobtrackr-persisted-jobs-workspace-signoff-checklist-2026-04-23.md` and `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md`.
+- Product-facing recovery notes do not force QA to infer the current sign-off entrypoints from other docs.
+
+### TC-2176 PRD v2 keeps the stale root-path warning and current slice wording aligned with QA docs
+**Steps**
+1. Review the recovery note and implementation-slice wording in `projects/jobtrackr/prd/jobtrackr-prd-v2.md`.
+2. Compare it with `projects/jobtrackr/specs/jobtrackr-qa-blocker-checklist-2026-04-19.md` and `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`.
+3. Check path examples and the current architecture phrasing.
+
+**Expected**
+- PRD v2 treats `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` as stale external drift only.
+- PRD v2 reuses the same ordered recovery path back to `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, and the live Phase 3 handoff package.
+- PRD v2 describes the active implementation as the Next.js web plus Go API auth -> session -> Gmail readonly connect -> persisted jobs slice, without reintroducing older local-Go-app wording.
 
 ## T-118 Backend Provenance Recovery Pointer Test Cases
 
