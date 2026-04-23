@@ -9,6 +9,16 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
+## Hourly QA review — 2026-04-23 16:19 America/Chicago
+
+### Results
+- PASS: Jimmy's latest 4:17 PM plan still keeps the live QA gate pair unchanged, with T-106 as the server-backed persisted-jobs workspace handoff and T-095 as the provenance-first source-email persistence gate.
+- PASS: The repo recovery order remains `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, then `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`, and the stale root-level `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` prompt is still treated as external coordination drift only.
+- PASS: The active implementation wording in this file now matches the live handoff docs again, using `auth -> session -> Gmail readonly connect -> persisted jobs slice` instead of the stale `persisted jobs UI` phrasing that had lingered in the historical hourly notes.
+- GAP: T-106 still needs executed QA evidence for API-up `/dashboard` and `/jobs`, safe API-down mock fallback, and visible pending-fit or workflow-normalization notices before it can move from QA to Completed.
+- GAP: T-095 still needs fixture-backed execution against `source_emails`, `job_source_emails`, and repeat-sync idempotence before the provenance-first sign-off gate can close.
+- GAP: The external hourly kickoff prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so automation-facing prompt drift remains unresolved outside the repo.
+
 ## Hourly QA review — 2026-04-23 15:20 America/Chicago
 
 ### Results
@@ -2145,8 +2155,8 @@ Evidence note:
 16. Frank's doc-cleanup follow-through tasks T-053, T-054, and T-058 still require the older stories, draft PRDs, PROJECT, clarification docs, and roadmap to be visibly annotated or rewritten before QA can confirm stale wording is no longer implementation-facing.
 17. T-057, T-062, and T-066 now cover PRD v2 source references plus QA-owned path and environment notes, but QA still needs surrounding non-QA docs and automation prompts to keep pointing at valid current paths so the shortest implementation-facing checklist stays trustworthy.
 18. Jimmy's latest plan keeps the highest-value QA work on T-057, T-062, and T-066, with T-063 through T-068 extending the same recovery cleanup into roadmap, kickoff, handoff, and automation-facing entrypoint docs.
-19. The active PM implementation slice remains auth -> session -> Gmail readonly connect -> persisted jobs UI, so QA-owned docs should treat the Next.js web shell plus Go API split as current and older local-Go-app wording as historical unless a task explicitly scopes back to that earlier path.
-20. The hourly kickoff prompt still referenced `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, while the live source file remains `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`; QA-facing repo docs now explicitly treat that mismatch as external coordination drift and tell engineers how to recover safely.
+19. The active PM implementation slice remains auth -> session -> Gmail readonly connect -> persisted jobs slice, so QA-owned docs should treat the Next.js web shell plus Go API split as current and older local-Go-app wording as historical unless a task explicitly scopes back to that earlier path.
+20. The hourly kickoff prompt still referenced `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, while the live source file remains `projects/jobtrackr/DEVELOPMENT_PLAN.md`; QA-facing repo docs now explicitly treat that mismatch as external coordination drift and tell engineers how to recover safely.
 21. The live development plan now has completed entries again, including T-085, T-086, T-090, T-093, T-094, T-096, T-097, and T-107, so this hour's QA output should keep distinguishing plan-complete documentation work from still-open execution sign-off work like T-095 and T-106.
 22. T-063 through T-068 still need diff-level verification in roadmap, README, PROJECT, handoff, and preserved kickoff docs before QA can close the remaining recovery-path drift called out by Jimmy's latest plan.
 23. T-070 now covers wording normalization across PRD v2, the QA blocker checklist, and in-progress QA coverage so QA can recover from stale automation prompts without comparing three slightly different recovery notes by hand.
