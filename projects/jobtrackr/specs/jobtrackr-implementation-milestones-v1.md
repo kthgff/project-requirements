@@ -95,20 +95,20 @@ Allow the system to evaluate jobs against the user's resume.
 
 ---
 
-## Milestone 6. Fit analysis and flagged jobs
+## Milestone 6. Fit analysis and fit signals
 
 ### Goal
-Surface likely good-fit roles in the dashboard.
+Surface likely good-fit roles in the dashboard without conflating fit indicators with workflow state.
 
 ### Scope
 - fit scoring
-- fit flag logic
+- low-fit and match-rating signal logic
 - fit summary storage
 - fit visibility in table and detail view
 
 ### Exit criteria
 - jobs receive fit results
-- dashboard clearly shows flagged jobs
+- dashboard clearly shows match rating, low-fit indicators, and pending-fit states without implying a workflow transition
 
 ---
 
@@ -141,5 +141,5 @@ Prepare MVP for real use.
 - launch checklist
 
 ### Exit criteria
-- critical user flow works from login to flagged jobs in dashboard
+- critical user flow works from login to fit-scored jobs in the dashboard
 - major known blockers resolved

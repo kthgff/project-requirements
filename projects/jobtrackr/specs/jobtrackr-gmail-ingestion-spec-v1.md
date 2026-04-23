@@ -69,6 +69,11 @@ Out of scope for MVP:
 
 The system should not run full extraction against every inbox message if basic filtering can reduce noise.
 
+### Operator discovery workflow
+For local debugging and ingestion-query validation, the operator may use `gog gmail search` before running the API sync. The canonical repo helper is `apps/api/scripts/gog-discover-job-emails.sh`, which should mirror the same Gmail query and max-results defaults used by the API sync environment.
+
+This discovery step is read-only. It is meant to answer "which Gmail messages would this query return right now?" before the write path runs. Persistence still happens only in the API sync flow, where matching messages are stored as source-email records and then linked to parsed jobs when applicable.
+
 ### Recommended pre-filters
 Use one or more of:
 - inbox placement
