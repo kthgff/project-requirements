@@ -37,6 +37,8 @@ Job seekers receive job leads, recruiter outreach, and application updates acros
 
 ## MVP Scope
 
+The MVP remains intentionally narrower than the long-term AIApply-style vision. It should establish the foundation with login, searchable jobs workspace, Gmail ingestion, resume-based match percentage, and fit signals.
+
 ### In Scope
 - Gmail OAuth connection
 - Polling Gmail inbox for relevant messages
@@ -81,18 +83,34 @@ Approach:
 - Later versions may use AI parsing
 
 ### 3. Dashboard
+The dashboard is the main jobs workspace and primary searchable review surface for MVP.
+
 Views:
 - Inbox (new jobs)
 - All jobs
 - Saved
 - Archived
 
+View semantics:
+- Inbox shows non-archived jobs with `status = new`
+- All jobs shows all non-archived jobs
+- Saved shows non-archived jobs with `saved = true`
+- Archived shows jobs with `archivedAt != null`
+- Archived is a view/archive state, not a workflow status
+
 Default job fields shown:
+- Match rating
 - Title
 - Company
 - Location
 - Status
 - Date received
+
+Fit treatment:
+- Match rating is a user-facing fit signal when fit analysis exists
+- Low-fit behavior stays a fit signal and must not mutate workflow status
+- Pending or unavailable fit analysis should render as a non-workflow pending state
+- Any shortlist or review-style labels are presentation helpers only, not additions to the canonical workflow enum
 
 ### 4. Status Tracking
 Supported statuses:
@@ -102,7 +120,6 @@ Supported statuses:
 - Interviewing
 - Offer
 - Rejected
-- Archived
 
 ### 5. Search and Filters
 - Search by keyword
@@ -160,11 +177,28 @@ Supported statuses:
 - Update emails may be misclassified as new opportunities
 
 ## Open Questions
-- Should saved be modeled as a status or a separate view state?
-- Should archived be a status or a separate archived flag?
 - How should duplicates be handled, automatic merge or review queue?
 - Should application update emails attach to an existing job timeline?
 - Do we need manual job entry in MVP as a fallback?
+
+## Canonical Reference Notes
+For implementation-facing workflow, archive, and fit semantics, defer to the live project-root source files:
+- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+- `projects/jobtrackr/specs/jobtrackr-api-contract.md`
+- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+
+Shared QA recovery note:
+- If a kickoff prompt or older note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift.
+- Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
+- Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
+
+Live QA sign-off entrypoints:
+- T-095 source-email persistence sign-off checklist: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md`
+- T-095 supporting evidence bundle: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md`
+- T-106 persisted-jobs workspace sign-off checklist: `projects/jobtrackr/specs/jobtrackr-persisted-jobs-workspace-signoff-checklist-2026-04-23.md`
+- Use the T-095 and T-106 sign-off checklists as the two live QA paths before moving either task from QA to Completed.
 
 ## Recommended MVP Cut
 If speed matters most, first release should focus on:
