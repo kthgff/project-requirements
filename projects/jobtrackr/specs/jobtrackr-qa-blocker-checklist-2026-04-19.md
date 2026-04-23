@@ -161,6 +161,10 @@ These are the highest-risk contract mismatches to re-check during implementation
 - Source-email persistence sign-off checklist: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md`
 - Use the sign-off checklist as the primary QA path, and use the evidence bundle as the supporting proof set before moving T-095 from QA to Completed.
 
+## T-106 QA evidence handoff
+- Persisted-jobs workspace sign-off checklist: `projects/jobtrackr/specs/jobtrackr-persisted-jobs-workspace-signoff-checklist-2026-04-23.md`
+- Use the sign-off checklist as the primary QA path before moving T-106 from QA to Completed.
+
 ## 6. QA Gate Decision
 
 ### Build readiness
