@@ -17,32 +17,28 @@ JobTrakr is a single-user job search assistant that:
 
 ## Recovery Note for Preserved Handoff Guidance
 
-This file is preserved handoff context, not the primary kickoff entrypoint.
+This file is preserved engineering handoff context, not the primary kickoff entrypoint.
 
-Implementation kickoff redirect:
-- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
-- `projects/jobtrackr/PROJECT.md`
-- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+Live implementation kickoff redirect:
+1. `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+2. `projects/jobtrackr/PROJECT.md`
+3. `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
-Recovery note:
-- If a kickoff prompt or older preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift only.
-- Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+Recovery rules for older handoff notes:
+- If a kickoff prompt or preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift only.
+- Recover in the ordered project-root sequence above.
 - Treat bare filenames in preserved notes as historical shorthand only, not live repo-root entrypoints.
+- Treat older mock-first build-order guidance in this file as legacy context only, not the active implementation default.
 
 Current implementation slice:
 - Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice
 
 Current lane ownership for this slice:
+- Alice and Marcus are the frontend owners for the current slice.
 - Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
 - Marcus: frontend recovery-entrypoint and kickoff-doc alignment so frontend pickup stays safe during hourly handoffs
-- Frank: source-of-truth maintenance across roadmap-facing and preserved planning docs so the live kickoff set and current slice wording stay aligned
+- Frank: preserved engineering handoff and source-of-truth recovery maintenance so older docs keep pointing back to the live kickoff set and current slice wording
 - remaining SWE lanes: backend and shared contract follow-through
-
-Shared frontend ownership note:
-- Alice and Marcus are the frontend owners for the current slice.
-
-Shared Alice lane note:
-- Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
 
 ## Locked Product Decisions
 

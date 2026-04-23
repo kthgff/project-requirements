@@ -1,23 +1,23 @@
 # JobTrakr First Build Slice v1
 
-> Historical kickoff note: this file captures the original mock-first slice. For the current implementation lane, use `projects/jobtrackr/DEVELOPMENT_PLAN.md` and `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
->
-> Recovery note for automation-facing handoffs: if a kickoff prompt or preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale drift and recover in this order:
+> Historical kickoff note: this file captures the original mock-first slice and remains preserved legacy context. For the current implementation lane, use the live project-root kickoff set instead:
 > 1. `projects/jobtrackr/DEVELOPMENT_PLAN.md`
 > 2. `projects/jobtrackr/PROJECT.md`
 > 3. `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+>
+> Recovery note for automation-facing handoffs: if a kickoff prompt or preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift only and recover through the ordered project-root sequence above.
 >
 > Current implementation slice:
 > - Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice
 >
 > Current lane ownership for this slice:
+> - Alice and Marcus are the frontend owners for the current slice.
 > - Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
 > - Marcus: frontend recovery-entrypoint and kickoff-doc alignment so frontend pickup stays safe during hourly handoffs
-> - Frank: source-of-truth maintenance across roadmap-facing and preserved planning docs so the live kickoff set and current slice wording stay aligned
+> - Frank: preserved engineering handoff and source-of-truth recovery maintenance so older docs keep pointing back to the live kickoff set and current slice wording
 > - remaining SWE lanes: backend and shared contract follow-through
 >
-> Shared frontend ownership note:
-> - Alice and Marcus are the frontend owners for the current slice.
+> Legacy-context rule: treat the mock-first scope and build order below as historical kickoff guidance only, not the active implementation default.
 
 ## Purpose
 
@@ -201,8 +201,8 @@ Then:
 Engineering originally began programming from this slice as the kickoff scope.
 
 Current implementation pickup should start from the live project-root source set instead, in this order:
-- `projects/jobtrackr/DEVELOPMENT_PLAN.md`
-- `projects/jobtrackr/PROJECT.md`
-- `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+1. `projects/jobtrackr/DEVELOPMENT_PLAN.md`
+2. `projects/jobtrackr/PROJECT.md`
+3. `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 
 Treat any older local-Go-app framing in preserved kickoff notes as historical context only. The live implementation path is the Next.js web plus Go API slice above.
