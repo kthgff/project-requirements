@@ -42,6 +42,11 @@ Current lane split for this slice:
 - Marcus: primary frontend continuity owner for kickoff docs, detail continuity entrypoints, and safe hourly pickup recovery
 - remaining SWE lanes: backend and shared contract follow-through
 
+Latest frontend continuity watchpoints from Jimmy's current plan:
+- T-106 is the live frontend handoff for the server-backed dashboard and jobs workspace slice
+- T-107 is the current QA handoff summary for that frontend slice
+- the remaining QA blocker story is still narrowed to T-095 fixture-backed validation, plus stale external kickoff drift when prompts reference the dead root-level development-plan path
+
 Use `projects/jobtrackr/specs/jobtrackr-first-build-slice-v1.md` as historical kickoff context only, and use `projects/jobtrackr/DEVELOPMENT_PLAN.md` plus `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md` for the current lane and ownership guidance. Frontend pickup should also treat these detail-continuity docs as part of the live kickoff set:
 - `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
 - `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
@@ -79,6 +84,8 @@ projects/jobtrackr/
 ## Frontend continuity reminder
 
 For the current frontend slice, treat drawer and full-page detail as one behavior surface. Notes must use explicit save/cancel, tags must edit in context, and selected-row continuity should follow the canonical list-to-detail examples instead of older preserved wording.
+
+If you are picking up frontend continuity after the latest server-backed workspace handoff, start from `projects/jobtrackr/DEVELOPMENT_PLAN.md` for T-106 and T-107 context, then use the canonical detail-view, list-to-detail, and workspace continuity docs above before touching preserved frontend planning notes.
 
 ## Ticket Tracking
 

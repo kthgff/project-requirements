@@ -22,6 +22,10 @@ Recovery note for automation-facing handoffs:
   3. `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 - when a kickoff note says to start with PROJECT, use `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md` so the recovery path stays explicit alongside the live development plan
 - the current implementation slice for pickup remains Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
+- latest frontend handoff checkpoints from Jimmy's current plan:
+  - T-106 is the live frontend handoff for the server-backed dashboard and jobs workspace slice
+  - T-107 is the current QA handoff summary for that frontend slice
+  - the remaining QA blocker story is still narrowed to T-095 fixture-backed validation, plus stale external kickoff drift when prompts reference the dead root-level development-plan path
 - current lane ownership for this slice:
   - Alice and Marcus are the frontend owners for the current slice.
   - Alice: primary frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
@@ -117,9 +121,9 @@ Priority order:
 Focus on frontend continuity, kickoff-entrypoint alignment, and safe hourly recovery so frontend pickup stays anchored to the canonical detail-view, list-to-detail, and workspace continuity contracts.
 
 Priority order:
-1. T-078 normalize README, PROJECT, and the handoff package so Marcus and Alice show up explicitly as the frontend owners for the current slice, with Marcus called out as the frontend continuity owner for kickoff-facing recovery
-2. T-061 reconcile README, PROJECT, and kickoff handoff entrypoints around the live auth -> session -> Gmail readonly connect -> persisted jobs slice
-3. Keep README, PROJECT, and the handoff package pointing frontend pickup back to the canonical detail-view, list-to-detail, and workspace continuity contracts
+1. Keep README, PROJECT, and the handoff package pointing frontend pickup first to T-106 and T-107, then to the canonical detail-view, list-to-detail, and workspace continuity contracts
+2. T-078 normalize README, PROJECT, and the handoff package so Marcus and Alice show up explicitly as the frontend owners for the current slice, with Marcus called out as the frontend continuity owner for kickoff-facing recovery
+3. T-061 reconcile README, PROJECT, and kickoff handoff entrypoints around the live auth -> session -> Gmail readonly connect -> persisted jobs slice
 4. T-065 keep preserved kickoff docs clearly historical and recoverable to the live project-root source set
 5. T-068 normalize README, PROJECT, and handoff package path examples so they all use the same explicit `projects/jobtrackr/...` entrypoints
 6. T-072 remove remaining bare-path and lane-wording ambiguity across kickoff-facing docs during hourly recovery
@@ -141,7 +145,7 @@ Priority order:
 - Empty results are not the same as no-data state.
 - Detail view should follow the locked section order.
 - Row-selection persistence should follow the workspace continuity rules.
-- Frontend kickoff docs should point engineers at the canonical detail-view, list-to-detail, and workspace continuity contracts before they rely on preserved frontend plans.
+- Frontend kickoff docs should point engineers at T-106 and T-107 first, then at the canonical detail-view, list-to-detail, and workspace continuity contracts before they rely on preserved frontend plans.
 
 ## Milestones 1 to 4 Summary
 

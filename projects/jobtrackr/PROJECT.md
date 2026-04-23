@@ -23,6 +23,11 @@ Frontend continuity for this slice should stay anchored to:
 - `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
 - `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
 
+Latest frontend handoff checkpoints from Jimmy's current plan:
+- T-106 is the live frontend handoff for the server-backed dashboard and jobs workspace slice
+- T-107 is the current QA handoff summary for that frontend slice
+- the remaining QA blocker story is still narrowed to T-095 fixture-backed validation, plus stale external kickoff drift when prompts reference the dead root-level development-plan path
+
 ## Current Phase
 
 **Phase 3: Engineering handoff and kickoff**
@@ -122,7 +127,7 @@ In progress:
 
 1. Finish reconciling PROJECT, README, milestone, and handoff references against the canonical workflow, fit-signal contract, and current auth to Gmail to persisted-jobs pickup lane
 2. Keep the frontend ownership split explicit in kickoff-facing docs so Marcus and Alice land on the same live source-of-truth set during hourly recovery
-3. Keep kickoff-facing docs pointing frontend pickup back to the canonical detail-view, list-to-detail, and workspace continuity contracts so drawer, route, notes, tags, and row-selection behavior do not drift
+3. Keep kickoff-facing docs pointing frontend pickup back to T-106, T-107, and the canonical detail-view, list-to-detail, and workspace continuity contracts so drawer, route, notes, tags, and row-selection behavior do not drift
 4. Lock the first shared schema and API interfaces for the raw-ingestion and persisted-jobs vertical slice
 5. Add explicit product and engineering guidance for GOG-based Gmail job-email discovery, raw message capture, parsing, deduplication, and persistence into the jobs database
 6. Keep the engineering handoff entrypoints current as implementation pickup accelerates
@@ -214,6 +219,8 @@ Current lane split for this slice:
 - remaining SWE lanes: backend and shared contract follow-through
 
 If an hourly kickoff or preserved note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale automation drift and recover to the ordered project-root files above.
+
+If you are resuming frontend continuity after the latest server-backed workspace handoff, check T-106 and T-107 in `projects/jobtrackr/DEVELOPMENT_PLAN.md` first, then move into the canonical detail-view, list-to-detail, and workspace continuity contracts before touching preserved frontend planning notes.
 
 Historical references to fit flags, flagged jobs, or older workflow examples should be read as legacy shorthand only, not as current product-state vocabulary.
 
