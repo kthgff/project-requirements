@@ -4,9 +4,11 @@
 
 Define the MVP table UI for reviewing tracked jobs in JobTrakr.
 
+If this preserved table spec conflicts with the canonical detail-view or list-to-detail continuity docs, follow `specs/jobtrackr-detail-view-contract-2026-04-20.md` and `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`.
+
 ## Goal
 
-Allow the user to scan all tracked jobs quickly, identify flagged opportunities, and update workflow status with minimal friction.
+Allow the user to scan all tracked jobs quickly, identify likely good-fit opportunities through fit signals, and update workflow status with minimal friction.
 
 ## Table Overview
 
@@ -43,13 +45,14 @@ It should:
 ## Column Requirements
 
 ### Fit
-- show both a numeric `match rating` from 0 to 100 and a simple flagged/not-flagged state
+- show a numeric `match rating` from 0 to 100 plus a simple fit-priority indicator derived from the canonical fit contract
 - support three fit availability states:
-  - flagged or not flagged with a computed rating
-  - analyzed but below flag threshold
+  - analyzed with a computed rating and fit indicator
+  - analyzed but below the fit-priority threshold
   - unavailable or pending because resume or job data is incomplete
 - numeric rating should be sortable
-- flagged state should remain visually obvious for fast triage
+- fit-priority state should remain visually obvious for fast triage
+- fit treatment must not introduce or imply a workflow status
 
 ### Company
 - display normalized company name
@@ -81,6 +84,8 @@ It should:
 ### Row click behavior
 PM recommendation:
 - clicking a row or title opens a right-side detail drawer
+- the selected state is keyed by job id and should stay aligned with the canonical list-to-detail continuity examples
+- mobile may switch to a full-page detail route, but section order and edit behavior must remain the same as the drawer
 
 ### Sorting behavior
 At minimum support sorting by:
@@ -111,27 +116,28 @@ PM recommendation:
 ## Status Interaction
 
 ### MVP recommendation
-Allow status update from detail drawer first.
+Allow status update from the shared detail experience first.
 
 Optional if cheap:
-- inline status dropdown in table
+- inline status dropdown in table, but only if it stays behaviorally aligned with the canonical detail contract
 
 Reason:
 - keeps initial table simpler
 - reduces accidental edits
+- preserves one clear source of truth for notes, tags, and detail editing behavior
 
 ---
 
 ## Visual Hierarchy
 
 The table should make these things easy to notice first:
-1. flagged jobs and match percentage
+1. fit indicators and match percentage
 2. title and company
 3. current status
 4. recency
 
 ### Recommended treatment
-- flagged jobs use a badge or colored icon
+- fit-priority jobs use a badge or colored icon
 - match rating appears as a compact score, such as `84/100`, near the fit state
 - title text should be visually stronger than metadata
 - muted styling for lower-priority metadata like source/date
@@ -157,7 +163,7 @@ Show:
 
 ### Long text
 - truncate in cells
-- expose full content in detail view or tooltip
+- expose full content in the canonical detail experience rather than inventing table-only interaction patterns
 
 ---
 
@@ -176,7 +182,7 @@ Show:
 The dashboard shall present database-backed jobs in a structured table.
 
 ### FR2. Fit visibility
-The table shall visually distinguish flagged jobs and display a numeric match rating when analysis exists.
+The table shall visually distinguish stronger-fit jobs through fit indicators and display a numeric match rating when analysis exists.
 
 ### FR3. Row detail access
 The user shall be able to open fuller job detail from the table.
@@ -194,7 +200,10 @@ The user shall be able to sort by supported columns, including match percentage.
 The table shall show workflow status for every job.
 
 ### FR9. Status editing
-The product shall support updating job status from the dashboard experience.
+The product shall support updating job status from the dashboard experience through the shared detail surface first, with any table-side shortcut treated as secondary.
+
+### FR10. Detail continuity
+The table shall preserve canonical list-to-detail continuity for selected-row state, drawer versus full-page parity, and notes/tag editing handoff.
 
 ---
 
@@ -202,4 +211,8 @@ The product shall support updating job status from the dashboard experience.
 
 - Should multi-select bulk actions exist in MVP, or later?
 - Should row click and title click both open detail, or title only?
-- Should flagged jobs float to top as an optional sort preset?
+- Should stronger-fit jobs float to top as an optional sort preset?
+
+## Canonical continuity note
+
+Use `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md` as the authoritative source for selected-row continuity, drawer versus route parity, and the way table rows hand off to status, notes, and tag editing in the detail experience.

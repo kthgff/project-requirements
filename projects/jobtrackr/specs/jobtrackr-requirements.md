@@ -33,11 +33,16 @@ Build an MVP that automatically ingests job-related emails from Gmail, extracts 
 - The system must support candidate email filtering based on sender, keywords, and labels
 - The system must store message IDs to prevent duplicate processing
 - The system must log processing failures
+- The system must support a Gmail discovery path using the `gog` CLI for local/operator-driven ingestion and debugging
+- The system must be able to search for job-related Gmail messages using repeatable queries such as sender filters, subject filters, and keyword filters
+- The system must persist source-email records before or alongside parsed job creation so inbox discoveries can be reprocessed later without re-fetch ambiguity
 
 ### 3. Job Detection
 - The system must determine whether an email is job-related using rule-based logic
 - Detection rules must be configurable in code for MVP
 - The system should support common job boards and recruiter outreach patterns
+- Detection should explicitly support job-alert and search-result style emails from sources like LinkedIn, Indeed, Built In, Greenhouse, Lever, Ashby, company talent alerts, and recruiter outreach when a specific role is present
+- The system should support a first-pass "candidate source email" state where job-related emails are stored even if they do not yet produce a complete parsed job record
 
 ### 4. Parsing and Data Extraction
 Required fields to extract when present:
@@ -62,6 +67,10 @@ Behavior requirements:
 - If the parsed-job threshold is not met, the system must persist the source email only for debug and traceability
 - Parsed fields must be editable in the UI
 - Source email references must be retained for traceability
+- The ingestion flow must support two explicit stages:
+  1. save the Gmail message as a source-email record
+  2. parse and upsert one or more job records from that source email when confidence is sufficient
+- The system must support reprocessing previously saved source emails after parser improvements or rule changes
 
 ### 5. Job Management UI
 The app must provide:
@@ -121,10 +130,27 @@ The user must be able to:
 - Tags should be available as a filterable attribute
 
 ## Data Requirements
+Minimum source-email entity fields:
+- id
+- gmail_message_id
+- gmail_thread_id
+- account_email
+- sender
+- subject
+- date_received
+- labels
+- source_type
+- raw_text or retrievable raw body reference
+- processing_state
+- parse_confidence
+- created_at
+- updated_at
+
 Minimum job entity fields:
 - id
 - gmail_message_id
 - gmail_thread_id
+- source_email_id
 - title
 - company
 - location
@@ -169,7 +195,22 @@ Not required for MVP:
 - duplicate handling is automatic only for exact-match rules defined in the PM decision memo; ambiguous matches do not auto-merge in MVP
 - manual job entry is out of MVP scope
 - recruiter outreach is in MVP scope only when the email clearly references a specific open role
+- Gmail discovery and debug ingestion may use the `gog` CLI as an operator-facing ingestion path for local workflows and verification
+- source emails are first-class records in the data model and must be persisted even when a full job row is not created yet
 
 ## Decisions Still Open
 - Whether update emails should appear in a job activity timeline
 - What enrichment source should be authoritative when email data conflicts with the linked job page
+
+
+## Strategic Product Direction
+
+JobTrakr should evolve toward an AIApply-style AI job search copilot.
+
+This means post-MVP planning should include:
+- resume tailoring
+- cover letter generation
+- application workflow support or automation
+- interview preparation support
+
+The MVP does not need to ship all of these immediately, but the architecture and roadmap should allow expansion in that direction.
