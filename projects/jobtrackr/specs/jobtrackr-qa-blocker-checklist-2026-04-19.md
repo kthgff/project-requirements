@@ -22,7 +22,7 @@ Current implementation context for QA:
 
 Shared QA recovery note:
 - If a kickoff prompt or older note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift.
-- Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/prd/jobtrackr-prd-v2.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
@@ -156,14 +156,11 @@ These are the highest-risk contract mismatches to re-check during implementation
 
 ---
 
-## T-095 QA evidence handoff
-- Source-email persistence evidence bundle: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md`
-- Source-email persistence sign-off checklist: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md`
-- Use the sign-off checklist as the primary QA path, and use the evidence bundle as the supporting proof set before moving T-095 from QA to Completed.
-
-## T-106 QA evidence handoff
-- Persisted-jobs workspace sign-off checklist: `projects/jobtrackr/specs/jobtrackr-persisted-jobs-workspace-signoff-checklist-2026-04-23.md`
-- Use the sign-off checklist as the primary QA path before moving T-106 from QA to Completed.
+## Live QA sign-off entrypoints
+- T-095 source-email persistence sign-off checklist: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md`
+- T-095 supporting evidence bundle: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md`
+- T-106 persisted-jobs workspace sign-off checklist: `projects/jobtrackr/specs/jobtrackr-persisted-jobs-workspace-signoff-checklist-2026-04-23.md`
+- Use the T-095 and T-106 sign-off checklists as the two live QA paths before moving either task from QA to Completed.
 
 ## 6. QA Gate Decision
 
