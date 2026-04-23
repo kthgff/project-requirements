@@ -1,28 +1,53 @@
-# JobTrackr Auto-Close Logic Spec v1
+# JobTrackr Low-Fit Handling Spec v1
+
+## Status
+This document has been rewritten on 2026-04-20 to remove stale pre-Gate-A workflow semantics.
+Use it only with the PM decision memo, API contract, and Gate A reconciliation matrix.
+
+Canonical references:
+- `specs/jobtrackr-pm-decision-memo-2026-04-19.md`
+- `specs/jobtrackr-api-contract.md`
+- `specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
 
 ## Purpose
-
-Define the MVP backend behavior for automatically moving low-fit jobs to `not a match` once fit analysis completes.
+Define the MVP backend behavior for handling low-fit jobs after fit analysis runs, without reintroducing deprecated workflow statuses.
 
 ## Scope
-
 In scope:
-- status transition rules when fit analysis produces a score
-- guardrails that prevent unwanted overwrites of user-managed workflow states
-- event logging and status history expectations
-- list/detail API behavior after auto-close runs
+- low-fit evaluation after fit analysis writes or refreshes a score
+- guardrails that prevent unwanted overwrites of canonical workflow states
+- event logging and status-history expectations when a canonical workflow change is allowed
+- list and detail API expectations after low-fit evaluation
 
 Out of scope:
 - the fit-scoring algorithm itself
 - manual bulk review tooling
 - notification behavior
+- any new workflow enum values outside the PM memo
 
-## Canonical Rule
+## Canonical workflow guardrail
+Canonical workflow statuses remain:
+- `new`
+- `interested`
+- `applied`
+- `interviewing`
+- `offer`
+- `rejected`
 
-When a job receives a fit score below `60`, the system must automatically set job status to `not a match`.
+The system must not introduce or persist `flagged`, `reviewing`, `skipped`, `interview`, `not a match`, or `archived` as workflow statuses.
+Archive behavior remains separate through `archivedAt`, and shortlist behavior remains separate through `saved`.
+
+## Current MVP rule
+When a job receives a fit score below `60`, the system may mark the job as low-fit for triage and logging purposes, but it must not create a non-canonical workflow state.
+
+Until a follow-up PM decision explicitly defines an automated low-fit transition inside the canonical model, low-fit handling must follow this safe default:
+- keep the current canonical workflow `status` unchanged
+- preserve `saved` and `archivedAt`
+- persist the latest `fitScore`, `fitFlag`, and `fitSummary`
+- emit a structured low-fit evaluation log
+- optionally append a status-history or audit entry only if a future canonical transition is explicitly approved
 
 ## Trigger
-
 Run the rule whenever fit analysis writes or refreshes the latest fit result for a job.
 
 Primary trigger points:
@@ -31,112 +56,68 @@ Primary trigger points:
 - existing job reanalyzed after active resume changes
 
 ## Inputs
-
 Required:
 - `job.id`
 - current `job.status`
-- latest `job.fit_score`
+- latest `job.fitScore`
 - analysis timestamp
 
 Optional but recommended:
 - prior fit score
 - trigger source (`new_job`, `job_enriched`, `resume_changed`, `manual_reanalysis`)
 
-## Decision Table
+## Decision table
 
 ### Case 1. Fit score is null
-- do not auto-close
+- do not apply low-fit handling
 - leave current status unchanged
-- log that auto-close was skipped because score is unavailable
+- log that low-fit evaluation was skipped because score is unavailable
 
 ### Case 2. Fit score is 60 or above
-- do not auto-close
+- do not apply low-fit handling
 - leave current status unchanged
+- keep canonical fit fields updated
 
-### Case 3. Fit score is below 60 and current status is `new`
-- set status to `not a match`
-- append `job_status_history` entry
-- log auto-close reason
+### Case 3. Fit score is below 60 and current status is a canonical workflow state
+- leave `status` unchanged
+- preserve `saved` and `archivedAt`
+- persist the low-fit score and summary
+- log that the job fell below the threshold without mutating workflow state
 
-### Case 4. Fit score is below 60 and current status is `flagged` or `reviewing`
-- set status to `not a match`
-- append `job_status_history` entry
-- log auto-close reason
+## Persistence requirements
+When low-fit evaluation runs:
+- keep `job.status` within the canonical enum
+- update fit fields from the latest analysis result
+- update `job.updated_at`
+- do not write `to_status = 'not a match'`
+- do not create history rows for deprecated status names
 
-### Case 5. Fit score is below 60 and current status is user-advanced
-Statuses that must not be auto-overwritten:
-- `applied`
-- `interview`
-- `offer`
-- `rejected`
+If a later PM-approved canonical transition is added, this document must be revised before implementation.
 
-Behavior:
-- leave status unchanged
-- log that the job was below threshold but status was protected
-
-### Case 6. Fit score is below 60 and current status is already `not a match`
-- no-op
-- avoid duplicate history rows
-
-### Case 7. Fit score is below 60 and current status is `skipped`
-- leave status unchanged
-- log protected manual state
-
-## Recommended Protected-State Rule
-
-For MVP, auto-close should only mutate statuses that still represent pre-decision triage:
-- `new`
-- `flagged`
-- `reviewing`
-
-It should not overwrite statuses that imply a human already made or advanced a decision:
-- `skipped`
-- `not a match`
-- `applied`
-- `interview`
-- `rejected`
-- `offer`
-
-This avoids destructive workflow churn after user action.
-
-## Persistence Requirements
-
-When auto-close changes a job status:
-- update `job.status = 'not a match'`
-- set `job.updated_at`
-- append `job_status_history` row with:
-  - `job_id`
-  - `from_status`
-  - `to_status = 'not a match'`
-  - `reason = 'auto_close_fit_score_below_threshold'`
-  - `metadata.threshold = 60`
-  - `metadata.fit_score = <latest score>`
-  - `created_at`
-
-## API Expectations
+## API expectations
 
 ### Jobs list API
-Low-fit jobs that were auto-closed must appear with:
-- `status = 'not a match'`
+Low-fit jobs must appear with:
+- canonical `status`
 - latest `fitScore`
 - latest `fitFlag`
 - latest `fitSummary`
+- unchanged `saved` and `archivedAt` behavior
 
 ### Job detail API
 Expose enough detail for debugging and user trust:
-- current status
+- current canonical status
 - current fit score
-- latest status history row
-- optional audit metadata if debug mode is enabled
+- fit summary if present
+- latest related activity or audit metadata if debug mode is enabled
 
-## Logging Requirements
-
+## Logging requirements
 Emit a structured log for each evaluation:
 - `job_id`
 - `fit_score`
 - `threshold = 60`
 - `current_status`
-- `action = auto_closed | skipped_null_score | skipped_protected_status | no_op_already_closed | skipped_above_threshold`
+- `action = skipped_null_score | above_threshold | low_fit_logged_no_status_change`
 - trigger source
 
 ## Pseudocode
@@ -147,37 +128,21 @@ if fit_score is null:
   return
 
 if fit_score >= 60:
-  log skipped_above_threshold
+  log above_threshold
   return
 
-if status in ['new', 'flagged', 'reviewing']:
-  set status = 'not a match'
-  insert status history row
-  log auto_closed
-  return
-
-if status == 'not a match':
-  log no_op_already_closed
-  return
-
-log skipped_protected_status
+log low_fit_logged_no_status_change
+return
 ```
 
-## Acceptance Criteria Additions
+## Acceptance criteria additions
+To consider low-fit handling ready for implementation, verify:
+- jobs with `fitScore < 60` do not create deprecated workflow statuses
+- jobs with `fitScore = 60` do not trigger low-fit handling
+- jobs with `fitScore = null` do not trigger low-fit handling
+- canonical workflow statuses remain unchanged unless a future PM-approved transition exists
+- structured logs capture skip and low-fit paths without stale enum values
 
-To consider T-006 done, verify:
-- jobs with `fit_score < 60` move from `new` to `not a match`
-- jobs with `fit_score < 60` move from `flagged` or `reviewing` to `not a match`
-- jobs with `fit_score = 60` do not auto-close
-- jobs with `fit_score = null` do not auto-close
-- jobs already in `applied`, `interview`, `offer`, `rejected`, or `skipped` are not overwritten
-- a status history row is written only when a transition occurs
-- structured logs capture both transition and skip paths
-
-## Open Implementation Question
-
-The current plan says score below 60 becomes `not a match`, but it does not explicitly say whether `skipped` is protected from later auto-close passes.
-
-Recommendation:
-- treat `skipped` as protected because it reflects explicit user intent
-- only revisit that if PM wants low-fit reanalysis to override manual triage states
+## Follow-up note
+T-006 and any related implementation should be treated as a canonical low-fit handling task, not as permission to persist `not a match`.
+If PM wants automated archive or another canonical transition later, update the PM memo and API contract first, then revise this spec.
