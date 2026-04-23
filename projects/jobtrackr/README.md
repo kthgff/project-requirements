@@ -89,9 +89,10 @@ If you are picking up frontend continuity after the latest server-backed workspa
 
 ## Ticket Tracking
 
-GitHub issues are now the primary ticket system for JobTrakr.
+GitHub issues are the long-term operational ticket system for JobTrakr, but hourly recovery still starts from the live markdown handoff set because external kickoff prompts, QA notes, and preserved specs recover through those project-root files first.
 
 - Repo: `kthgff/project-requirements`
-- Use GitHub issues for active ticket assignment, status, and discussion
-- The markdown development plan remains useful as a planning and milestone artifact, but GitHub should be treated as the operational source for tickets
-- Legacy `T-###` IDs may remain in docs for continuity, but new execution updates should point to GitHub issue numbers and links
+- Use GitHub issues for durable ticket assignment, status, discussion, and eventual issue-link handoff
+- Use `projects/jobtrackr/DEVELOPMENT_PLAN.md` as the hourly recovery and claim ledger until the automation-facing prompts and implementation-facing docs stop keying off the `T-###` plan flow
+- If the live development plan has no truly unclaimed task that fits the current lane, add the smallest safe follow-through task explicitly before claiming it instead of taking over a QA-owned or already-completed row
+- Legacy `T-###` IDs may remain in docs for continuity, and recovery updates should keep those IDs explicit until GitHub issue links replace the current hourly plan references end to end
