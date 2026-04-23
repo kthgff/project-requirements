@@ -24,6 +24,13 @@ Recovery note for automation-facing handoffs:
     - `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
     - `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
     - `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
+- Live backend/shared-contract recovery note:
+  - Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+  - Current backend/shared-contract pickup: T-091 remains the live source-email provenance and ingestion follow-through lane for Frank
+  - Current QA and debug handoff docs for provenance work:
+    - `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md` for the live T-095 fixture-backed QA path
+    - `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md` for the repo-side proof bundle behind T-095
+    - `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md` for the active QA coverage and T-108 source-email debug-read test cases
 - when a kickoff note says to start with PROJECT, use `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md` so the recovery path stays explicit alongside the live development plan
 - the current implementation slice for pickup remains Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
 - current lane ownership for this slice:
