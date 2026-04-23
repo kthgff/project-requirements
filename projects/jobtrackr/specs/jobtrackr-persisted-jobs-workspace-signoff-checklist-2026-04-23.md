@@ -19,9 +19,7 @@ Give Sam one implementation-facing checklist for final QA validation of T-106 wi
   - updates `apps/web/README.md` for the server-backed workspace handoff
 
 ## Preconditions
-- Repo available at `~/Documents/jobtrackr`
-- Web workspace available at `~/Documents/jobtrackr/apps/web`
-- API workspace available at `~/Documents/jobtrackr/apps/api`
+- App repo available locally with the web workspace at `apps/web` and the API workspace at `apps/api`
 - One authenticated test user is available
 - One deterministic API-backed job dataset is available with:
   - at least one canonical persisted job
@@ -30,7 +28,7 @@ Give Sam one implementation-facing checklist for final QA validation of T-106 wi
 - A safe API-unavailable mode is available, such as stopping the API locally or pointing the frontend at an unreachable jobs endpoint
 
 ## Fast repo-side verification
-Run from `~/Documents/jobtrackr/apps/web`:
+Run from the app repo's `apps/web` workspace:
 
 ```bash
 npm test
@@ -87,11 +85,11 @@ At minimum, confirm:
 - Pending-fit and workflow-normalization notices are visible at the result-set level
 
 ## Code and doc pointers
-- Frontend README note: `~/Documents/jobtrackr/apps/web/README.md`
+- Frontend README note in the app repo: `apps/web/README.md`
 - T-106 evidence commit to inspect in the app repo: `858127d` on `feat/jobtrackr-persisted-jobs-workspace`
-- Active handoff note: `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
-- Active QA coverage: `~/Documents/project-requirements/projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`
-- Live task plan: `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`
+- Active handoff note: `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+- Active QA coverage: `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`
+- Live task plan: `projects/jobtrackr/DEVELOPMENT_PLAN.md`
 
 ## Sign-off rule
 Move T-106 from QA to Completed only when all of the following are true:

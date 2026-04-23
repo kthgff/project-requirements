@@ -14,12 +14,11 @@ Give Sam one implementation-facing checklist for final QA validation of T-095 wi
 - Current evidence commit: `da7b8af` (`feat(api): persist source emails during gmail sync`)
 
 ## Preconditions
-- Repo available at `~/Documents/jobtrackr`
-- API workspace available at `~/Documents/jobtrackr/apps/api`
+- App repo available locally with the API workspace at `apps/api`
 - A fixture mailbox, seeded sync fixture, or equivalent deterministic test source is available for one new job-like Gmail message and one duplicate alert
 
 ## Fast repo-side verification
-Run from `~/Documents/jobtrackr/apps/api`:
+Run from the app repo's `apps/api` workspace:
 
 ```bash
 go test ./...
@@ -65,9 +64,9 @@ Use whatever local inspection path is already standard for the environment. At m
 - deduped jobs still retain one-or-more provenance links after repeat sync
 
 ## Code pointers
-- Sync implementation: `~/Documents/jobtrackr/apps/api/internal/ingest/service.go`
-- Regression test: `~/Documents/jobtrackr/apps/api/internal/ingest/service_test.go`
-- Current API behavior note: `~/Documents/jobtrackr/apps/api/README.md`
+- Sync implementation in the app repo: `apps/api/internal/ingest/service.go`
+- Regression test in the app repo: `apps/api/internal/ingest/service_test.go`
+- Current API behavior note in the app repo: `apps/api/README.md`
 
 ## Sign-off rule
 Move T-095 from QA to Completed only when all of the following are true:
