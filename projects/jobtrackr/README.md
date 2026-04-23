@@ -42,15 +42,15 @@ Current lane split for this slice:
 - Marcus: primary frontend continuity owner for kickoff docs, detail continuity entrypoints, and safe hourly pickup recovery
 - remaining SWE lanes: backend and shared contract follow-through
 
-Latest frontend continuity watchpoints from Jimmy's current plan:
-- T-106 is the live frontend handoff for the server-backed dashboard and jobs workspace slice
-- T-107 is the current QA handoff summary for that frontend slice
-- the remaining QA blocker story is still narrowed to T-095 fixture-backed validation, plus stale external kickoff drift when prompts reference the dead root-level development-plan path
+Live frontend recovery note:
+- Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+- Current frontend handoff checkpoints: T-106 is the live server-backed workspace handoff, T-107 is the current QA handoff summary, and the remaining blocker story stays narrowed to T-095 fixture-backed validation plus stale external kickoff drift
+- Canonical frontend continuity docs for follow-through after T-106 and T-107:
+  - `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
+  - `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
+  - `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
 
-Use `projects/jobtrackr/specs/jobtrackr-first-build-slice-v1.md` as historical kickoff context only, and use `projects/jobtrackr/DEVELOPMENT_PLAN.md` plus `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md` for the current lane and ownership guidance. Frontend pickup should also treat these detail-continuity docs as part of the live kickoff set:
-- `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
-- `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
-- `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
+Use `projects/jobtrackr/specs/jobtrackr-first-build-slice-v1.md` as historical kickoff context only, and use `projects/jobtrackr/DEVELOPMENT_PLAN.md` plus `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md` for the current lane and ownership guidance.
 
 All work should still follow canonical workflow and fit-signal language:
 - workflow status is only `new`, `interested`, `applied`, `interviewing`, `offer`, `rejected`

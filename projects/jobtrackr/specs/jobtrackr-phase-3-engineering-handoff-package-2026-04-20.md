@@ -16,16 +16,16 @@ Provide one source-of-truth handoff package for engineering so hourly kickoff an
 Engineers should use these files in this order when there is any conflict.
 
 Recovery note for automation-facing handoffs:
-- if an hourly kickoff prompt still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that path as stale drift and recover in this order:
-  1. `~/Documents/project-requirements/projects/jobtrackr/DEVELOPMENT_PLAN.md`
-  2. `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md`
-  3. `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+- if an hourly kickoff prompt still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that path as stale drift
+- Live frontend recovery note:
+  - Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
+  - Current frontend handoff checkpoints: T-106 is the live server-backed workspace handoff, T-107 is the current QA handoff summary, and the remaining blocker story stays narrowed to T-095 fixture-backed validation plus stale external kickoff drift
+  - Canonical frontend continuity docs for follow-through after T-106 and T-107:
+    - `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
+    - `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
+    - `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
 - when a kickoff note says to start with PROJECT, use `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md` so the recovery path stays explicit alongside the live development plan
 - the current implementation slice for pickup remains Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
-- latest frontend handoff checkpoints from Jimmy's current plan:
-  - T-106 is the live frontend handoff for the server-backed dashboard and jobs workspace slice
-  - T-107 is the current QA handoff summary for that frontend slice
-  - the remaining QA blocker story is still narrowed to T-095 fixture-backed validation, plus stale external kickoff drift when prompts reference the dead root-level development-plan path
 - current lane ownership for this slice:
   - Alice and Marcus are the frontend owners for the current slice.
   - Alice: primary frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
