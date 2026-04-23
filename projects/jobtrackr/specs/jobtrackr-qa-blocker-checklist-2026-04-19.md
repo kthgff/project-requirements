@@ -17,8 +17,8 @@ Primary source documents (project root: `projects/jobtrackr/`):
 Current implementation context for QA:
 - frontend is the Next.js web app described in the handoff and milestone docs
 - backend remains the Go API and Gmail integration lane
-- the active implementation slice is Google auth -> session -> Gmail readonly connect -> persisted jobs UI
-- older local-Go-app wording should be treated as historical unless a task explicitly says otherwise
+- the active implementation slice is Google auth -> session -> Gmail readonly connect -> persisted jobs slice
+- older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path
 
 Shared QA recovery note:
 - If a kickoff prompt or older note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift.
