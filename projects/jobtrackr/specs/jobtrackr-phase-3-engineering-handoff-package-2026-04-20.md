@@ -22,9 +22,12 @@ Recovery note for automation-facing handoffs:
   3. `~/Documents/project-requirements/projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 - when a kickoff note says to start with PROJECT, use `~/Documents/project-requirements/projects/jobtrackr/PROJECT.md` so the recovery path stays explicit alongside the live development plan
 - the current implementation slice for pickup remains Next.js web app -> Go API -> Google auth -> session -> Gmail readonly connect -> persisted jobs UI
-- current lane split for this slice:
-  - Alice and Marcus: frontend owners for the current slice
+- current lane ownership for this slice:
+  - Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
+  - Marcus: frontend recovery-entrypoint and kickoff-doc alignment so frontend pickup stays safe during hourly handoffs
+  - Frank: source-of-truth maintenance across roadmap-facing and preserved planning docs so the live kickoff set and current slice wording stay aligned
   - remaining SWE lanes: backend and shared contract follow-through
+  - shared frontend ownership note: Alice and Marcus are the frontend owners for the current slice.
 
 1. `projects/jobtrackr/DEVELOPMENT_PLAN.md`
    - live task ownership, active branches, dependencies, and delivery sequencing

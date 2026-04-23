@@ -24,8 +24,10 @@ Recovery note:
 Current implementation slice:
 - Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs UI lane
 
-Current lane split for this slice:
-- Alice and Marcus: frontend owners for the current slice
+Current lane ownership for this slice:
+- Alice: frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
+- Marcus: frontend recovery-entrypoint and kickoff-doc alignment so frontend pickup stays safe during hourly handoffs
+- Frank: source-of-truth maintenance across roadmap-facing and preserved planning docs so the live kickoff set and current slice wording stay aligned
 - remaining SWE lanes: backend and shared contract follow-through
 
 Shared frontend ownership note:
