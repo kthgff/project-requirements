@@ -9,6 +9,19 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
+## Hourly QA review — 2026-04-23 03:20 America/Chicago
+
+### Results
+- PASS: Jimmy's latest plan still keeps QA tightly scoped to the two real open gates, T-095 fixture-backed source-email persistence sign-off and T-106 frontend handoff verification, which matches the current repo state.
+- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` still shows T-106 in `QA`, while recent supporting handoff cleanup work is now recorded as completed, including T-107, T-109, T-110, and T-114.
+- PASS: The live recovery guidance remains explicit that `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, and `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md` are the correct ordered entrypoints.
+- PASS: The T-095 sign-off checklist and evidence bundle are still the right implementation-facing proof set for provenance-first persistence, linkage preservation, and repeat-sync idempotence validation.
+- PASS: T-106 remains the correct frontend QA target for server-backed dashboard and jobs-workspace validation, specifically persisted-job rendering, safe mock fallback behavior, pending-fit messaging, and workflow-normalization visibility.
+- PASS: Jimmy's latest note that T-113 already pruned stale carry-forward history matches the live plan, so the remaining QA narrative is now cleanly focused on open verification instead of stale kickoff drift inside repo docs.
+- GAP: The external hourly kickoff prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so automation-facing wording remains stale outside the repo even though the repo recovery notes are aligned.
+- GAP: T-095 still needs fixture-backed execution against `source_emails`, `job_source_emails`, and repeat-sync behavior before QA can close the provenance-first persistence gate.
+- GAP: T-106 still needs executed frontend QA evidence covering API-up behavior, API-down mock fallback behavior, and visible fallback notices for canonicalized workflow or pending-fit defaults before it can move out of QA.
+
 ## Hourly QA review — 2026-04-22 21:50 America/Chicago
 
 ### Results
