@@ -160,7 +160,9 @@ These are the highest-risk contract mismatches to re-check during implementation
 - T-095 source-email persistence sign-off checklist: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md`
 - T-095 supporting evidence bundle: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md`
 - T-106 persisted-jobs workspace sign-off checklist: `projects/jobtrackr/specs/jobtrackr-persisted-jobs-workspace-signoff-checklist-2026-04-23.md`
+- T-138 persisted full-detail route implementation-facing checklist for completed T-133 and T-137 follow-through: `projects/jobtrackr/specs/jobtrackr-persisted-job-detail-signoff-checklist-2026-04-28.md`
 - Use the T-095 and T-106 sign-off checklists as the two live QA paths before moving either task from QA to Completed.
+- Use the T-138 checklist when QA needs one implementation-facing note for persisted `/jobs/:id` fallback and return-context verification without reopening those completed tickets.
 
 ## 6. QA Gate Decision
 
