@@ -52,6 +52,7 @@ Live frontend recovery note:
   - `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
   - `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
   - `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
+- Current persisted full-detail QA reference for the completed T-133 and T-137 follow-through: `projects/jobtrackr/specs/jobtrackr-persisted-job-detail-signoff-checklist-2026-04-28.md`
 
 Live backend/shared-contract recovery note:
 - Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
