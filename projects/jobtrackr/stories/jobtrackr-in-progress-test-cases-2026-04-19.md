@@ -9,6 +9,18 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
+## Hourly QA review — 2026-04-28 19:08 America/Chicago
+
+### Results
+- PASS: The hourly kickoff prompt still opened with the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, and repo recovery still works by pivoting to `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, and `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md` in that order.
+- PASS: Jimmy's latest `#pm-jimmy` fetch was still unusable for plan recovery because the last five visible messages were cron timeout failures only, so this hour continues to fall back to the live repo ledger instead of inventing new direction.
+- PASS: The live repo plan still keeps the meaningful QA surface explicit: T-106 remains the server-backed persisted-jobs workspace handoff in QA, T-095 remains the provenance-first source-email persistence sign-off gate, and T-108 remains implemented debug-read coverage rather than a new live gate.
+- PASS: The latest completed follow-through around persisted `/jobs/:id` verification remains visible through T-138, T-139, and T-140 without reopening the live QA gate pair.
+- GAP: T-106 still needs executed QA evidence for API-up `/dashboard` and `/jobs`, safe API-down mock fallback, and visible pending-fit or workflow-normalization notices before it can move from QA to Completed.
+- GAP: T-108 has contract-level endpoint coverage in this file, but this hour did not produce executed API evidence for `GET /api/v1/source-emails` filter behavior against a live or seeded dataset.
+- GAP: T-095 still needs fixture-backed execution against `source_emails`, `job_source_emails`, and repeat-sync idempotence before the provenance-first sign-off gate can close.
+- GAP: The external hourly kickoff prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so automation-facing prompt drift remains unresolved outside the repo.
+
 ## Hourly QA review — 2026-04-28 18:36 America/Chicago
 
 ### Results
