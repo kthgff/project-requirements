@@ -37,6 +37,7 @@ These are provisional until Keith confirms them:
 - Scraped jobs should use the **same jobs table / model** as email-ingested jobs
 - Scraping is an **additional source of jobs**, not a separate job domain
 - Search configuration should be **owned per user**, not as one global operator-managed search set
+- Users should **configure their own search profiles in the app for MVP**
 - The new UI should follow a **Coolors trending UI color palette direction**
 - Canonical MVP palette selected in `projects/jobtrackr/specs/jobtrackr-ui-palette-direction-2026-05-02.md`
 - The `/jobs` page should use a **full-width grid layout**
@@ -59,13 +60,12 @@ These are provisional until Keith confirms them:
 - Exact persistence model inside the new service
 
 ## Key product questions to resolve
-1. Whether per-user searches are fully self-configured in-product for MVP or initially managed through internal/admin setup
-2. Which search inputs drive sourcing (title, location, remote, salary, etc.)
-3. How aggressive the scraping should be
-4. How freshness, deduplication, and retry rules should work
-5. Whether the service stores raw HTML / snapshots / extraction evidence
-6. What level of observability and failure handling is required for MVP
-7. What source-provenance fields the shared jobs schema needs so the UI and backend can distinguish email-sourced vs scraped jobs cleanly
+1. Which search inputs drive sourcing (title, location, remote, salary, etc.)
+2. How aggressive the scraping should be
+3. How freshness, deduplication, and retry rules should work
+4. Whether the service stores raw HTML / snapshots / extraction evidence
+5. What level of observability and failure handling is required for MVP
+6. What source-provenance fields the shared jobs schema needs so the UI and backend can distinguish email-sourced vs scraped jobs cleanly
 
 ## Proposed architecture direction
 ### Recommended boundary
@@ -150,7 +150,6 @@ The service will likely need to produce at least:
 - define operational runbook
 
 ## Decisions Keith still needs to make
-- whether per-user searches are self-serve in MVP or admin-seeded first
 - automation level
 - acceptable scraping risk / aggressiveness
 - MVP success criteria
