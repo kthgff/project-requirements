@@ -41,6 +41,7 @@ These are provisional until Keith confirms them:
 - MVP search profiles should support **job title, location, remote preference, salary, seniority, employment type, and keyword include/exclude controls**
 - Sourcing should run **automatically on a schedule** for MVP
 - MVP sourcing cadence should be **once per day per user**
+- Scraping posture for MVP should be **aggressive** to maximize coverage
 - The new UI should follow a **Coolors trending UI color palette direction**
 - Canonical MVP palette selected in `projects/jobtrackr/specs/jobtrackr-ui-palette-direction-2026-05-02.md`
 - The `/jobs` page should use a **full-width grid layout**
@@ -63,11 +64,10 @@ These are provisional until Keith confirms them:
 - Exact persistence model inside the new service
 
 ## Key product questions to resolve
-1. How aggressive the scraping should be
-2. How freshness, deduplication, and retry rules should work
-3. Whether the service stores raw HTML / snapshots / extraction evidence
-4. What level of observability and failure handling is required for MVP
-5. What source-provenance fields the shared jobs schema needs so the UI and backend can distinguish email-sourced vs scraped jobs cleanly
+1. How freshness, deduplication, and retry rules should work
+2. Whether the service stores raw HTML / snapshots / extraction evidence
+3. What level of observability and failure handling is required for MVP
+4. What source-provenance fields the shared jobs schema needs so the UI and backend can distinguish email-sourced vs scraped jobs cleanly
 
 ## Proposed architecture direction
 ### Recommended boundary
@@ -152,7 +152,15 @@ The service will likely need to produce at least:
 - define operational runbook
 
 ## Decisions Keith still needs to make
-- acceptable scraping risk / aggressiveness
+- search-result-only vs full-detail scraping depth
+- duplicate merge behavior across email and scraped sources
+- raw evidence retention level
+- multi-profile vs single-profile-per-user limit for MVP
+- profile pause/disable behavior
+- source visibility and filtering behavior in `/jobs`
+- default sort behavior for sourced jobs
+- treatment of jobs that later disappear from source sites
+- retry behavior after failed daily runs
 - MVP success criteria
 
 ## Deliverables this plan should produce next
