@@ -12,6 +12,8 @@
 
 JobTrakr has moved from vague concept into defined MVP discovery. Core product direction is now clear, the canonical PM contracts are locked for engineering pickup, and the active implementation lane is the Next.js web plus Go API slice covering Google auth, app session, Gmail readonly connect, and persisted jobs retrieval.
 
+A new top-priority discovery track is now open for a separate **job source service** that will scrape jobs from Indeed and LinkedIn. This service is explicitly planned as a separate microservice in a new repository, with JobTrakr consuming its normalized job output rather than embedding scraper logic in the main application.
+
 Current lane split for this slice:
 - Alice and Marcus: frontend owners for the current slice
 - Alice: primary frontend delivery on the auth -> session -> Gmail readonly connect -> persisted-jobs experience
@@ -148,6 +150,14 @@ In progress:
 6. Keep the engineering handoff entrypoints current as implementation pickup accelerates
 7. Move the current auth and persisted-jobs slice forward with verifiable completion states
 
+## New Top-Priority Discovery Track
+
+### Job source service
+- Goal: add a second acquisition lane beyond Gmail alerts by sourcing jobs directly from Indeed and LinkedIn
+- Boundary: separate microservice, separate repository, outside the main JobTrakr application codebase
+- Current state: discovery started and initial project plan created in `projects/jobtrackr/specs/jobtrackr-job-source-service-project-plan-2026-05-02.md`
+- Immediate next step: lock the integration contract between the new service and JobTrakr before defining scraper runtime details
+
 ## Key Files
 
 - `projects/jobtrackr/COMPETITOR_NOTES_AIAPPLY.md`
@@ -161,6 +171,7 @@ In progress:
 - `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
 - `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 - `projects/jobtrackr/specs/jobtrackr-digitalocean-production-hosting-plan-2026-04-23.md`
+- `projects/jobtrackr/specs/jobtrackr-job-source-service-project-plan-2026-05-02.md`
 - `projects/jobtrackr/specs/jobtrackr-frontend-plan-v1.md` (preserved, should defer to the canonical detail and list-to-detail contracts)
 - `projects/jobtrackr/specs/jobtrackr-table-ui-spec-v1.md` (preserved, should defer to the canonical detail and list-to-detail contracts)
 
