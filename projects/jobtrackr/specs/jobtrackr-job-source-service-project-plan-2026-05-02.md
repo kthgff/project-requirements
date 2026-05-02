@@ -38,6 +38,7 @@ These are provisional until Keith confirms them:
 - Scraping is an **additional source of jobs**, not a separate job domain
 - Search configuration should be **owned per user**, not as one global operator-managed search set
 - Users should **configure their own search profiles in the app for MVP**
+- MVP search profiles should support **job title, location, remote preference, salary, seniority, employment type, and keyword include/exclude controls**
 - The new UI should follow a **Coolors trending UI color palette direction**
 - Canonical MVP palette selected in `projects/jobtrackr/specs/jobtrackr-ui-palette-direction-2026-05-02.md`
 - The `/jobs` page should use a **full-width grid layout**
@@ -82,13 +83,13 @@ Create a dedicated **job-source-service** repository with one responsibility:
 - the team can version and deploy scraper changes independently
 
 ## Initial MVP source flow
-1. Define one or more per-user search profiles
+1. User defines one or more search profiles with title, location, remote preference, salary, seniority, employment type, and keyword include/exclude rules
 2. Run source-specific collection against Indeed and LinkedIn for that user's profile set
 3. Extract structured job data
 4. Normalize into the shared jobs payload
 5. Deduplicate against previously seen jobs
 6. Write accepted jobs into JobTrakr
-7. Log source, fetch time, user ownership, and extraction status for traceability
+7. Log source, fetch time, user ownership, matched search profile, and extraction status for traceability
 
 ## MVP output shape to define
 The service will likely need to produce at least:
