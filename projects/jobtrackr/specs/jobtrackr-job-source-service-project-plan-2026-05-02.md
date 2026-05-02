@@ -39,9 +39,19 @@ These are provisional until Keith confirms them:
 - Search configuration should be **owned per user**, not as one global operator-managed search set
 - Users should **configure their own search profiles in the app for MVP**
 - MVP search profiles should support **job title, location, remote preference, salary, seniority, employment type, and keyword include/exclude controls**
+- Users may create **multiple search profiles** in MVP
+- Users should be able to **pause/disable** a search profile
 - Sourcing should run **automatically on a schedule** for MVP
 - MVP sourcing cadence should be **once per day per user**
 - Scraping posture for MVP should be **aggressive** to maximize coverage
+- Scraping should capture **full job detail**, not just search-result summaries
+- Duplicate jobs across email ingestion and scraping should be **merged into one job record** with no duplicate job entries
+- The scraping service should persist **normalized fields/data only**, not raw HTML or snapshots, for MVP
+- Failed daily runs should **retry automatically up to 3 times**
+- If a sourced job later disappears from the source site, it should be **archived**
+- MVP success should optimize for **job quality**, not raw volume
+- The `/jobs` page should expose **source visibility/filtering** for Email, Indeed, and LinkedIn
+- The default job ordering for sourced jobs should favor **best fit**
 - The new UI should follow a **Coolors trending UI color palette direction**
 - Canonical MVP palette selected in `projects/jobtrackr/specs/jobtrackr-ui-palette-direction-2026-05-02.md`
 - The `/jobs` page should use a **full-width grid layout**
@@ -64,10 +74,10 @@ These are provisional until Keith confirms them:
 - Exact persistence model inside the new service
 
 ## Key product questions to resolve
-1. How freshness, deduplication, and retry rules should work
-2. Whether the service stores raw HTML / snapshots / extraction evidence
-3. What level of observability and failure handling is required for MVP
-4. What source-provenance fields the shared jobs schema needs so the UI and backend can distinguish email-sourced vs scraped jobs cleanly
+1. What level of observability and failure handling is required for MVP
+2. What source-provenance fields the shared jobs schema needs so the UI and backend can distinguish email-sourced vs scraped jobs cleanly
+3. How best-fit default ordering should interact with freshness in the `/jobs` ranking model
+4. What archive semantics should apply when a once-sourced job disappears from the source site but already has user workflow activity
 
 ## Proposed architecture direction
 ### Recommended boundary
@@ -98,13 +108,17 @@ The service will likely need to produce at least:
 - source platform (`indeed`, `linkedin`)
 - source URL
 - external job ID if available
+- matched search profile ID
 - title
 - company
 - location
 - remote/hybrid/on-site signal if detectable
 - compensation text if available
+- seniority if detectable
+- employment type if detectable
 - full description/content
 - scrape timestamp
+- quality-oriented ranking metadata
 - normalized metadata
 - dedupe fingerprint
 
@@ -152,16 +166,10 @@ The service will likely need to produce at least:
 - define operational runbook
 
 ## Decisions Keith still needs to make
-- search-result-only vs full-detail scraping depth
-- duplicate merge behavior across email and scraped sources
-- raw evidence retention level
-- multi-profile vs single-profile-per-user limit for MVP
-- profile pause/disable behavior
-- source visibility and filtering behavior in `/jobs`
-- default sort behavior for sourced jobs
-- treatment of jobs that later disappear from source sites
-- retry behavior after failed daily runs
-- MVP success criteria
+- observability and failure-surfacing level for MVP
+- source-provenance fields and schema updates needed in the shared jobs model
+- exact ranking logic for `best fit` default sorting
+- archive behavior when a disappeared job already has workflow activity
 
 ## Deliverables this plan should produce next
 - PRD for the job source service
