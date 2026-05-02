@@ -1,13 +1,25 @@
 # JobTrackr In-Progress and Recent Completion Test Cases — 2026-04-22
 
 ## Purpose
-Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELOPMENT_PLAN.md`, updated for Jimmy's latest kickoff emphasis on QA recovery wording normalization, kickoff-entrypoint safety, and the active auth -> session -> Gmail readonly connect -> persisted jobs implementation slice.
+Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELOPMENT_PLAN.md`, updated for Jimmy's latest kickoff emphasis on the live auth -> session -> Gmail readonly connect -> persisted jobs slice, the new sourcing workstream beginning with T-144, and QA-safe recovery from stale kickoff prompts.
 
 ## Shared QA recovery note:
 - If a kickoff prompt or older note still points to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, treat that as stale external drift.
 - Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
+
+## Hourly QA review — 2026-05-02 18:20 America/Chicago
+
+### Results
+- PASS: Jimmy's latest 6:02 PM `#pm-jimmy` plan fetch was usable again this hour and explicitly kept the live MVP lane on auth -> session -> Gmail readonly connect -> persisted jobs while opening the new sourcing execution spine at T-144 through T-152 / GitHub #87 through #95.
+- PASS: The stale kickoff-path issue is still external drift only. Repo recovery remains `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, then `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now shows T-144 as the first concrete sourcing implementation handoff to QA, and this file now includes schema/provenance coverage for canonical sourced-job persistence without splitting scraped jobs into a separate workflow domain.
+- PASS: The live QA gate pair is still T-106 plus T-095. T-108 remains supporting debug-read context, and T-144 is now covered as the next implementation-facing provenance/schema validation surface rather than a replacement for the live sign-off pair.
+- GAP: T-106 still needs executed QA evidence for API-up `/dashboard` and `/jobs`, safe API-down mock fallback, and visible pending-fit or workflow-normalization notices before it can move from QA to Completed.
+- GAP: T-095 still needs fixture-backed execution against `source_emails`, `job_source_emails`, and repeat-sync idempotence before the provenance-first sign-off gate can close.
+- GAP: T-144 now has contract-level test coverage in this file, but this hour did not execute migration or API-level evidence for `job_sources`, `job_source_runs`, `search_profiles`, or Gmail provenance attachment against a seeded database.
+- GAP: The external hourly kickoff prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so automation-facing prompt drift remains unresolved outside the repo.
 
 ## Hourly QA review — 2026-04-28 19:08 America/Chicago
 
@@ -2058,6 +2070,52 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Debug read stays read-only.
 - QA can inspect recent source emails without reconstructing state from sync logs.
 
+## T-144 Sourced Jobs Schema and Provenance Test Cases
+
+### TC-2179 Shared schema keeps sourced and emailed jobs in one canonical jobs model
+**Steps**
+1. Review `specs/jobtrackr-job-source-schema-and-provenance-spec-2026-05-02.md`, the T-144 DEVELOPMENT_PLAN row, and the API schema changes referenced in the handoff note.
+2. Inspect whether sourced jobs are persisted into the existing canonical `jobs` model rather than a separate scraped-jobs table.
+3. Compare workflow, archive, and fit semantics for sourced versus Gmail-ingested records.
+
+**Expected**
+- Sourced jobs and Gmail-ingested jobs share one canonical `jobs` model.
+- Provenance is represented through source-linkage tables or metadata, not a parallel workflow domain.
+- Canonical workflow, archive, and fit-signal semantics remain unchanged for sourced jobs.
+
+### TC-2180 Provenance rows preserve multi-source traceability per canonical job
+**Steps**
+1. Seed or inspect one job discovered from Gmail and one matching job discovered from a sourced platform.
+2. Review `job_sources` and any related linkage rows created by T-144.
+3. Confirm whether one canonical job can retain multiple provenance records cleanly.
+
+**Expected**
+- One canonical job can retain multiple provenance records across Gmail, Indeed, or LinkedIn.
+- Provenance rows identify source platform and source-specific identifiers deterministically.
+- Duplicate source origins attach to the existing job instead of creating a second workflow record.
+
+### TC-2181 Minimal run-traceability records stay inspection-friendly without over-owning workflow state
+**Steps**
+1. Review `job_source_runs`, `search_profiles`, and the T-144 acceptance notes.
+2. Inspect whether the schema captures the minimum run metadata needed for daily sourcing diagnostics.
+3. Compare that metadata with the rule that the sourcing service must not own user workflow state.
+
+**Expected**
+- `job_source_runs` captures lightweight traceability such as run timing, profile linkage, and source identity.
+- `search_profiles` support user-scoped sourcing configuration without leaking workflow ownership into the sourcing service.
+- No sourced-job schema change introduces product workflow states outside the canonical main-app model.
+
+### TC-2182 Gmail sync provenance attachment still works after sourced-job schema expansion
+**Steps**
+1. Review the T-144 handoff note and the current Gmail sync persistence path.
+2. Inspect whether Gmail-ingested records now create or attach canonical provenance rows compatible with the new source schema.
+3. Compare the resulting persistence shape against T-095 and T-108 expectations.
+
+**Expected**
+- Gmail sync continues to persist provenance-first records after the schema expansion.
+- Gmail-origin jobs attach provenance in a shape compatible with the shared sourced-job model.
+- T-144 does not regress T-095 persistence expectations or T-108 debug-read inspection value.
+
 ## T-133 Persisted Job Detail API Fallback Test Cases
 
 ### TC-2177 Job detail route prefers persisted API data when available
@@ -2231,3 +2289,4 @@ Evidence note:
 30. T-095 now has stronger contract-level QA coverage for provenance persistence, explicit reprocess idempotence, and GOG discovery sufficiency, the repo-side evidence bundle exists at `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md`, and the Sam-facing sign-off path is now consolidated in `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md`, but final sign-off still depends on fixture-backed verification.
 31. T-106 adds a second live QA lane: once the backend-backed workspace branch is available for execution, QA should verify persisted `/dashboard` and `/jobs` behavior, safe mock fallback when the API is unavailable, and visible pending-fit or workflow-normalization notices without treating that new frontend surface like a reopened blocker for T-095.
 32. T-106 now also has one implementation-facing sign-off note at `projects/jobtrackr/specs/jobtrackr-persisted-jobs-workspace-signoff-checklist-2026-04-23.md`, so Sam can run one explicit repo-side verification path instead of stitching together the frontend handoff from multiple kickoff docs.
+33. T-144 now has contract-level QA coverage for canonical sourced-job schema expansion, provenance attachment, lightweight run traceability, and Gmail compatibility, but it still needs executed migration and inspection evidence before QA can treat the new sourcing spine as implementation-safe.
