@@ -39,6 +39,8 @@ These are provisional until Keith confirms them:
 - Search configuration should be **owned per user**, not as one global operator-managed search set
 - The new UI should follow a **Coolors trending UI color palette direction**
 - Canonical MVP palette selected in `projects/jobtrackr/specs/jobtrackr-ui-palette-direction-2026-05-02.md`
+- The `/jobs` page should use a **full-width grid layout**
+- Selecting a job in `/jobs` should open a **right-side sliding drawer** for detail review
 
 ## Scope for this planning pass
 ### In scope
@@ -158,6 +160,7 @@ The service will likely need to produce at least:
 - service interface contract
 - source strategy memo for Indeed and LinkedIn
 - UI/brand direction note including the selected Coolors palette
+- jobs workspace UX contract update for full-width grid plus right-side drawer behavior
 - MVP story set
 - implementation milestone plan for the new repository
 
