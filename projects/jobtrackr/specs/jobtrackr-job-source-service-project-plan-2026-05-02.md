@@ -36,6 +36,8 @@ These are provisional until Keith confirms them:
 - The main application should read and display these records rather than requiring a separate import review step for MVP
 - Scraped jobs should use the **same jobs table / model** as email-ingested jobs
 - Scraping is an **additional source of jobs**, not a separate job domain
+- Search configuration should be **owned per user**, not as one global operator-managed search set
+- The new UI should follow a **Coolors trending UI color palette direction**
 
 ## Scope for this planning pass
 ### In scope
@@ -54,13 +56,14 @@ These are provisional until Keith confirms them:
 - Exact persistence model inside the new service
 
 ## Key product questions to resolve
-1. Whether scraping is user-configured, operator-run, or fully automated
-2. Which search inputs drive sourcing (title, location, remote, salary, etc.)
-3. How aggressive the scraping should be
-4. How freshness, deduplication, and retry rules should work
-5. Whether the service stores raw HTML / snapshots / extraction evidence
-6. What level of observability and failure handling is required for MVP
-7. What source-provenance fields the shared jobs schema needs so the UI and backend can distinguish email-sourced vs scraped jobs cleanly
+1. Whether per-user searches are fully self-configured in-product for MVP or initially managed through internal/admin setup
+2. Which specific Coolors trending UI palette should be the canonical brand/UI palette for MVP
+3. Which search inputs drive sourcing (title, location, remote, salary, etc.)
+4. How aggressive the scraping should be
+5. How freshness, deduplication, and retry rules should work
+6. Whether the service stores raw HTML / snapshots / extraction evidence
+7. What level of observability and failure handling is required for MVP
+8. What source-provenance fields the shared jobs schema needs so the UI and backend can distinguish email-sourced vs scraped jobs cleanly
 
 ## Proposed architecture direction
 ### Recommended boundary
@@ -77,13 +80,13 @@ Create a dedicated **job-source-service** repository with one responsibility:
 - the team can version and deploy scraper changes independently
 
 ## Initial MVP source flow
-1. Define one or more search profiles
-2. Run source-specific collection against Indeed and LinkedIn
+1. Define one or more per-user search profiles
+2. Run source-specific collection against Indeed and LinkedIn for that user's profile set
 3. Extract structured job data
-4. Normalize into a shared payload
+4. Normalize into the shared jobs payload
 5. Deduplicate against previously seen jobs
-6. Deliver accepted jobs into JobTrakr
-7. Log source, fetch time, and extraction status for traceability
+6. Write accepted jobs into JobTrakr
+7. Log source, fetch time, user ownership, and extraction status for traceability
 
 ## MVP output shape to define
 The service will likely need to produce at least:
@@ -155,6 +158,7 @@ The service will likely need to produce at least:
 - PRD for the job source service
 - service interface contract
 - source strategy memo for Indeed and LinkedIn
+- UI/brand direction note including the selected Coolors palette
 - MVP story set
 - implementation milestone plan for the new repository
 
