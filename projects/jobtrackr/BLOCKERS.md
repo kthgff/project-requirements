@@ -8,9 +8,21 @@ This file tracks active and resolved blockers for the JobTrackr project. Jimmy (
 
 Current note:
 - There are no active repo-side blockers right now.
-- The remaining coordination gap is external kickoff drift when hourly prompts still point to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` instead of `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
+- The remaining coordination gap on the legacy lane is external kickoff drift when hourly prompts still point to `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` instead of `projects/jobtrackr/DEVELOPMENT_PLAN.md`.
 - Repo-side follow-through is QA doc verification across the shared recovery-note set and kickoff-facing entrypoints, not a reopened engineering blocker.
 - T-095 now has a repo-side evidence bundle at `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md` plus a Sam-facing sign-off checklist at `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md`; remaining sign-off work is fixture-backed QA validation, not missing implementation proof.
+- New sourcing workstream kickoff is now live in GitHub issues #87 through #95; Jimmy is treating those as the active blocker-monitoring spine for the new job source service lane.
+
+Sourcing workstream watchlist:
+- #87 / T-144 — schema and provenance foundation
+- #88 / T-145 — search profile CRUD and scheduling metadata
+- #89 / T-146 — new source-service repo bootstrap
+- #90 / T-147 — Indeed connector
+- #91 / T-148 — LinkedIn connector
+- #92 / T-149 — cross-source dedupe and merge
+- #93 / T-150 — daily scheduling, retries, archive-on-disappear
+- #94 / T-151 — `/jobs` integration and provenance UX
+- #95 / T-152 — QA and release-readiness
 
 ## Resolved Blockers
 | ID | Who | Blocker | Resolution |
