@@ -102,5 +102,23 @@ These tickets are now live in GitHub under `kthgff/project-requirements`.
 **Dependencies**
 - T-150, T-151
 
+## Execution order
+1. T-144 / GitHub #87
+2. T-145 / GitHub #88
+3. T-146 / GitHub #89
+4. T-147 / GitHub #90
+5. T-148 / GitHub #91
+6. T-149 / GitHub #92
+7. T-150 / GitHub #93
+8. T-151 / GitHub #94
+9. T-152 / GitHub #95
+
+Parallelization notes:
+- T-144 should start first and unblock the rest
+- T-145 and T-146 can begin once T-144 is stable enough
+- T-147 and T-148 can run in parallel after T-144, T-145, and T-146
+- T-151 can start contract/UI prep after T-145, but final integration depends on T-149
+- T-152 belongs at the end of the chain after T-150 and T-151
+
 ## Recommendation
-Create these as GitHub issues in `kthgff/project-requirements` now, then use them as the handoff spine for engineering and QA.
+These issues are now live in `kthgff/project-requirements` and should be used as the engineering/QA handoff spine for the new sourcing workstream.
