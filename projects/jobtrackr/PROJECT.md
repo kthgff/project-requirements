@@ -156,7 +156,7 @@ In progress:
 - Goal: add a second acquisition lane beyond Gmail alerts by sourcing jobs directly from Indeed and LinkedIn
 - Boundary: separate microservice, separate repository, outside the main JobTrakr application codebase
 - Current state: discovery started and initial project plan created in `projects/jobtrackr/specs/jobtrackr-job-source-service-project-plan-2026-05-02.md`
-- Locked so far: direct writes into the JobTrakr database, shared jobs model with email-ingested jobs, per-user search ownership, self-serve in-app search configuration for MVP, a canonical MVP UI palette in `projects/jobtrackr/specs/jobtrackr-ui-palette-direction-2026-05-02.md`, and `/jobs` workspace behavior that uses a full-width grid with a right-side sliding detail drawer
+- Locked so far: direct writes into the JobTrakr database, shared jobs model with email-ingested jobs, per-user search ownership, self-serve in-app search configuration for MVP, broad search-profile fields, automatic scheduled sourcing, a canonical MVP UI palette in `projects/jobtrackr/specs/jobtrackr-ui-palette-direction-2026-05-02.md`, and `/jobs` workspace behavior that uses a full-width grid with a right-side sliding detail drawer
 - Immediate next step: lock MVP search-profile ownership and sourcing inputs before defining scraper runtime details
 
 ## Key Files

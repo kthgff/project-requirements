@@ -39,6 +39,7 @@ These are provisional until Keith confirms them:
 - Search configuration should be **owned per user**, not as one global operator-managed search set
 - Users should **configure their own search profiles in the app for MVP**
 - MVP search profiles should support **job title, location, remote preference, salary, seniority, employment type, and keyword include/exclude controls**
+- Sourcing should run **automatically on a schedule** for MVP
 - The new UI should follow a **Coolors trending UI color palette direction**
 - Canonical MVP palette selected in `projects/jobtrackr/specs/jobtrackr-ui-palette-direction-2026-05-02.md`
 - The `/jobs` page should use a **full-width grid layout**
@@ -61,7 +62,7 @@ These are provisional until Keith confirms them:
 - Exact persistence model inside the new service
 
 ## Key product questions to resolve
-1. Which search inputs drive sourcing (title, location, remote, salary, etc.)
+1. How often scheduled sourcing should run for MVP
 2. How aggressive the scraping should be
 3. How freshness, deduplication, and retry rules should work
 4. Whether the service stores raw HTML / snapshots / extraction evidence
@@ -84,7 +85,7 @@ Create a dedicated **job-source-service** repository with one responsibility:
 
 ## Initial MVP source flow
 1. User defines one or more search profiles with title, location, remote preference, salary, seniority, employment type, and keyword include/exclude rules
-2. Run source-specific collection against Indeed and LinkedIn for that user's profile set
+2. Scheduled jobs run source-specific collection against Indeed and LinkedIn for that user's profile set
 3. Extract structured job data
 4. Normalize into the shared jobs payload
 5. Deduplicate against previously seen jobs
