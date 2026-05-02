@@ -49,6 +49,8 @@ These are provisional until Keith confirms them:
 - The scraping service should persist **normalized fields/data only**, not raw HTML or snapshots, for MVP
 - Failed daily runs should **retry automatically up to 3 times**
 - If a sourced job later disappears from the source site, it should be **archived**
+- MVP observability should stay **light/minimal**
+- Source-provenance schema details should be defined by the product/engineering team without further PM gating
 - MVP success should optimize for **job quality**, not raw volume
 - The `/jobs` page should expose **source visibility/filtering** for Email, Indeed, and LinkedIn
 - The default job ordering for sourced jobs should favor **best fit**
@@ -74,10 +76,8 @@ These are provisional until Keith confirms them:
 - Exact persistence model inside the new service
 
 ## Key product questions to resolve
-1. What level of observability and failure handling is required for MVP
-2. What source-provenance fields the shared jobs schema needs so the UI and backend can distinguish email-sourced vs scraped jobs cleanly
-3. How best-fit default ordering should interact with freshness in the `/jobs` ranking model
-4. What archive semantics should apply when a once-sourced job disappears from the source site but already has user workflow activity
+1. How best-fit default ordering should interact with freshness in the `/jobs` ranking model
+2. What archive semantics should apply when a once-sourced job disappears from the source site but already has user workflow activity
 
 ## Proposed architecture direction
 ### Recommended boundary
@@ -166,8 +166,6 @@ The service will likely need to produce at least:
 - define operational runbook
 
 ## Decisions Keith still needs to make
-- observability and failure-surfacing level for MVP
-- source-provenance fields and schema updates needed in the shared jobs model
 - exact ranking logic for `best fit` default sorting
 - archive behavior when a disappeared job already has workflow activity
 

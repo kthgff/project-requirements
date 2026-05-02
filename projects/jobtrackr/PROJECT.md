@@ -155,9 +155,12 @@ In progress:
 ### Job source service
 - Goal: add a second acquisition lane beyond Gmail alerts by sourcing jobs directly from Indeed and LinkedIn
 - Boundary: separate microservice, separate repository, outside the main JobTrakr application codebase
-- Current state: discovery started and initial project plan created in `projects/jobtrackr/specs/jobtrackr-job-source-service-project-plan-2026-05-02.md`
-- Locked so far: direct writes into the JobTrakr database, shared jobs model with email-ingested jobs, per-user search ownership, self-serve in-app search configuration for MVP, broad search-profile fields, multiple/pauseable profiles, automatic once-daily sourcing per user, aggressive full-detail scraping, duplicate merge behavior across sources, normalized-fields-only persistence, source filtering plus best-fit sorting in `/jobs`, archive-on-disappear behavior, quality as the MVP success target, a canonical MVP UI palette in `projects/jobtrackr/specs/jobtrackr-ui-palette-direction-2026-05-02.md`, and `/jobs` workspace behavior that uses a full-width grid with a right-side sliding detail drawer
-- Immediate next step: lock MVP search-profile ownership and sourcing inputs before defining scraper runtime details
+- Current state: discovery answers are now captured in the project plan, PRD, and MVP stories:
+  - `projects/jobtrackr/specs/jobtrackr-job-source-service-project-plan-2026-05-02.md`
+  - `projects/jobtrackr/prd/jobtrackr-job-source-service-prd-2026-05-02.md`
+  - `projects/jobtrackr/stories/jobtrackr-job-source-service-mvp-stories-2026-05-02.md`
+- Locked so far: direct writes into the JobTrakr database, shared jobs model with email-ingested jobs, per-user search ownership, self-serve in-app search configuration for MVP, broad search-profile fields, multiple/pauseable profiles, automatic once-daily sourcing per user, aggressive full-detail scraping, duplicate merge behavior across sources, normalized-fields-only persistence, source filtering plus best-fit sorting in `/jobs`, archive-on-disappear behavior, quality as the MVP success target, light observability, a canonical MVP UI palette in `projects/jobtrackr/specs/jobtrackr-ui-palette-direction-2026-05-02.md`, and `/jobs` workspace behavior that uses a full-width grid with a right-side sliding detail drawer
+- Immediate next step: define shared-schema provenance fields and turn this into implementation milestones for the new repository
 
 ## Key Files
 
@@ -173,6 +176,8 @@ In progress:
 - `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 - `projects/jobtrackr/specs/jobtrackr-digitalocean-production-hosting-plan-2026-04-23.md`
 - `projects/jobtrackr/specs/jobtrackr-job-source-service-project-plan-2026-05-02.md`
+- `projects/jobtrackr/prd/jobtrackr-job-source-service-prd-2026-05-02.md`
+- `projects/jobtrackr/stories/jobtrackr-job-source-service-mvp-stories-2026-05-02.md`
 - `projects/jobtrackr/specs/jobtrackr-ui-palette-direction-2026-05-02.md`
 - `projects/jobtrackr/specs/jobtrackr-frontend-plan-v1.md` (preserved, should defer to the canonical detail and list-to-detail contracts)
 - `projects/jobtrackr/specs/jobtrackr-table-ui-spec-v1.md` (preserved, should defer to the canonical detail and list-to-detail contracts)
