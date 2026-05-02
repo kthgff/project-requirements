@@ -170,13 +170,21 @@ The service will likely need to produce at least:
 - archive behavior when a disappeared job already has workflow activity
 
 ## Deliverables this plan should produce next
-- PRD for the job source service
-- service interface contract
+- PRD for the job source service ✅
+- service interface contract / shared schema spec ✅
 - source strategy memo for Indeed and LinkedIn
-- UI/brand direction note including the selected Coolors palette
+- UI/brand direction note including the selected Coolors palette ✅
 - jobs workspace UX contract update for full-width grid plus right-side drawer behavior
-- MVP story set
-- implementation milestone plan for the new repository
+- MVP story set ✅
+- implementation milestone plan for the new repository ✅
 
 ## Current recommendation
 Treat this as a **separate product workstream inside JobTrakr**, but not as part of the main application codebase. The main app should consume sourced jobs; the new service should specialize in finding and extracting them.
+
+The PM package is now far enough along to hand to engineering:
+- product direction is locked for MVP
+- PRD and stories exist
+- shared schema/provenance direction exists
+- milestone sequencing exists
+
+Next PM step should be ticketization and engineering lane assignment.

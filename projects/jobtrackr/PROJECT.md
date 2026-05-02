@@ -155,12 +155,14 @@ In progress:
 ### Job source service
 - Goal: add a second acquisition lane beyond Gmail alerts by sourcing jobs directly from Indeed and LinkedIn
 - Boundary: separate microservice, separate repository, outside the main JobTrakr application codebase
-- Current state: discovery answers are now captured in the project plan, PRD, and MVP stories:
+- Current state: discovery answers are now captured in the project plan, PRD, MVP stories, shared-schema/provenance spec, and milestone plan:
   - `projects/jobtrackr/specs/jobtrackr-job-source-service-project-plan-2026-05-02.md`
   - `projects/jobtrackr/prd/jobtrackr-job-source-service-prd-2026-05-02.md`
   - `projects/jobtrackr/stories/jobtrackr-job-source-service-mvp-stories-2026-05-02.md`
+  - `projects/jobtrackr/specs/jobtrackr-job-source-schema-and-provenance-spec-2026-05-02.md`
+  - `projects/jobtrackr/specs/jobtrackr-job-source-service-milestone-plan-2026-05-02.md`
 - Locked so far: direct writes into the JobTrakr database, shared jobs model with email-ingested jobs, per-user search ownership, self-serve in-app search configuration for MVP, broad search-profile fields, multiple/pauseable profiles, automatic once-daily sourcing per user, aggressive full-detail scraping, duplicate merge behavior across sources, normalized-fields-only persistence, source filtering plus best-fit sorting in `/jobs`, archive-on-disappear behavior, quality as the MVP success target, light observability, a canonical MVP UI palette in `projects/jobtrackr/specs/jobtrackr-ui-palette-direction-2026-05-02.md`, and `/jobs` workspace behavior that uses a full-width grid with a right-side sliding detail drawer
-- Immediate next step: define shared-schema provenance fields and turn this into implementation milestones for the new repository
+- Immediate next step: hand this package to engineering and create implementation tickets for the new repository plus app-side integration work
 
 ## Key Files
 
@@ -178,6 +180,8 @@ In progress:
 - `projects/jobtrackr/specs/jobtrackr-job-source-service-project-plan-2026-05-02.md`
 - `projects/jobtrackr/prd/jobtrackr-job-source-service-prd-2026-05-02.md`
 - `projects/jobtrackr/stories/jobtrackr-job-source-service-mvp-stories-2026-05-02.md`
+- `projects/jobtrackr/specs/jobtrackr-job-source-schema-and-provenance-spec-2026-05-02.md`
+- `projects/jobtrackr/specs/jobtrackr-job-source-service-milestone-plan-2026-05-02.md`
 - `projects/jobtrackr/specs/jobtrackr-ui-palette-direction-2026-05-02.md`
 - `projects/jobtrackr/specs/jobtrackr-frontend-plan-v1.md` (preserved, should defer to the canonical detail and list-to-detail contracts)
 - `projects/jobtrackr/specs/jobtrackr-table-ui-spec-v1.md` (preserved, should defer to the canonical detail and list-to-detail contracts)
