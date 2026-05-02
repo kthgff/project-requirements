@@ -30,6 +30,13 @@ These are provisional until Keith confirms them:
 - The service should not own end-user workflow state such as `interested`, `applied`, or `rejected`
 - The main app should remain the system of record for user-facing job workflow
 
+## Confirmed decisions
+- Scraped jobs should be written **directly into the JobTrakr database**
+- The immediate product goal is for sourced jobs to appear in the **front-end application**
+- The main application should read and display these records rather than requiring a separate import review step for MVP
+- Scraped jobs should use the **same jobs table / model** as email-ingested jobs
+- Scraping is an **additional source of jobs**, not a separate job domain
+
 ## Scope for this planning pass
 ### In scope
 - Service boundary and repository boundary
@@ -47,13 +54,13 @@ These are provisional until Keith confirms them:
 - Exact persistence model inside the new service
 
 ## Key product questions to resolve
-1. How the service hands jobs into JobTrakr
-2. Whether scraping is user-configured, operator-run, or fully automated
-3. Which search inputs drive sourcing (title, location, remote, salary, etc.)
-4. How aggressive the scraping should be
-5. How freshness, deduplication, and retry rules should work
-6. Whether the service stores raw HTML / snapshots / extraction evidence
-7. What level of observability and failure handling is required for MVP
+1. Whether scraping is user-configured, operator-run, or fully automated
+2. Which search inputs drive sourcing (title, location, remote, salary, etc.)
+3. How aggressive the scraping should be
+4. How freshness, deduplication, and retry rules should work
+5. Whether the service stores raw HTML / snapshots / extraction evidence
+6. What level of observability and failure handling is required for MVP
+7. What source-provenance fields the shared jobs schema needs so the UI and backend can distinguish email-sourced vs scraped jobs cleanly
 
 ## Proposed architecture direction
 ### Recommended boundary
@@ -61,7 +68,7 @@ Create a dedicated **job-source-service** repository with one responsibility:
 - fetch jobs from supported external sources
 - extract and normalize job data
 - deduplicate and annotate source metadata
-- hand normalized results to JobTrakr through a defined interface
+- write normalized job records directly into the JobTrakr database through a controlled persistence contract
 
 ### Why this boundary is right
 - scraping logic will change faster than the core product
@@ -80,7 +87,8 @@ Create a dedicated **job-source-service** repository with one responsibility:
 
 ## MVP output shape to define
 The service will likely need to produce at least:
-- source platform
+- source type (`scraped` vs existing email ingestion lane)
+- source platform (`indeed`, `linkedin`)
 - source URL
 - external job ID if available
 - title
