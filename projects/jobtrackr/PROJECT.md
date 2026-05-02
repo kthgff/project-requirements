@@ -156,7 +156,8 @@ In progress:
 - Goal: add a second acquisition lane beyond Gmail alerts by sourcing jobs directly from Indeed and LinkedIn
 - Boundary: separate microservice, separate repository, outside the main JobTrakr application codebase
 - Current state: discovery started and initial project plan created in `projects/jobtrackr/specs/jobtrackr-job-source-service-project-plan-2026-05-02.md`
-- Immediate next step: lock the integration contract between the new service and JobTrakr before defining scraper runtime details
+- Locked so far: direct writes into the JobTrakr database, shared jobs model with email-ingested jobs, per-user search ownership, and a canonical MVP UI palette in `projects/jobtrackr/specs/jobtrackr-ui-palette-direction-2026-05-02.md`
+- Immediate next step: lock MVP search-profile ownership and sourcing inputs before defining scraper runtime details
 
 ## Key Files
 
@@ -172,6 +173,7 @@ In progress:
 - `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 - `projects/jobtrackr/specs/jobtrackr-digitalocean-production-hosting-plan-2026-04-23.md`
 - `projects/jobtrackr/specs/jobtrackr-job-source-service-project-plan-2026-05-02.md`
+- `projects/jobtrackr/specs/jobtrackr-ui-palette-direction-2026-05-02.md`
 - `projects/jobtrackr/specs/jobtrackr-frontend-plan-v1.md` (preserved, should defer to the canonical detail and list-to-detail contracts)
 - `projects/jobtrackr/specs/jobtrackr-table-ui-spec-v1.md` (preserved, should defer to the canonical detail and list-to-detail contracts)
 

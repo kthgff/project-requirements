@@ -38,6 +38,7 @@ These are provisional until Keith confirms them:
 - Scraping is an **additional source of jobs**, not a separate job domain
 - Search configuration should be **owned per user**, not as one global operator-managed search set
 - The new UI should follow a **Coolors trending UI color palette direction**
+- Canonical MVP palette selected in `projects/jobtrackr/specs/jobtrackr-ui-palette-direction-2026-05-02.md`
 
 ## Scope for this planning pass
 ### In scope
@@ -57,13 +58,12 @@ These are provisional until Keith confirms them:
 
 ## Key product questions to resolve
 1. Whether per-user searches are fully self-configured in-product for MVP or initially managed through internal/admin setup
-2. Which specific Coolors trending UI palette should be the canonical brand/UI palette for MVP
-3. Which search inputs drive sourcing (title, location, remote, salary, etc.)
-4. How aggressive the scraping should be
-5. How freshness, deduplication, and retry rules should work
-6. Whether the service stores raw HTML / snapshots / extraction evidence
-7. What level of observability and failure handling is required for MVP
-8. What source-provenance fields the shared jobs schema needs so the UI and backend can distinguish email-sourced vs scraped jobs cleanly
+2. Which search inputs drive sourcing (title, location, remote, salary, etc.)
+3. How aggressive the scraping should be
+4. How freshness, deduplication, and retry rules should work
+5. Whether the service stores raw HTML / snapshots / extraction evidence
+6. What level of observability and failure handling is required for MVP
+7. What source-provenance fields the shared jobs schema needs so the UI and backend can distinguish email-sourced vs scraped jobs cleanly
 
 ## Proposed architecture direction
 ### Recommended boundary
@@ -148,9 +148,8 @@ The service will likely need to produce at least:
 - define operational runbook
 
 ## Decisions Keith still needs to make
-- integration contract with the main app
+- whether per-user searches are self-serve in MVP or admin-seeded first
 - automation level
-- search-profile ownership model
 - acceptable scraping risk / aggressiveness
 - MVP success criteria
 
