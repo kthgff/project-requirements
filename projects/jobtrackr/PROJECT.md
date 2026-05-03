@@ -29,7 +29,7 @@ Frontend continuity for this slice should stay anchored to:
 Live frontend recovery note:
 - Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 - Jimmy's latest hourly guidance keeps the live QA surface narrowed to T-106 for the server-backed persisted-jobs workspace and T-095 for source-email persistence, with stale external kickoff drift still the only non-repo blocker called out
-- Current frontend handoff checkpoints: T-106 is the live server-backed workspace handoff, T-107 is the current QA handoff summary, T-151 is Marcus's sourced-jobs continuity contract for the next `/jobs` provenance pass, and the remaining blocker story stays narrowed to T-095 fixture-backed validation plus stale external kickoff drift
+- Current frontend handoff checkpoints: T-106 is the live server-backed workspace handoff, T-107 is the current QA handoff summary, T-151 is Marcus's locked sourced-jobs continuity contract, T-152 is the completed app-side source chips/source filters handoff now waiting on QA, and the remaining blocker story stays narrowed to T-095 fixture-backed validation plus stale external kickoff drift
 - Current frontend QA entrypoint: `projects/jobtrackr/specs/jobtrackr-persisted-jobs-workspace-signoff-checklist-2026-04-23.md` (T-116)
 - Current backend/shared-contract QA entrypoint paired with that live frontend gate: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md` (T-102)
 - Canonical frontend continuity docs for follow-through after T-106 and T-107:
@@ -37,6 +37,7 @@ Live frontend recovery note:
   - `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
   - `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
   - `projects/jobtrackr/specs/jobtrackr-sourced-jobs-frontend-continuity-contract-2026-05-02.md`
+- Current sourced-jobs UI handoff: T-152 implemented compact source chips, merged-source labels, source filters, source-aware empty/filter summaries, and README/test coverage in `apps/web`; keep follow-through inside the canonical `/jobs` workspace rather than creating a separate sourced-jobs queue
 - Current persisted full-detail QA reference for the completed T-133 and T-137 follow-through: `projects/jobtrackr/specs/jobtrackr-persisted-job-detail-signoff-checklist-2026-04-28.md`
 
 Live backend/shared-contract recovery note:
@@ -166,7 +167,7 @@ In progress:
   - `projects/jobtrackr/specs/jobtrackr-job-source-service-milestone-plan-2026-05-02.md`
   - `projects/jobtrackr/specs/jobtrackr-job-source-service-ticket-breakdown-2026-05-02.md`
 - Locked so far: direct writes into the JobTrakr database, shared jobs model with email-ingested jobs, per-user search ownership, self-serve in-app search configuration for MVP, broad search-profile fields, multiple/pauseable profiles, automatic once-daily sourcing per user, aggressive full-detail scraping, duplicate merge behavior across sources, normalized-fields-only persistence, source filtering plus best-fit sorting in `/jobs`, archive-on-disappear behavior, quality as the MVP success target, light observability, a canonical MVP UI palette in `projects/jobtrackr/specs/jobtrackr-ui-palette-direction-2026-05-02.md`, and `/jobs` workspace behavior that uses a full-width grid with a right-side sliding detail drawer
-- Immediate next step: hand this package to engineering and start execution from GitHub issues T-144 through T-152 for the new repository plus app-side integration work
+- Immediate next step: continue execution from the completed T-144 through T-152 sourcing spine by validating the T-152 app-side source chips/filter handoff, then pick the next smallest `/jobs` continuity follow-through without forking sourced jobs into a separate queue
 
 ## Key Files
 
