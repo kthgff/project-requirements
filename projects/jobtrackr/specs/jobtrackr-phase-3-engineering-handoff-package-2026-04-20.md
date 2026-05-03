@@ -41,6 +41,7 @@ Recovery note for automation-facing handoffs:
     - `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md` for the active QA coverage and T-108 source-email debug-read test cases
     - `projects/jobtrackr/specs/jobtrackr-t144-sourced-jobs-schema-provenance-validation-lens-2026-05-02.md` for the sourced-jobs schema/provenance QA lens
     - `projects/jobtrackr/specs/jobtrackr-t158-source-service-provenance-validation-handoff-2026-05-03.md` for the backend/shared-contract validation path across T-144, T-149, T-150, and T-155
+    - `projects/jobtrackr/specs/jobtrackr-t163-source-service-provenance-qa-evidence-index-2026-05-03.md` for the T-163 Sam-facing backend evidence index across schema, merge, connector, source-run, and T-108 debug-read proof
 - when a kickoff note says to start with PROJECT, use `projects/jobtrackr/PROJECT.md` so the recovery path stays explicit alongside the live development plan and the ordered project-root handoff set
 - the current implementation slice for pickup remains the Next.js web plus Go API path covering Google auth -> session -> Gmail readonly connect -> persisted jobs retrieval
 - current lane ownership for this slice:
@@ -77,11 +78,13 @@ Recovery note for automation-facing handoffs:
    - evidence pointer and pass/fail template for recording desktop/mobile, drawer/full-detail, source-filter, empty-state, and command proof before moving T-152 out of QA
 13. `projects/jobtrackr/specs/jobtrackr-t158-source-service-provenance-validation-handoff-2026-05-03.md`
    - backend/shared-contract validation path for sourced-job schema provenance, cross-source merge, connector provenance, and source-email debug-read alignment
-13. `projects/jobtrackr/specs/jobtrackr-dependency-map-and-sequencing-2026-04-19.md`
+14. `projects/jobtrackr/specs/jobtrackr-t163-source-service-provenance-qa-evidence-index-2026-05-03.md`
+   - T-163 Sam-facing evidence index for collecting source-service schema, merge, connector, source-run, and T-108 debug-read proof from one handoff path
+15. `projects/jobtrackr/specs/jobtrackr-dependency-map-and-sequencing-2026-04-19.md`
    - milestone dependencies and parallel-safe sequencing
-14. `projects/jobtrackr/specs/jobtrackr-milestones-1-to-4-engineering-tickets-2026-04-20.md`
+16. `projects/jobtrackr/specs/jobtrackr-milestones-1-to-4-engineering-tickets-2026-04-20.md`
    - implementation-ready ticket map for Milestones 1 to 4
-15. `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`
+17. `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`
    - current QA expectations for in-flight slices
 
 ## Contract Gates

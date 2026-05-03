@@ -52,6 +52,7 @@ Live backend/shared-contract recovery note:
   - `projects/jobtrackr/specs/jobtrackr-t152-sourced-jobs-ui-continuity-validation-lens-2026-05-03.md` for the T-152 source-chip, merged-provenance, and source-filter QA validation lens
   - `projects/jobtrackr/specs/jobtrackr-t154-sourced-jobs-ui-validation-handoff-2026-05-03.md` for the T-154 execution handoff that turns the lens into a concrete `/jobs` walkthrough sequence
   - `projects/jobtrackr/specs/jobtrackr-t158-source-service-provenance-validation-handoff-2026-05-03.md` for the backend/shared-contract validation path across T-144 schema provenance, T-149 cross-source merge, T-150 connector provenance, and T-155 debug-read alignment
+  - `projects/jobtrackr/specs/jobtrackr-t163-source-service-provenance-qa-evidence-index-2026-05-03.md` for the T-163 Sam-facing evidence index that collects source-service schema, merge, connector, source-run, and T-108 debug-read proof from one path
 
 ## Current Phase
 

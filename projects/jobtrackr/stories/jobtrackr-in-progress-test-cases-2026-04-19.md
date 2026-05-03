@@ -10,6 +10,15 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
 
+## Hourly QA review — 2026-05-03 14:10 America/Chicago
+
+### Results
+- PASS: Jimmy's latest fetched plan keeps Frank on the backend/shared-contract provenance lane, using the T-158 validation map for sourced-job service provenance while keeping T-095/T-102 source-email sign-off visible.
+- PASS: T-163 adds one QA evidence index at `projects/jobtrackr/specs/jobtrackr-t163-source-service-provenance-qa-evidence-index-2026-05-03.md`, mapping T-144 schema provenance, T-149 cross-source merge, T-150 connector behavior, T-155/T-108 debug-read alignment, and source-run proof into one Sam-facing backend validation route.
+- PASS: README, PROJECT, and the Phase 3 handoff package now surface the T-163 evidence index alongside T-158, so backend provenance QA can collect schema, merge, connector, `job_source_runs`, and `GET /api/v1/source-emails` artifacts without reconstructing the handoff chain.
+- GAP: This repo-side update did not rerun app API tests, seed provider fixtures, or call T-108 debug endpoints; T-163 defines the artifact slots and pass boundaries for Sam/QA to attach executed evidence.
+- GAP: T-106 and T-095 remain the only live QA sign-off gates; T-163 supports sourced-job service provenance validation only and does not replace those gates.
+
 ## Hourly QA review — 2026-05-03 12:50 America/Chicago
 
 ### Results

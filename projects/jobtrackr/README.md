@@ -66,6 +66,7 @@ Live backend/shared-contract recovery note:
   - `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md` for the active QA coverage and T-108 source-email debug-read test cases
   - `projects/jobtrackr/specs/jobtrackr-t144-sourced-jobs-schema-provenance-validation-lens-2026-05-02.md` for the sourced-jobs schema/provenance QA lens
   - `projects/jobtrackr/specs/jobtrackr-t158-source-service-provenance-validation-handoff-2026-05-03.md` for the current backend source-service provenance validation path across T-144, T-149, T-150, and T-155
+  - `projects/jobtrackr/specs/jobtrackr-t163-source-service-provenance-qa-evidence-index-2026-05-03.md` for the T-163 Sam-facing backend evidence index across schema, merge, connector, source-run, and T-108 debug-read proof
 
 Use `projects/jobtrackr/specs/jobtrackr-first-build-slice-v1.md` as historical kickoff context only, and use `projects/jobtrackr/DEVELOPMENT_PLAN.md` plus `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md` for the current lane and ownership guidance.
 
