@@ -9,6 +9,18 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
+## Hourly QA review — 2026-05-03 03:20 America/Chicago
+
+### Results
+- PASS: Jimmy's latest 2:15 AM `#pm-jimmy` fetch is usable and explicitly keeps the active implementation lane on auth -> session -> Gmail readonly connect -> persisted jobs while pushing the sourced-jobs execution spine from T-146 through T-152.
+- PASS: The stale kickoff-path issue is still external drift only. Repo recovery remains `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, then `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now shows T-147, T-149, T-150, and T-152 as implementation-complete and handed to Sam for QA, with T-151 completed as the locked frontend continuity contract for source chips, merged-source messaging, and source filters.
+- PASS: This file now adds implementation-facing QA coverage for the sourced-job connector and UI continuity follow-through: Indeed normalization, LinkedIn normalization, cross-source merge behavior, source chips, and source-filter continuity.
+- GAP: T-106 still needs executed QA evidence for API-up `/dashboard` and `/jobs`, safe API-down mock fallback, and visible pending-fit or workflow-normalization notices before it can move from QA to Completed.
+- GAP: T-095 still needs fixture-backed execution against `source_emails`, `job_source_emails`, and repeat-sync idempotence before the provenance-first sign-off gate can close.
+- GAP: T-147, T-149, T-150, and T-152 now have contract-level QA coverage in this file, but this hour did not execute seeded provider runs, cross-source merge assertions, or frontend source-filter walkthroughs against a live dataset.
+- GAP: The external hourly kickoff prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so automation-facing prompt drift remains unresolved outside the repo.
+
 ## Hourly QA review — 2026-05-02 21:20 America/Chicago
 
 ### Results
@@ -2181,6 +2193,140 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Supported-provider stubs still execute in the same run pass.
 - One bad provider does not suppress other eligible profiles.
 - The run output leaves enough evidence for QA and engineering to diagnose provider coverage gaps before real scraping begins.
+
+## T-147 Indeed Sourcing Connector Test Cases
+
+### TC-2187 Indeed profile run persists canonical jobs plus Indeed provenance
+**Steps**
+1. Review the T-147 DEVELOPMENT_PLAN row, provider docs, and source-service coverage referenced in the handoff note.
+2. Seed one active Indeed search profile with deterministic fixture results.
+3. Trigger the source-service runtime for that profile.
+4. Inspect created or updated `jobs`, `job_sources`, and `job_source_runs` records.
+
+**Expected**
+- The Indeed provider executes through the shared source-service runtime rather than a one-off ingestion path.
+- Discovered roles persist into the canonical `jobs` model.
+- Each persisted result attaches Indeed provenance rows with deterministic source identifiers.
+- Run lifecycle metadata records result counts and terminal status cleanly.
+
+### TC-2188 Indeed normalization keeps canonical workflow and fit semantics intact
+**Steps**
+1. Review normalized job payloads or fixture outputs from the T-147 connector.
+2. Compare the persisted fields and defaults against the canonical jobs contract.
+3. Inspect how incomplete fit or workflow-adjacent source data is handled.
+
+**Expected**
+- The connector persists canonical job fields without inventing source-specific workflow states.
+- Fit data remains nullable or pending when the source payload does not provide canonical analysis output.
+- Indeed-specific metadata stays in provenance fields rather than polluting the shared workflow model.
+
+## T-149 Cross-Source Dedupe and Merge Test Cases
+
+### TC-2189 Cross-source persistence merges Gmail and sourced results onto one canonical job row
+**Steps**
+1. Seed one Gmail-derived job and one sourced-platform job that should normalize to the same canonical role.
+2. Run the Gmail/source persistence paths in either order.
+3. Inspect the resulting `jobs`, `job_sources`, and source-linkage records.
+
+**Expected**
+- Only one canonical job row remains after merge.
+- Distinct Gmail and sourced provenance rows are both preserved.
+- Merge behavior prefers canonical reuse over creating parallel source-specific jobs.
+
+### TC-2190 Repeat-source runs stay idempotent while preserving new provenance
+**Steps**
+1. Re-run the same sourced job import for a job that already exists.
+2. Re-run a matching Gmail or alternate-source import for the same role.
+3. Inspect canonical job count and provenance rows after each pass.
+
+**Expected**
+- Repeat runs do not create duplicate canonical jobs.
+- Previously attached provenance rows are retained.
+- New distinct source origins attach once each without duplicating identical linkage rows.
+
+## T-150 LinkedIn Sourcing Connector Test Cases
+
+### TC-2191 LinkedIn profile run persists canonical jobs plus LinkedIn provenance
+**Steps**
+1. Review the T-150 DEVELOPMENT_PLAN row, provider docs, and runtime coverage referenced in the handoff note.
+2. Seed one active LinkedIn search profile with deterministic fixture results.
+3. Trigger the source-service runtime for that profile.
+4. Inspect created or updated `jobs`, `job_sources`, and `job_source_runs` records.
+
+**Expected**
+- The LinkedIn provider executes through the shared source-service runtime.
+- Discovered roles persist into the canonical `jobs` model.
+- LinkedIn provenance rows store deterministic source identifiers and normalized destination URLs.
+- Run lifecycle metadata records success, skip, or failure state cleanly.
+
+### TC-2192 LinkedIn normalization handles detail URLs and current-job identifiers deterministically
+**Steps**
+1. Review fixture outputs that include `/jobs/view/:id`, `currentJobId`, or equivalent LinkedIn detail references.
+2. Compare persisted normalized URLs and merge keys against the shared dedupe contract.
+3. Re-run the same fixture through persistence.
+
+**Expected**
+- LinkedIn detail URLs normalize deterministically before persistence.
+- Merge keys line up with the shared cross-source dedupe rules.
+- Re-running the same fixture remains idempotent.
+
+## T-151 Sourced-Jobs Frontend Continuity Contract Test Cases
+
+### TC-2193 Frontend continuity contract keeps provenance in the existing jobs workspace instead of a second review surface
+**Steps**
+1. Review `specs/jobtrackr-sourced-jobs-frontend-continuity-contract-2026-05-02.md`, the T-151 DEVELOPMENT_PLAN row, and linked API-contract guidance.
+2. Compare sourced-job grid, drawer, and full-detail expectations against the existing workspace continuity contract.
+3. Inspect whether the contract introduces a separate sourced-jobs queue or review screen.
+
+**Expected**
+- The contract keeps sourced jobs in the canonical `/jobs` workspace.
+- Provenance display rules are defined for grid, drawer, and full detail without creating a second review surface.
+- Workflow, fit, archive, and row-selection semantics stay aligned with the existing workspace contracts.
+
+### TC-2194 Merged-source explanation and source-filter rules are concrete enough for frontend QA
+**Steps**
+1. Review how the T-151 contract defines single-source chips, merged-source `+N` treatment, and source-filter composition.
+2. Compare those rules to active-filter summaries and empty-state behavior in the workspace UX docs.
+
+**Expected**
+- The contract defines deterministic source-chip and merged-source copy for rows/cards and detail views.
+- Source filters compose with the existing search/status/location filters instead of replacing them.
+- QA can validate empty-state, active-filter, and selection behavior from one explicit contract.
+
+## T-152 Sourced-Jobs UI Continuity Test Cases
+
+### TC-2195 Jobs workspace renders compact source chips and merged-source labels canonically
+**Steps**
+1. Start the web app with one single-source job and one merged-source job available through mock or API-backed data.
+2. Open `/jobs` and inspect row/card source presentation.
+3. Open the same jobs in drawer and full-detail views.
+
+**Expected**
+- Single-source jobs show one compact source chip.
+- Multi-source jobs show deterministic merged-source treatment such as `+N` without bloating the table.
+- Grid, drawer, and full-detail views present source provenance consistently.
+
+### TC-2196 Source filters compose with existing workspace filters without breaking continuity
+**Steps**
+1. Apply one or more source filters in `/jobs`.
+2. Add search, status, or location filters on top of the source filter state.
+3. Change or clear filters while a row is selected.
+
+**Expected**
+- Source filters compose with existing filter families instead of replacing them.
+- Active-filter summaries and empty states name the active source filters clearly.
+- Row-selection continuity still follows the canonical preserve/clear/restore rules.
+
+### TC-2197 Source-filter fallback mapping stays safe for both mock and API-backed data
+**Steps**
+1. Load `/jobs` with API-backed source metadata available.
+2. Repeat with API-unavailable mock fallback data.
+3. Compare chip labels, filter options, and any normalization notices.
+
+**Expected**
+- Source chips and filter options stay usable with either API-backed or mock fallback data.
+- Unknown or missing source metadata degrades to safe canonical presentation instead of blank UI state.
+- The UI does not reintroduce stale workflow or fit semantics while explaining source provenance.
 
 ## T-133 Persisted Job Detail API Fallback Test Cases
 
