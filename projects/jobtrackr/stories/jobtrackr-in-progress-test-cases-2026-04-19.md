@@ -10,6 +10,15 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
 
+## Hourly QA review — 2026-05-03 12:50 America/Chicago
+
+### Results
+- PASS: Jimmy's latest fetched messages still keep Priya on QA/release readiness for T-154 sourced-jobs UI continuity, with sourced jobs staying inside the canonical `/jobs` workspace and source provenance remaining metadata only.
+- PASS: T-162 adds one QA evidence index at `projects/jobtrackr/specs/jobtrackr-t162-sourced-jobs-ui-qa-evidence-index-2026-05-03.md`, mapping the T-151 contract, T-154 lens/handoff, T-159 evidence pointers, T-160 clean repo-side evidence, and T-161 visual capture path into one Sam-facing validation route.
+- PASS: The live frontend recovery note now points at the T-162 index first, so Sam can attach desktop/mobile screenshots or walkthrough notes without reconstructing the T-154/T-159/T-160/T-161 chain.
+- GAP: This repo-side update did not capture new browser/mobile screenshots or rerun app tests; T-160 remains the command evidence source for clean app commit `ca0459c`, and T-161/T-162 define the optional visual evidence collection path.
+- GAP: T-106 and T-095 remain the only live QA sign-off gates; T-162 supports sourced-jobs UI validation only and does not replace those gates.
+
 ## Hourly QA review — 2026-05-03 12:40 America/Chicago
 
 ### Results

@@ -14,7 +14,8 @@ This handoff is for screenshot/visual evidence only. It does **not** replace the
    - `projects/jobtrackr/DEVELOPMENT_PLAN.md`
    - `projects/jobtrackr/PROJECT.md`
    - `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
-2. Open the execution handoff and evidence notes:
+2. Open the T-162 QA evidence index, then the execution handoff and evidence notes:
+   - `projects/jobtrackr/specs/jobtrackr-t162-sourced-jobs-ui-qa-evidence-index-2026-05-03.md`
    - `projects/jobtrackr/specs/jobtrackr-t154-sourced-jobs-ui-validation-handoff-2026-05-03.md`
    - `projects/jobtrackr/specs/jobtrackr-t159-sourced-jobs-ui-walkthrough-evidence-pointers-2026-05-03.md`
    - `projects/jobtrackr/specs/jobtrackr-t160-sourced-jobs-ui-validation-evidence-2026-05-03.md`
@@ -110,4 +111,4 @@ Do not use this handoff to:
 
 ## Completion note
 
-T-161 is complete when this visual capture handoff is linked from the T-154/T-159/T-160 evidence path, active QA coverage, and live frontend recovery docs, and `DEVELOPMENT_PLAN.md` records the task as completed or handed to Sam for QA.
+T-161 is complete when this visual capture handoff is linked from the T-154/T-159/T-160/T-162 evidence path, active QA coverage, and live frontend recovery docs, and `DEVELOPMENT_PLAN.md` records the task as completed or handed to Sam for QA.
