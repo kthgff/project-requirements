@@ -32,18 +32,39 @@ Represents the user-uploaded resume used for fit analysis.
 - `user_id` UUID or string, required
 - `file_name` string, required
 - `storage_path` string, required
-- `mime_type` string, nullable
+- `mime_type` string, required, PDF only for MVP
 - `file_size_bytes` integer, nullable
+- `original_file_encrypted` boolean, required
 - `parsed_text` text, required
+- `parsed_profile` JSON/object, required
+- `parse_source` enum/string, required
+  - examples: `pdf_text`, `pasted_text`
+- `parse_status` enum/string, required
+  - examples: `pending`, `parsed`, `partial`, `failed`, `archived`
+- `parse_error_message` string, nullable
+- `candidate_summary` text, nullable
+- `is_active` boolean, required
 - `uploaded_at` timestamp, required
+- `parsed_at` timestamp, nullable
+- `archived_at` timestamp, nullable
 - `replaced_at` timestamp, nullable
 - `created_at` timestamp, required
 - `updated_at` timestamp, required
 
 ### Notes
 
-- MVP assumes one active resume per user.
-- Older resumes may remain stored but inactive.
+- MVP accepts PDF resumes only.
+- Store both the original PDF and parsed resume data.
+- Original PDF files must be encrypted at rest.
+- Preserve full plain-text resume content.
+- Parse contact info, summary, work history, skills, education, certifications, and inferred years of experience when available.
+- Preserve job titles as written on the resume rather than normalizing them.
+- Users can store multiple resume versions.
+- Exactly one non-archived resume is active/default for fit scoring.
+- A new successfully parsed upload becomes active automatically.
+- Parsed resume data is not directly user-editable in MVP.
+- If parsing fails, the user can upload a cleaner PDF or paste resume text manually.
+- Soft delete/archive old resume versions so historical fit scores remain traceable.
 
 ---
 

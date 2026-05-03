@@ -12,6 +12,7 @@ Help Keith focus on the most relevant jobs by automatically comparing tracked ro
 
 In scope for MVP:
 - use uploaded resume as the fit-analysis input
+- parse uploaded PDF resumes into plain text and structured candidate profile data
 - compare each tracked job against the active resume
 - produce a fit result for each job
 - mark likely good-fit jobs with fit indicators
@@ -20,6 +21,8 @@ In scope for MVP:
 
 Out of scope for MVP:
 - tailoring the resume automatically
+- editing parsed resume fields directly
+- non-PDF resume upload formats
 - drafting cover letters
 - learning from user actions automatically
 - personalized ranking across multiple users
@@ -44,12 +47,36 @@ Out of scope for MVP:
 - seniority
 
 ### Resume inputs
-The system should use the uploaded resume to derive fit context, such as:
+The system should use the active parsed resume profile to derive fit context, such as:
+- full plain-text resume content
+- generated candidate summary
 - current and prior roles
+- job titles preserved as written on the resume
+- companies preserved as written on the resume
 - skills and technologies
 - years or depth of experience where inferable
 - industry/domain experience where inferable
 - leadership or management background where inferable
+- education
+- certifications
+
+### Resume parsing
+MVP resume parsing should:
+- accept PDF files only
+- store the original PDF and parsed data
+- encrypt the original PDF at rest
+- extract plain text deterministically before AI/LLM structuring
+- preserve full plain-text resume content
+- parse contact information, candidate summary, work history, skills, education, and certifications
+- preserve job titles as written, without title normalization in MVP
+- treat years of experience by skill or category as inferred data
+- provide lightweight parser status or warnings, not technical confidence scores
+
+If parsing fails:
+- store the failed parse state
+- show a user-facing error asking for help
+- allow the user to upload a cleaner PDF or paste resume text manually
+- store pasted fallback text as the parse source for that resume version
 
 ---
 
@@ -189,7 +216,8 @@ Run fit analysis when:
 ### Reanalysis on resume upload
 When Keith uploads a new resume:
 - mark it as active
-- rerun fit analysis for existing active jobs, either immediately or via background queue
+- rerun fit analysis for existing non-archived jobs, either immediately or via background queue
+- preserve historical fit-analysis rows with the resume version used at the time
 
 ---
 
@@ -230,6 +258,19 @@ Mirror the latest analysis onto `job` for fast table queries:
 - `job.fit_score`
 - `job.fit_summary`
 
+Persist resume versions with:
+- original PDF file reference
+- encrypted-at-rest storage indicator
+- parsed plain text
+- structured parsed profile
+- parse source (`pdf_text` or `pasted_text`)
+- parse status (`pending`, `parsed`, `partial`, `failed`, `archived`)
+- parser warning or error message when useful
+- active/default flag
+- uploaded, parsed, archived, created, and updated timestamps
+
+Only one non-archived resume should be active for a user at a time.
+
 ---
 
 ## Functional Requirements
@@ -261,6 +302,12 @@ The system shall support rerunning fit analysis when a new resume is uploaded or
 ### FR9. Partial-data analysis
 The system shall support fit evaluation using partial job data when complete detail is unavailable.
 
+### FR10. Resume version traceability
+The system shall preserve which resume version was used for each fit analysis.
+
+### FR11. Resume parsing fallback
+The system shall allow a user to recover from PDF parsing failure by uploading a cleaner PDF or pasting resume text.
+
 ---
 
 ## Non-Functional Requirements
@@ -268,6 +315,8 @@ The system shall support fit evaluation using partial job data when complete det
 - results should be understandable, not just numeric
 - threshold for flagging should be configurable
 - analysis should be traceable to a specific resume version
+- resume files should be encrypted at rest
+- parsed resume data should remain private per user
 - system should tolerate incomplete job data
 
 ---

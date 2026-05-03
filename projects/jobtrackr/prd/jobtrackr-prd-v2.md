@@ -12,6 +12,7 @@ Job seekers receive job leads, recruiter outreach, and application updates acros
 - Automatically capture job opportunities from Gmail
 - Extract structured job data from emails
 - Provide a web interface to manage job opportunities
+- Parse uploaded resumes into a candidate profile for fit scoring and future application support
 
 ### Secondary Goals
 - Enable filtering and tagging
@@ -27,6 +28,7 @@ Job seekers receive job leads, recruiter outreach, and application updates acros
 - System ingests relevant job-related emails automatically
 - At least 80% of relevant emails create a usable job record
 - User can update job status, add notes, and find jobs through search or filtering
+- User can upload a PDF resume and see fit scoring use the active parsed resume
 - Duplicate job creation stays low enough that manual cleanup is minimal
 
 ### Future Metrics
@@ -50,9 +52,16 @@ The MVP remains intentionally narrower than the long-term AIApply-style vision. 
 - Notes and tags
 - Search and basic filters
 - Google-authenticated app access
+- PDF resume upload
+- Original resume PDF storage with encryption at rest
+- Resume text extraction and structured parsed profile generation
+- Multiple resume versions with one active/default resume
+- Resume-based fit analysis for jobs
 
 ### Out of Scope
-- AI-based parsing
+- AI-based job-email parsing
+- Direct editing of parsed resume fields
+- Non-PDF resume formats
 - Multi-user collaboration
 - Mobile app
 - Browser extension
@@ -80,7 +89,7 @@ Extract the following when available:
 
 Approach:
 - MVP uses regex and rule-based heuristics
-- Later versions may use AI parsing
+- Later versions may use AI job-email parsing
 
 ### 3. Dashboard
 The dashboard is the main jobs workspace and primary searchable review surface for MVP.
@@ -132,7 +141,21 @@ Supported statuses:
 - Add and remove tags
 - Reserve reminders for a future release
 
-### 7. Authentication
+### 7. Resume Upload and Parsing
+- User can upload PDF resumes only for MVP
+- System stores both the original PDF and parsed resume data
+- Original PDFs are encrypted at rest
+- System preserves full plain-text resume content
+- System parses contact info, summary, work history, skills, education, certifications, and inferred experience when available
+- Job titles are preserved as written on the resume
+- Users can keep multiple resume versions
+- One resume is active/default for fit scoring
+- A newly uploaded successfully parsed resume becomes active automatically
+- If parsing fails, the user can upload a cleaner PDF or paste resume text
+- Users can view or download the original uploaded PDF
+- Resume deletion is archive/soft delete for MVP
+
+### 8. Authentication
 - Google OAuth preferred
 - Optional local auth is not part of MVP unless implementation constraints require it
 
@@ -163,16 +186,23 @@ Supported statuses:
 - User can change status
 - User can add notes and tags
 - User can archive and unarchive jobs
+- User can manage resume versions and active resume state
+- User can see lightweight resume parser status or warnings
 
 ## Key Product Decisions
 - Email is the ingestion source, but the in-app job record becomes the editable source of truth
 - Multiple emails may map to a single job opportunity, so deduplication is required
 - Polling is the MVP approach, not push-based Gmail subscriptions
 - Manual correction is required in MVP to preserve trust when parsing is imperfect
+- Resume parsing uses deterministic PDF text extraction plus AI/LLM structuring
+- Parsed resume data is not directly editable in MVP
+- Historical fit scores preserve the resume version used at analysis time
 
 ## Risks
 - Gmail permission friction may hurt onboarding conversion
 - Rule-based parsing may miss poorly structured recruiter emails
+- Resume PDF extraction may fail or produce incomplete text
+- Resume files contain sensitive personal data and must be protected carefully
 - Deduplication may be harder than initial extraction
 - Update emails may be misclassified as new opportunities
 

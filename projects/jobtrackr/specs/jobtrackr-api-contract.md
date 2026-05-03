@@ -681,6 +681,153 @@ Response:
 }
 ```
 
+## Resume Endpoints
+
+Resume APIs support PDF-only upload, multiple stored versions, one active/default resume, parser status visibility, original PDF download, and pasted-text fallback when PDF parsing fails.
+
+### GET /resumes
+Returns resume versions for the authenticated user.
+
+Response:
+```json
+{
+  "data": [
+    {
+      "id": "uuid",
+      "fileName": "Keith_Goff_Resume.pdf",
+      "mimeType": "application/pdf",
+      "fileSizeBytes": 240120,
+      "parseStatus": "parsed",
+      "parseSource": "pdf_text",
+      "candidateSummary": "Product leader with AI, SaaS, and platform experience.",
+      "isActive": true,
+      "uploadedAt": "2026-05-03T17:00:00Z",
+      "parsedAt": "2026-05-03T17:00:20Z",
+      "archivedAt": null
+    }
+  ]
+}
+```
+
+### POST /resumes
+Uploads a PDF resume.
+
+Request:
+- `multipart/form-data`
+- `file` PDF only
+
+Behavior:
+- rejects non-PDF files
+- stores the original PDF encrypted at rest
+- extracts full plain text from the PDF
+- structures the resume into parsed profile data
+- preserves job titles as written
+- marks the new resume active automatically after successful parsing
+- queues fit reanalysis for existing non-archived jobs after successful parsing
+
+Response:
+```json
+{
+  "data": {
+    "id": "uuid",
+    "parseStatus": "pending",
+    "isActive": false
+  }
+}
+```
+
+### GET /resumes/:id
+Returns one resume version with parsed profile data.
+
+Response:
+```json
+{
+  "data": {
+    "id": "uuid",
+    "fileName": "Keith_Goff_Resume.pdf",
+    "parseStatus": "parsed",
+    "parseSource": "pdf_text",
+    "candidateSummary": "Product leader with AI, SaaS, and platform experience.",
+    "parsedText": "Full extracted resume text...",
+    "parsedProfile": {
+      "contact": {
+        "name": "Keith Goff",
+        "email": "keith@example.com"
+      },
+      "summary": "Product leader with AI, SaaS, and platform experience.",
+      "workHistory": [
+        {
+          "title": "Senior Product Manager",
+          "company": "Example Co",
+          "startDate": "2021-01",
+          "endDate": null,
+          "highlights": ["Launched AI workflow tooling"]
+        }
+      ],
+      "skills": ["Product strategy", "AI", "SaaS"],
+      "education": [],
+      "certifications": [],
+      "inferredExperience": [
+        {
+          "category": "Product management",
+          "years": 8,
+          "inferred": true
+        }
+      ]
+    },
+    "isActive": true,
+    "uploadedAt": "2026-05-03T17:00:00Z",
+    "parsedAt": "2026-05-03T17:00:20Z"
+  }
+}
+```
+
+### POST /resumes/:id/activate
+Marks a non-archived parsed resume as the active/default resume.
+
+Behavior:
+- ensures only one non-archived resume is active for the user
+- queues fit reanalysis for existing non-archived jobs
+
+Response:
+```json
+{
+  "data": {
+    "success": true
+  }
+}
+```
+
+### POST /resumes/:id/fallback-text
+Stores pasted resume text when PDF parsing fails or is incomplete.
+
+Request:
+```json
+{
+  "text": "Pasted resume text..."
+}
+```
+
+Behavior:
+- stores the pasted text as the parse source for that resume version
+- reruns structured parsing against the pasted text
+- marks the resume active after successful parsing
+
+### GET /resumes/:id/download
+Returns or redirects to the original uploaded PDF for the authenticated owner.
+
+Behavior:
+- original PDF remains private per user
+- file storage must be encrypted at rest
+
+### POST /resumes/:id/archive
+Soft-deletes a resume version.
+
+Behavior:
+- sets `archivedAt`
+- does not remove historical fit-analysis references
+- if the active resume is archived, the user should be prompted to choose or upload another active resume
+
 ## Filter Metadata Endpoints
 
 ### GET /filters

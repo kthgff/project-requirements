@@ -250,9 +250,16 @@ Reason:
 Because fit depends on a resume, the frontend should make resume state visible.
 
 ### MVP behavior
-- if no resume uploaded, show prominent prompt in dashboard
-- give user a clear upload entry point
-- after upload, refresh fit-analysis state when available
+- if no resume uploaded, show a compact prompt in the dashboard and a full management surface in settings
+- accept PDF resume uploads only
+- show active resume status in both dashboard and settings
+- after successful parsing, make the uploaded resume active automatically
+- after upload, queue or refresh fit-analysis state when available
+- let users view or download the original uploaded PDF
+- support multiple resume versions and active-resume switching in settings
+- soft-delete/archive resume versions instead of hard deleting them in MVP
+- if parsing fails, show a user-facing error asking for help and offer cleaner PDF upload or pasted-text fallback
+- show lightweight parser states such as parsed, incomplete, or failed without exposing technical confidence scores
 
 ---
 

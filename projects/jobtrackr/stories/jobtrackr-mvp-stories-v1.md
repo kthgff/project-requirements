@@ -28,9 +28,19 @@ As Keith, I want to log into JobTrakr using my Gmail account so that I can secur
 As Keith, I want to upload my resume so that the system can evaluate jobs against my background.
 
 **Acceptance criteria**
-- I can upload a resume file through the product
-- The system stores the uploaded resume for later fit evaluation
-- A newer upload can replace the previous resume
+- I can upload a PDF resume through the product
+- The system stores both the original PDF and parsed resume data
+- The original PDF is encrypted at rest
+- The system parses contact info, summary, work history, skills, education, and certifications when available
+- The system preserves full plain-text resume content for fit scoring and future application support
+- Job titles are preserved as written on the resume
+- I can store multiple resume versions
+- A newly uploaded successfully parsed resume becomes the active/default resume automatically
+- I can switch the active resume later
+- Parsed resume data is not directly editable in MVP
+- If parsing fails, I see an error asking for help and can upload a cleaner PDF or paste resume text
+- I can view or download the original uploaded resume
+- Deleting a resume archives it instead of hard deleting it
 
 ## Epic 2: Inbox job detection
 

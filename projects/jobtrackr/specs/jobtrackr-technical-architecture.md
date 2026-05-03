@@ -340,7 +340,7 @@ The following are intentionally excluded from the initial architecture:
 - multi-tenant SaaS complexity
 - event bus or distributed queue systems
 - microservices split
-- AI parsing dependency in the critical path
+- AI job-email parsing dependency in the critical path
 - reminder workflows
 - non-Gmail providers
 

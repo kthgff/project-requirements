@@ -252,7 +252,50 @@ Indexes:
 CREATE INDEX idx_job_source_emails_source_email_id ON job_source_emails(source_email_id);
 ```
 
-## 7. job_tags
+## 7. resumes
+Stores uploaded resume versions and parsed candidate profile data.
+
+```sql
+CREATE TABLE resumes (
+  id UUID PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  file_name TEXT NOT NULL,
+  storage_path TEXT NOT NULL,
+  mime_type TEXT NOT NULL DEFAULT 'application/pdf',
+  file_size_bytes INTEGER,
+  original_file_encrypted BOOLEAN NOT NULL DEFAULT TRUE,
+  parsed_text TEXT,
+  parsed_profile JSONB NOT NULL DEFAULT '{}'::jsonb,
+  parse_source TEXT NOT NULL DEFAULT 'pdf_text',
+  parse_status TEXT NOT NULL DEFAULT 'pending',
+  parse_error_message TEXT,
+  candidate_summary TEXT,
+  is_active BOOLEAN NOT NULL DEFAULT FALSE,
+  uploaded_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  parsed_at TIMESTAMPTZ,
+  archived_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+```
+
+Indexes:
+```sql
+CREATE INDEX idx_resumes_user_id ON resumes(user_id);
+CREATE INDEX idx_resumes_active ON resumes(user_id, is_active) WHERE archived_at IS NULL;
+CREATE INDEX idx_resumes_parse_status ON resumes(user_id, parse_status);
+```
+
+Notes:
+- MVP accepts PDF resumes only.
+- Original resume PDFs must be encrypted at rest.
+- Users may store multiple resume versions.
+- Exactly one non-archived resume should be active per user.
+- Parsed job titles should be preserved as written, not normalized.
+- `parsed_profile` should include contact info, summary, work history, skills, education, certifications, and inferred experience metadata when available.
+- A failed parse may be recovered by uploading a cleaner PDF or by storing pasted fallback text as `parse_source = 'pasted_text'`.
+
+## 8. job_tags
 Stores reusable tags owned by a user.
 
 ```sql
@@ -270,7 +313,7 @@ Indexes:
 CREATE INDEX idx_job_tags_user_id ON job_tags(user_id);
 ```
 
-## 8. job_tag_links
+## 9. job_tag_links
 Join table linking jobs and tags.
 
 ```sql
@@ -287,7 +330,7 @@ Indexes:
 CREATE INDEX idx_job_tag_links_tag_id ON job_tag_links(tag_id);
 ```
 
-## 9. job_activities
+## 10. job_activities
 Timeline of notable events for a job.
 
 ```sql
@@ -309,7 +352,7 @@ CREATE INDEX idx_job_activities_job_id ON job_activities(job_id, created_at DESC
 Notes:
 - metadata allows source email references, old/new status values, and debug fields without over-modeling the MVP
 
-## 10. ingestion_runs
+## 11. ingestion_runs
 Tracks each sync execution.
 
 ```sql
@@ -336,7 +379,7 @@ CREATE INDEX idx_ingestion_runs_user_id ON ingestion_runs(user_id, started_at DE
 CREATE INDEX idx_ingestion_runs_connection_id ON ingestion_runs(gmail_connection_id, started_at DESC);
 ```
 
-## 11. ingestion_errors
+## 12. ingestion_errors
 Optional detail table for message-level failures.
 
 ```sql
@@ -357,7 +400,7 @@ Indexes:
 CREATE INDEX idx_ingestion_errors_run_id ON ingestion_errors(ingestion_run_id);
 ```
 
-## 12. search_profiles
+## 13. search_profiles
 Stores user-defined saved filters and scheduled discovery instructions.
 
 ```sql
@@ -400,7 +443,7 @@ Notes:
 - disabled profiles do not run, but remain available for editing and historical match display
 - daily runs default to overnight in the user's configured timezone
 
-## 13. job_search_profile_matches
+## 14. job_search_profile_matches
 Join table preserving every search profile a job matched.
 
 ```sql
@@ -434,6 +477,7 @@ Notes:
 - one user has many gmail_connections
 - one user has many source_emails
 - one user has many jobs
+- one user has many resumes
 - one user has many job_tags
 - one user has many search_profiles
 - one gmail_connection has many source_emails
@@ -482,6 +526,7 @@ The schema supports conservative dedupe through:
 The first sqlc query groups should cover:
 - user lookup and session auth
 - Gmail connection connect and refresh state
+- resume upload, parse status, and active resume lookup
 - insert/find source emails
 - create job from parsed message
 - attach source email to existing or new jobs via job_source_emails

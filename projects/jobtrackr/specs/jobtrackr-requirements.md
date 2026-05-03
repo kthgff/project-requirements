@@ -135,7 +135,51 @@ The user must be able to:
 - User must be able to add and remove tags
 - Tags should be available as a filterable attribute
 
-### 9. Search Profiles and Discovery
+### 9. Resume Upload and Parsing
+The user must be able to upload resume PDFs so JobTrakr can derive a candidate profile for fit scoring and future application support.
+
+MVP upload requirements:
+- Accept PDF resume files only.
+- Store both the original uploaded PDF and parsed resume data.
+- Encrypt uploaded resume PDFs at rest.
+- Preserve full plain-text resume content for scoring, search, and future application-material generation.
+- Parse structured resume data from the PDF using a hybrid flow: deterministic PDF text extraction first, then AI/LLM structuring.
+- Do not make parsed resume data directly editable in MVP.
+- Allow users to view or download their original uploaded resume.
+- Resume records are private per user for MVP.
+
+Parsed resume data must include when available:
+- contact information
+- candidate summary
+- work history
+- job titles as written on the resume
+- companies as written on the resume
+- skills
+- education
+- certifications
+- inferred years of experience by skill or category, clearly treated as inferred data
+
+Resume versioning requirements:
+- Users can store multiple resume versions.
+- Exactly one non-archived resume should be marked active/default for fit scoring.
+- A newly uploaded resume becomes active automatically after successful parsing.
+- Users should be able to switch the active resume later.
+- Deleting a resume is a soft delete/archive, not a hard delete, so historical fit scores remain traceable.
+- Historical fit scores must preserve the resume version used at the time.
+- Future fit scoring uses the current active resume.
+
+Parsing failure behavior:
+- If PDF parsing fails, store a retryable error state and show a user-facing message asking for help.
+- The user can resolve the failure by uploading a cleaner PDF or pasting resume text manually.
+- If pasted fallback text is used, store it as the parse source for that resume version.
+- The user can replace fallback text by uploading a new resume version.
+- Parser status should be lightweight and user-facing, such as `Parsed successfully` or `Some details may be incomplete`, not a technical confidence score.
+
+Fit and application behavior:
+- After a new resume is successfully parsed and made active, queue or rerun fit scoring for existing non-archived jobs.
+- Parsed resume data should support both job fit scoring and future application material generation or prefill.
+
+### 10. Search Profiles and Discovery
 Search profiles are both:
 - saved filters for reviewing jobs already in the database
 - discovery instructions for scheduled sourcing across supported job sources
@@ -239,8 +283,30 @@ Minimum job-to-search-profile match fields:
 - match_reason or matched_fields
 - source_run_id when available
 
+Minimum resume entity fields:
+- id
+- user_id
+- file_name
+- storage_path
+- mime_type
+- file_size_bytes
+- original_file_encrypted
+- parsed_text
+- parsed_profile
+- parse_source
+- parse_status
+- parse_error_message
+- candidate_summary
+- is_active
+- uploaded_at
+- parsed_at
+- archived_at
+- created_at
+- updated_at
+
 ## Non-Functional Requirements
 - OAuth tokens must be stored securely
+- Resume PDFs must be encrypted at rest
 - The system should handle several thousand processed emails for one user
 - The UI should remain responsive for a personal dataset
 - Failures in ingestion or parsing should be observable in logs
@@ -248,9 +314,12 @@ Minimum job-to-search-profile match fields:
 
 ## Exclusions
 Not required for MVP:
-- AI parsing
+- AI job-email parsing
 - Multi-user support
 - Native mobile app
+- automatic resume tailoring
+- editable parsed-resume fields
+- non-PDF resume formats
 - Reminder workflows
 - Calendar integration
 - Advanced analytics
