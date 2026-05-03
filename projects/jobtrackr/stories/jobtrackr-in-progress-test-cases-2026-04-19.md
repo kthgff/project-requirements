@@ -9,6 +9,20 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
+## Hourly QA review — 2026-05-02 21:20 America/Chicago
+
+### Results
+- PASS: Jimmy's latest 8:02 PM `#pm-jimmy` plan fetch is usable again and keeps the live MVP lane anchored to auth -> session -> Gmail readonly connect -> persisted jobs while explicitly moving the sourcing spine forward through T-144, T-145, and T-146.
+- PASS: The stale kickoff-path issue is still external drift only. Repo recovery remains `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, then `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- PASS: `projects/jobtrackr/DEVELOPMENT_PLAN.md` now shows T-144, T-145, and T-146 as implementation-complete and handed to Sam for QA, so this file now covers the first three sourcing execution tickets rather than stopping at the schema foundation.
+- PASS: The live QA gate pair is still T-106 plus T-095. T-144 through T-146 are the next implementation-facing coverage surface, not a replacement for those two execution sign-off gates.
+- GAP: T-106 still needs executed QA evidence for API-up `/dashboard` and `/jobs`, safe API-down mock fallback, and visible pending-fit or workflow-normalization notices before it can move from QA to Completed.
+- GAP: T-095 still needs fixture-backed execution against `source_emails`, `job_source_emails`, and repeat-sync idempotence before the provenance-first sign-off gate can close.
+- PASS: T-148 adds a dedicated T-144 sourced-jobs schema/provenance validation lens at `projects/jobtrackr/specs/jobtrackr-t144-sourced-jobs-schema-provenance-validation-lens-2026-05-02.md`, so QA can start from one checklist for migration inspection, canonical jobs/provenance assertions, Gmail compatibility, and evidence gaps.
+- GAP: T-144 through T-146 now have contract-level QA coverage in this file, but this hour did not execute migration, CRUD, or runtime evidence against seeded `job_sources`, `job_source_runs`, or `search_profiles` data.
+- GAP: Release-readiness expectations for the sourced-job lane are now clear enough to start from this file, but T-152-level execution proof still needs future end-to-end runs across profile CRUD, run lifecycle recording, provenance merge behavior, and `/jobs` UX exposure.
+- GAP: The external hourly kickoff prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so automation-facing prompt drift remains unresolved outside the repo.
+
 ## Hourly QA review — 2026-05-02 18:20 America/Chicago
 
 ### Results
@@ -2115,6 +2129,58 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Gmail sync continues to persist provenance-first records after the schema expansion.
 - Gmail-origin jobs attach provenance in a shape compatible with the shared sourced-job model.
 - T-144 does not regress T-095 persistence expectations or T-108 debug-read inspection value.
+
+## T-145 Search Profile CRUD Test Cases
+
+### TC-2183 Search profile CRUD preserves source and schedule metadata deterministically
+**Steps**
+1. Review `specs/jobtrackr-job-source-service-ticket-breakdown-2026-05-02.md`, the T-145 DEVELOPMENT_PLAN row, and the API docs or handler coverage referenced in the handoff note.
+2. Create a profile for each supported source type with cadence and timezone metadata.
+3. Read the created records back through list and detail endpoints.
+4. Update the same profile and then soft-disable it.
+
+**Expected**
+- CRUD endpoints support create, list, read, update, and disable flows without inventing provider-specific schema outside the shared model.
+- Supported source types validate deterministically.
+- Cadence, timezone, `lastRunAt`, and `nextRunAt` style scheduling metadata persist and round-trip cleanly.
+- Disabled profiles stop appearing in active scheduling queries while remaining auditable.
+
+### TC-2184 Invalid source-profile input fails safely without corrupting scheduling state
+**Steps**
+1. Attempt to create or update a search profile with an unsupported provider, missing required query fields, and malformed cadence or timezone values.
+2. Re-read any existing profile that was targeted by the failed update.
+
+**Expected**
+- Invalid input is rejected with deterministic validation errors.
+- Existing records are not partially mutated on failed updates.
+- Scheduling metadata does not advance or clear as a side effect of rejected writes.
+
+## T-146 Source-Service Bootstrap Test Cases
+
+### TC-2185 Source-service bootstrap enumerates active profiles and records run lifecycle cleanly
+**Steps**
+1. Review the T-146 DEVELOPMENT_PLAN row, the source-service bootstrap docs, and the runtime or route coverage referenced in the handoff note.
+2. Seed active and disabled search profiles across supported providers.
+3. Trigger the bootstrap runtime or `POST /api/v1/source-runs/run`.
+4. Inspect created `job_source_runs` records and schedule-advance behavior.
+
+**Expected**
+- Only active profiles are selected for execution.
+- A run record is created with traceable lifecycle fields such as source/profile identity, start state, terminal state, and timestamps.
+- Schedule advancement happens deterministically after the run path completes.
+- The bootstrap layer remains runtime-only and does not mutate canonical job workflow state.
+
+### TC-2186 Unsupported-provider stubs fail traceably without breaking other source runs
+**Steps**
+1. Seed at least one supported provider profile and one unsupported or intentionally unimplemented provider profile.
+2. Trigger a source run.
+3. Inspect per-profile run outcomes and any aggregate response.
+
+**Expected**
+- Unsupported providers are skipped or failed with explicit traceable status.
+- Supported-provider stubs still execute in the same run pass.
+- One bad provider does not suppress other eligible profiles.
+- The run output leaves enough evidence for QA and engineering to diagnose provider coverage gaps before real scraping begins.
 
 ## T-133 Persisted Job Detail API Fallback Test Cases
 

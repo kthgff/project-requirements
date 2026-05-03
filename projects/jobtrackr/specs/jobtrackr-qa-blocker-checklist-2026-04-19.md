@@ -30,6 +30,11 @@ Status:
 - Product decisions are resolved in the PM memo.
 - QA remains blocked anywhere those decisions are not implemented consistently in code and reflected in the ingestion spec, API contract, and QA fixtures.
 
+Sourcing QA addendum:
+- T-144 through T-147 are implementation handoffs for the sourced-job execution spine, not replacements for the live T-106 and T-095 QA gate pair.
+- T-144 schema/provenance validation now starts from `projects/jobtrackr/specs/jobtrackr-t144-sourced-jobs-schema-provenance-validation-lens-2026-05-02.md` and the active coverage in `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`.
+- T-144 remains a QA item until executed migration/fixture evidence proves the canonical `jobs` model, `job_sources`, `job_source_runs`, `search_profiles`, and Gmail provenance compatibility.
+
 ---
 
 ## 1. Status, Saved, and Archived Semantics
