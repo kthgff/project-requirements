@@ -18,7 +18,9 @@ This note is supporting sourced-jobs UI validation only. It does **not** replace
    - `projects/jobtrackr/specs/jobtrackr-t159-sourced-jobs-ui-walkthrough-evidence-pointers-2026-05-03.md`
 4. Review the T-160 repo-side evidence pass before deciding whether Sam still needs browser/mobile screenshots:
    - `projects/jobtrackr/specs/jobtrackr-t160-sourced-jobs-ui-validation-evidence-2026-05-03.md`
-5. Keep implementation and QA inside the existing `/jobs` workspace. Do not create a separate sourced-jobs queue, new workflow status, or source-specific review surface.
+5. If Sam needs final screenshot proof, use the T-161 visual QA capture handoff:
+   - `projects/jobtrackr/specs/jobtrackr-t161-sourced-jobs-ui-visual-qa-capture-handoff-2026-05-03.md`
+6. Keep implementation and QA inside the existing `/jobs` workspace. Do not create a separate sourced-jobs queue, new workflow status, or source-specific review surface.
 
 ## Validation data needed
 Use seeded API data when available, or the stable mock fallback path if the API is unavailable.
@@ -104,4 +106,4 @@ Do not use this handoff to:
 - create a separate sourced-jobs queue outside `/jobs`
 
 ## Remaining gap
-This handoff makes the T-154 validation lens execution-ready. T-160 adds repo-side evidence against the clean T-152 app branch/commit, including seeded mock fixture coverage plus green web test/build results; T-152 should still stay in QA until Sam decides whether that repo-side evidence is sufficient or captures final browser/mobile screenshots.
+This handoff makes the T-154 validation lens execution-ready. T-160 adds repo-side evidence against the clean T-152 app branch/commit, including seeded mock fixture coverage plus green web test/build results. T-161 now defines the optional final browser/mobile visual capture path if Sam wants screenshot proof before moving T-152 out of QA.

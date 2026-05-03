@@ -83,7 +83,7 @@ Neither warning blocked tests or build, and neither changes sourced-jobs UI sema
 
 ## Remaining visual QA note
 
-This T-160 pass records clean repo-side command and fixture evidence. It does not attach actual browser or mobile screenshots. If Sam requires visual proof before moving T-152 out of QA, execute the T-154 walkthrough against the same app commit and capture:
+This T-160 pass records clean repo-side command and fixture evidence. It does not attach actual browser or mobile screenshots. If Sam requires visual proof before moving T-152 out of QA, use `projects/jobtrackr/specs/jobtrackr-t161-sourced-jobs-ui-visual-qa-capture-handoff-2026-05-03.md` to execute the T-154 walkthrough against the same app commit and capture:
 
 - desktop `/jobs` source chips and merged `+N` treatment
 - mobile card source chips

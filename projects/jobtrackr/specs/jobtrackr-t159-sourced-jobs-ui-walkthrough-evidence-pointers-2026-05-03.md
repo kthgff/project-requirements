@@ -20,6 +20,8 @@ This note is a continuity/evidence pointer only. It does **not** replace the liv
    - `projects/jobtrackr/specs/jobtrackr-t152-sourced-jobs-ui-continuity-validation-lens-2026-05-03.md`
 4. Review the T-160 repo-side evidence pass before moving T-152 out of QA or requesting extra browser/mobile screenshots:
    - `projects/jobtrackr/specs/jobtrackr-t160-sourced-jobs-ui-validation-evidence-2026-05-03.md`
+5. If screenshot proof is still required, use the T-161 visual capture handoff:
+   - `projects/jobtrackr/specs/jobtrackr-t161-sourced-jobs-ui-visual-qa-capture-handoff-2026-05-03.md`
 
 ## Evidence anchor map
 
@@ -89,4 +91,4 @@ Do not use this evidence path to:
 
 ## T-159 completion note
 
-T-159 is complete when this pointer is linked from the T-154 execution handoff, active QA coverage, and live frontend recovery docs. T-160 now records repo-side seeded-data walkthrough evidence against the implemented app branch; any remaining execution gap is Sam/QA visual browser or mobile screenshot evidence if required for final sign-off.
+T-159 is complete when this pointer is linked from the T-154 execution handoff, active QA coverage, and live frontend recovery docs. T-160 now records repo-side seeded-data walkthrough evidence against the implemented app branch. T-161 defines the optional Sam/QA visual browser and mobile screenshot capture path if final sign-off requires screenshots.

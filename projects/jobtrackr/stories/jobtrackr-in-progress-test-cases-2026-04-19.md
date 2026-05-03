@@ -9,6 +9,16 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
+
+## Hourly QA review — 2026-05-03 12:40 America/Chicago
+
+### Results
+- PASS: Jimmy's latest usable `#pm-jimmy` plan keeps Marcus on frontend continuity for sourced jobs inside the canonical `/jobs` workspace and keeps source provenance as metadata only.
+- PASS: T-161 adds a visual QA capture handoff at `projects/jobtrackr/specs/jobtrackr-t161-sourced-jobs-ui-visual-qa-capture-handoff-2026-05-03.md`, giving Sam one desktop/mobile screenshot path for source chips, merged `+N` provenance, source filters, empty states, drawer continuity, full-detail return context, and metadata-only provenance checks.
+- PASS: The T-154, T-159, and T-160 evidence path now points to the T-161 visual capture note when Sam wants browser/mobile screenshot proof before moving T-152 out of QA.
+- GAP: This repo-side update did not capture browser/mobile screenshots or rerun app tests; T-160 remains the command evidence source for clean app commit `ca0459c`, and T-161 is the optional visual capture path.
+- GAP: T-106 and T-095 remain the only live QA sign-off gates; T-161 supports sourced-jobs UI validation only and does not replace those gates.
+
 ## Hourly QA review — 2026-05-03 08:40 America/Chicago
 
 ### Results
