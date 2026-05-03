@@ -21,13 +21,14 @@ Recovery note for automation-facing handoffs:
 - Live frontend recovery note:
   - Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
   - Jimmy's latest hourly guidance keeps the live QA surface narrowed to T-106 for the server-backed persisted-jobs workspace and T-095 for source-email persistence, with stale external kickoff drift still the only non-repo blocker called out
-  - Current frontend handoff checkpoints: T-106 is the live server-backed workspace handoff, T-107 is the current QA handoff summary, and the remaining blocker story stays narrowed to T-095 fixture-backed validation plus stale external kickoff drift
+  - Current frontend handoff checkpoints: T-106 is the live server-backed workspace handoff, T-107 is the current QA handoff summary, T-151 is Marcus's sourced-jobs continuity contract for the next `/jobs` provenance pass, and the remaining blocker story stays narrowed to T-095 fixture-backed validation plus stale external kickoff drift
   - Current frontend QA entrypoint: `projects/jobtrackr/specs/jobtrackr-persisted-jobs-workspace-signoff-checklist-2026-04-23.md` (T-116)
   - Current backend/shared-contract QA entrypoint paired with that live frontend gate: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md` (T-102)
   - Canonical frontend continuity docs for follow-through after T-106 and T-107:
     - `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
     - `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
     - `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
+    - `projects/jobtrackr/specs/jobtrackr-sourced-jobs-frontend-continuity-contract-2026-05-02.md`
   - Current persisted full-detail QA reference for the completed T-133 and T-137 follow-through: `projects/jobtrackr/specs/jobtrackr-persisted-job-detail-signoff-checklist-2026-04-28.md`
 - Live backend/shared-contract recovery note:
   - Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
@@ -64,11 +65,13 @@ Recovery note for automation-facing handoffs:
    - if you encounter `jobtrackr-list-detail-examples-2026-04-20.md`, treat it as a compatibility shim that defers to this canonical file
 9. `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
    - locked workspace interaction expectations
-10. `projects/jobtrackr/specs/jobtrackr-dependency-map-and-sequencing-2026-04-19.md`
+10. `projects/jobtrackr/specs/jobtrackr-sourced-jobs-frontend-continuity-contract-2026-05-02.md`
+   - sourced-job provenance display, merged-source explanation, and source-filter continuity expectations for `/jobs`
+11. `projects/jobtrackr/specs/jobtrackr-dependency-map-and-sequencing-2026-04-19.md`
    - milestone dependencies and parallel-safe sequencing
-11. `projects/jobtrackr/specs/jobtrackr-milestones-1-to-4-engineering-tickets-2026-04-20.md`
+12. `projects/jobtrackr/specs/jobtrackr-milestones-1-to-4-engineering-tickets-2026-04-20.md`
    - implementation-ready ticket map for Milestones 1 to 4
-12. `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`
+13. `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`
    - current QA expectations for in-flight slices
 
 ## Contract Gates

@@ -24,17 +24,19 @@ Frontend continuity for this slice should stay anchored to:
 - `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
 - `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
 - `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
+- `projects/jobtrackr/specs/jobtrackr-sourced-jobs-frontend-continuity-contract-2026-05-02.md`
 
 Live frontend recovery note:
 - Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 - Jimmy's latest hourly guidance keeps the live QA surface narrowed to T-106 for the server-backed persisted-jobs workspace and T-095 for source-email persistence, with stale external kickoff drift still the only non-repo blocker called out
-- Current frontend handoff checkpoints: T-106 is the live server-backed workspace handoff, T-107 is the current QA handoff summary, and the remaining blocker story stays narrowed to T-095 fixture-backed validation plus stale external kickoff drift
+- Current frontend handoff checkpoints: T-106 is the live server-backed workspace handoff, T-107 is the current QA handoff summary, T-151 is Marcus's sourced-jobs continuity contract for the next `/jobs` provenance pass, and the remaining blocker story stays narrowed to T-095 fixture-backed validation plus stale external kickoff drift
 - Current frontend QA entrypoint: `projects/jobtrackr/specs/jobtrackr-persisted-jobs-workspace-signoff-checklist-2026-04-23.md` (T-116)
 - Current backend/shared-contract QA entrypoint paired with that live frontend gate: `projects/jobtrackr/specs/jobtrackr-source-email-persistence-signoff-checklist-2026-04-22.md` (T-102)
 - Canonical frontend continuity docs for follow-through after T-106 and T-107:
   - `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
   - `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
   - `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
+  - `projects/jobtrackr/specs/jobtrackr-sourced-jobs-frontend-continuity-contract-2026-05-02.md`
 - Current persisted full-detail QA reference for the completed T-133 and T-137 follow-through: `projects/jobtrackr/specs/jobtrackr-persisted-job-detail-signoff-checklist-2026-04-28.md`
 
 Live backend/shared-contract recovery note:

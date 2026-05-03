@@ -281,6 +281,7 @@ Query params:
 - `tag` one or many repeated params, OR semantics within the tag filter
 - `dateFrom` inclusive date lower bound in user-facing timezone
 - `dateTo` inclusive date upper bound in user-facing timezone
+- `source` one or many repeated params for sourced-job provenance (`gmail`, `indeed`, `linkedin`), OR semantics within the source filter
 - `page`
 - `pageSize`
 - `sort` default `dateReceived:desc`
@@ -305,6 +306,11 @@ Response:
         "company": "Acme",
         "location": "Remote",
         "source": "linkedin",
+        "sourceCount": 2,
+        "sources": ["linkedin", "gmail"],
+        "firstSeenAt": "2026-04-18T13:00:00Z",
+        "lastSeenAt": "2026-05-02T16:30:00Z",
+        "lastSourcedAt": "2026-05-02T16:30:00Z",
         "status": "applied",
         "saved": true,
         "dateReceived": "2026-04-18T13:00:00Z",
@@ -327,7 +333,10 @@ List payload notes:
 - `fitScore` is the user-facing match rating when present
 - `fitFlag` stays as the quick triage boolean
 - `fitState` supports `pending`, `scored`, or `unavailable` so the UI can distinguish missing analysis from a low score
-- `source` is included in the list payload because it is a required dashboard column
+- `source` is included in the list payload because it is a required dashboard column and maps to the primary source label
+- sourced-job provenance may add `sourceCount`, `sources`, `firstSeenAt`, `lastSeenAt`, and `lastSourcedAt` without changing workflow, fit, saved, or archive semantics
+- source filters compose with existing filters using AND across filter families and OR within repeated source values
+- canonical sourced-job grid/drawer/detail continuity rules live in `specs/jobtrackr-sourced-jobs-frontend-continuity-contract-2026-05-02.md`
 - canonical list-to-detail examples for row selection, drawer continuity, and detail handoff live in `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
 
 ### GET /jobs/:id
@@ -335,7 +344,8 @@ Returns a single job detail.
 
 Interaction and section-order expectations for this payload are defined in `specs/jobtrackr-detail-view-contract-2026-04-20.md`.
 Concrete list-row to detail-response examples, selection continuity expectations, and drawer versus full-page parity examples are defined in `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`.
-Use that file as the single canonical example set for list-to-detail continuity, selected-row behavior, and edit-flow expectations.
+Sourced-job provenance display, merged-source explanation, and source-filter continuity expectations are defined in `specs/jobtrackr-sourced-jobs-frontend-continuity-contract-2026-05-02.md`.
+Use those files as the canonical example set for list-to-detail continuity, selected-row behavior, sourced-job provenance, and edit-flow expectations.
 
 Response:
 ```json
@@ -346,6 +356,8 @@ Response:
     "company": "Example Inc",
     "location": "Chicago, IL",
     "source": "linkedin",
+    "sourceCount": 2,
+    "sources": ["linkedin", "gmail"],
     "descriptionSnippet": "Go backend role",
     "applicationLink": "https://example.com/jobs/123",
     "recruiterName": "Jane Doe",

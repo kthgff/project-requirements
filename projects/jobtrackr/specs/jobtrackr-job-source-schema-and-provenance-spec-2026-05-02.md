@@ -202,10 +202,11 @@ Add a provenance block for drawer/detail rendering:
 ```
 
 ## `/jobs` UI behavior support
-The schema must support:
+The schema must support the frontend continuity rules now locked in `specs/jobtrackr-sourced-jobs-frontend-continuity-contract-2026-05-02.md`:
 - source chips/filtering for Email / Indeed / LinkedIn
 - full-width grid display with one primary source column/chip
 - right-drawer detail view showing richer provenance
+- full detail view showing the same source order and merged-source explanation as the drawer
 - default best-fit ordering without losing source visibility
 
 ## Archiving behavior
