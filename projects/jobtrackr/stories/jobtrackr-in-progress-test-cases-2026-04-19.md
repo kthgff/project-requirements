@@ -10,6 +10,16 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
 
+## Hourly QA review — 2026-05-03 18:20 America/Chicago
+
+### Results
+- PASS: Jimmy's latest `#pm-jimmy` plan keeps the team priority order explicit: close T-106 and T-095 with executed QA evidence first, then validate the sourced-jobs handoff chain now that T-163 is published.
+- PASS: The latest PM guidance confirms the root-level `~/Documents/project-requirements/DEVELOPMENT_PLAN.md` path is stale external drift only; repo recovery still starts from `projects/jobtrackr/DEVELOPMENT_PLAN.md`, then `projects/jobtrackr/PROJECT.md`, then the Phase 3 handoff package.
+- PASS: T-163 remains the right backend provenance evidence index for sourced-job follow-through because it consolidates the T-144 schema lens, T-149 merge checks, T-150 connector proof, T-155/T-108 debug-read alignment, and `job_source_runs` inspection path into one Sam-facing route.
+- PASS: T-106 and T-095 stay narrowed to the same two live QA sign-off gates, which keeps this file focused on executed sign-off proof instead of reopening scope.
+- GAP: This hour updated QA coverage and test-case alignment only; it did not execute the T-106 API-up/API-down UI walkthrough, the T-095 fixture-backed sync/idempotence proof, or seeded T-108/T-163 backend evidence capture.
+- GAP: Sourced-job provenance follow-through is now well-mapped, but it still needs explicit seeded/API evidence before QA can treat T-163 support coverage as execution proof.
+
 ## Hourly QA review — 2026-05-03 14:10 America/Chicago
 
 ### Results
@@ -2415,6 +2425,30 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - Source chips and filter options stay usable with either API-backed or mock fallback data.
 - Unknown or missing source metadata degrades to safe canonical presentation instead of blank UI state.
 - The UI does not reintroduce stale workflow or fit semantics while explaining source provenance.
+
+## T-163 Source-Service Provenance Evidence Index Test Cases
+
+### TC-2200 T-163 gives QA one deterministic provenance evidence route across schema, merge, connector, and debug-read checks
+**Steps**
+1. Review `projects/jobtrackr/specs/jobtrackr-t163-source-service-provenance-qa-evidence-index-2026-05-03.md` alongside the T-163 DEVELOPMENT_PLAN row and Jimmy's latest backend/shared-contract guidance.
+2. Trace the index links to the T-144 schema lens, T-158 validation handoff, T-102 source-email sign-off checklist, and active T-108 contract coverage in this file.
+3. Confirm the index keeps sourced-job provenance validation separate from the live T-106 and T-095 sign-off gates.
+
+**Expected**
+- T-163 points QA to one deterministic recovery path for backend sourced-job provenance validation.
+- The index covers schema, merge, connector, source-run, and debug-read evidence collection without requiring hourly-note archaeology.
+- T-163 is clearly framed as support coverage for sourced-job provenance follow-through, not as a replacement for T-106 or T-095 sign-off.
+
+### TC-2201 T-163 artifact checklist is concrete enough for executed seeded/API provenance evidence
+**Steps**
+1. Review the artifact slots and pass boundaries in `jobtrackr-t163-source-service-provenance-qa-evidence-index-2026-05-03.md`.
+2. Compare them against the current backend proof surface: `go test ./...`, `go build ./...`, schema inspection, cross-source merge behavior, source-run lifecycle fields, and `GET /api/v1/source-emails` filter coverage.
+3. Check whether the evidence list preserves the rule that provenance stays metadata-only inside the canonical `jobs` model.
+
+**Expected**
+- The artifact checklist names the exact evidence categories Sam needs to capture on the reviewed app branch.
+- Pass boundaries are concrete enough to distinguish repo-side contract coverage from missing executed QA proof.
+- The checklist explicitly requires provenance to remain metadata-only and not mutate workflow, fit, archive, priority, or queue state.
 
 ## T-133 Persisted Job Detail API Fallback Test Cases
 
