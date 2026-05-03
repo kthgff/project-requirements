@@ -30,6 +30,7 @@ Recovery note for automation-facing handoffs:
     - `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
     - `projects/jobtrackr/specs/jobtrackr-sourced-jobs-frontend-continuity-contract-2026-05-02.md`
   - Current sourced-jobs UI handoff: T-152 implemented compact source chips, merged-source labels, source filters, source-aware empty/filter summaries, and README/test coverage in `apps/web`; keep follow-through inside the canonical `/jobs` workspace rather than creating a separate sourced-jobs queue
+  - Current sourced-jobs UI validation handoff: `projects/jobtrackr/specs/jobtrackr-t154-sourced-jobs-ui-validation-handoff-2026-05-03.md` turns the T-154 lens into an ordered `/jobs` walkthrough for source chips, merged provenance, source filters, empty states, and drawer/full-detail continuity
   - Current persisted full-detail QA reference for the completed T-133 and T-137 follow-through: `projects/jobtrackr/specs/jobtrackr-persisted-job-detail-signoff-checklist-2026-04-28.md`
 - Live backend/shared-contract recovery note:
   - Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
@@ -68,11 +69,13 @@ Recovery note for automation-facing handoffs:
    - locked workspace interaction expectations
 10. `projects/jobtrackr/specs/jobtrackr-sourced-jobs-frontend-continuity-contract-2026-05-02.md`
    - sourced-job provenance display, merged-source explanation, and source-filter continuity expectations for `/jobs`; pair it with T-152's app-side source chips/source filters handoff before inventing new sourced-job UI states
-11. `projects/jobtrackr/specs/jobtrackr-dependency-map-and-sequencing-2026-04-19.md`
+11. `projects/jobtrackr/specs/jobtrackr-t154-sourced-jobs-ui-validation-handoff-2026-05-03.md`
+   - execution-ready walkthrough for validating source chips, merged provenance, source filters, empty states, and drawer/full-detail continuity from the T-154 lens without reopening `/jobs` semantics
+12. `projects/jobtrackr/specs/jobtrackr-dependency-map-and-sequencing-2026-04-19.md`
    - milestone dependencies and parallel-safe sequencing
-12. `projects/jobtrackr/specs/jobtrackr-milestones-1-to-4-engineering-tickets-2026-04-20.md`
+13. `projects/jobtrackr/specs/jobtrackr-milestones-1-to-4-engineering-tickets-2026-04-20.md`
    - implementation-ready ticket map for Milestones 1 to 4
-13. `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`
+14. `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`
    - current QA expectations for in-flight slices
 
 ## Contract Gates

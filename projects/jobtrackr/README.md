@@ -54,6 +54,7 @@ Live frontend recovery note:
   - `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
   - `projects/jobtrackr/specs/jobtrackr-sourced-jobs-frontend-continuity-contract-2026-05-02.md`
 - Current sourced-jobs UI handoff: T-152 implemented compact source chips, merged-source labels, source filters, source-aware empty/filter summaries, and README/test coverage in `apps/web`; keep follow-through inside the canonical `/jobs` workspace rather than creating a separate sourced-jobs queue
+- Current sourced-jobs UI validation handoff: `projects/jobtrackr/specs/jobtrackr-t154-sourced-jobs-ui-validation-handoff-2026-05-03.md` turns the T-154 lens into an ordered `/jobs` walkthrough for source chips, merged provenance, source filters, empty states, and drawer/full-detail continuity
 - Current persisted full-detail QA reference for the completed T-133 and T-137 follow-through: `projects/jobtrackr/specs/jobtrackr-persisted-job-detail-signoff-checklist-2026-04-28.md`
 
 Live backend/shared-contract recovery note:
