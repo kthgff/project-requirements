@@ -57,8 +57,23 @@ Expected:
 - Re-running sync does not create duplicate jobs when normalized job identity is unchanged
 - If reprocess is available, replaying a persisted source email keeps the existing job linkage intact and only updates processing metadata as expected
 
-## Suggested SQL / inspection targets
-Use whatever local inspection path is already standard for the environment. At minimum, confirm:
+## Debug-read inspection path
+Prefer the implemented T-108 debug endpoint before falling back to manual SQL:
+
+```text
+GET /api/v1/source-emails?matchedAsJob=true&limit=25
+GET /api/v1/source-emails?matchedAsJob=false&limit=25
+GET /api/v1/source-emails?fromEmail=<fixture-sender>&search=<fixture-keyword>&limit=10
+```
+
+Expected from the endpoint:
+- fixture Gmail message ids appear once in the source-email result set
+- `matchedAsJob=true` records identify messages that produced or attached to persisted jobs
+- `matchedAsJob=false` records remain available for persisted candidate/debug messages that did not create jobs
+- filtered responses preserve enough sender, subject, received timestamp, matched-as-job, parse-error, and processed timestamp context for QA to narrow provenance records before join-table SQL assertions
+
+## Suggested SQL / fallback inspection targets
+Use SQL only if the debug endpoint is unavailable or if QA needs to verify table-level constraints directly. At minimum, confirm:
 - one row per Gmail message id in `source_emails`
 - at least one corresponding row in `job_source_emails` for each saved job created from a persisted source email
 - deduped jobs still retain one-or-more provenance links after repeat sync

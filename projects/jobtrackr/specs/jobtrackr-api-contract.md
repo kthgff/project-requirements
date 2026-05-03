@@ -591,70 +591,52 @@ Response:
 ## Admin and Debug Endpoints
 These may be hidden from normal UI but are useful during MVP.
 
-### GET /messages
-Returns ingested Gmail messages for debug review.
+### GET /source-emails
+Returns persisted Gmail source-email provenance records for operator and QA debug review. This is the implemented T-108 read path; older `/messages` naming is historical shorthand and should not be used as the current contract.
 
 Query params:
-- `classification`
-- `parseStatus`
-- `jobLinked`
-- `limit`
+- `matchedAsJob` optional boolean; `true` returns records linked to at least one persisted job, `false` returns records without job linkage
+- `fromEmail` optional case-insensitive sender filter
+- `search` optional case-insensitive search across sender, subject, and snippet/body preview fields
+- `limit` optional result cap for recent records
 
 Response:
 ```json
 {
   "data": [
     {
-      "id": "uuid",
       "gmailMessageId": "18f0...",
+      "gmailThreadId": "19ab...",
       "subject": "New opportunity",
+      "fromName": "Jane Doe",
       "fromEmail": "recruiter@example.com",
-      "classification": "job_alert",
-      "parseStatus": "partial",
+      "snippet": "New backend engineer role...",
+      "body": "Full or normalized message body...",
+      "receivedAt": "2026-04-19T19:58:00Z",
+      "matchedAsJob": true,
+      "parseError": null,
       "processedAt": "2026-04-19T20:01:00Z",
-      "linkedJobIds": ["uuid1", "uuid2"]
+      "createdAt": "2026-04-19T20:00:59Z",
+      "updatedAt": "2026-04-19T20:01:00Z"
     }
-  ]
-}
-```
-
-Allowed `classification` values:
-- `job_alert`
-- `not_job_alert`
-- `uncertain`
-
-Classification handling for MVP:
-- `job_alert`: proceed through extraction and dedupe
-- `uncertain`: attempt extraction only when a usable job link or equivalent strong identifier is present, otherwise persist for debug review without creating a job
-- `not_job_alert`: do not create a job and do not persist the message unless it had already entered the pipeline and failed later
-
-### GET /messages/:id
-Returns one ingested message and parsing metadata.
-
-Response:
-```json
-{
-  "data": {
-    "id": "uuid",
-    "gmailMessageId": "18f0...",
-    "gmailThreadId": "19ab...",
-    "subject": "New opportunity",
-    "fromName": "Jane Doe",
-    "fromEmail": "recruiter@example.com",
-    "snippet": "I wanted to reach out...",
-    "classification": "job_alert",
-    "parseStatus": "partial",
-    "parseError": null,
-    "linkedJobs": [
-      {
-        "id": "uuid",
-        "title": "Backend Engineer",
-        "company": "Example Inc"
-      }
-    ]
+  ],
+  "meta": {
+    "limit": 10,
+    "matchedAsJob": true,
+    "fromEmail": "recruiter",
+    "search": "engineer"
   }
 }
 ```
+
+QA usage for T-095/T-108:
+- use `/api/v1/source-emails?matchedAsJob=true` to find persisted messages that produced or attached to jobs
+- use `/api/v1/source-emails?matchedAsJob=false` to inspect persisted candidate messages that did not create jobs
+- use `fromEmail`, `search`, and `limit` to narrow fixture-backed sign-off before falling back to PostgreSQL for join-table assertions
+
+Classification handling for MVP:
+- job-alert or uncertain candidate mail that enters the ingestion pipeline should remain inspectable through this source-email read path
+- clearly irrelevant mail is not persisted by default unless it entered the pipeline and failed later
 
 ## Health Endpoints
 

@@ -9,6 +9,15 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
+## Hourly QA review — 2026-05-03 06:10 America/Chicago
+
+### Results
+- PASS: Jimmy's latest 6:02 AM `#pm-jimmy` plan is usable and keeps Frank on the backend/shared-contract provenance lane around T-091, T-095, and T-108.
+- PASS: T-155 aligns the API contract and T-095 checklist with the implemented T-108 debug-read endpoint, `GET /api/v1/source-emails`, including `matchedAsJob`, `fromEmail`, `search`, and `limit` filters.
+- PASS: QA can now inspect persisted source-email provenance through the debug endpoint before falling back to SQL, which keeps fixture-backed T-095 validation focused on executed evidence instead of endpoint-name archaeology.
+- GAP: This update did not execute fixture-backed T-095 sign-off or seeded T-108 API calls; Sam still needs live or seeded evidence for `source_emails`, `job_source_emails`, and repeat-sync idempotence before closing T-095.
+- GAP: T-106 and T-095 remain the live QA gate pair; T-108 remains supporting provenance-debug coverage, not a separate replacement gate.
+
 ## Hourly QA review — 2026-05-03 03:50 America/Chicago
 
 ### Results
