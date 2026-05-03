@@ -9,6 +9,16 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
+## Hourly QA review — 2026-05-03 03:50 America/Chicago
+
+### Results
+- PASS: Jimmy's latest 2:15 AM `#pm-jimmy` fetch remains the usable plan source and keeps Priya on early QA/readiness for T-152 sourced-jobs source chips, merged-source behavior, source filters, and best-fit-first `/jobs` experience.
+- PASS: T-154 adds one implementation-facing T-152 validation lens at `projects/jobtrackr/specs/jobtrackr-t152-sourced-jobs-ui-continuity-validation-lens-2026-05-03.md`, so Sam can validate source chips and source-filter continuity without reconstructing expectations from T-151 plus frontend commits.
+- PASS: The lens keeps T-152 inside the canonical `/jobs` workspace and explicitly preserves workflow, fit, archive, and selection semantics while covering Email/Indeed/LinkedIn source presentation.
+- GAP: This hour produced the QA checklist and recovery links only; it did not execute browser walkthroughs, seeded API-backed source-filter checks, or mobile screenshots for T-152.
+- GAP: T-106 and T-095 remain the live QA gate pair; T-152 validation is supporting sourced-jobs UI handoff coverage, not a replacement for those gates.
+- GAP: The external hourly kickoff prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so automation-facing prompt drift remains unresolved outside the repo.
+
 ## Hourly QA review — 2026-05-03 03:20 America/Chicago
 
 ### Results
