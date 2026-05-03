@@ -9,6 +9,15 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
+## Hourly QA review — 2026-05-03 08:40 America/Chicago
+
+### Results
+- PASS: Jimmy's latest 8:02 AM `#pm-jimmy` plan is usable and keeps Marcus on frontend continuity for sourced jobs inside the canonical `/jobs` workspace, with source provenance treated as metadata only.
+- PASS: T-159 adds one evidence-pointer note at `projects/jobtrackr/specs/jobtrackr-t159-sourced-jobs-ui-walkthrough-evidence-pointers-2026-05-03.md`, mapping the T-154 walkthrough to concrete desktop/mobile, drawer/full-detail, source-filter, empty-state, and command evidence expectations.
+- PASS: The T-154 execution handoff now points directly to the T-159 evidence template, so Sam or QA can record source-chip and source-filter proof without reconstructing it from the T-151 contract plus T-152 implementation history.
+- GAP: This repo-side update did not execute browser/mobile validation, seed sourced-job records, or rerun `npm test`/`npm run build` in `apps/web`; the current app repo also has unrelated dirty work, so T-152 still needs isolated QA walkthrough evidence before moving out of QA.
+- GAP: T-106 and T-095 remain the only live QA sign-off gates; T-159 is supporting sourced-jobs UI validation evidence, not a replacement gate.
+
 ## Hourly QA review — 2026-05-03 08:10 America/Chicago
 
 ### Results

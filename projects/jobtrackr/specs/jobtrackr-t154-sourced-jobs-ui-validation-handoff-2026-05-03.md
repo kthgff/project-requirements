@@ -14,7 +14,9 @@ This note is supporting sourced-jobs UI validation only. It does **not** replace
    - `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
 2. Open the T-154 validation lens:
    - `projects/jobtrackr/specs/jobtrackr-t152-sourced-jobs-ui-continuity-validation-lens-2026-05-03.md`
-3. Keep implementation and QA inside the existing `/jobs` workspace. Do not create a separate sourced-jobs queue, new workflow status, or source-specific review surface.
+3. Open the T-159 evidence pointers before recording walkthrough results:
+   - `projects/jobtrackr/specs/jobtrackr-t159-sourced-jobs-ui-walkthrough-evidence-pointers-2026-05-03.md`
+4. Keep implementation and QA inside the existing `/jobs` workspace. Do not create a separate sourced-jobs queue, new workflow status, or source-specific review surface.
 
 ## Validation data needed
 Use seeded API data when available, or the stable mock fallback path if the API is unavailable.
@@ -37,6 +39,7 @@ Use this trace when Marcus or frontend continuity reviewers pick up the T-154 le
 - App-side implementation handoff: T-152 on `feat/jobtrackr-sourced-jobs-ui-continuity`.
 - QA validation lens: `projects/jobtrackr/specs/jobtrackr-t152-sourced-jobs-ui-continuity-validation-lens-2026-05-03.md` (T-154).
 - Execution handoff: this note, added by T-156 and extended by T-157.
+- Evidence pointer: `projects/jobtrackr/specs/jobtrackr-t159-sourced-jobs-ui-walkthrough-evidence-pointers-2026-05-03.md`, which names the screenshots/notes, data shape, command evidence, and pass/fail template needed before QA moves T-152 out of review.
 
 Continuity-specific assertions to keep together during the walkthrough:
 

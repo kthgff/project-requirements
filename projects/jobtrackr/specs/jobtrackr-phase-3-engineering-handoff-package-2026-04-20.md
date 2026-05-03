@@ -30,7 +30,7 @@ Recovery note for automation-facing handoffs:
     - `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
     - `projects/jobtrackr/specs/jobtrackr-sourced-jobs-frontend-continuity-contract-2026-05-02.md`
   - Current sourced-jobs UI handoff: T-152 implemented compact source chips, merged-source labels, source filters, source-aware empty/filter summaries, and README/test coverage in `apps/web`; keep follow-through inside the canonical `/jobs` workspace rather than creating a separate sourced-jobs queue
-  - Current sourced-jobs UI validation handoff: `projects/jobtrackr/specs/jobtrackr-t154-sourced-jobs-ui-validation-handoff-2026-05-03.md` turns the T-154 lens into an ordered `/jobs` walkthrough for source chips, merged provenance, source filters, empty states, and drawer/full-detail continuity
+  - Current sourced-jobs UI validation handoff: `projects/jobtrackr/specs/jobtrackr-t154-sourced-jobs-ui-validation-handoff-2026-05-03.md` turns the T-154 lens into an ordered `/jobs` walkthrough for source chips, merged provenance, source filters, empty states, and drawer/full-detail continuity; pair it with `projects/jobtrackr/specs/jobtrackr-t159-sourced-jobs-ui-walkthrough-evidence-pointers-2026-05-03.md` when recording browser/mobile walkthrough evidence
   - Current persisted full-detail QA reference for the completed T-133 and T-137 follow-through: `projects/jobtrackr/specs/jobtrackr-persisted-job-detail-signoff-checklist-2026-04-28.md`
 - Live backend/shared-contract recovery note:
   - Recover in this order: `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`
@@ -73,7 +73,9 @@ Recovery note for automation-facing handoffs:
    - sourced-job provenance display, merged-source explanation, and source-filter continuity expectations for `/jobs`; pair it with T-152's app-side source chips/source filters handoff before inventing new sourced-job UI states
 11. `projects/jobtrackr/specs/jobtrackr-t154-sourced-jobs-ui-validation-handoff-2026-05-03.md`
    - execution-ready walkthrough for validating source chips, merged provenance, source filters, empty states, and drawer/full-detail continuity from the T-154 lens without reopening `/jobs` semantics
-12. `projects/jobtrackr/specs/jobtrackr-t158-source-service-provenance-validation-handoff-2026-05-03.md`
+12. `projects/jobtrackr/specs/jobtrackr-t159-sourced-jobs-ui-walkthrough-evidence-pointers-2026-05-03.md`
+   - evidence pointer and pass/fail template for recording desktop/mobile, drawer/full-detail, source-filter, empty-state, and command proof before moving T-152 out of QA
+13. `projects/jobtrackr/specs/jobtrackr-t158-source-service-provenance-validation-handoff-2026-05-03.md`
    - backend/shared-contract validation path for sourced-job schema provenance, cross-source merge, connector provenance, and source-email debug-read alignment
 13. `projects/jobtrackr/specs/jobtrackr-dependency-map-and-sequencing-2026-04-19.md`
    - milestone dependencies and parallel-safe sequencing
