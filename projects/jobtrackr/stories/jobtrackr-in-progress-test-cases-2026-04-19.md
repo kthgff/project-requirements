@@ -9,6 +9,15 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
+## Hourly QA review — 2026-05-03 06:40 America/Chicago
+
+### Results
+- PASS: Jimmy's latest 6:02 AM `#pm-jimmy` plan is still usable and asks Marcus to keep sourced-jobs UI continuity inside the existing `/jobs` workspace using the new T-154 lens.
+- PASS: T-157 extends the T-154 execution handoff with a Marcus/frontend continuity trace that ties the walkthrough back to the T-151 contract, T-152 implementation, T-154 validation lens, and T-156 handoff.
+- PASS: The added continuity trace keeps source chips, merged-source labels, drawer/full-detail source context, return behavior, and source-filter selection handling tied to the canonical workspace model instead of introducing source-specific workflow, fit, archive, or queue semantics.
+- GAP: This repo-side update did not execute browser/mobile validation against the app branch. Sam or QA still needs concrete T-152 walkthrough evidence before moving sourced-jobs UI continuity out of QA.
+- GAP: T-106 and T-095 remain the only live QA sign-off gates; the T-154/T-157 notes are supporting sourced-jobs UI validation guidance.
+
 ## Hourly QA review — 2026-05-03 06:20 America/Chicago
 
 ### Results

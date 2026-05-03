@@ -30,6 +30,23 @@ Minimum dataset:
 ## Walkthrough sequence
 Run the checks in this order so selection and filter continuity are easy to inspect.
 
+## Marcus/frontend continuity trace
+Use this trace when Marcus or frontend continuity reviewers pick up the T-154 lens from Jimmy's hourly plan.
+
+- Canonical contract source: `projects/jobtrackr/specs/jobtrackr-sourced-jobs-frontend-continuity-contract-2026-05-02.md` (T-151).
+- App-side implementation handoff: T-152 on `feat/jobtrackr-sourced-jobs-ui-continuity`.
+- QA validation lens: `projects/jobtrackr/specs/jobtrackr-t152-sourced-jobs-ui-continuity-validation-lens-2026-05-03.md` (T-154).
+- Execution handoff: this note, added by T-156 and extended by T-157.
+
+Continuity-specific assertions to keep together during the walkthrough:
+
+1. Grid/table/card source chips must use the same normalized source vocabulary as the drawer and full-detail view.
+2. A selected job's source context must survive drawer open/close, full-detail navigation, and safe return to the filtered `/jobs` workspace when the selected job remains visible.
+3. If a source filter hides the selected job, selection clearing must follow the existing workspace helper-copy behavior; do not invent a sourced-job-specific selection model.
+4. Relaxing filters should restore or preserve selection only according to the existing workspace continuity contract, with source filters treated as another filter family.
+5. Source provenance must remain explanatory metadata only. Do not map Email, Indeed, LinkedIn, merged-source labels, or `+N` chips into workflow, fit, archive, or queue state.
+6. If the app branch is dirty or contains unrelated UI experiments, record that separately in QA evidence and validate only the T-152 source-chip/filter behavior that can be isolated safely.
+
 1. Load `/jobs` with no filters.
    - Verify source chips are visible in rows/cards.
    - Verify source labels read as source provenance, not workflow, fit, or archive state.
