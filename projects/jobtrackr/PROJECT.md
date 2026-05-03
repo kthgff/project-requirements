@@ -181,6 +181,7 @@ In progress:
 - `projects/jobtrackr/specs/jobtrackr-pm-decision-memo-2026-04-19.md`
 - `projects/jobtrackr/specs/jobtrackr-gate-a-reconciliation-matrix-2026-04-20.md`
 - `projects/jobtrackr/specs/jobtrackr-api-contract.md`
+- `projects/jobtrackr/specs/jobtrackr-brand-and-product-site-plan-2026-05-03.md`
 - `projects/jobtrackr/specs/jobtrackr-detail-view-contract-2026-04-20.md`
 - `projects/jobtrackr/specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
 - `projects/jobtrackr/specs/jobtrackr-workspace-ux-contract-2026-04-20.md`
