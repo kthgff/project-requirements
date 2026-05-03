@@ -9,6 +9,15 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
+## Hourly QA review — 2026-05-03 08:10 America/Chicago
+
+### Results
+- PASS: Jimmy's latest 8:02 AM `#pm-jimmy` plan is usable and keeps Frank on the backend/shared-contract provenance lane while asking the team to keep sourced jobs inside the canonical `/jobs` workspace.
+- PASS: T-158 publishes one backend/shared-contract validation handoff at `projects/jobtrackr/specs/jobtrackr-t158-source-service-provenance-validation-handoff-2026-05-03.md`, tying T-144 schema provenance, T-149 cross-source merge, T-150 connector provenance, and T-155 source-email debug-read alignment into one recovery path.
+- PASS: README, PROJECT, and the Phase 3 handoff package now surface the T-158 handoff from the backend recovery notes, so Frank pickup no longer stops at source-email-only T-095/T-108 guidance when validating the sourced-job service spine.
+- GAP: This repo-side update did not execute app repo tests, seeded provider runs, or API debug-read calls. Sam or QA still needs concrete fixture/run evidence for `job_sources`, `job_source_runs`, cross-source merge behavior, and `/jobs` source metadata before closing sourced-job provenance follow-through.
+- GAP: T-106 and T-095 remain the only live QA sign-off gates; T-158 is supporting sourced-job provenance validation guidance, not a replacement gate.
+
 ## Hourly QA review — 2026-05-03 06:40 America/Chicago
 
 ### Results

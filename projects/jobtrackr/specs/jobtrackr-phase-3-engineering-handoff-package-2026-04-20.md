@@ -39,6 +39,8 @@ Recovery note for automation-facing handoffs:
   - Current QA and debug handoff docs for provenance work:
     - `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md` for the repo-side proof bundle behind T-095
     - `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md` for the active QA coverage and T-108 source-email debug-read test cases
+    - `projects/jobtrackr/specs/jobtrackr-t144-sourced-jobs-schema-provenance-validation-lens-2026-05-02.md` for the sourced-jobs schema/provenance QA lens
+    - `projects/jobtrackr/specs/jobtrackr-t158-source-service-provenance-validation-handoff-2026-05-03.md` for the backend/shared-contract validation path across T-144, T-149, T-150, and T-155
 - when a kickoff note says to start with PROJECT, use `projects/jobtrackr/PROJECT.md` so the recovery path stays explicit alongside the live development plan and the ordered project-root handoff set
 - the current implementation slice for pickup remains the Next.js web plus Go API path covering Google auth -> session -> Gmail readonly connect -> persisted jobs retrieval
 - current lane ownership for this slice:
@@ -71,11 +73,13 @@ Recovery note for automation-facing handoffs:
    - sourced-job provenance display, merged-source explanation, and source-filter continuity expectations for `/jobs`; pair it with T-152's app-side source chips/source filters handoff before inventing new sourced-job UI states
 11. `projects/jobtrackr/specs/jobtrackr-t154-sourced-jobs-ui-validation-handoff-2026-05-03.md`
    - execution-ready walkthrough for validating source chips, merged provenance, source filters, empty states, and drawer/full-detail continuity from the T-154 lens without reopening `/jobs` semantics
-12. `projects/jobtrackr/specs/jobtrackr-dependency-map-and-sequencing-2026-04-19.md`
+12. `projects/jobtrackr/specs/jobtrackr-t158-source-service-provenance-validation-handoff-2026-05-03.md`
+   - backend/shared-contract validation path for sourced-job schema provenance, cross-source merge, connector provenance, and source-email debug-read alignment
+13. `projects/jobtrackr/specs/jobtrackr-dependency-map-and-sequencing-2026-04-19.md`
    - milestone dependencies and parallel-safe sequencing
-13. `projects/jobtrackr/specs/jobtrackr-milestones-1-to-4-engineering-tickets-2026-04-20.md`
+14. `projects/jobtrackr/specs/jobtrackr-milestones-1-to-4-engineering-tickets-2026-04-20.md`
    - implementation-ready ticket map for Milestones 1 to 4
-14. `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`
+15. `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md`
    - current QA expectations for in-flight slices
 
 ## Contract Gates

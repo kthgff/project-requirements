@@ -64,6 +64,8 @@ Live backend/shared-contract recovery note:
 - Current QA and debug handoff docs for provenance work:
   - `projects/jobtrackr/specs/jobtrackr-source-email-persistence-evidence-2026-04-22.md` for the repo-side proof bundle behind T-095
   - `projects/jobtrackr/stories/jobtrackr-in-progress-test-cases-2026-04-19.md` for the active QA coverage and T-108 source-email debug-read test cases
+  - `projects/jobtrackr/specs/jobtrackr-t144-sourced-jobs-schema-provenance-validation-lens-2026-05-02.md` for the sourced-jobs schema/provenance QA lens
+  - `projects/jobtrackr/specs/jobtrackr-t158-source-service-provenance-validation-handoff-2026-05-03.md` for the current backend source-service provenance validation path across T-144, T-149, T-150, and T-155
 
 Use `projects/jobtrackr/specs/jobtrackr-first-build-slice-v1.md` as historical kickoff context only, and use `projects/jobtrackr/DEVELOPMENT_PLAN.md` plus `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md` for the current lane and ownership guidance.
 
