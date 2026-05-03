@@ -13,16 +13,18 @@ As a JobTrakr user, I want to create my own search profiles so that the system c
 
 **Acceptance criteria**
 - I can create a search profile in the app
-- A profile supports job title, location, remote preference, salary, seniority, employment type, include keywords, and exclude keywords
+- A profile supports job title, location, remote preference, companies to include/exclude, salary, seniority, employment type, include keywords, and exclude keywords
+- JobTrakr suggests a readable profile name from the criteria, and I can edit it
 - The profile saves successfully and is associated with my account
 
 ### Story 2
-As a JobTrakr user, I want to create multiple search profiles so that I can source jobs for different role targets.
+As a JobTrakr user, I want to create unlimited search profiles so that I can source jobs for different role targets.
 
 **Acceptance criteria**
-- I can create more than one profile
+- I can create as many profiles as I need
 - Each profile is listed separately
 - Each profile can run independently in scheduled sourcing
+- Each profile can also be used as a saved filter over all jobs in the database
 
 ### Story 3
 As a JobTrakr user, I want to pause a search profile without deleting it so that I can stop sourcing temporarily.
@@ -31,6 +33,7 @@ As a JobTrakr user, I want to pause a search profile without deleting it so that
 - I can disable a profile from the app
 - Disabled profiles are excluded from daily sourcing
 - I can re-enable a disabled profile later
+- Existing jobs keep their historical matched-profile labels when a profile is disabled
 
 ## Epic 2: Scheduled sourcing
 
@@ -41,6 +44,8 @@ As a JobTrakr user, I want the system to source jobs automatically every day so 
 - The system runs sourcing once per day per user
 - The run uses that user’s enabled search profiles
 - The run covers Indeed and LinkedIn in MVP
+- Daily sourcing defaults to overnight in the user's configured timezone
+- I cannot manually run a profile on demand in MVP
 
 ### Story 5
 As a JobTrakr user, I want failed sourcing runs retried automatically so that one transient failure does not cause me to miss a day of opportunities.
@@ -67,6 +72,7 @@ As a JobTrakr user, I want sourced jobs written directly into JobTrakr so that t
 - Sourced jobs write directly into the shared jobs model
 - No separate import approval step is required in MVP
 - The front end can read and render sourced jobs through the existing jobs experience
+- The dashboard is the only notification surface for newly found jobs in MVP
 
 ## Epic 4: Deduplication and merge
 
@@ -89,6 +95,22 @@ As a JobTrakr user, I want merged jobs to retain source provenance so that I can
 ## Epic 5: Jobs workspace behavior
 
 ### Story 10
+As a JobTrakr user, I want the dashboard to show all jobs by default so that I start from the full opportunity set.
+
+**Acceptance criteria**
+- The dashboard default view shows all jobs in the database that are visible to me
+- The default view is not scoped to a single search profile
+- If no jobs or search profiles exist yet, the dashboard empty state directs me to create a search profile
+
+### Story 11
+As a JobTrakr user, I want to see which search profiles matched a job so that I understand why it appears in my workspace.
+
+**Acceptance criteria**
+- A job can show matched search profile names in the row, drawer, or full detail view
+- If a job matches multiple profiles, all matched profiles are preserved and can be shown
+- Paused profiles can still appear as historical match labels
+
+### Story 12
 As a JobTrakr user, I want sourced jobs visible in the main `/jobs` grid so that all opportunities are reviewed in one place.
 
 **Acceptance criteria**
@@ -96,7 +118,7 @@ As a JobTrakr user, I want sourced jobs visible in the main `/jobs` grid so that
 - Sourced jobs appear alongside email-derived jobs
 - Users can filter or visually distinguish Email, Indeed, and LinkedIn sources
 
-### Story 11
+### Story 13
 As a JobTrakr user, I want to inspect job details in a drawer so that I can review jobs without losing my place in the grid.
 
 **Acceptance criteria**
@@ -104,7 +126,7 @@ As a JobTrakr user, I want to inspect job details in a drawer so that I can revi
 - The selected job’s detail is shown in the drawer
 - Closing the drawer returns me to the same grid context
 
-### Story 12
+### Story 14
 As a JobTrakr user, I want the default ordering to bias toward best-fit jobs so that the highest-quality opportunities rise to the top.
 
 **Acceptance criteria**
@@ -114,7 +136,7 @@ As a JobTrakr user, I want the default ordering to bias toward best-fit jobs so 
 
 ## Epic 6: Archive behavior
 
-### Story 13
+### Story 15
 As a JobTrakr user, I want jobs that disappear from the source site archived so that stale sourced jobs do not clutter my active workspace.
 
 **Acceptance criteria**
@@ -124,7 +146,7 @@ As a JobTrakr user, I want jobs that disappear from the source site archived so 
 
 ## Epic 7: MVP operations
 
-### Story 14
+### Story 16
 As the team, we want lightweight operational visibility so that daily sourcing failures can be diagnosed without overbuilding platform tooling.
 
 **Acceptance criteria**

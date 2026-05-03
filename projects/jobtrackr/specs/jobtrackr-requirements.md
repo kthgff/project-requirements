@@ -24,7 +24,13 @@ Build an MVP that automatically ingests job-related emails from Gmail, extracts 
 
 ### 1. Account and Authentication
 - The user must be able to sign in with Google OAuth
+- The user must supply a Google email address on the login page before starting Google sign-in
+- The Google account returned by OAuth must match the supplied email address, using case-insensitive comparison after normalizing whitespace
+- If the returned Google account does not match the supplied email, the system must reject the login attempt, show a retryable error, and avoid creating a session
+- The login page must feel polished and high-confidence, with a visually distinctive JobTrakr brand treatment, clear Google sign-in action, and responsive desktop/mobile layout
 - The user must be able to connect a Gmail account
+- The authenticated Google account is the default Gmail account for MVP unless a later implementation explicitly separates identity login from Gmail authorization
+- On successful Google login, the system must create or update a user record in the database before redirecting into the app
 - Gmail access tokens must be stored securely
 - The system must detect expired authorization and require reconnection
 
@@ -129,6 +135,42 @@ The user must be able to:
 - User must be able to add and remove tags
 - Tags should be available as a filterable attribute
 
+### 9. Search Profiles and Discovery
+Search profiles are both:
+- saved filters for reviewing jobs already in the database
+- discovery instructions for scheduled sourcing across supported job sources
+
+The user must be able to create unlimited search profiles.
+
+Each search profile must support:
+- profile name
+- job title or keyword query
+- location
+- remote preference
+- companies to include
+- companies to exclude
+- salary target or range
+- job level or seniority
+- employment type
+- include keywords
+- exclude keywords
+
+Default behavior:
+- JobTrakr should suggest a readable profile name from the criteria, but the user can edit it.
+- Search profiles apply to all jobs in the database, regardless of whether the job came from Gmail, Indeed, LinkedIn, or a future source.
+- Search profiles run automatically once daily.
+- Scheduled runs default to overnight in the user's configured timezone.
+- MVP does not include a manual run-now action.
+- New matches appear on the dashboard only; MVP does not send email, push, or in-app notifications.
+- Users can pause and re-enable search profiles without deleting them.
+- Paused profiles are excluded from future scheduled discovery but remain available for historical match labels and saved-filter review.
+- If a job matches multiple search profiles, the UI should show all matched profile names where space allows.
+
+Dashboard behavior:
+- After first login, the user lands on the jobs dashboard.
+- If there are no jobs or no search profiles yet, the dashboard empty state should guide the user to create a search profile first.
+- The dashboard default view should show all job results, not a single profile-specific view.
+
 ## Data Requirements
 Minimum source-email entity fields:
 - id
@@ -165,6 +207,37 @@ Minimum job entity fields:
 - created_at
 - updated_at
 - archived_at
+
+Minimum search-profile entity fields:
+- id
+- user_id
+- name
+- title_query
+- location_query
+- remote_preference
+- included_companies
+- excluded_companies
+- salary_min
+- salary_max
+- seniority
+- employment_types
+- include_keywords
+- exclude_keywords
+- enabled
+- cadence
+- timezone
+- last_run_at
+- next_run_at
+- created_at
+- updated_at
+
+Minimum job-to-search-profile match fields:
+- job_id
+- search_profile_id
+- user_id
+- matched_at
+- match_reason or matched_fields
+- source_run_id when available
 
 ## Non-Functional Requirements
 - OAuth tokens must be stored securely

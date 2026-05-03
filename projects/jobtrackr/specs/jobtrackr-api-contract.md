@@ -26,6 +26,8 @@ This contract incorporates the PM decisions in `specs/jobtrackr-pm-decision-memo
 
 ## Authentication Model
 - user signs in with Google OAuth
+- login starts with a user-supplied Google email address
+- OAuth callback must verify the Google profile email matches the supplied email before session creation
 - backend creates a secure session cookie
 - frontend sends browser requests with credentials enabled
 - Gmail tokens are stored server-side only
@@ -60,6 +62,18 @@ This contract incorporates the PM decisions in `specs/jobtrackr-pm-decision-memo
 ### POST /auth/google/start
 Starts Google OAuth flow.
 
+Request:
+```json
+{
+  "email": "user@example.com"
+}
+```
+
+Behavior:
+- validates email format
+- stores normalized email with OAuth state for callback verification
+- returns Google auth URL when valid
+
 Response:
 ```json
 {
@@ -75,12 +89,14 @@ Handles OAuth callback.
 Behavior:
 - validates state
 - exchanges code for tokens
+- verifies Google profile email matches the email supplied to `/auth/google/start`
 - creates or updates user/session
 - creates or updates Gmail account when Gmail scope is granted
 - redirects to the frontend app
 
 Response:
 - HTTP redirect to app route
+- HTTP redirect to login with a retryable `account_mismatch` style error when the returned Google account does not match the supplied email
 
 ### POST /auth/logout
 Clears authenticated session.
@@ -103,6 +119,7 @@ Response:
   "data": {
     "user": {
       "id": "uuid",
+      "googleAccountId": "google-sub-or-account-id",
       "email": "user@example.com",
       "name": "Keith",
       "imageUrl": "https://..."
@@ -169,6 +186,98 @@ Response:
   }
 }
 ```
+
+## Search Profile Endpoints
+
+Search profiles are user-scoped saved filters and scheduled discovery instructions. MVP supports unlimited profiles, daily scheduled runs, pause/re-enable behavior, and no manual run-now endpoint.
+
+### GET /search-profiles
+Returns search profiles for the authenticated user.
+
+Response:
+```json
+{
+  "data": [
+    {
+      "id": "uuid",
+      "name": "Remote Senior Product Roles",
+      "titleQuery": "product manager",
+      "locationQuery": "United States",
+      "remotePreference": "remote",
+      "includedCompanies": [],
+      "excludedCompanies": ["Example Corp"],
+      "salaryMin": 140000,
+      "salaryMax": null,
+      "seniority": "senior",
+      "employmentTypes": ["full_time"],
+      "includeKeywords": ["platform"],
+      "excludeKeywords": ["contract"],
+      "enabled": true,
+      "cadence": "daily",
+      "timezone": "America/Chicago",
+      "lastRunAt": "2026-05-03T07:00:00Z",
+      "nextRunAt": "2026-05-04T07:00:00Z"
+    }
+  ]
+}
+```
+
+### POST /search-profiles
+Creates a search profile.
+
+Request:
+```json
+{
+  "name": "Remote Senior Product Roles",
+  "titleQuery": "product manager",
+  "locationQuery": "United States",
+  "remotePreference": "remote",
+  "includedCompanies": [],
+  "excludedCompanies": ["Example Corp"],
+  "salaryMin": 140000,
+  "salaryMax": null,
+  "seniority": "senior",
+  "employmentTypes": ["full_time"],
+  "includeKeywords": ["platform"],
+  "excludeKeywords": ["contract"],
+  "timezone": "America/Chicago"
+}
+```
+
+Behavior:
+- creates an enabled profile by default
+- defaults cadence to `daily`
+- schedules the next run for the overnight daily sourcing window
+- may accept an app-suggested name, but the saved name is user-editable
+
+### PATCH /search-profiles/:id
+Updates editable profile criteria or name.
+
+Behavior:
+- preserves run history
+- recalculates `nextRunAt` when schedule-relevant fields change
+- does not remove existing job match labels
+
+### POST /search-profiles/:id/disable
+Pauses a profile without deleting it.
+
+Behavior:
+- sets `enabled` to false
+- excludes the profile from future scheduled discovery
+- preserves saved-filter access and historical job match labels
+
+### POST /search-profiles/:id/enable
+Re-enables a paused profile.
+
+Behavior:
+- sets `enabled` to true
+- schedules the next daily run
+
+### Search Profile API Exclusions
+MVP does not expose:
+- manual run-now endpoint
+- notification subscription endpoint for newly found jobs
+- hard delete requirement for profiles
 
 ## Sync Endpoints
 
@@ -279,6 +388,7 @@ Query params:
 - `saved` boolean
 - `archived` boolean
 - `tag` one or many repeated params, OR semantics within the tag filter
+- `searchProfile` one or many repeated profile ids, OR semantics within the search-profile filter
 - `dateFrom` inclusive date lower bound in user-facing timezone
 - `dateTo` inclusive date upper bound in user-facing timezone
 - `source` one or many repeated params for sourced-job provenance (`gmail`, `indeed`, `linkedin`), OR semantics within the source filter
@@ -308,6 +418,13 @@ Response:
         "source": "linkedin",
         "sourceCount": 2,
         "sources": ["linkedin", "gmail"],
+        "matchedProfiles": [
+          {
+            "id": "uuid",
+            "name": "Remote Senior Product Roles",
+            "enabled": true
+          }
+        ],
         "firstSeenAt": "2026-04-18T13:00:00Z",
         "lastSeenAt": "2026-05-02T16:30:00Z",
         "lastSourcedAt": "2026-05-02T16:30:00Z",
@@ -336,6 +453,8 @@ List payload notes:
 - `source` is included in the list payload because it is a required dashboard column and maps to the primary source label
 - sourced-job provenance may add `sourceCount`, `sources`, `firstSeenAt`, `lastSeenAt`, and `lastSourcedAt` without changing workflow, fit, saved, or archive semantics
 - source filters compose with existing filters using AND across filter families and OR within repeated source values
+- `matchedProfiles` shows every search profile that matched the job, including disabled profiles when they are preserved as historical labels
+- search-profile filters compose with existing filters using AND across filter families and OR within repeated profile ids
 - canonical sourced-job grid/drawer/detail continuity rules live in `specs/jobtrackr-sourced-jobs-frontend-continuity-contract-2026-05-02.md`
 - canonical list-to-detail examples for row selection, drawer continuity, and detail handoff live in `specs/jobtrackr-list-detail-contract-examples-2026-04-20.md`
 
@@ -358,6 +477,20 @@ Response:
     "source": "linkedin",
     "sourceCount": 2,
     "sources": ["linkedin", "gmail"],
+    "matchedProfiles": [
+      {
+        "id": "uuid",
+        "name": "Remote Senior Product Roles",
+        "enabled": true,
+        "matchedAt": "2026-05-02T12:00:00Z"
+      },
+      {
+        "id": "uuid",
+        "name": "AI Platform Engineering",
+        "enabled": false,
+        "matchedAt": "2026-05-02T12:30:00Z"
+      }
+    ],
     "descriptionSnippet": "Go backend role",
     "applicationLink": "https://example.com/jobs/123",
     "recruiterName": "Jane Doe",

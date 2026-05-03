@@ -137,7 +137,7 @@ When merging a new source into an existing job:
 - never overwrite user-edited notes, tags, status, saved state, or archive state
 
 ## Search profile linkage
-Scraped records need profile traceability.
+Scraped records need profile traceability, and every job needs the ability to show all search profiles it matches.
 
 Recommended `search_profiles` support fields:
 - `id`
@@ -146,6 +146,8 @@ Recommended `search_profiles` support fields:
 - `title_query`
 - `location_query`
 - `remote_preference`
+- `included_companies` JSON/array
+- `excluded_companies` JSON/array
 - `salary_min` nullable
 - `salary_max` nullable
 - `salary_text` nullable
@@ -154,12 +156,46 @@ Recommended `search_profiles` support fields:
 - `include_keywords` JSON/array
 - `exclude_keywords` JSON/array
 - `enabled`
+- `cadence` default `daily`
+- `timezone`
 - `last_run_at`
 - `next_run_at` nullable
+- `disabled_at` nullable
 - `created_at`
 - `updated_at`
 
-`job_sources.search_profile_id` should point at the matched profile for scraped-origin rows.
+Defaults:
+- users may create unlimited profiles
+- profile names are user-editable, with app-generated suggestions allowed
+- profiles run daily by default
+- daily runs default to overnight in the user's configured timezone
+- disabled profiles are excluded from future scheduled discovery but remain available for saved filters and historical match display
+
+`job_sources.search_profile_id` may point at the profile that produced a scraped-origin source row, but UI matched-profile display should not depend on a single source row.
+
+Add a separate `job_search_profile_matches` table so one job can match multiple profiles across all job sources.
+
+Recommended `job_search_profile_matches` fields:
+- `job_id`
+- `search_profile_id`
+- `user_id`
+- `matched_at`
+- `matched_fields` JSON/array
+- `match_reason` nullable
+- `source_run_id` nullable
+- `created_at`
+- `updated_at`
+
+Recommended constraints:
+- primary key or unique index on (`job_id`, `search_profile_id`)
+- foreign key to `jobs`
+- foreign key to `search_profiles`
+
+Rules:
+- profile matching applies to Gmail, Indeed, LinkedIn, and future job sources
+- a job matching multiple profiles should retain all profile match rows
+- disabling a profile should not delete existing match rows
+- profile match rows do not change job workflow status, saved state, archive state, notes, or tags
 
 ## API contract impact
 
@@ -171,7 +207,14 @@ Add optional future-safe fields:
 {
   "source": "linkedin",
   "sourceCount": 2,
-  "sources": ["linkedin", "gmail"]
+  "sources": ["linkedin", "gmail"],
+  "matchedProfiles": [
+    {
+      "id": "uuid",
+      "name": "Remote Senior Product Roles",
+      "enabled": true
+    }
+  ]
 }
 ```
 
@@ -186,6 +229,7 @@ Add a provenance block for drawer/detail rendering:
       {
         "type": "scraped",
         "platform": "linkedin",
+        "searchProfileName": "Remote Senior Product Roles",
         "url": "https://www.linkedin.com/jobs/view/...",
         "firstSeenAt": "2026-05-02T12:00:00Z",
         "lastSeenAt": "2026-05-02T12:00:00Z"
@@ -195,6 +239,20 @@ Add a provenance block for drawer/detail rendering:
         "platform": "gmail",
         "firstSeenAt": "2026-05-02T13:00:00Z",
         "lastSeenAt": "2026-05-02T13:00:00Z"
+      }
+    ],
+    "matchedProfiles": [
+      {
+        "id": "uuid",
+        "name": "Remote Senior Product Roles",
+        "enabled": true,
+        "matchedAt": "2026-05-02T12:00:00Z"
+      },
+      {
+        "id": "uuid",
+        "name": "AI Platform Engineering",
+        "enabled": false,
+        "matchedAt": "2026-05-02T12:30:00Z"
       }
     ]
   }

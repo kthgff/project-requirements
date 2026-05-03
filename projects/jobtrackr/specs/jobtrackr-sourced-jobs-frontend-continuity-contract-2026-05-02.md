@@ -148,6 +148,12 @@ Drawer source row fields:
 - source link when present and safe to open
 - search profile name only if it is user-facing and short
 
+Matched search profile behavior:
+- Show matched profile names in the drawer when available.
+- If a job matches multiple profiles, show all profile names in a compact list or chip group.
+- Disabled profiles may remain visible as historical match labels, with a subtle paused/disabled treatment if status is shown.
+- Matched profile labels must not imply separate job records or workflow states.
+
 Drawer exclusions:
 - No raw Gmail message ids by default.
 - No source-run ids.
@@ -167,6 +173,7 @@ Required full-detail behavior:
 
 Optional full-detail-only fields:
 - search profile name
+- all matched search profile names
 - last checked date
 - source status such as `Seen`, `Missing`, or `Error`, only when it helps explain freshness or archive behavior
 

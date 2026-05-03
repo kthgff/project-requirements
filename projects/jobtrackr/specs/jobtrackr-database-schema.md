@@ -84,6 +84,7 @@ Represents an authenticated application user.
 ```sql
 CREATE TABLE users (
   id UUID PRIMARY KEY,
+  google_account_id TEXT NOT NULL UNIQUE,
   email TEXT NOT NULL UNIQUE,
   name TEXT,
   image_url TEXT,
@@ -94,7 +95,9 @@ CREATE TABLE users (
 
 Notes:
 - MVP is single-user-first but still modeled as user-scoped
-- email is the canonical unique identifier for app login
+- Google account id is the stable identity key from the OAuth provider
+- email remains unique and is used for display, account lookup, and login email verification
+- returning Google users should update mutable profile fields instead of creating duplicate users
 
 ## 2. sessions
 Stores authenticated web sessions if handled in the app database.
@@ -354,11 +357,85 @@ Indexes:
 CREATE INDEX idx_ingestion_errors_run_id ON ingestion_errors(ingestion_run_id);
 ```
 
+## 12. search_profiles
+Stores user-defined saved filters and scheduled discovery instructions.
+
+```sql
+CREATE TABLE search_profiles (
+  id UUID PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  name TEXT NOT NULL,
+  title_query TEXT,
+  location_query TEXT,
+  remote_preference TEXT,
+  included_companies JSONB NOT NULL DEFAULT '[]'::jsonb,
+  excluded_companies JSONB NOT NULL DEFAULT '[]'::jsonb,
+  salary_min INTEGER,
+  salary_max INTEGER,
+  salary_text TEXT,
+  seniority TEXT,
+  employment_types JSONB NOT NULL DEFAULT '[]'::jsonb,
+  include_keywords JSONB NOT NULL DEFAULT '[]'::jsonb,
+  exclude_keywords JSONB NOT NULL DEFAULT '[]'::jsonb,
+  enabled BOOLEAN NOT NULL DEFAULT TRUE,
+  cadence TEXT NOT NULL DEFAULT 'daily',
+  timezone TEXT NOT NULL DEFAULT 'America/Chicago',
+  last_run_at TIMESTAMPTZ,
+  next_run_at TIMESTAMPTZ,
+  disabled_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+```
+
+Indexes:
+```sql
+CREATE INDEX idx_search_profiles_user_id ON search_profiles(user_id);
+CREATE INDEX idx_search_profiles_enabled_next_run ON search_profiles(enabled, next_run_at);
+```
+
+Notes:
+- users may create unlimited search profiles
+- profiles are both saved filters and scheduled discovery instructions
+- disabled profiles do not run, but remain available for editing and historical match display
+- daily runs default to overnight in the user's configured timezone
+
+## 13. job_search_profile_matches
+Join table preserving every search profile a job matched.
+
+```sql
+CREATE TABLE job_search_profile_matches (
+  job_id UUID NOT NULL REFERENCES jobs(id) ON DELETE CASCADE,
+  search_profile_id UUID NOT NULL REFERENCES search_profiles(id) ON DELETE CASCADE,
+  user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  matched_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  matched_fields JSONB NOT NULL DEFAULT '[]'::jsonb,
+  match_reason TEXT,
+  source_run_id UUID,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  PRIMARY KEY (job_id, search_profile_id)
+);
+```
+
+Indexes:
+```sql
+CREATE INDEX idx_job_search_profile_matches_profile_id ON job_search_profile_matches(search_profile_id);
+CREATE INDEX idx_job_search_profile_matches_user_id ON job_search_profile_matches(user_id);
+```
+
+Notes:
+- one job can match multiple search profiles
+- profile matching applies across Gmail, Indeed, LinkedIn, and future sources
+- disabling a profile does not delete existing match rows
+- matched profiles are display/filter context, not workflow state
+
 ## Relationship Summary
 - one user has many gmail_connections
 - one user has many source_emails
 - one user has many jobs
 - one user has many job_tags
+- one user has many search_profiles
 - one gmail_connection has many source_emails
 - one source_email may link to many jobs through job_source_emails
 - one job may link to many source_emails through job_source_emails
@@ -366,6 +443,8 @@ CREATE INDEX idx_ingestion_errors_run_id ON ingestion_errors(ingestion_run_id);
 - many jobs can have many tags through job_tag_links
 - one gmail_connection has many ingestion_runs
 - one ingestion_run may have many ingestion_errors
+- one job may match many search_profiles through job_search_profile_matches
+- one search_profile may match many jobs through job_search_profile_matches
 
 ## Search Strategy
 Initial search should use SQL filters and `ILIKE` against:
@@ -411,6 +490,8 @@ The first sqlc query groups should cover:
 - update job status and notes
 - tag add/remove
 - list ingestion runs and errors
+- create/update/list/disable search profiles
+- list job search-profile matches for dashboard and detail views
 
 ## Future Extensions
 The schema can evolve later to support:
@@ -418,4 +499,6 @@ The schema can evolve later to support:
 - AI parse results and confidence explanations
 - reminders and follow-up workflows
 - non-Gmail providers
+- manual profile run-now controls
+- notifications for newly discovered jobs
 - multi-user collaboration and organizations

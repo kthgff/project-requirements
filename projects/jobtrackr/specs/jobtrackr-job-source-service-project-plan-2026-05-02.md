@@ -38,11 +38,18 @@ These are provisional until Keith confirms them:
 - Scraping is an **additional source of jobs**, not a separate job domain
 - Search configuration should be **owned per user**, not as one global operator-managed search set
 - Users should **configure their own search profiles in the app for MVP**
-- MVP search profiles should support **job title, location, remote preference, salary, seniority, employment type, and keyword include/exclude controls**
-- Users may create **multiple search profiles** in MVP
+- MVP search profiles should support **job title, location, remote preference, companies to include/exclude, salary, seniority, employment type, and keyword include/exclude controls**
+- Users may create **unlimited search profiles** in MVP
 - Users should be able to **pause/disable** a search profile
 - Sourcing should run **automatically on a schedule** for MVP
 - MVP sourcing cadence should be **once per day per user**
+- Scheduled sourcing defaults to **overnight in the user's configured timezone**
+- MVP should **not include manual run-now controls**
+- Newly found jobs should surface on the **dashboard only** for MVP, with no email, push, or in-app notification layer
+- Search profiles act as both **saved filters** and **scheduled discovery instructions**
+- Search-profile filtering and matched-profile labeling apply across **all jobs in the database**, regardless of source
+- A job may match **multiple search profiles**, and JobTrakr should preserve all matched profile labels
+- Paused profiles stop future scheduled discovery but keep historical matched-profile labels on existing jobs
 - Scraping posture for MVP should be **aggressive** to maximize coverage
 - Scraping should capture **full job detail**, not just search-result summaries
 - Duplicate jobs across email ingestion and scraping should be **merged into one job record** with no duplicate job entries
@@ -94,7 +101,7 @@ Create a dedicated **job-source-service** repository with one responsibility:
 - the team can version and deploy scraper changes independently
 
 ## Initial MVP source flow
-1. User defines one or more search profiles with title, location, remote preference, salary, seniority, employment type, and keyword include/exclude rules
+1. User defines one or more search profiles with title, location, remote preference, company include/exclude rules, salary, seniority, employment type, and keyword include/exclude rules
 2. A once-daily scheduled job runs source-specific collection against Indeed and LinkedIn for that user's profile set
 3. Extract structured job data
 4. Normalize into the shared jobs payload
@@ -109,6 +116,7 @@ The service will likely need to produce at least:
 - source URL
 - external job ID if available
 - matched search profile ID
+- all matched search profile IDs for jobs that satisfy multiple profiles
 - title
 - company
 - location

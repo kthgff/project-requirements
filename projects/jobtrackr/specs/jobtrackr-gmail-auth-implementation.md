@@ -13,6 +13,7 @@ This package is intentionally scoped to the smallest vertical slice that gets:
 ## Scope of This Package
 In scope:
 - auth/session foundation
+- polished login requirements for Google email collection and Google sign-in initiation
 - Gmail account connection
 - manual sync trigger
 - raw Gmail message fetch and persistence
@@ -63,16 +64,19 @@ Recommended practical scopes:
 - `https://www.googleapis.com/auth/gmail.readonly`
 
 ### Flow steps
-1. user clicks connect/sign in in frontend
+1. user enters a Google email address and clicks connect/sign in in frontend
 2. frontend calls `POST /auth/google/start`
-3. backend creates OAuth state and returns Google auth URL
+3. backend validates and stores the supplied email with OAuth state, then returns Google auth URL
 4. browser redirects to Google
 5. Google redirects to `GET /auth/google/callback`
 6. backend validates state and exchanges code for tokens
-7. backend upserts `users`
-8. backend upserts `gmail_accounts`
-9. backend creates app session in `sessions`
-10. backend sets HTTP-only cookie and redirects to frontend dashboard
+7. backend reads the Google identity profile and verifies the profile email matches the supplied email
+8. backend upserts `users`
+9. backend upserts `gmail_accounts`
+10. backend creates app session in `sessions`
+11. backend sets HTTP-only cookie and redirects to frontend dashboard
+
+If the supplied email and Google profile email do not match, the backend must reject the callback, must not create a session, and should redirect back to login with a retryable account mismatch error.
 
 ## Required Tables for This Package
 
@@ -81,6 +85,7 @@ Needed for app identity.
 
 Minimum fields:
 - `id`
+- `google_account_id`
 - `email`
 - `name`
 - `image_url`

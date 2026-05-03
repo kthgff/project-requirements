@@ -66,24 +66,36 @@ Provide a single clear entry point into the product using Gmail federated login.
 #### Primary content
 - JobTrakr product name
 - short explanation of value
+- email input for the Google account the user intends to use
 - one primary CTA: `Sign in with Google`
 
 #### Recommended layout
-- centered card or split-screen hero
-- product title at top
+- immersive split-screen or full-viewport login experience
+- product title as a strong first-screen brand signal
 - short supporting sentence
+- compact product-preview or status-panel treatment that hints at job scanning, matching, and tracking
 - Google sign-in button
 - optional small trust/help text below
 
 #### UX requirements
 - user should understand sign-in is required
 - only one primary action should compete for attention
+- Google email is required before initiating sign-in
+- OAuth profile email must match the supplied email before the app creates a session
 - failed sign-in should show a clear retryable error
+- mismatched Google account should explain that the user needs to retry with the same email
 - successful sign-in should redirect to dashboard or onboarding
+- loading and disabled states should make the redirect flow feel deliberate
+- mobile layout must keep the email field, Google button, and error messages visible without awkward scrolling
 
 #### Suggested copy direction
 - Headline: `Track jobs faster`
 - Supporting text: `Sign in with Google to scan job alerts, review matches, and manage your search in one place.`
+
+#### Visual direction
+- sleek and professional
+- modern job-search command center feel
+- clear product trust signal rather than playful or consumer-social styling
 
 ---
 
@@ -174,8 +186,9 @@ At minimum support:
 
 ### Empty states
 If no jobs exist:
-- explain that jobs will appear after Gmail scan
-- show next action if needed
+- explain that jobs will appear after search profiles and scheduled sourcing start finding matches
+- primary action: create a search profile
+- secondary context may mention Gmail, Indeed, and LinkedIn sources when connected or planned
 
 If filters return no results:
 - explain no jobs match the current filters
@@ -247,8 +260,10 @@ Because fit depends on a resume, the frontend should make resume state visible.
 
 ### Login page
 - default
+- email validation error
 - login in progress
 - login error
+- Google account mismatch error
 
 ### Dashboard
 - initial loading
@@ -278,7 +293,9 @@ Because fit depends on a resume, the frontend should make resume state visible.
 ## Functional Requirements
 
 ### FR1. Login page
-The frontend shall provide a login page with a Google sign-in action.
+The frontend shall provide a polished login page with a Google email input and Google sign-in action.
+
+The login page shall validate email format before sign-in, submit the supplied email into the auth start flow, and display retryable error states for failed or mismatched Google login attempts.
 
 ### FR2. Protected navigation
 The frontend shall restrict dashboard access to authenticated users.

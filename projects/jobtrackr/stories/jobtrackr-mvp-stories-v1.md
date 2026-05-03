@@ -11,8 +11,13 @@ As Keith, I want to log into JobTrakr using my Gmail account so that I can secur
 
 **Acceptance criteria**
 - The product includes a login page
-- The login page offers Gmail federated sign-in
+- The login page presents a polished JobTrakr-branded first impression, not a generic placeholder form
+- The login page requires me to enter the Google email I intend to use
+- The login page offers Google federated sign-in
+- The Google account returned by OAuth must match the email I supplied
 - After successful sign-in, I am authenticated into the app
+- On first successful sign-in, the system creates a user record in the database
+- On returning sign-in, the system reuses the existing user record and updates mutable profile fields
 - Unauthenticated users cannot access the main app experience
 
 # JobTrackr MVP Stories v1
