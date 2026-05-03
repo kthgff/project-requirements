@@ -9,6 +9,17 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - The active implementation context is Next.js web plus Go API on the current auth -> session -> Gmail readonly connect -> persisted jobs slice.
 - Older local-Go-app wording should be treated as historical unless a task explicitly scopes back to that earlier path.
 
+## Hourly QA review — 2026-05-03 06:20 America/Chicago
+
+### Results
+- PASS: Jimmy's latest 6:02 AM `#pm-jimmy` plan is usable and keeps the live QA gate pair unchanged: T-106 for the server-backed workspace handoff and T-095 for provenance-first source-email persistence.
+- PASS: The stale kickoff-path issue is still external drift only. Repo recovery remains `projects/jobtrackr/DEVELOPMENT_PLAN.md`, `projects/jobtrackr/PROJECT.md`, then `projects/jobtrackr/specs/jobtrackr-phase-3-engineering-handoff-package-2026-04-20.md`.
+- PASS: Completed T-154 now gives the sourced-jobs UI continuity slice one implementation-facing lens at `projects/jobtrackr/specs/jobtrackr-t152-sourced-jobs-ui-continuity-validation-lens-2026-05-03.md`, which cleanly anchors existing TC-2195 through TC-2197 for source chips, merged-source labels, source filters, and continuity behavior.
+- PASS: Completed T-155 keeps the T-095 sign-off path aligned to the implemented T-108 debug-read endpoint, `GET /api/v1/source-emails`, so TC-2167 and TC-2168 plus the T-095 checklist now point to the live `matchedAsJob`, `fromEmail`, `search`, and `limit` inspection path instead of stale endpoint naming.
+- GAP: This hour updated QA coverage only; it did not execute the T-106 browser walkthrough, the T-095 fixture-backed sync proof, or seeded T-108 endpoint calls.
+- GAP: T-106 and T-095 remain the only live QA sign-off gates. T-152 and T-108 coverage is implementation-facing support, not a replacement gate.
+- GAP: The external hourly kickoff prompt still references the dead root-level path `~/Documents/project-requirements/DEVELOPMENT_PLAN.md`, so automation-facing prompt drift remains unresolved outside the repo.
+
 ## Hourly QA review — 2026-05-03 06:10 America/Chicago
 
 ### Results
