@@ -16,7 +16,9 @@ Test cases for work currently marked `in-progress` in `projects/jobtrackr/DEVELO
 - PASS: T-159 adds one evidence-pointer note at `projects/jobtrackr/specs/jobtrackr-t159-sourced-jobs-ui-walkthrough-evidence-pointers-2026-05-03.md`, mapping the T-154 walkthrough to concrete desktop/mobile, drawer/full-detail, source-filter, empty-state, and command evidence expectations.
 - PASS: The T-154 execution handoff now points directly to the T-159 evidence template, so Sam or QA can record source-chip and source-filter proof without reconstructing it from the T-151 contract plus T-152 implementation history.
 - GAP: This repo-side update did not execute browser/mobile validation, seed sourced-job records, or rerun `npm test`/`npm run build` in `apps/web`; the current app repo also has unrelated dirty work, so T-152 still needs isolated QA walkthrough evidence before moving out of QA.
-- GAP: T-106 and T-095 remain the only live QA sign-off gates; T-159 is supporting sourced-jobs UI validation evidence, not a replacement gate.
+- PASS: T-160 adds repo-side sourced-jobs UI evidence at `projects/jobtrackr/specs/jobtrackr-t160-sourced-jobs-ui-validation-evidence-2026-05-03.md`, anchored to clean T-152 app commit `ca0459c`, seeded mock source metadata, and green `npm test && npm run build` output.
+- GAP: T-106 and T-095 remain the only live QA sign-off gates; T-159/T-160 are supporting sourced-jobs UI validation evidence, not replacement gates.
+- GAP: T-160 did not attach actual browser/mobile screenshots; Sam can decide whether the repo-side evidence is enough or whether final visual captures are still required before moving T-152 out of QA.
 
 ## Hourly QA review — 2026-05-03 08:10 America/Chicago
 

@@ -18,7 +18,8 @@ This note is a continuity/evidence pointer only. It does **not** replace the liv
    - `projects/jobtrackr/specs/jobtrackr-t154-sourced-jobs-ui-validation-handoff-2026-05-03.md`
 3. Pair it with the validation lens:
    - `projects/jobtrackr/specs/jobtrackr-t152-sourced-jobs-ui-continuity-validation-lens-2026-05-03.md`
-4. Use this T-159 note to record or review the concrete evidence shape before moving T-152 out of QA.
+4. Review the T-160 repo-side evidence pass before moving T-152 out of QA or requesting extra browser/mobile screenshots:
+   - `projects/jobtrackr/specs/jobtrackr-t160-sourced-jobs-ui-validation-evidence-2026-05-03.md`
 
 ## Evidence anchor map
 
@@ -88,4 +89,4 @@ Do not use this evidence path to:
 
 ## T-159 completion note
 
-T-159 is complete when this pointer is linked from the T-154 execution handoff, active QA coverage, and live frontend recovery docs. The remaining execution gap is still Sam/QA browser or seeded-data walkthrough evidence against the implemented app branch.
+T-159 is complete when this pointer is linked from the T-154 execution handoff, active QA coverage, and live frontend recovery docs. T-160 now records repo-side seeded-data walkthrough evidence against the implemented app branch; any remaining execution gap is Sam/QA visual browser or mobile screenshot evidence if required for final sign-off.

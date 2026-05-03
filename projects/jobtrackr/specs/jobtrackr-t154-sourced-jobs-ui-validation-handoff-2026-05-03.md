@@ -16,7 +16,9 @@ This note is supporting sourced-jobs UI validation only. It does **not** replace
    - `projects/jobtrackr/specs/jobtrackr-t152-sourced-jobs-ui-continuity-validation-lens-2026-05-03.md`
 3. Open the T-159 evidence pointers before recording walkthrough results:
    - `projects/jobtrackr/specs/jobtrackr-t159-sourced-jobs-ui-walkthrough-evidence-pointers-2026-05-03.md`
-4. Keep implementation and QA inside the existing `/jobs` workspace. Do not create a separate sourced-jobs queue, new workflow status, or source-specific review surface.
+4. Review the T-160 repo-side evidence pass before deciding whether Sam still needs browser/mobile screenshots:
+   - `projects/jobtrackr/specs/jobtrackr-t160-sourced-jobs-ui-validation-evidence-2026-05-03.md`
+5. Keep implementation and QA inside the existing `/jobs` workspace. Do not create a separate sourced-jobs queue, new workflow status, or source-specific review surface.
 
 ## Validation data needed
 Use seeded API data when available, or the stable mock fallback path if the API is unavailable.
@@ -39,7 +41,7 @@ Use this trace when Marcus or frontend continuity reviewers pick up the T-154 le
 - App-side implementation handoff: T-152 on `feat/jobtrackr-sourced-jobs-ui-continuity`.
 - QA validation lens: `projects/jobtrackr/specs/jobtrackr-t152-sourced-jobs-ui-continuity-validation-lens-2026-05-03.md` (T-154).
 - Execution handoff: this note, added by T-156 and extended by T-157.
-- Evidence pointer: `projects/jobtrackr/specs/jobtrackr-t159-sourced-jobs-ui-walkthrough-evidence-pointers-2026-05-03.md`, which names the screenshots/notes, data shape, command evidence, and pass/fail template needed before QA moves T-152 out of review.
+- Evidence pointer: `projects/jobtrackr/specs/jobtrackr-t159-sourced-jobs-ui-walkthrough-evidence-pointers-2026-05-03.md`, which names the screenshots/notes, data shape, command evidence, and pass/fail template needed before QA moves T-152 out of review. Repo-side evidence pass: `projects/jobtrackr/specs/jobtrackr-t160-sourced-jobs-ui-validation-evidence-2026-05-03.md`, which records the clean T-152 app branch/commit, seeded mock fixture coverage, and green web test/build evidence.
 
 Continuity-specific assertions to keep together during the walkthrough:
 
@@ -102,4 +104,4 @@ Do not use this handoff to:
 - create a separate sourced-jobs queue outside `/jobs`
 
 ## Remaining gap
-This handoff makes the T-154 validation lens execution-ready, but it is not browser or seeded API evidence by itself. T-152 should stay in QA until Sam or a QA pass records concrete walkthrough results against the implemented frontend branch.
+This handoff makes the T-154 validation lens execution-ready. T-160 adds repo-side evidence against the clean T-152 app branch/commit, including seeded mock fixture coverage plus green web test/build results; T-152 should still stay in QA until Sam decides whether that repo-side evidence is sufficient or captures final browser/mobile screenshots.
